@@ -14,13 +14,11 @@ export default function Logout(){
           .unwrap()
           .then(() => {
             dispatch(setLogout())
-            // redirect('/')
-            // console.log(isLoading, isFetching)
           })
       }
     return  (
         <form onSubmit={handleLogout}>
-            <button className="flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium bg-sky-100 text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3"
+            <button className="flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium bg-sky-500 text-white md:flex-none md:justify-start md:p-2 md:px-3"
             >
                 <PowerIcon className="w-6" />
                 <div className="hidden md:block">Sign Out</div>

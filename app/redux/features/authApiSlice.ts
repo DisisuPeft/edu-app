@@ -1,13 +1,13 @@
 import { apiSlice } from "../services/apiSlice";
 
-interface Role {
+export interface Role {
     id: number,
     name: string
 }
 // interface isAuth {
 //     is_auth: booleand
 // }
-interface User {
+export interface User {
     id: number,
     email: string,
     rol: Array<Role>

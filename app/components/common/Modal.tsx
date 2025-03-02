@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useCallback } from "react";
 import { createPortal } from "react-dom";
 
@@ -72,7 +73,7 @@ export const Modal: React.FC<ModalProps> = ({
 //   console.log(transparent)
   return createPortal(
     <div
-      className={`fixed inset-0 overflow-y-auto px-4 py-[300px] sm:px-0 z-50 transition-opacity duration-200 ${
+      className={`fixed inset-0 overflow-y-auto px-4 py-[200px] sm:px-0 z-50 transition-opacity duration-200 ${
         show ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
       onClick={close}

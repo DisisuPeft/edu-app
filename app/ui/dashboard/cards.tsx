@@ -1,60 +1,67 @@
-import {
-  BanknotesIcon,
-  ClockIcon,
-  UserGroupIcon,
-  InboxIcon,
-} from '@heroicons/react/24/outline';
-import { lusitana } from '../fonts';
-
-
-const iconMap = {
-  collected: BanknotesIcon,
-  customers: UserGroupIcon,
-  pending: ClockIcon,
-  invoices: InboxIcon,
-};
-
-export default async function CardWrapper() {
-  // const {numberOfCustomers, numberOfInvoices, totalPaidInvoices, totalPendingInvoices} = await fetchCardData()
+'use client'
+// import {
+//   BanknotesIcon,
+//   ClockIcon,
+//   UserGroupIcon,
+//   InboxIcon,
+// } from '@heroicons/react/24/outline';
+// import { lusitana } from '../fonts';
+import { useRetrieveUserQuery } from '@/app/redux/features/authApiSlice';
+import type React from "react"
+// const iconMap = {
+//   users:
+// };
+export const SkeletonLoader: React.FC = () => {
   return (
-    <>
-      {/* NOTE: Uncomment this code in Chapter 9 */}
-
-      {/* <Card title="Collected" value={totalPaidInvoices} type="collected" />
-      <Card title="Pending" value={totalPendingInvoices} type="pending" />
-      <Card title="Total Invoices" value={numberOfInvoices} type="invoices" />
-      <Card
-        title="Total Customers"
-        value={numberOfCustomers}
-        type="customers"
-      /> */}
-    </>
-  );
+    <div className="mx-auto w-full max-w-sm rounded-md border border-black p-4 bg-black">
+      <div className="flex animate-pulse space-x-4">
+        {/* <div className="size-10 rounded-full bg-black"></div> */}
+        <div className="flex-1 space-y-6 py-1">
+          <div className="h-2 rounded bg-white"></div>
+          {/* <div className="space-y-3">
+            <div className="grid grid-cols-3 gap-4">
+              <div className="col-span-2 h-2 rounded bg-gray-200"></div>
+              <div className="col-span-1 h-2 rounded bg-gray-200"></div>
+            </div> */}
+            {/* <div className="h-2 rounded bg-gray-200"></div> */}
+          </div>
+        </div>
+      </div>
+    // </div>
+  )
+}
+export default function CardWrapper() {
+  // const {numberOfCustomers, numberOfInvoices, totalPaidInvoices, totalPendingInvoices} = await fetchCardData()
+  const {data: user, isLoading, isFetching} = useRetrieveUserQuery()
+  if (isLoading || isFetching){
+    return (
+      // <div className="relative flex w-64 animate-pulse gap-2 p-4 z-0">
+      //   <div className="h-12 w-12 rounded-full"></div>
+      //   <div className="flex-1">
+      //     <div className="mb-1 h-5 w-3/5 rounded-lg text-lg"></div>
+      //     {/* <div className="h-5 w-[90%] rounded-lg bg-slate-400 text-sm"></div> */}
+      //   </div>
+      //   {/* <div className="absolute bottom-5 right-0 h-4 w-4 rounded-full bg-slate-400"></div> */}
+      // </div>
+      // <div className='text-white bg-sky-500 p-1 rounded-xl'>Loading..</div>
+      <SkeletonLoader/>
+    )
+  }
+  return <Card title={user?.user?.email}/>
 }
 
 export function Card({
   title,
-  value,
-  type,
 }: {
   title: string;
-  value: number | string;
-  type: 'invoices' | 'customers' | 'pending' | 'collected';
 }) {
-  const Icon = iconMap[type];
 
   return (
-    <div className="rounded-xl bg-gray-50 p-2 shadow-sm">
-      <div className="flex p-4">
-        {Icon ? <Icon className="h-5 w-5 text-gray-700" /> : null}
+    <div className="rounded-xl bg-sky-500 shadow-sm">
+      <div className="">
+        {/* {Icon ? <Icon className="h-5 w-5 text-gray-700" /> : null} */}
         <h3 className="ml-2 text-sm font-medium">{title}</h3>
       </div>
-      <p
-        className={`${lusitana.className}
-          truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
-      >
-        {value}
-      </p>
     </div>
   );
 }

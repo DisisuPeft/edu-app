@@ -28,6 +28,7 @@ export default function useLogin(){
         login({email, password})
             .unwrap()
             .then(() => {
+                // console.log(res)
                 dispatch(setAuth());
                 // dispatch(finishInitialLoad())
                 Toast({message: "Logged in", icon: "success"})

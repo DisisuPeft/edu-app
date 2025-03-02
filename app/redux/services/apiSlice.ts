@@ -6,12 +6,16 @@ import type {
 } from '@reduxjs/toolkit/query'
 import { setAuth, logout } from "../features/authSlice";
 import { Mutex } from "async-mutex";
-
+// import { ServicebaseQuery } from './MapapiSlice';
 const mutex = new Mutex()
 const baseQuery = fetchBaseQuery({
     baseUrl: `${process.env.NEXT_PUBLIC_HOST}/api`,
     credentials: 'include'
 });
+// const DatabaseQuery = fetchBaseQuery({
+//     baseUrl: `${process.env.NEXT_PUBLIC_DATA_HOST}/api`,
+//     credentials: "include"
+// });
 
 const baseQueryWithReauth: BaseQueryFn<string|FetchArgs, unknown, FetchBaseQueryError>
     = async (args, api, extraOptions) => {
@@ -37,7 +41,7 @@ const baseQueryWithReauth: BaseQueryFn<string|FetchArgs, unknown, FetchBaseQuery
             }
         } else {
             await mutex.waitForUnlock();
-            result = await baseQuery(args, api, extraOptions)
+            // result = await baseQuery(args, api, extraOptions)
         }
         return result
 }
