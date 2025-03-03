@@ -1,8 +1,8 @@
 
 import { useEffect } from "react";
-import { useAppDispatch } from "@/app/redux/hooks";
-import {setAuth, finishInitialLoad} from "@/app/redux/features/authSlice"
-import { useVerifyMutation } from "@/app/redux/features/authApiSlice";
+import { useAppDispatch } from "@/redux/hooks";
+import {setAuth, finishInitialLoad} from "@/redux/features/authSlice"
+import { useVerifyMutation } from "@/redux/features/authApiSlice";
 
 export default function useVerify(){
     const dispatch = useAppDispatch()

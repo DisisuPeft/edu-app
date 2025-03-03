@@ -5,13 +5,13 @@ export default function Layout({children}:{children: React.ReactNode}){
         {/* Lado izquierdo con mapa difuminado */}
         <div className="hidden lg:block lg:w-1/2 relative">
           <Image
-            src="/assets/whitemap.jpg"
+            src="/assets/doctor-giving-presentation-team-interim-doctors.jpg"
             alt="Mapa de fondo"
             layout="fill"
             objectFit="cover"
-            className="filter blur-sm"
+            className="filter"
           />
-          <div className="absolute inset-0 bg-gray-500 bg-opacity-30"></div>
+          <div className="absolute inset-0"></div>
         </div>
   
         {/* Lado derecho con el login */}
