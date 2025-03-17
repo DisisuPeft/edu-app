@@ -1,9 +1,9 @@
 'use client'
 
 import { useVerify } from "@/hooks"
-import Loading from "@/components/common/Loading"
+import Loading from "@/app/components/common/Loading"
 import { useAppSelector } from "@/redux/hooks";
-import { Modal } from "@/components/common/Modal";
+import { Modal } from "@/app/components/common/Modal";
 
 export default function Setup(){
     useVerify()

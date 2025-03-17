@@ -1,10 +1,10 @@
 // import Image from "next/image";
 
-import FeaturesSection from "../ui/landing/Features";
-import Footer from "../ui/landing/Footer";
-import Header from "../ui/landing/Header";
-import PrimarySection from "../ui/landing/PrimarySection";
-import TestSection from "../ui/landing/TestSection";
+import FeaturesSection from "@/app/ui/landing/Features";
+import Footer from "@/app/ui/landing/Footer";
+import Header from "@/app/ui/landing/Header";
+import PrimarySection from "@/app/ui/landing/PrimarySection";
+import TestSection from "@/app/ui/landing/TestSection";
 
 export default function Home() {
   return (

@@ -1,5 +1,5 @@
 'use client'
-import { Button } from '@/ui/Button';
+import { Button } from '@/app/ui/Button';
 import Link from 'next/link';
 import { useLogin } from '@/hooks';
 // import Loading from '@/app/components/common/Loading';

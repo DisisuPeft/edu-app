@@ -3,6 +3,8 @@
 import {
   // UserGroupIcon,
   HomeIcon,
+  PencilIcon,
+  BookmarkIcon
   // DocumentDuplicateIcon,
   // ArrowsUpDownIcon
 } from '@heroicons/react/24/outline';
@@ -24,7 +26,9 @@ export default function NavLinks() {
   //checar como arreglar eso del user
   const links = [
     { name: 'Home', route: () => router.push('/dashboard'), icon: HomeIcon, roles: [1,2,3], nameroute: '/dashboard' },
+    { name: 'Diplomas asignados', route: () => router.push('/diplomas'), icon: PencilIcon, roles: [1,2], nameroute: '/diplomas'},
     { name: 'Catalogos', route: () => router.push('/catalogos'), icon: BookOpenIcon, roles: [1,2,3], nameroute: '/catalogos'},
+    { name: 'Mi Aprendizaje', route: () => router.push('/mi-aprendizaje'), icon: BookmarkIcon, roles: [1,3], nameroute: '/mi-aprendizaje'},
     // {
     //   name: 'Mis planes',
     //   href: '#',

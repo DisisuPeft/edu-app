@@ -1,6 +1,6 @@
 // 'use client'
 import Link from 'next/link';
-import NavLinks from '@/ui/dashboard/nav-links';
+import NavLinks from '@/app/ui/dashboard/nav-links';
 // import AcmeLogo from '@/app/ui/acme-logo';
 import { UserIcon } from '@heroicons/react/16/solid';
 // import { useAppSelector } from '@/app/redux/hooks';

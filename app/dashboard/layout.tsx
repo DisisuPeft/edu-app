@@ -1,5 +1,5 @@
-import { RequireAuth } from "../../utils";
-import SideNav from "../../ui/dashboard/sidenav";
+import { RequireAuth } from "@/utils";
+import SideNav from "@/app/ui/dashboard/sidenav";
 
 interface Props {
     children: React.ReactNode

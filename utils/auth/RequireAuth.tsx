@@ -20,7 +20,7 @@ export default function RequireAuth({children}: Props){
         )
     }
     if(!isAuth){
-        redirect('/')
+        redirect('/auth/login')
     }
 
     return <>{children}</>

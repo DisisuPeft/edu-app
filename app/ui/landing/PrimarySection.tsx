@@ -10,7 +10,7 @@ export default function PrimarySection(){
             //     filter: "brightness(0.7)"
             // }}
             />
-            <div className="container mx-auto px-4 z-10">
+            <div className="container mx-auto px-4 z-10"> 
                 <div className="max-w-2xl text-white">
                     <h1 className="text-5xl font-bold mb-4">Impulsa tu Carrera con Nuestros Diplomados</h1>
                     <p className="text-xl mb-8">
