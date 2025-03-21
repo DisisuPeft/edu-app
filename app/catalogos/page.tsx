@@ -1,3 +1,5 @@
-export default function Page(){
-    return <div>Catalogos</div>
+import MenuDashboard from "../ui/catalogos/menu-dashboard";
+
+export default function Page() {
+  return <MenuDashboard />;
 }
