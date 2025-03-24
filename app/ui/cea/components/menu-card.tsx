@@ -1,4 +1,4 @@
-import { MenuItem } from "@/redux/interface/CatalogosInterfaces";
+import { MenuItem } from "@/redux/interface/CeaInterfaces";
 import {
   Users,
   GraduationCap,

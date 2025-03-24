@@ -8,7 +8,7 @@ interface Props {
 export default function Layout({ children }: Props) {
   return (
     <RequireAuth>
-      <div className="flex h-screen flex-col md:flex-row md:overflow-hidden bg-white h-full">
+      <div className="flex h-screen flex-col md:flex-row md:overflow-hidden bg-white">
         <div className="w-full flex-none md:w-64">
           <SideNav />
         </div>

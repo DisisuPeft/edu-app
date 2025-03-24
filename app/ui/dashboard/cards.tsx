@@ -1,4 +1,4 @@
-'use client'
+// 'use client'
 // import {
 //   BanknotesIcon,
 //   ClockIcon,
@@ -6,8 +6,9 @@
 //   InboxIcon,
 // } from '@heroicons/react/24/outline';
 // import { lusitana } from '../fonts';
-import { useRetrieveUserQuery } from '@/redux/features/authApiSlice';
-import type React from "react"
+import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
+import type React from "react";
+import { User } from "@/redux/features/authApiSlice";
 // const iconMap = {
 //   users:
 // };
@@ -23,17 +24,24 @@ export const SkeletonLoader: React.FC = () => {
               <div className="col-span-2 h-2 rounded bg-gray-200"></div>
               <div className="col-span-1 h-2 rounded bg-gray-200"></div>
             </div> */}
-            {/* <div className="h-2 rounded bg-gray-200"></div> */}
-          </div>
+          {/* <div className="h-2 rounded bg-gray-200"></div> */}
         </div>
       </div>
+    </div>
     // </div>
-  )
-}
-export default function CardWrapper() {
+  );
+};
+export default function CardWrapper({
+  isLoading,
+  isFetching,
+  user,
+}: {
+  isLoading: boolean;
+  isFetching: boolean;
+  user: User | undefined;
+}) {
   // const {numberOfCustomers, numberOfInvoices, totalPaidInvoices, totalPendingInvoices} = await fetchCardData()
-  const {data: user, isLoading, isFetching} = useRetrieveUserQuery()
-  if (isLoading || isFetching){
+  if (isLoading || isFetching) {
     return (
       // <div className="relative flex w-64 animate-pulse gap-2 p-4 z-0">
       //   <div className="h-12 w-12 rounded-full"></div>
@@ -44,18 +52,13 @@ export default function CardWrapper() {
       //   {/* <div className="absolute bottom-5 right-0 h-4 w-4 rounded-full bg-slate-400"></div> */}
       // </div>
       // <div className='text-white bg-sky-500 p-1 rounded-xl'>Loading..</div>
-      <SkeletonLoader/>
-    )
+      <SkeletonLoader />
+    );
   }
-  return <Card title={user?.usuario?.email}/>
+  return <Card title={user?.usuario?.email} />;
 }
 
-export function Card({
-  title,
-}: {
-  title: string;
-}) {
-
+export function Card({ title }: { title: string }) {
   return (
     <div className="rounded-md p-2 bg-[#121829]">
       <div className="">

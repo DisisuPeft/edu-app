@@ -2,10 +2,11 @@
 
 export interface MenuItem {
   id: number;
-  title: string;
+  name: string;
   description: string;
   icon: string;
   itemCount: number;
   bgColor: string;
   textColor: string;
+  route: string;
 }

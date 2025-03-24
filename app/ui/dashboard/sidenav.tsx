@@ -1,4 +1,4 @@
-// 'use client'
+"use client";
 import Link from "next/link";
 import NavLinks from "@/app/ui/dashboard/nav-links";
 // import AcmeLogo from '@/app/ui/acme-logo';
@@ -6,19 +6,34 @@ import { UserIcon } from "@heroicons/react/16/solid";
 // import { useAppSelector } from '@/app/redux/hooks';
 // import { useLogoutMutation } from '@/app/redux/features/authApiSlice';
 // import { logout as setLogout } from '@/app/redux/features/authSlice';
-// import { useRetrieveUserQuery } from '@/app/redux/features/authApiSlice';
+import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 // import { lusitana } from '../fonts';
 import Logout from "@/app/utils/auth/Logout";
 import CardWrapper from "./cards";
+import { useState } from "react";
+import { User } from "@/redux/features/authApiSlice";
 // import { FormEvent } from 'react';
 // import { redirect } from 'next/navigation';
 // import Loading from '@/app/components/common/Loading';
+import { useEffect } from "react";
+import { useAppSelector } from "@/redux/hooks";
 
 export default function SideNav() {
   // const [logout] = useLogoutMutation()
   // const {isAuth} = useAppSelector(state => state.auth)
-  // const {data: user, isLoading, isFetching} = useRetrieveUserQuery()
-  // console.log(user, isLoading, isFetching)
+  const { data: user, isLoading, isFetching, refetch } = useRetrieveUserQuery();
+  const [obj, setObj] = useState<User | undefined>();
+  const { isAuth } = useAppSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (isAuth) {
+      refetch(); // Forzar la actualización de datos cuando cambia la autenticación
+    }
+  }, [isAuth]);
+
+  useEffect(() => {
+    setObj(user);
+  }, [user]);
   return (
     <div className="flex h-full flex-col px-3 py-4 md:px-2 bg-[#121829]">
       <Link
@@ -32,7 +47,11 @@ export default function SideNav() {
             </div>
             <div className="flex-1">
               <div className="rounded-lg bg-slate-400 text-lg">
-                <CardWrapper />
+                <CardWrapper
+                  isFetching={isFetching}
+                  isLoading={isLoading}
+                  user={obj}
+                />
               </div>
               {/* <div className="rounded-lg bg-slate-400 text-sm"></div> */}
             </div>

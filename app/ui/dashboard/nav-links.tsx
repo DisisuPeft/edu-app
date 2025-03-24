@@ -1,34 +1,58 @@
-'use client'
+"use client";
 
 import {
   // UserGroupIcon,
   HomeIcon,
   PencilIcon,
-  BookmarkIcon
+  BookmarkIcon,
   // DocumentDuplicateIcon,
   // ArrowsUpDownIcon
-} from '@heroicons/react/24/outline';
+} from "@heroicons/react/24/outline";
 // import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import clsx from 'clsx';
-import { useRetrieveUserQuery } from '@/redux/features/authApiSlice';
+import { usePathname } from "next/navigation";
+import clsx from "clsx";
+import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { useRouter } from "next/navigation";
-import {BookOpenIcon} from '@heroicons/react/24/outline';
+import { BookOpenIcon } from "@heroicons/react/24/outline";
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
 
 // const arraylength = null;
 // console.log(arraylength)
 export default function NavLinks() {
-  const pathname = usePathname()
-  const router = useRouter()
-  const {data: user, isLoading, isFetching} = useRetrieveUserQuery()
+  const pathname = usePathname();
+  const router = useRouter();
+  const { data: user, isLoading, isFetching } = useRetrieveUserQuery();
   //checar como arreglar eso del user
   const links = [
-    { name: 'Home', route: () => router.push('/dashboard'), icon: HomeIcon, roles: [1,2,3], nameroute: '/dashboard' },
-    { name: 'Diplomas asignados', route: () => router.push('/diplomas'), icon: PencilIcon, roles: [1,2], nameroute: '/diplomas'},
-    { name: 'Catalogos', route: () => router.push('/catalogos'), icon: BookOpenIcon, roles: [1,2,3], nameroute: '/catalogos'},
-    { name: 'Mi Aprendizaje', route: () => router.push('/mi-aprendizaje'), icon: BookmarkIcon, roles: [1,3], nameroute: '/mi-aprendizaje'},
+    {
+      name: "Menu",
+      route: () => router.push("/dashboard"),
+      icon: HomeIcon,
+      roles: [1, 2, 3],
+      nameroute: "/dashboard",
+    },
+    {
+      name: "Diplomas asignados",
+      route: () => router.push("/diplomas"),
+      icon: PencilIcon,
+      roles: [1, 2],
+      nameroute: "/diplomas",
+    },
+    {
+      name: "Control escolar",
+      route: () => router.push("/cea"),
+      icon: BookOpenIcon,
+      roles: [1, 2, 3],
+      nameroute: "/cea",
+    },
+    {
+      name: "Mi Aprendizaje",
+      route: () => router.push("/mi-aprendizaje"),
+      icon: BookmarkIcon,
+      roles: [1, 3],
+      nameroute: "/mi-aprendizaje",
+    },
     // {
     //   name: 'Mis planes',
     //   href: '#',
@@ -38,32 +62,34 @@ export default function NavLinks() {
   ];
   // console.log(links[0].roles[user?.rol.[]])
   // links.length = arraylength
-  if(isLoading || isFetching){
+  if (isLoading || isFetching) {
     return (
       <>
-        <Skeleton/>
-        <Skeleton/>
-        <Skeleton/>
-        <Skeleton/>
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
       </>
-    )
+    );
   }
   return (
     <>
       {links.map((link) => {
         const LinkIcon = link.icon;
-        const {roles = []} = link || {}
-        const { roleID = [] } = user?.usuario || {}
+        const { roles = [] } = link || {};
+        const { roleID = [] } = user?.usuario || {};
         // console.log(roleID)
-        const canAccess = roles.some(role => roleID.some(r => r.id === role))
+        const canAccess = roles.some((role) =>
+          roleID.some((r) => r.id === role)
+        );
         return canAccess ? (
           <button
             key={link.name}
             onClick={link.route}
             className={clsx(
-              'flex h-[40px] grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium text-white md:flex-none md:justify-start md:p-2 md:px-3',
+              "flex h-[40px] grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium text-white md:flex-none md:justify-start md:p-2 md:px-3",
               {
-                'bg-[#4b1804]  text-white': pathname === link.nameroute,
+                "bg-[#a20519]  text-white": pathname === link.nameroute,
               }
             )}
           >
@@ -76,7 +102,7 @@ export default function NavLinks() {
   );
 }
 
-export function Skeleton(){
+export function Skeleton() {
   return (
     <div className="mx-auto w-full max-w-sm rounded-md border border-black p-2">
       <div className="flex animate-pulse space-x-4">
@@ -93,5 +119,5 @@ export function Skeleton(){
         </div>
       </div>
     </div>
-  )
-} 
+  );
+}

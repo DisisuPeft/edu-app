@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { MenuItem } from "../interface/CatalogosInterfaces";
+import { MenuItem } from "../interface/CeaInterfaces";
 
-interface CatalogosState {
+interface CeaState {
   menu: MenuItem | null;
   isLoading: boolean;
 }
@@ -9,10 +9,10 @@ interface CatalogosState {
 const initialState = {
   menu: null,
   isLoading: true,
-} as CatalogosState;
+} as CeaState;
 
-const catalogoSlce = createSlice({
-  name: "catalogos",
+const CeaSlice = createSlice({
+  name: "cea",
   initialState,
   reducers: {
     clearMenu: (state) => {
@@ -24,5 +24,5 @@ const catalogoSlce = createSlice({
   },
 });
 
-export const { clearMenu, finishInitialLoadCatalogos } = catalogoSlce.actions;
-export default catalogoSlce.reducer;
+export const { clearMenu, finishInitialLoadCatalogos } = CeaSlice.actions;
+export default CeaSlice.reducer;

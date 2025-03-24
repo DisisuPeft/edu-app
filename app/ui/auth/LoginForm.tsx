@@ -64,7 +64,11 @@ export default function LoginForm() {
             </Link>
           </div>
         </div>
-
+        <div className="text-sm">
+            <Link href="/auth/register" className="font-medium text-[#121829]">
+              Registrarse
+            </Link>
+          </div>
         <div>
           <Button
             type="submit"
