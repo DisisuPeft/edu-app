@@ -8,7 +8,7 @@
 // import { lusitana } from '../fonts';
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import type React from "react";
-import { User } from "@/redux/features/authApiSlice";
+import { User } from "@/redux/interface/Users";
 // const iconMap = {
 //   users:
 // };

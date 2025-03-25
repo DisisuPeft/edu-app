@@ -1,6 +1,6 @@
 import { MenuItem } from "../interface/CeaInterfaces";
 import { apiSlice } from "../services/apiSlice";
-import { User, Role } from "../features/authApiSlice";
+import { User, Role } from "@/redux/interface/Users";
 const ceaApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createMenu: builder.mutation({
@@ -22,8 +22,19 @@ const ceaApiSlice = apiSlice.injectEndpoints({
         return Array.isArray(response) ? response : [];
       },
     }),
+    editUsers: builder.mutation({
+      query: (payload) => ({
+        url: "/cea/usuarios/editar/",
+        method: "POST",
+        body: payload,
+      }),
+    }),
   }),
 });
 
-export const { useCreateMenuMutation, useGetMenuQuery, useGetUsersQuery } =
-  ceaApiSlice;
+export const {
+  useCreateMenuMutation,
+  useGetMenuQuery,
+  useGetUsersQuery,
+  useEditUsersMutation,
+} = ceaApiSlice;

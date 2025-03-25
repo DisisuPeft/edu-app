@@ -11,7 +11,7 @@ import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import Logout from "@/app/utils/auth/Logout";
 import CardWrapper from "./cards";
 import { useState } from "react";
-import { User } from "@/redux/features/authApiSlice";
+import { User } from "@/redux/interface/Users";
 // import { FormEvent } from 'react';
 // import { redirect } from 'next/navigation';
 // import Loading from '@/app/components/common/Loading';

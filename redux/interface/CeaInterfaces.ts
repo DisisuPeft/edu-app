@@ -10,3 +10,13 @@ export interface MenuItem {
   textColor: string;
   route: string;
 }
+
+export interface NivelEducativo {
+  id: number;
+  name: string;
+}
+
+export interface Genero {
+  id: number;
+  name: string;
+}

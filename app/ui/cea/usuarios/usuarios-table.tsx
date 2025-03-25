@@ -10,24 +10,109 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { useEffect, useState } from "react";
-import { columns } from "./tipos";
+import { Column } from "./TableTypes";
+import { Chip } from "@mui/material";
+import { Edit } from "lucide-react";
+import { Delete } from "lucide-react";
+import UsersDialog from "./UsersDialog";
 
+// Prometo que despues limpio el componente haciendo un hook
 export default function UsuariosTabla() {
   const { data, error } = useGetUsersQuery();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [open, setOpen] = useState(false);
+  const [from, setFrom] = useState("");
 
+  const handleClose = (event: boolean) => {
+    setOpen(event);
+  };
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
-
+  const handleReset = (message: string) => {
+    setFrom(message);
+  };
+  const handleOpenEdit = () => {
+    setFrom("edit");
+    setOpen(true);
+  };
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-  // console.log(data, error);
+  const columns: readonly Column[] = [
+    { id: "email", label: "Correo electronico", minWidth: 170, path: "email" },
+    { id: "nombre", label: "Nombre", minWidth: 100, path: "profile.nombre" },
+    {
+      id: "apellidop",
+      label: "Apellido paterno",
+      minWidth: 170,
+      path: "profile.apellidoP",
+    },
+    {
+      id: "apellidom",
+      label: "Apellido materno",
+      minWidth: 170,
+      path: "profile.apellidoM",
+    },
+    {
+      id: "genero",
+      label: "Genero",
+      minWidth: 170,
+      path: "profile.genero.name",
+    },
+    {
+      id: "fechaNacimiento",
+      label: "Fecha de nacimiento",
+      minWidth: 170,
+      path: "profile.fechaNacimiento",
+    },
+    {
+      id: "nivEdu",
+      label: "Nivel educativo",
+      minWidth: 170,
+      path: "profile.nivEdu.name",
+    },
+    {
+      id: "rol",
+      label: "Rol",
+      minWidth: 170,
+      render: (row) => {
+        const roles = row?.roleID;
+        return roles.map((value: any) => {
+          return <Chip label={value.name} key={value.id} color="secondary" />;
+        });
+      },
+    },
+    {
+      id: "editar",
+      label: "Acciones",
+      minWidth: 170,
+      render: (row) => (
+        <div className="flex flex-row w-full p-2 gap-2">
+          <div className="flex justify-center">
+            <button className="" onClick={handleOpenEdit}>
+              <Edit />
+            </button>
+          </div>
+          <UsersDialog
+            open={open}
+            setClose={handleClose}
+            from={from}
+            resetFrom={handleReset}
+          />
+          <div className="flex justify-center">
+            <button className="">
+              <Delete />
+            </button>
+          </div>
+        </div>
+      ),
+    },
+  ];
   return (
     <div className="">
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
