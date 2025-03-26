@@ -103,6 +103,7 @@ export default function UsuariosTabla() {
             setClose={handleClose}
             from={from}
             resetFrom={handleReset}
+            id={row.id}
           />
           <div className="flex justify-center">
             <button className="">

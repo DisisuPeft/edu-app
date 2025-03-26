@@ -1,4 +1,4 @@
-import { MenuItem } from "../interface/CeaInterfaces";
+import { MenuItem, NivelEducativo } from "../interface/CeaInterfaces";
 import { apiSlice } from "../services/apiSlice";
 import { User, Role } from "@/redux/interface/Users";
 const ceaApiSlice = apiSlice.injectEndpoints({
@@ -22,12 +22,24 @@ const ceaApiSlice = apiSlice.injectEndpoints({
         return Array.isArray(response) ? response : [];
       },
     }),
+    getUserEdit: builder.query<User, number>({
+      query: (id) => `/cea/usuario/${id}`,
+      // transformResponse: (response) => {
+      //   return Array.isArray(response) ? response : [];
+      // },
+    }),
     editUsers: builder.mutation({
       query: (payload) => ({
         url: "/cea/usuarios/editar/",
         method: "POST",
         body: payload,
       }),
+    }),
+    getNiveles: builder.query<NivelEducativo[], void>({
+      query: () => "/cea/niveles-educativos/",
+      transformResponse: (response) => {
+        return Array.isArray(response) ? response : [];
+      },
     }),
   }),
 });
@@ -37,4 +49,6 @@ export const {
   useGetMenuQuery,
   useGetUsersQuery,
   useEditUsersMutation,
+  useGetNivelesQuery,
+  useGetUserEditQuery,
 } = ceaApiSlice;

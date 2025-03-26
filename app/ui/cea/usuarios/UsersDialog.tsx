@@ -13,6 +13,7 @@ import { TransitionProps } from "@mui/material/transitions";
 import { X } from "lucide-react";
 import { Transition } from "@/app/utils/Transition/Transition";
 import React, { useEffect } from "react";
+import EditUser from "./forms/EditUser";
 
 export default function UsersDialog({
   open,
@@ -20,12 +21,14 @@ export default function UsersDialog({
   setClose,
   from,
   resetFrom,
+  id,
 }: {
   open: boolean;
   setOpen?: () => void;
   setClose: (event: boolean) => void;
   from?: string;
   resetFrom: (message: string) => void;
+  id: number;
 }) {
   useEffect(() => {
     // console.log(from);
@@ -60,6 +63,8 @@ export default function UsersDialog({
             </Button> */}
           </Toolbar>
         </AppBar>
+        {/* formularios */}
+        <EditUser id={id} />
       </Dialog>
     </React.Fragment>
   );
