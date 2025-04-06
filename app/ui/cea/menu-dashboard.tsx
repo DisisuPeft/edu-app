@@ -1,8 +1,8 @@
 "use client";
 
-import { useGetMenuQuery } from "@/redux/cea/CeaApiSlice";
+import { useGetMenuQuery } from "@/redux/sistema/SistemaApiSlice";
 import MenuCard from "./components/menu-card";
-import { MenuItem } from "@/redux/interface/CeaInterfaces";
+import { MenuItem } from "@/redux/interface/sistema/modulos";
 import {
   Users,
   GraduationCap,

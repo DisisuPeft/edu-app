@@ -1,6 +1,13 @@
-import { Genero, NivelEducativo } from "./CeaInterfaces";
+import { Genero } from "../catalogos/genero";
+import { TipoNivel } from "../catalogos/tipo_nivel";
 
 export interface Role {
+  id: number;
+  name: string;
+  permission: Permission []
+}
+
+export interface Permission {
   id: number;
   name: string;
 }
@@ -20,7 +27,7 @@ export interface Profile {
   edad: number | null;
   fechaNacimiento: string | null;
   genero: Genero | null;
-  nivEdu: NivelEducativo | null;
+  nivEdu: TipoNivel | null;
   telefono: string | null;
   user?: number;
 }

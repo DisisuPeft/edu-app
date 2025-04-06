@@ -1,7 +1,11 @@
-import { MenuItem, NivelEducativo } from "../interface/CeaInterfaces";
+import { Modulos } from "../interface/sistema/modulos";
 import { apiSlice } from "../services/apiSlice";
-import { User, Role } from "@/redux/interface/Users";
-const ceaApiSlice = apiSlice.injectEndpoints({
+import { User, Role } from "@/redux/interface/authentication/Users";
+import { NivelEducativo } from "../interface/catalogos/nivel_educativo";
+import { TipoNivel } from "../interface/catalogos/tipo_nivel";
+import { TabsModulos } from "../interface/sistema/tabs";
+
+const SistemaApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createMenu: builder.mutation({
       query: (payload) => ({
@@ -10,8 +14,14 @@ const ceaApiSlice = apiSlice.injectEndpoints({
         body: payload,
       }),
     }),
-    getMenu: builder.query<MenuItem[], void>({
+    getMenu: builder.query<Modulos[], void>({
       query: () => "/menu/all/",
+      transformResponse: (response) => {
+        return Array.isArray(response) ? response : [];
+      },
+    }),
+    getTabs: builder.query<TabsModulos[], void>({
+      query: () => "/tabs/all/",
       transformResponse: (response) => {
         return Array.isArray(response) ? response : [];
       },
@@ -35,7 +45,7 @@ const ceaApiSlice = apiSlice.injectEndpoints({
         body: payload,
       }),
     }),
-    getNiveles: builder.query<NivelEducativo[], void>({
+    getNiveles: builder.query<TipoNivel[], void>({
       query: () => "/cea/niveles-educativos/",
       transformResponse: (response) => {
         return Array.isArray(response) ? response : [];
@@ -47,8 +57,9 @@ const ceaApiSlice = apiSlice.injectEndpoints({
 export const {
   useCreateMenuMutation,
   useGetMenuQuery,
+  useGetTabsQuery,
   useGetUsersQuery,
   useEditUsersMutation,
   useGetNivelesQuery,
   useGetUserEditQuery,
-} = ceaApiSlice;
+} = SistemaApiSlice;

@@ -1,16 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { apiSlice } from "./services/apiSlice";
 // import { DataApiSlice } from "./services/MapapiSlice";
-import authReducer from "@/redux/features/authSlice"
-import taskReducer from "@/redux/task/taskSlice";
-
+import authReducer from "@/redux/features/authSlice";
+import SistemaReducer from "@/redux/sistema/SistemaSlice"
 
 export const store = configureStore({
     reducer: {
         [apiSlice.reducerPath]: apiSlice.reducer,
         auth: authReducer,
-        taskstore: taskReducer
-        
+        sistema: SistemaReducer
     },
     middleware: getDefaultMiddleware => 
         getDefaultMiddleware().concat(apiSlice.middleware),

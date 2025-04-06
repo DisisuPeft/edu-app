@@ -4,8 +4,8 @@ import { useState, ChangeEvent, FormEvent } from "react";
 // // import { useAppDispatch } from "@/app/redux/hooks";
 import { Toast } from "@/alerts/toast";
 // // import { useRouteTestMutation } from "@/app/redux/task/taskapiSlice";
-import { useEditUsersMutation } from "@/redux/cea/CeaApiSlice";
-import { useGetUserEditQuery } from "@/redux/cea/CeaApiSlice";
+import { useEditUsersMutation } from "@/redux/sistema/SistemaApiSlice";
+import { useGetUserEditQuery } from "@/redux/sistema/SistemaApiSlice";
 import { useEffect } from "react";
 
 export default function useEditUser(id: number) {

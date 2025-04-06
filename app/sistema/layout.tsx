@@ -1,7 +1,6 @@
 import { RequireAuth } from "@/app/utils";
 import SideNav from "@/app/ui/dashboard/sidenav";
 import Navbar from "../ui/dashboard/navbar";
-import Modulos from "../ui/dashboard/cards";
 
 interface Props {
   children: React.ReactNode;

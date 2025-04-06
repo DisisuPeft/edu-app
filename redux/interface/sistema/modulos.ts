@@ -1,6 +1,6 @@
 // import type { LucideIcon } from "lucide-react";
 
-export interface MenuItem {
+export interface Modulos {
   id: number;
   name: string;
   description: string;
@@ -11,12 +11,3 @@ export interface MenuItem {
   route: string;
 }
 
-export interface NivelEducativo {
-  id: number;
-  name: string;
-}
-
-export interface Genero {
-  id: number;
-  name: string;
-}
