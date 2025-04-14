@@ -23,10 +23,14 @@ export const Toast = ({message, icon}: {message:string, icon:Icon}) => {
 
 
 
-export const Alert = ({title, text, icon}: {title: string, text: string, icon: Icon}) => {
+export const Alert = ({title, text, icon, closeB, onCloseOut, onEscapeOut}: {title: string, text: string, icon: Icon, closeB: boolean, onCloseOut: boolean, onEscapeOut: boolean}) => {
   Swal.fire({
     title: title,
     text: text,
-    icon: icon
+    icon: icon,
+    focusConfirm: false,
+    showConfirmButton: closeB,
+    allowOutsideClick: false,
+    allowEscapeKey: false,
   });
 }

@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Modulos} from "../interface/sistema/modulos";
 import { TabsModulos } from "../interface/sistema/tabs";
+import { Role } from "../interface/authentication/Users";
 
 interface SistemaState {
   menus: Modulos | null;

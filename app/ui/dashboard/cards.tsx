@@ -12,6 +12,9 @@ import type React from "react";
 import { User } from "@/redux/interface/authentication/Users";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
+import { Alert } from "@/alerts/toast";
+import { serializeError } from "@/redux/features/serializer";
 // const iconMap = {
 //   users:
 // // };
@@ -73,8 +76,15 @@ import Link from "next/link";
 // }
 
 export default function Modulos(){
-  const {data:modulos} = useGetMenuQuery()
-  // console.log(modulos)
+  const {data:modulos, error, refetch} = useGetMenuQuery()
+  const message = serializeError(error)
+  useEffect(() => {
+    if (error != undefined){
+      Alert({title: "Alerta", text: message, icon: "error", closeB: true, onCloseOut: true, onEscapeOut: true})
+      // refetch()
+    }
+    // refetch()
+  }, [error])
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {modulos?.map((mod) => (

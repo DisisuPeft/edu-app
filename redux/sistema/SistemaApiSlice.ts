@@ -40,16 +40,10 @@ const SistemaApiSlice = apiSlice.injectEndpoints({
     }),
     editUsers: builder.mutation({
       query: (payload) => ({
-        url: "/cea/usuarios/editar/",
-        method: "POST",
+        url: "/cea/usuarios/update/",
+        method: "PATCH",
         body: payload,
       }),
-    }),
-    getNiveles: builder.query<TipoNivel[], void>({
-      query: () => "/cea/niveles-educativos/",
-      transformResponse: (response) => {
-        return Array.isArray(response) ? response : [];
-      },
     }),
   }),
 });
@@ -60,6 +54,5 @@ export const {
   useGetTabsQuery,
   useGetUsersQuery,
   useEditUsersMutation,
-  useGetNivelesQuery,
   useGetUserEditQuery,
 } = SistemaApiSlice;

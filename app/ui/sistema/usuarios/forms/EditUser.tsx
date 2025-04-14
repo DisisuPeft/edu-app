@@ -4,32 +4,53 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
+  Box,
+  OutlinedInput,
+  Chip
 } from "@mui/material";
+import { Theme, useTheme } from "@emotion/react";
 import { useEditUser } from "@/hooks";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs, { Dayjs } from "dayjs";
-import { useGetNivelesQuery } from "@/redux/sistema/SistemaApiSlice";
+import { useGetGeneroQuery, useGetNivelesQuery, useGetRolesQuery } from "@/redux/catalogos/CatApiSlice";
 import { useEffect } from "react";
+import { Role } from "@/redux/interface/authentication/Users";
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+// function getStyles(name: string, roles: Role[], theme: Theme) {
+//   return {
+//     fontWeight: roles.includes(name)
+//       ? theme.typography.fontWeightMedium
+//       : theme.typography.fontWeightRegular,
+//   };
+// }
+
 
 export default function EditUser({ id }: { id: number }) {
-  const { formData, onChange } = useEditUser(id);
+  const { formData, onChange, onSubmit, setFormData } = useEditUser(id);
+  // const theme = useTheme()
   const { data: niveles } = useGetNivelesQuery();
+  const {data: generos } = useGetGeneroQuery()
+  const { data: roles } = useGetRolesQuery()
   // console.log(niveles);
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    // console.log("Guardar", formData);
-  };
-  const convertedDate = (date: string) => {
-    return date ? dayjs(date) : null;
-  };
   useEffect(() => {
-    // console.log(id);
+    // console.log(roles);
   });
   //Mas adelante la edad se debe setear de manera automatica con la fecha de nacimiento
   return (
-    <div className="w-[400px] md:w-full mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="max-w-[900px] mx-auto mt-10 p-6">
+      <form onSubmit={onSubmit} className="space-y-4">
         <div className="flex flex-col md:flex-row w-full gap-10">
           <TextField
             name="email"
@@ -47,7 +68,7 @@ export default function EditUser({ id }: { id: number }) {
             type="text"
             variant="outlined"
             fullWidth
-            value={formData.nombre}
+            value={formData.profile.nombre}
             onChange={onChange}
             className="mb-4"
           />
@@ -59,7 +80,7 @@ export default function EditUser({ id }: { id: number }) {
             type="text"
             variant="outlined"
             fullWidth
-            value={formData.apellidoP}
+            value={formData.profile.apellidoP}
             onChange={onChange}
             className="mb-4"
           />
@@ -70,18 +91,18 @@ export default function EditUser({ id }: { id: number }) {
             variant="outlined"
             type="text"
             fullWidth
-            value={formData.apellidoM}
+            value={formData.profile.apellidoM}
             onChange={onChange}
             className="mb-4"
           />
         </div>
         {/* <TextField
-          name="apellidoM"
-          label="Apellido Materno"
+          name="edad"
+          label="Edad"
           variant="outlined"
           type="text"
           fullWidth
-          value={formData.apellidoM}
+          value={formData.profile.edad}
           onChange={onChange}
           className="mb-4"
         />
@@ -117,74 +138,86 @@ export default function EditUser({ id }: { id: number }) {
         <input
           type="date"
           name="fechaNacimiento"
-          value={formData.fechaNacimiento}
+          value={formData.profile.fechaNacimiento}
           onChange={onChange}
           className="border b-4 border-gray-400 rounded-md w-full p-2 focus:border-gray-900 focus:outline-hidden"
         />
-
+        <TextField
+          name="edad"
+          label="Edad"
+          variant="outlined"
+          type="number"
+          fullWidth
+          value={formData.profile.edad}
+          onChange={onChange}
+          className="mb-4"
+        />
         <FormControl fullWidth className="mb-4">
           <InputLabel>Niveles educativos</InputLabel>
           <Select
             name="nivEdu"
-            value={formData.nivEdu}
+            value={formData.profile.nivEdu}
             label="Nivel educativo"
             onChange={onChange}
           >
             <MenuItem value="0">Seleccionar</MenuItem>
             {niveles?.map((nivel) => {
-              return <MenuItem value={nivel.id}>{nivel.name}</MenuItem>;
+              return <MenuItem value={nivel.id ?? 0}>{nivel.name}</MenuItem>;
             })}
           </Select>
         </FormControl>
-        {/* <FormControl fullWidth className="mb-4">
-          <InputLabel>País</InputLabel>
-          <Select
-            name="pais"
-            value={formData.pais}
-            label="País"
-            onChange={handleChange}
-          >
-            <MenuItem value="mexico">México</MenuItem>
-            <MenuItem value="españa">España</MenuItem>
-            <MenuItem value="argentina">Argentina</MenuItem>
-            <MenuItem value="colombia">Colombia</MenuItem>
-          </Select>
-        </FormControl>
 
         <FormControl fullWidth className="mb-4">
-          <InputLabel>Ciudad</InputLabel>
-          <Select
-            name="ciudad"
-            value={formData.ciudad}
-            label="Ciudad"
-            onChange={handleChange}
-          >
-            <MenuItem value="cdmx">Ciudad de México</MenuItem>
-            <MenuItem value="madrid">Madrid</MenuItem>
-            <MenuItem value="barcelona">Barcelona</MenuItem>
-            <MenuItem value="bogota">Bogotá</MenuItem>
-          </Select>
-        </FormControl>
-
-        <FormControl fullWidth className="mb-4">
-          <InputLabel>Género</InputLabel>
+          <InputLabel>Genero</InputLabel>
           <Select
             name="genero"
-            value={formData.genero}
-            label="Género"
-            onChange={handleChange}
+            value={formData.profile.genero}
+            label="Nivel educativo"
+            onChange={onChange}
           >
-            <MenuItem value="masculino">Masculino</MenuItem>
-            <MenuItem value="femenino">Femenino</MenuItem>
-            <MenuItem value="otro">Otro</MenuItem>
+            <MenuItem value="0">Seleccionar</MenuItem>
+            {generos?.map((gen) => {
+              return <MenuItem value={gen.id ?? 0}>{gen.name}</MenuItem>;
+            })}
           </Select>
-        </FormControl> */}
+        </FormControl>
+        <TextField
+          name="telefono"
+          label="Telefono celular"
+          variant="outlined"
+          type="text"
+          fullWidth
+          value={formData.profile.telefono}
+          onChange={onChange}
+          className="mb-4"
+        />
+        <div className="bg-white border rounded-md p-4">
+          <h2 className="text-sm font-medium mb-2">Seleccionar roles</h2>
+          <div className="flex flex-col space-y-2 max-h-48 overflow-y-auto">
+            {roles?.map((role) => (
+              <label
+                key={role.id}
+                className="flex items-center space-x-2 cursor-pointer hover:bg-gray-100 p-2 rounded-md transition"
+              >
+                <input
+                  name="role"
+                  type="checkbox"
+                  value={role.id}
+                  checked={formData.rol.some((r) => r.id === role.id)}
+                  onChange={onChange}
+                  className="form-checkbox h-4 w-4 text-blue-600"
+                />
+                <span className="text-sm">{role.name}</span>
+              </label>
+            ))}
+          </div>
+        </div>
         <div className="w-[20%]">
           <button
             type="submit"
-            className="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-800 transition duration-300"
+            className="w-full bg-sky-500 text-white py-2 rounded-lg hover:bg-sky-800 transition duration-300"
           >
-            Enviar
+            Guardar
           </button>
         </div>
       </form>

@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Tabs from "./tabs"
 import { useGetTabsQuery } from "@/redux/sistema/SistemaApiSlice"
-import UsuariosTabla from "./usuarios/usuarios-table"
+import UsuariosPanel from "./usuarios/usuarios-panel"
 
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState<string | null>("Usuarios")
@@ -19,7 +19,7 @@ export default function AdminPage() {
       <Tabs activeTab={activeTab} setActiveTab={setActiveTab} tabs={tabs} />
 
       <div className="mt-6">
-        {activeTab === "Usuarios" && <UsuariosTabla/>}
+        {activeTab === "Usuarios" && <UsuariosPanel/>}
         {activeTab === "Roles" && <div>aqui roles</div>}
         {activeTab === "Permisos" && <div>aqui permisos</div>}
         {activeTab === "Parametros" && <div>aqui parametros</div>}

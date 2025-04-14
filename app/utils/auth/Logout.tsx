@@ -4,6 +4,7 @@ import { useLogoutMutation } from "@/redux/features/authApiSlice";
 import { logout as setLogout } from "@/redux/features/authSlice";
 import { PowerIcon } from "@heroicons/react/24/outline";
 import { FormEvent } from "react";
+import { apiSlice } from "@/redux/services/apiSlice";
 // import Loading from '@/components/common/Loading';
 // import Loading from '@/components/common/Loading';
 export default function Logout() {
@@ -16,6 +17,7 @@ export default function Logout() {
       .unwrap()
       .then(() => {
         dispatch(setLogout());
+        dispatch(apiSlice.util.resetApiState())
       });
   };
   return (

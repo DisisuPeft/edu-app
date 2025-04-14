@@ -14,6 +14,7 @@ import { X } from "lucide-react";
 import { Transition } from "@/app/utils/Transition/Transition";
 import React, { useEffect } from "react";
 import EditUser from "./forms/EditUser";
+import CreateUser from "./forms/create-user";
 
 export default function UsersDialog({
   open,
@@ -28,7 +29,7 @@ export default function UsersDialog({
   setClose: (event: boolean) => void;
   from?: string;
   resetFrom: (message: string) => void;
-  id: number;
+  id?: number;
 }) {
   useEffect(() => {
     // console.log(from);
@@ -40,13 +41,12 @@ export default function UsersDialog({
   return (
     <React.Fragment>
       <Dialog
-        fullScreen
         open={open}
         onClose={handleClose}
         TransitionComponent={Transition}
       >
         <AppBar sx={{ position: "relative" }}>
-          <Toolbar sx={{ backgroundColor: "#a20519" }}>
+          <Toolbar sx={{ backgroundColor: "#0ea5e9" }}>
             <IconButton
               edge="start"
               color="inherit"
@@ -56,7 +56,7 @@ export default function UsersDialog({
               <X />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Usuarios
+              Usuario
             </Typography>
             {/* <Button autoFocus color="inherit" onClick={handleClose}>
               Guardar
@@ -64,7 +64,7 @@ export default function UsersDialog({
           </Toolbar>
         </AppBar>
         {/* formularios */}
-        <EditUser id={id} />
+        {from === "create" ? <CreateUser/> : <EditUser id={id} />}
       </Dialog>
     </React.Fragment>
   );

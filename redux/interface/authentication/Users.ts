@@ -1,10 +1,10 @@
 import { Genero } from "../catalogos/genero";
+import { NivelEducativo } from "../catalogos/nivel_educativo";
 import { TipoNivel } from "../catalogos/tipo_nivel";
 
 export interface Role {
   id: number;
   name: string;
-  permission: Permission []
 }
 
 export interface Permission {
@@ -17,17 +17,17 @@ export interface User {
   email: string;
   profile: Profile;
   rol: Array<Role>;
+  permission: Permission []
 }
 
 export interface Profile {
-  id: number;
   nombre: string;
   apellidoP: string | null;
   apellidoM: string | null;
-  edad: number | null;
-  fechaNacimiento: string | null;
-  genero: Genero | null;
-  nivEdu: TipoNivel | null;
+  edad: string | null;
+  fechaNacimiento: string | undefined;
+  genero: Genero | number;
+  nivEdu: NivelEducativo | number;
   telefono: string | null;
   user?: number;
 }

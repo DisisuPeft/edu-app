@@ -1,4 +1,4 @@
-import UsuariosTabla from "@/app/ui/sistema/usuarios/usuarios-table";
+import UsuariosTabla from "@/app/ui/sistema/usuarios/usuarios-panel";
 import AdminPage from "../ui/sistema/admin-tabs";
 
 export default function Page() {
