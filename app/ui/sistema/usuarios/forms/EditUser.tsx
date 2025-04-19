@@ -13,20 +13,10 @@ import { useEditUser } from "@/hooks";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs, { Dayjs } from "dayjs";
-import { useGetGeneroQuery, useGetNivelesQuery, useGetRolesQuery } from "@/redux/catalogos/CatApiSlice";
+import { useGetGeneroQuery, useGetNivelesQuery, useGetRolesQuery, useGetPermissionQuery } from "@/redux/catalogos/CatApiSlice";
 import { useEffect } from "react";
 import { Role } from "@/redux/interface/authentication/Users";
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
 
 // function getStyles(name: string, roles: Role[], theme: Theme) {
 //   return {
@@ -35,15 +25,21 @@ const MenuProps = {
 //       : theme.typography.fontWeightRegular,
 //   };
 // }
+interface Props {
+  id: number | undefined
+  onClose?: (event:boolean) => void
+}
 
-
-export default function EditUser({ id }: { id: number }) {
-  const { formData, onChange, onSubmit, setFormData } = useEditUser(id);
+export default function EditUser({id, onClose}:Props) {
+  // console.log(id)
+  const { formData, onChange, onSubmit, setFormData } = useEditUser({id, onClose});
   // const theme = useTheme()
+  // console.log(id)
   const { data: niveles } = useGetNivelesQuery();
   const {data: generos } = useGetGeneroQuery()
-  const { data: roles } = useGetRolesQuery()
-  // console.log(niveles);
+  const { data: roles } = useGetRolesQuery();
+  const {data: permissions} = useGetPermissionQuery()
+  // console.log(permissions);
   useEffect(() => {
     // console.log(roles);
   });
@@ -203,11 +199,32 @@ export default function EditUser({ id }: { id: number }) {
                   name="role"
                   type="checkbox"
                   value={role.id}
-                  checked={formData.rol.some((r) => r.id === role.id)}
+                  checked={formData.roleID?.some((r) => r.id === role.id)}
                   onChange={onChange}
                   className="form-checkbox h-4 w-4 text-blue-600"
                 />
                 <span className="text-sm">{role.name}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+        <div className="bg-white border rounded-md p-4">
+          <h2 className="text-sm font-medium mb-2">Seleccionar Permisos</h2>
+          <div className="flex flex-col space-y-2 max-h-48 overflow-y-auto">
+            {permissions?.map((p) => (
+              <label
+                key={p.id}
+                className="flex items-center space-x-2 cursor-pointer hover:bg-gray-100 p-2 rounded-md transition"
+              >
+                <input
+                  name="role"
+                  type="checkbox"
+                  value={p.id}
+                  checked={formData.permission?.some((r) => r.id === p.id)}
+                  onChange={onChange}
+                  className="form-checkbox h-4 w-4 text-blue-600"
+                />
+                <span className="text-sm">{p.name}</span>
               </label>
             ))}
           </div>

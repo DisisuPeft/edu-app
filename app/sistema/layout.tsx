@@ -2,6 +2,7 @@ import { RequireAuth } from "@/app/utils";
 import SideNav from "@/app/ui/dashboard/sidenav";
 import Navbar from "../ui/dashboard/navbar";
 import { Metadata } from "next";
+import { useGetTabsQuery } from "@/redux/sistema/SistemaApiSlice";
 
 export const metadata: Metadata = {
   title: "CEA",

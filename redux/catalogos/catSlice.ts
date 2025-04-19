@@ -3,12 +3,13 @@ import { Modulos} from "../interface/sistema/modulos";
 import { TabsModulos } from "../interface/sistema/tabs";
 import { NivelEducativo } from "../interface/catalogos/nivel_educativo";
 import { Genero } from "../interface/catalogos/genero";
-import { Role } from "../interface/authentication/Users";
+import { Permission, Role } from "../interface/authentication/Users";
 
 interface CatState {
-  niveles_educativos: NivelEducativo | null,
-  generos: Genero | null,
-  roles: Role | null
+  niveles_educativos: NivelEducativo | null;
+  generos: Genero | null;
+  roles: Role | null;
+  permissions: Permission | null
   isLoading: boolean;
 }
 
@@ -16,6 +17,7 @@ const initialState = {
   niveles_educativos: null,
   generos: null,
   roles: null,
+  permissions: null,
   isLoading: true,
 } as CatState;
 
@@ -31,6 +33,9 @@ const CatSlice = createSlice({
     },
     clearRoles: (state) => {
       state.roles = null;
+    },
+    clearPermission: (state) => {
+      state.permissions = null;
     },
     finishInitialLoadCatalogos: (state) => {
       state.isLoading = false;

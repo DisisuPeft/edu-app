@@ -1,6 +1,6 @@
 import { Modulos } from "../interface/sistema/modulos";
 import { apiSlice } from "../services/apiSlice";
-import { User, Role } from "@/redux/interface/authentication/Users";
+import { User, Role, Permission } from "@/redux/interface/authentication/Users";
 import { NivelEducativo } from "../interface/catalogos/nivel_educativo";
 import { TipoNivel } from "../interface/catalogos/tipo_nivel";
 import { TabsModulos } from "../interface/sistema/tabs";
@@ -26,11 +26,19 @@ const CatApiSlice = apiSlice.injectEndpoints({
         return Array.isArray(response) ? response : [];
       },
     }),
+    getPermission: builder.query<Permission[], void>({
+      query: () => "/cea/permissions/",
+      transformResponse: (response) => {
+        return Array.isArray(response) ? response : [];
+      },
+    }),
   }),
 });
-
+// {mutation}, query access without brackets
+// cea/permissions/
 export const {
   useGetNivelesQuery,
   useGetGeneroQuery,
-  useGetRolesQuery
+  useGetRolesQuery,
+  useGetPermissionQuery
 } = CatApiSlice;

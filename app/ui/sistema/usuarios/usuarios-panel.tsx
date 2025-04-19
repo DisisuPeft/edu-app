@@ -16,8 +16,9 @@ import { Edit } from "lucide-react";
 import { Delete } from "lucide-react";
 import UsersDialog from "./UsersDialog";
 import { Modal } from "@/app/components/common/Modal";
-import UsuariosTabla from "./usuarios-table";
+// import UsuariosTabla from "./tables/usuarios-table";
 import CreateUser from "./forms/create-user";
+import TableUsers from "./tables/table-users";
 
 // Prometo que despues limpio el componente haciendo un hook
 export default function UsuariosPanel() {
@@ -47,13 +48,12 @@ export default function UsuariosPanel() {
           Nuevo Usuario
         </button>
       </div>
-      <UsuariosTabla/>
-      <UsersDialog
+      <TableUsers/>
+      {/* <UsuariosTabla/> */}
+      {/* <UsersDialog
         open={open}
         setClose={handleClose}
-        from={from}
-        resetFrom={handleReset}
-      />
+      /> */}
     </div>
   );
 }

@@ -20,28 +20,21 @@ export default function UsersDialog({
   open,
   setOpen,
   setClose,
-  from,
-  resetFrom,
-  id,
+  children
 }: {
   open: boolean;
   setOpen?: () => void;
   setClose: (event: boolean) => void;
-  from?: string;
-  resetFrom: (message: string) => void;
-  id?: number;
+  children: React.ReactNode;
 }) {
-  useEffect(() => {
-    // console.log(from);
-  }, [from]);
   const handleClose = () => {
     setClose(false);
-    resetFrom("");
   };
   return (
     <React.Fragment>
       <Dialog
         open={open}
+        fullScreen
         onClose={handleClose}
         TransitionComponent={Transition}
       >
@@ -64,7 +57,7 @@ export default function UsersDialog({
           </Toolbar>
         </AppBar>
         {/* formularios */}
-        {from === "create" ? <CreateUser/> : <EditUser id={id} />}
+        {children}
       </Dialog>
     </React.Fragment>
   );

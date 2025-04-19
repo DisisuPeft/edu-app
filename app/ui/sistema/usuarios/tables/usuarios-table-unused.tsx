@@ -8,38 +8,42 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { useEffect, useState } from "react";
-import { Column } from "./TableTypes";
+import { Column } from "../TableTypes";
 import { Chip } from "@mui/material";
 import { Edit } from "lucide-react";
 import { Delete } from "lucide-react";
-import UsersDialog from "./UsersDialog";
+import UsersDialog from "../UsersDialog";
 import { Modal } from "@/app/components/common/Modal";
+import EditUser from "../forms/EditUser";
+import { Alert } from "@/alerts/toast";
+import Swal from "sweetalert2";
 
 export default function UsuariosTabla(){
-    const { data, error } = useGetUsersQuery();
+    const { data, error, refetch } = useGetUsersQuery();
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [open, setOpen] = useState(false);
-    const [from, setFrom] = useState("");
-      const handleClose = (event: boolean) => {
-        setOpen(event);
-      };
-      const handleChangePage = (event: unknown, newPage: number) => {
-        setPage(newPage);
-      };
-      const handleReset = (message: string) => {
-        setFrom(message);
-      };
-      const handleOpenEdit = () => {
-        setFrom("edit");
-        setOpen(true);
-      };
-      const handleChangeRowsPerPage = (
-        event: React.ChangeEvent<HTMLInputElement>
-      ) => {
-        setRowsPerPage(+event.target.value);
+
+    const handleClose = (event: boolean) => {
+      setOpen(event);
+    };
+    const handleCloseForm = (event: boolean) => {
+      refetch()
+      Alert({title: "Exito", text:"El usuario se edito!", icon:"success"})
+      setOpen(event);
+    };
+    const handleChangePage = (event: unknown, newPage: number) => {
+      setPage(newPage);
+    };
+    const handleOpenEdit = () => {
+      setOpen(true);
+    };
+    const handleChangeRowsPerPage = (
+      event: React.ChangeEvent<HTMLInputElement>
+    ) => {
+      setRowsPerPage(+event.target.value);
         setPage(0);
-      };
+    };
       const columns: readonly Column[] = [
         { id: "email", label: "Correo electronico", minWidth: 170, path: "email" },
         { id: "nombre", label: "Nombre", minWidth: 100, path: "profile.nombre" },
@@ -59,7 +63,7 @@ export default function UsuariosTabla(){
           id: "genero",
           label: "Genero",
           minWidth: 170,
-          path: "profile.genero.name",
+          path: "profile.genero_info.name",
         },
         {
           id: "fechaNacimiento",
@@ -71,7 +75,7 @@ export default function UsuariosTabla(){
           id: "nivEdu",
           label: "Nivel educativo",
           minWidth: 170,
-          path: "profile.nivEdu.name",
+          path: "profile.nivEdu_info.name",
         },
         {
           id: "rol",
@@ -80,7 +84,11 @@ export default function UsuariosTabla(){
           render: (row) => {
             const roles = row?.roleID;
             return roles.map((value: any) => {
-              return <Chip label={value.name} key={value.id} color="secondary" />;
+              return (
+                <div className="p-[2px]" key={value.id}>
+                  <Chip label={value.name} color="secondary" />
+                </div>
+              );
             });
           },
         },
@@ -97,11 +105,9 @@ export default function UsuariosTabla(){
               </div>
               <UsersDialog
                 open={open}
-                setClose={handleClose}
-                from={from}
-                resetFrom={handleReset}
-                id={row?.id}
-              />
+                setClose={handleClose}>
+                  <EditUser id={row.id} onClose={handleCloseForm}/>
+              </UsersDialog>
               <div className="flex justify-center">
                 <button className="">
                   <Delete />

@@ -16,7 +16,7 @@ export interface User {
   id: number;
   email: string;
   profile: Profile;
-  rol: Array<Role>;
+  roleID: Array<Role>;
   permission: Permission []
 }
 

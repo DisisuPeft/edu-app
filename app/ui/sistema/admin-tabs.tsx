@@ -1,14 +1,22 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Tabs from "./tabs"
 import { useGetTabsQuery } from "@/redux/sistema/SistemaApiSlice"
 import UsuariosPanel from "./usuarios/usuarios-panel"
+import UnauthorizedPage from "../unauthorized"
+import { Inform } from "@/alerts/toast"
 
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState<string | null>("Usuarios")
-  const {data:tabs, isLoading} = useGetTabsQuery()
-//   console.log(tabs, isLoading)  
+  const {data:tabs, isLoading, error} = useGetTabsQuery()
+//   console.log(tabs, isLoading)
+  // useEffect(() => {
+  //   console.log(error?.data)
+  // }, [error])
+  if (error){
+    return Inform({title: "Alerta", text: "No tienes acceso a las pestanias", icon: "error"})
+  }
   return (
     <div className="container mx-auto px-4 py-8 text-gray-800">
       <div className="mb-8">
@@ -22,6 +30,7 @@ export default function AdminPage() {
         {activeTab === "Usuarios" && <UsuariosPanel/>}
         {activeTab === "Roles" && <div>aqui roles</div>}
         {activeTab === "Permisos" && <div>aqui permisos</div>}
+        {activeTab === "Modulos" && <div>aqui Modulos</div>}
         {activeTab === "Parametros" && <div>aqui parametros</div>}
       </div>
     </div>
