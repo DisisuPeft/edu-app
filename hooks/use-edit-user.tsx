@@ -98,6 +98,9 @@ export default function useEditUser({id, onClose}: Props) {
       },
     });
   };
+  // permission: checked ? [...prev.permission, selectedP] : prev.permission.filter((p) => p.id !== selectedP.id)
+  // const selectedP = permissions?.find((p) => p.id === parseInt(value))
+  // if (!selectedP) return;
   //No actualiza permisos
   const onChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, type, value } = event.target;
@@ -105,18 +108,24 @@ export default function useEditUser({id, onClose}: Props) {
     if (type === "checkbox" && name === "role") {
       const checked = (event.target as HTMLInputElement).checked
       const selectedRol = roles?.find((rol) => rol.id === parseInt(value));
-      const selectedP = permissions?.find((p) => p.id === parseInt(value))
       if (!selectedRol) return;
-      if (!selectedP) return;
-      // console.log(selectedRol)
       setFormData((prev) => ({
         ...prev,
         roleID: checked
           ? [...prev.roleID, selectedRol]
           : prev.roleID.filter((r) => r.id !== selectedRol.id),
+      }));
+    } 
+    else if(type === "checkbox" && name === "permission"){
+      const checked = (event.target as HTMLInputElement).checked
+      const selectedP = permissions?.find((p) => p.id === parseInt(value))
+      if (!selectedP) return;
+      setFormData((prev) => ({
+        ...prev,
         permission: checked ? [...prev.permission, selectedP] : prev.permission.filter((p) => p.id !== selectedP.id)
       }));
-    } else {
+    }
+    else {
       setFormData((prev) => ({
         ...prev,
         profile: {

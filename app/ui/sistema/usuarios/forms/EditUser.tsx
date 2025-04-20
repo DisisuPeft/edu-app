@@ -217,7 +217,7 @@ export default function EditUser({id, onClose}:Props) {
                 className="flex items-center space-x-2 cursor-pointer hover:bg-gray-100 p-2 rounded-md transition"
               >
                 <input
-                  name="role"
+                  name="permission"
                   type="checkbox"
                   value={p.id}
                   checked={formData.permission?.some((r) => r.id === p.id)}
