@@ -1,4 +1,4 @@
-import { Permission } from "../authentication/Users";
+import { Permission, User } from "../authentication/Users";
 import { Modulos } from "./modulos";
 
 export interface TabsModulos {
@@ -6,5 +6,8 @@ export interface TabsModulos {
     name: string | null;
     description: string | null;
     modulo: Modulos;
-    permiso: Permission
+    permiso: Permission,
+    user: User,
+    href: string,
+    icon: string,
 }

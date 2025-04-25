@@ -25,15 +25,14 @@ export default function Layout({ children }: Props) {
           {children}
         </main>
       </div> */}
-      <div className="flex h-screen flex-col md:flex-row md:overflow-hidden bg-white">
-        <SideNav />
-      <div className="flex-1 flex flex-col">
-        <Navbar />
-        <main className="p-6">
-            {children}
-          </main>
-        </div>
-      </div>
+          <div className="min-h-screen bg-gray-50">
+                <Navbar />
+                <div className="flex-1 flex flex-col">
+                    <main className="p-6 overflow-auto">
+                        {children}
+                    </main>
+                </div>
+            </div>
     </RequireAuth>
   );
 }

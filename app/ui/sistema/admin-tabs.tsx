@@ -6,14 +6,18 @@ import { useGetTabsQuery } from "@/redux/sistema/SistemaApiSlice"
 import UsuariosPanel from "./usuarios/usuarios-panel"
 import UnauthorizedPage from "../unauthorized"
 import { Inform } from "@/alerts/toast"
+import { useSearchParams } from "next/navigation"
 
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState<string | null>("Usuarios")
-  const {data:tabs, isLoading, error} = useGetTabsQuery()
+  const params = useSearchParams()
+  const id = params.get("id")
+  const query_id = id ? parseInt(id): undefined
+  const {data:tabs, isLoading, error} = useGetTabsQuery(query_id)
 //   console.log(tabs, isLoading)
   // useEffect(() => {
-  //   console.log(error?.data)
-  // }, [error])
+  //   console.log(params.get('id'))
+  // })
   if (error){
     return Inform({title: "Alerta", text: "No tienes acceso a las pestanias", icon: "error"})
   }

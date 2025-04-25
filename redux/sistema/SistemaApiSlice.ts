@@ -20,8 +20,8 @@ const SistemaApiSlice = apiSlice.injectEndpoints({
         return Array.isArray(response) ? response : [];
       },
     }),
-    getTabs: builder.query<TabsModulos[], void>({
-      query: () => "/tabs/all/",
+    getTabs: builder.query<TabsModulos[], number>({
+      query: (id) => `/tabs/all/${id}`,
       transformResponse: (response) => {
         return Array.isArray(response) ? response : [];
       },

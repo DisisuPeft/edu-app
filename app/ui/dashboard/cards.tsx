@@ -94,7 +94,7 @@ export default function Modulos(){
           style={{
             backgroundColor: mod.bgColor
           }}
-          href={mod.route}
+          href={{pathname: mod.route, query: {id: mod.id}}}
         >
               <div className="relative p-6">
                 <div

@@ -25,7 +25,7 @@ export default function Navbar(){
         setObj(user?.usuario);
       }, [user]);
     return (
-        <nav className="h-16 bg-white shadow px-6 flex items-center justify-between">
+        <nav className="h-16 bg-white shadow px-6 flex items-center justify-between fixed z-10 w-full">
             <Link className="text-lg font-bold text-gray-800" href="/dashboard">CEA ERP</Link>
             <div className="flex flex-row items-center p-2 gap-10">
                 <div className="text-sm text-gray-800">Bienvenido {obj?.profile?.nombre}</div>

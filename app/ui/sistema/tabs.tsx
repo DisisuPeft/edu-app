@@ -1,5 +1,4 @@
 import { TabsModulos } from "@/redux/interface/sistema/tabs"
-
 interface TabsProps {
     activeTab: string | null
     setActiveTab: (tab: string | null) => void
@@ -7,7 +6,7 @@ interface TabsProps {
 }
 
 export default function Tabs({ activeTab, setActiveTab, tabs }: TabsProps) {
-  
+
     return (
       <div className="border-b border-gray-200">
         <nav className="flex -mb-px space-x-8 overflow-x-auto">

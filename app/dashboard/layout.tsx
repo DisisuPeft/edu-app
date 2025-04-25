@@ -18,7 +18,7 @@ export default function Layout({ children }: Props) {
           {children}
         </main>
       </div> */}
-      <div className="flex h-screen bg-gray-100">
+      {/* <div className="flex h-screen bg-gray-100">
         <SideNav />
       <div className="flex-1 flex flex-col">
         <Navbar />
@@ -26,7 +26,15 @@ export default function Layout({ children }: Props) {
             {children}
           </main>
         </div>
-      </div>
+      </div> */}
+          <div className="min-h-screen bg-gray-50">
+                <Navbar />
+                <div className="flex-1 flex flex-col">
+                    <main className="p-6 overflow-auto">
+                        {children}
+                    </main>
+                </div>
+            </div>
     </RequireAuth>
   );
 }
