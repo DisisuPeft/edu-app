@@ -1,6 +1,6 @@
 import { useGetLeadsQuery } from "@/redux/crm/crmApiSlice";
 import { Users, Activity, PieChart, BarChart } from "lucide-react";
-
+import Link from "next/link";
 
 export default function DashboardCRM(){
     const {data:leads, isLoading} = useGetLeadsQuery()
@@ -23,10 +23,22 @@ export default function DashboardCRM(){
         },
         {} as Record<string, number>,
     );
-    // console.log(leadsByStage)
+
+    const leadsByPrograms = leads?.reduce(
+        (acc, lead) => {
+          const programa = lead?.interesado_en?.nombre?.trim();
+          if (programa) {
+            acc[programa] = (acc[programa] || 0) + 1;
+          }
+        //   console.log(acc)
+          return acc;
+        },
+        {} as Record<string, number>,
+    );
+    // console.log(leadsByPrograms)
     return (
         <div className="p-6 md:ml-64">
-            <h1 className="text-2xl font-bold mb-6 text-gray-800">Inicio</h1>
+            {/* <h1 className="text-2xl font-bold mb-6 text-gray-800">Camapana activa: {leads[0]?.camapania?.nombre}</h1> */}
 
             {/* State overview */}
 
@@ -80,7 +92,7 @@ export default function DashboardCRM(){
                 <div className="bg-white p-6 rounded-lg shadow text-gray-800">
                     <h2 className="text-lg font-semibold mb-4">Leads por Etapa</h2>
                     <div className="space-y-4">
-                        {Object?.entries(leadsByStage)?.map(([stage, count]) => (
+                        {Object?.entries(leadsByStage || {})?.map(([stage, count]) => (
                         <div key={stage}>
                             <div className="flex justify-between mb-1">
                                 <span className="text-sm font-medium">{stage}</span>
@@ -95,6 +107,78 @@ export default function DashboardCRM(){
                         </div>
                         ))}
                     </div>
+                </div>
+                <div className="bg-white p-6 rounded-lg shadow text-gray-800">
+                    <h2 className="text-lg font-semibold mb-4">Leads por Programa</h2>
+                    <div className="space-y-4">
+                        {Object.entries(leadsByPrograms || {}).map(([program, count]) => (
+                        <div key={program}>
+                            <div className="flex justify-between mb-1">
+                            <span className="text-sm font-medium">{program}</span>
+                            <span className="text-sm text-gray-500">{count > 1 ? `${count} leads`: `${count} lead`}</span>
+                            </div>
+                            <div className="w-full bg-gray-200 rounded-full h-2">
+                            <div
+                                className="bg-green-600 h-2 rounded-full"
+                                style={{ width: `${(count / total_leads) * 100}%` }}
+                            ></div>
+                            </div>
+                        </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow mb-6">
+                <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-lg font-semibold text-gray-800">Leads Recientes</h2>
+                    <Link href={`/crm/leads?id=${6}`} className="text-sm text-blue-600 hover:underline">
+                        Ver todos
+                    </Link>
+                </div>
+                <div className="overflow-x-auto">
+                    <table className="min-w-full divide-y divide-gray-200 text-gray-800">
+                        <thead className="bg-gray-50">
+                        <tr>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Nombre
+                            </th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Programa
+                            </th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Etapa
+                            </th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Estatus
+                            </th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Vendedor
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-gray-200 text-gray-800">
+                        {leads?.slice(0, 5).map((lead) => (
+                            <tr key={lead.id}>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                                <div className="text-sm font-medium text-gray-900">{lead.nombre}</div>
+                                <div className="text-sm text-gray-500">{lead.correo}</div>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{lead?.interesado_en?.nombre}</td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                    {lead?.etapa?.nombre}
+                                </span>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                    {lead?.estatus?.nombre}
+                                </span>
+                            </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{lead?.vendedor_asignado?.profile?.nombre} {lead?.vendedor_asignado?.profile?.apellidoM} {lead?.vendedor_asignado?.profile?.apellidoP}</td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

@@ -7,12 +7,13 @@ import {
     getCoreRowModel,
     flexRender,
     ColumnDef,
+    getPaginationRowModel,
 } from '@tanstack/react-table';
 import { Edit, Delete, Plus, Search, Filter } from "lucide-react";
+import Link from "next/link";
 // Faltaria agregar filtos de busqueda
 export default function LeadList(){
     const {data:leads, isLoading} = useGetLeadsQuery()
-    
     const columns: ColumnDef<Lead>[] = [
         {
           accessorKey: "nombre",
@@ -60,13 +61,13 @@ export default function LeadList(){
               {
                 accessorFn: (row) => row,
                 cell: ({getValue}) => {
-                  const user = getValue() as User
+                  const lead = getValue() as Lead
                   return (
                     <div className="flex flex-row w-full p-2 gap-2">
                       <div className="flex justify-center">
-                        <button className="">
+                        <Link className="" href={{pathname: `/crm/leads/${lead.id}`, query:{id: 6}}}>
                           <Edit />
-                        </button>
+                        </Link>
                       </div>
                       <div className="flex justify-center">
                         <button className="">

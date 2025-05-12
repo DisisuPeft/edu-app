@@ -1,7 +1,7 @@
 import { Modulos } from "../interface/sistema/modulos";
 import { apiSlice } from "../services/apiSlice";
 import { User, Role } from "@/redux/interface/authentication/Users";
-import { Lead } from "../interface/crm/crm";
+import { Lead, Pipeline, Data } from "../interface/crm/crm";
 
 const crmApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -17,6 +17,9 @@ const crmApiSlice = apiSlice.injectEndpoints({
       transformResponse: (response) => {
         return Array.isArray(response) ? response : [];
       },
+    }),
+    retrieveLead: builder.query<Data, number>({
+      query: (id) => `/lead/${id}/`,
     }),
     // getTabs: builder.query<TabsModulos[], void>({
     //   query: () => "/tabs/all/",
@@ -46,6 +49,4 @@ const crmApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const {
-  useGetLeadsQuery
-} = crmApiSlice;
+export const { useGetLeadsQuery, useRetrieveLeadQuery } = crmApiSlice;

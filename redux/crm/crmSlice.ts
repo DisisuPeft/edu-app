@@ -5,11 +5,15 @@ import { Role } from "../interface/authentication/Users";
 
 interface crmState {
   leads: null
+  lead: null,
+  pipelines: null,
   isLoading: boolean;
 }
 
 const initialState = {
   leads: null,
+  lead: null,
+  pipelines: null,
   isLoading: true,
 } as crmState;
 
@@ -17,8 +21,14 @@ const crmSlice = createSlice({
   name: "crm",
   initialState,
   reducers: {
-    clearLead: (state) => {
+    clearLeads: (state) => {
       state.leads = null
+    },
+    clearLead: (state) => {
+      state.lead = null
+    },
+    clearPipeline: (state) => {
+      state.pipelines = null
     },
     finishInitialLoadCatalogos: (state) => {
       state.isLoading = false;
@@ -26,5 +36,5 @@ const crmSlice = createSlice({
   },
 });
 
-export const { clearLead, finishInitialLoadCatalogos } = crmSlice.actions;
+export const { clearLeads, finishInitialLoadCatalogos, clearLead, clearPipeline } = crmSlice.actions;
 export default crmSlice.reducer;
