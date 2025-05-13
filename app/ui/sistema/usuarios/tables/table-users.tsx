@@ -15,8 +15,9 @@ import {
   ColumnDef,
 } from '@tanstack/react-table';
 import { Permission, Role, User } from "@/redux/interface/authentication/Users";
-
+//
 export default function TableUsers(){
+  
     const { data, error, refetch } = useGetUsersQuery();
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);

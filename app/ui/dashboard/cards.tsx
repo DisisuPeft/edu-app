@@ -15,6 +15,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { Alert } from "@/alerts/toast";
 import { serializeError } from "@/redux/features/serializer";
+import { DynamicIcon } from "../icons/dynamic-icon";
 // const iconMap = {
 //   users:
 // // };
@@ -86,34 +87,32 @@ export default function Modulos(){
     // refetch()
   }, [error])
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-[50px] p-5">
       {modulos?.map((mod) => (
         <Link
           key={mod.id}
           className={`rounded-xl p-6 shadow transition cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md`}
           style={{
-            backgroundColor: mod.bgColor
+            backgroundColor: mod.bgColor,
           }}
-          href={{pathname: mod.route, query: {id: mod.id}}}
+          href={{ pathname: mod.route, query: { id: mod.id } }}
         >
-              <div className="relative p-6">
-                <div
-                  className="mb-4 flex justify-center rounded-lg p-3"
-                >
-                  <Image className="h-[200px] w-[200px]" height={600} width={600} src={mod.icon} alt="imagenmodulo"/>
-                </div>
-                <h3 className="mb-2 text-2xl font-bold text-black">
-                  {mod.name}
-                </h3>
-                <p className="mb-4 text-sm text-gray-600">{mod.description}</p>
-                {/* <div className="flex items-center justify-between">
+          <div className="relative p-6">
+            <div className="mb-4 flex justify-center rounded-lg p-3">
+              {/* <Image className="h-[200px] w-[200px]" height={600} width={600} src={mod.icon} alt="imagenmodulo"/> */}
+              <DynamicIcon iconName={mod.icon} size={100} />
+            </div>
+            <h3 className="mb-2 text-2xl font-bold text-black">{mod.name}</h3>
+            <p className="mb-4 text-sm text-gray-600">{mod.description}</p>
+            {/* <div className="flex items-center justify-between">
                   <span className="text-xs font-medium text-gray-500">
                     {item.itemCount}
                   </span>
                 </div> */}
-              </div>
+          </div>
         </Link>
       ))}
     </div>
-  )
+  );
 }
+// clipboard-list chalkboard-teacher
