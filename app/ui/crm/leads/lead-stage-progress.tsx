@@ -56,14 +56,14 @@ export default function LeadStageProgress({
                 {index + 1}
               </button>
               <span className="text-xs text-center">{stage.nombre}</span>
-              {index < stages.length - 1 && (
+              {/* {index < stages.length - 1 && (
                 <div
                   className={`absolute top-4 left-[80px] h-0.5 transform -translate-y-1/2 ${
                     isCompleted ? "bg-green-500" : "bg-gray-200"
                   }`}
                   style={{ width: "50px" }} // ajusta según el spacing entre puntos
                 ></div>
-              )}
+              )} */}
             </div>
           );
         })}

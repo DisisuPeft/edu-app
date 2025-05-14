@@ -2,6 +2,7 @@
 
 import { useRetrieveLeadQuery } from "@/redux/crm/crmApiSlice";
 import Link from "next/link";
+import LeadNoteForm from "./lead-note-form";
 import {
   ArrowLeft,
   Edit,
@@ -11,6 +12,7 @@ import {
   BookOpen,
   BarChart2,
   Clock,
+  MessageSquare
 } from "lucide-react";
 import LeadStageProgress from "./lead-stage-progress";
 import { Etapas } from "@/redux/interface/crm/crm";
@@ -101,7 +103,7 @@ export default function LeadDetail({ id }: LeadDetailProps) {
               <div className="flex items-start">
                 <BookOpen className="h-5 w-5 text-gray-400 mr-2 mt-0.5" />
                 <div>
-                  <p className="text-sm text-gray-500">Programa Educativo</p>
+                  <p className="text-sm text-gray-500">Interes</p>
                   <p className="font-medium">
                     {data?.lead?.interesado_en?.nombre}
                   </p>
@@ -162,7 +164,7 @@ export default function LeadDetail({ id }: LeadDetailProps) {
             {/* {lead.pipeline && ( */}
             <div className="bg-white rounded-lg shadow p-6">
               <h2 className="text-lg  mb-4">
-                <p className="font-bold">Progreso en Pipeline:</p>{" "}
+                <p className="font-bold">Progreso:</p>{" "}
                 {data?.pipeline[0]?.nombre}
               </h2>
               <LeadStageProgress
@@ -172,6 +174,111 @@ export default function LeadDetail({ id }: LeadDetailProps) {
               />
             </div>
             {/* )} */}
+          </div>
+          {/* Historial de notas */}
+          <div className="bg-white rounded-lg shadow p-6">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-lg font-semibold">Historial de Notas</h2>
+              <div className="flex items-center">
+                <MessageSquare className="h-5 w-5 text-gray-400 mr-2" />
+                <span className="text-gray-500">
+                  {data?.lead?.notas?.length > 0
+                    ? data?.lead?.notas?.length
+                    : 0}{" "}
+                  notas
+                </span>
+              </div>
+            </div>
+
+            <LeadNoteForm leadId={data?.lead.id} />
+
+            <div className="mt-6 space-y-4">
+              {data?.lead?.notas.length > 0 ? (
+                data?.lead?.notas
+                  .sort(
+                    (a, b) =>
+                      new Date(b.fecha).getTime() - new Date(a.fecha).getTime()
+                  )
+                  .map((nota, index) => (
+                    <div
+                      key={index}
+                      className="border-l-4 border-blue-500 pl-4 py-2"
+                    >
+                      <div className="flex justify-between items-center mb-1">
+                        <p className="font-medium">{nota.usuario}</p>
+                        <p className="text-sm text-gray-500">
+                          {new Date(nota.fecha_creacion).toLocaleString()}
+                        </p>
+                      </div>
+                      <p className="text-gray-800">{nota.texto}</p>
+                    </div>
+                  ))
+              ) : (
+                <p className="text-gray-500 text-center py-4">
+                  No hay notas registradas.
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+        <div className="space-y-6">
+          {/* Tarjeta de estado */}
+          <div className="bg-white rounded-lg shadow p-6">
+            <h2 className="text-lg font-semibold mb-4">Estado del Lead</h2>
+
+            <div className="mb-4">
+              <label className="block text-sm text-gray-500 mb-1">
+                Estatus Actual
+              </label>
+              <select
+                // value={selectedEstatus}
+                // onChange={handleStatusChange}
+                className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="">Seleccionar estatus</option>
+                {data?.estatus?.map((est) => (
+                  <option key={est.id} value={est.nombre}>
+                    {est.nombre}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm text-gray-500 mb-1">
+                Etapa Actual
+              </label>
+              <div
+                className={`px-4 py-2 rounded-md ${
+                  data?.lead?.etapa
+                    ? "bg-blue-100 text-blue-800"
+                    : "bg-gray-100 text-gray-800"
+                }`}
+              >
+                {data?.lead?.etapa?.nombre || "No asignada"}
+              </div>
+            </div>
+          </div>
+
+          {/* Acciones rápidas */}
+          <div className="bg-white rounded-lg shadow p-6">
+            <h2 className="text-lg font-semibold mb-4">Acciones Rápidas</h2>
+            <div className="space-y-3">
+              <button className="w-full flex items-center justify-center px-4 py-2 bg-blue-50 text-blue-700 rounded-md hover:bg-blue-100 transition-colors">
+                <Mail className="mr-2 h-5 w-5" />
+                Enviar Email
+              </button>
+
+              <button className="w-full flex items-center justify-center px-4 py-2 bg-green-50 text-green-700 rounded-md hover:bg-green-100 transition-colors">
+                <Phone className="mr-2 h-5 w-5" />
+                Llamar
+              </button>
+
+              <button className="w-full flex items-center justify-center px-4 py-2 bg-purple-50 text-purple-700 rounded-md hover:bg-purple-100 transition-colors">
+                <MessageSquare className="mr-2 h-5 w-5" />
+                Enviar SMS
+              </button>
+            </div>
           </div>
         </div>
       </div>
