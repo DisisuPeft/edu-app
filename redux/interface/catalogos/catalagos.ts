@@ -38,3 +38,22 @@ export interface InstitucionAcademica {
     fecha_creacion: string | null | undefined;
     fecha_actualizacion: string | null | undefined;
 }
+
+export interface Niveles {
+  name: string | null | undefined;
+  created_at: string | null | undefined;
+  updated_at: string | null | undefined;
+}
+
+export interface Grados {
+  name: string | null | undefined;
+  nivel: Niveles | string | null | undefined;
+  created_at: string | null | undefined;
+  updated_at: string | null | undefined;
+}
+export interface Grupos {
+  name: string | null | undefined;
+  grado: Grados | string | null | undefined;
+  created_at: string | null | undefined;
+  updated_at: string | null | undefined;
+}
