@@ -57,3 +57,18 @@ export interface Grupos {
   created_at: string | null | undefined;
   updated_at: string | null | undefined;
 }
+
+export interface EstadosRepublica {
+  id: number | null | undefined;
+  name: string | null | undefined;
+  created_at: string | null | undefined;
+  updated_at: string | null | undefined;
+}
+
+export interface Municipios {
+  id: number | null | undefined;
+  nombre: string | null | undefined;
+  estado: EstadosRepublica | null | undefined;
+  activo: number | null | undefined;
+  clave: string | null | undefined;
+}

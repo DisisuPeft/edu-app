@@ -1,7 +1,7 @@
 import { Profile, User } from "../authentication/Users";
-import { Grupos } from "../catalogos/catalagos";
+import { Grupos, Municipios } from "../catalogos/catalagos";
 import { NivelEducativo } from "../catalogos/nivel_educativo";
-
+import { EstadosRepublica } from "../catalogos/catalagos";
 
 export interface Estudiante {
   user: User | null | undefined;
@@ -9,9 +9,8 @@ export interface Estudiante {
   curp: string | null | undefined;
   matricula: string | null | undefined;
   grupo: Grupos | string | null | undefined;
-  nivel_educativo: NivelEducativo | string | null | undefined;
-  fecha_nacimiento: string | null | undefined;
-  lugar_nacimiento: string | null | undefined;
+  lugar_nacimiento: EstadosRepublica | string | null | undefined;
+  municipio: Municipios | string | null | undefined;
   direccion: string | null | undefined;
   telefono: string | null | undefined;
   tutor_nombre: string | null | undefined;
@@ -21,3 +20,4 @@ export interface Estudiante {
   fecha_creacion: string | null | undefined;
   fecha_actualizacion: string | null | undefined;
 }
+

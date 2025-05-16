@@ -3,14 +3,11 @@
 import { ArrowLeftIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useCreateStudent } from "@/hooks";
 
 export default function CreateStudent() {
   const router = useRouter()
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    console.log("Save");
-  };
+  const {formData, onChange, onSubmit} = useCreateStudent()
   return (
     <div className="container mx-auto px-4 py-8 text-gray-800">
       <div className="mb-6">
@@ -27,7 +24,7 @@ export default function CreateStudent() {
         <h1 className="text-2xl font-bold text-gray-800 mb-6">
           Agregar nuevo estudiante
         </h1>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={onSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-4">
               <h2 className="text-lg font-semibold text-gray-700">
@@ -45,14 +42,15 @@ export default function CreateStudent() {
                   type="text"
                   id="curp"
                   name="curp"
-                  // value={formData.curp}
-                  // onChange={handleChange}
-                  className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm`}
+                  value={formData.curp}
+                  onChange={onChange}
+                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
                   // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
                   //   errors.curp ? "border-red-500" : ""
                   // }`}
                   placeholder="ABCD123456HDFXYZ01"
                   maxLength={18}
+                  style={{ textTransform: "uppercase" }}
                 />
                 {/* {errors.curp && (
                 <p className="mt-1 text-sm text-red-600">{errors.curp}</p>
@@ -70,13 +68,15 @@ export default function CreateStudent() {
                   type="text"
                   id="matricula"
                   name="matricula"
-                  // value={formData.matricula}
-                  // onChange={handleChange}
-                  className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm`}
+                  value={formData.matricula}
+                  onChange={onChange}
+                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
                   // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
                   //   errors.matricula ? "border-red-500" : ""
                   // }`}
                   placeholder="A12345"
+                  style={{ textTransform: "uppercase" }}
+                  maxLength={5}
                 />
                 {/* {errors.matricula && (
                 <p className="mt-1 text-sm text-red-600">{errors.matricula}</p>
@@ -85,18 +85,18 @@ export default function CreateStudent() {
 
               <div>
                 <label
-                  htmlFor="fecha_nacimiento"
+                  htmlFor="fechaNacimiento"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Fecha de nacimiento <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="date"
-                  id="fecha_nacimiento"
-                  name="fecha_nacimiento"
-                  // value={formData.fecha_nacimiento}
-                  // onChange={handleChange}
-                  className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm`}
+                  id="fechaNacimiento"
+                  name="profile.fechaNacimiento"
+                  value={formData.profile.fechaNacimiento}
+                  onChange={onChange}
+                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
                   // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
                   //   errors.fecha_nacimiento ? "border-red-500" : ""
                   // }`}
@@ -118,10 +118,10 @@ export default function CreateStudent() {
                 <textarea
                   id="direccion"
                   name="direccion"
-                  // value={formData.direccion}
-                  // onChange={handleChange}
+                  value={formData.direccion}
+                  onChange={onChange}
                   rows={3}
-                  className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm`}
+                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
                   // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
                   //   errors.direccion ? "border-red-500" : ""
                   // }`}
@@ -142,10 +142,10 @@ export default function CreateStudent() {
                 <input
                   type="tel"
                   id="telefono"
-                  name="telefono"
-                  // value={formData.telefono}
-                  // onChange={handleChange}
-                  className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm`}
+                  name="profile.telefono"
+                  value={formData.profile.telefono}
+                  onChange={onChange}
+                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
                   // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
                   //   errors.telefono ? "border-red-500" : ""
                   // }`}
@@ -176,7 +176,7 @@ export default function CreateStudent() {
                   name="grupo"
                   // value={formData.grupo}
                   // onChange={handleChange}
-                  className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm`}
+                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
                   // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
                   //   errors.grupo ? "border-red-500" : ""
                   // }`}

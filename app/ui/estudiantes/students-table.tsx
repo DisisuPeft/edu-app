@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { SearchIcon } from "lucide-react";
 import { PlusIcon } from "lucide-react";
+import { Estudiante } from "@/redux/interface/estudiante/estudiante";
 
 interface TableProps {
-    // estudiantes: 
+    estudiantes?: Estudiante [] | []
 }
 
-export default function StudentsTable(){
+export default function StudentsTable({estudiantes}: TableProps){
     return (
       <div className="text-gray-800">
         <div className="flex flex-col sm:flex-row w-full md:w-auto gap-4">
