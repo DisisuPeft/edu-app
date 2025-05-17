@@ -5,6 +5,7 @@ import { NivelEducativo } from "../interface/catalogos/nivel_educativo";
 import { TipoNivel } from "../interface/catalogos/tipo_nivel";
 import { TabsModulos } from "../interface/sistema/tabs";
 import { Genero } from "../interface/catalogos/genero";
+import { EstadosRepublica } from "../interface/catalogos/catalagos";
 
 const CatApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -32,6 +33,12 @@ const CatApiSlice = apiSlice.injectEndpoints({
         return Array.isArray(response) ? response : [];
       },
     }),
+    getEntidades: builder.query<EstadosRepublica[], void>({
+      query: () => "/catalogos/estados-republica/",
+      transformResponse: (response) => {
+        return Array.isArray(response) ? response : [];
+      },
+    }),
   }),
 });
 // {mutation}, query access without brackets
@@ -40,5 +47,6 @@ export const {
   useGetNivelesQuery,
   useGetGeneroQuery,
   useGetRolesQuery,
-  useGetPermissionQuery
+  useGetPermissionQuery,
+  useGetEntidadesQuery,
 } = CatApiSlice;

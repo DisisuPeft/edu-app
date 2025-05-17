@@ -4,10 +4,17 @@ import { ArrowLeftIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCreateStudent } from "@/hooks";
+import { useGetEntidadesQuery, useGetNivelesQuery } from "@/redux/catalogos/CatApiSlice";
+import { useGetGeneroQuery } from "@/redux/catalogos/CatApiSlice";
 
 export default function CreateStudent() {
   const router = useRouter()
   const {formData, onChange, onSubmit} = useCreateStudent()
+  const {data:niveles} = useGetNivelesQuery()
+  const {data:genero} = useGetGeneroQuery()
+  const {data:entidades} = useGetEntidadesQuery()
+  
+
   return (
     <div className="container mx-auto px-4 py-8 text-gray-800">
       <div className="mb-6">
@@ -30,13 +37,83 @@ export default function CreateStudent() {
               <h2 className="text-lg font-semibold text-gray-700">
                 Información personal
               </h2>
+              <div>
+                <label
+                  htmlFor="curp"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Nombre <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="nombre"
+                  name="profile.nombre"
+                  value={formData.profile.nombre}
+                  onChange={onChange}
+                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
+                  // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
+                  //   errors.curp ? "border-red-500" : ""
+                  // }`}
+                  placeholder="Nombre del alumno"
+                />
+                {/* {errors.curp && (
+                <p className="mt-1 text-sm text-red-600">{errors.curp}</p>
+              )} */}
+              </div>
+              <div>
+                <label
+                  htmlFor="curp"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Apellido Paterno <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="apellidoP"
+                  name="profile.apellidoP"
+                  value={formData.profile.apellidoP}
+                  onChange={onChange}
+                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
+                  // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
+                  //   errors.curp ? "border-red-500" : ""
+                  // }`}
+                  placeholder="Apellido paterno"
+                />
+                {/* {errors.curp && (
+                <p className="mt-1 text-sm text-red-600">{errors.curp}</p>
+              )} */}
+              </div>
+              <div>
+                <label
+                  htmlFor="curp"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Apellido Materno <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="apellidoM"
+                  name="profile.apellidoM"
+                  value={formData.profile.apellidoM}
+                  onChange={onChange}
+                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
+                  // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
+                  //   errors.curp ? "border-red-500" : ""
+                  // }`}
+                  placeholder="Apellido materno"
+                />
+                {/* {errors.curp && (
+                <p className="mt-1 text-sm text-red-600">{errors.curp}</p>
+              )} */}
+              </div>
 
               <div>
                 <label
                   htmlFor="curp"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  CURP <span className="text-red-500">*</span>
+                  CURP
+                  {/* <span className="text-red-500">*</span> */}
                 </label>
                 <input
                   type="text"
@@ -51,6 +128,62 @@ export default function CreateStudent() {
                   placeholder="ABCD123456HDFXYZ01"
                   maxLength={18}
                   style={{ textTransform: "uppercase" }}
+                />
+                {/* {errors.curp && (
+                <p className="mt-1 text-sm text-red-600">{errors.curp}</p>
+              )} */}
+              </div>
+
+              <div>
+                <label
+                  htmlFor="nivel_educativo"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Genero <span className="text-red-500">*</span>
+                </label>
+                <select
+                  id="genero"
+                  name="profile.genero"
+                  value={formData.profile.genero}
+                  onChange={onChange}
+                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
+                  // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
+                  //   errors.nivel_educativo ? "border-red-500" : ""
+                  // }`}
+                >
+                  <option value="">Seleccionar genero</option>
+                  {genero?.map((niv) => (
+                    <option key={niv.id} value={niv.id}>
+                      {niv.name}
+                    </option>
+                  ))}
+                </select>
+                {/* {errors.nivel_educativo && (
+                <p className="mt-1 text-sm text-red-600">
+                  {errors.nivel_educativo}
+                </p>
+              )} */}
+              </div>
+
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Correo electronico
+                  {/* <span className="text-red-500">*</span> */}
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={onChange}
+                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
+                  // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
+                  //   errors.curp ? "border-red-500" : ""
+                  // }`}
+                  placeholder=""
                 />
                 {/* {errors.curp && (
                 <p className="mt-1 text-sm text-red-600">{errors.curp}</p>
@@ -110,10 +243,67 @@ export default function CreateStudent() {
 
               <div>
                 <label
+                  htmlFor="edad"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Edad <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="edad"
+                  name="profile.edad"
+                  value={formData.profile.edad}
+                  onChange={onChange}
+                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
+                  // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
+                  //   errors.matricula ? "border-red-500" : ""
+                  // }`}
+                  placeholder=""
+                  // style={{ textTransform: "uppercase" }}
+                  maxLength={100}
+                />
+                {/* {errors.matricula && (
+                <p className="mt-1 text-sm text-red-600">{errors.matricula}</p>
+              )} */}
+              </div>
+              <div>
+                <label
+                  htmlFor="nivel_educativo"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Estado 
+                  {/* <span className="text-red-500">*</span> */}
+                </label>
+                <select
+                  id="estado"
+                  name="lugar_nacimiento"
+                  value={formData.lugar_nacimiento}
+                  onChange={onChange}
+                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
+                  // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
+                  //   errors.nivel_educativo ? "border-red-500" : ""
+                  // }`}
+                >
+                  <option value="">Seleccionar un estado</option>
+                  {entidades?.map((entidad) => (
+                    <option key={entidad.id} value={entidad.id}>
+                      {entidad.name}
+                    </option>
+                  ))}
+                </select>
+                {/* {errors.nivel_educativo && (
+                <p className="mt-1 text-sm text-red-600">
+                  {errors.nivel_educativo}
+                </p>
+              )} */}
+              </div>
+              <div>
+                <label
                   htmlFor="direccion"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Dirección <span className="text-red-500">*</span>
+                  Dirección
+                  {/* <span className="text-red-500">*</span> */}
                 </label>
                 <textarea
                   id="direccion"
@@ -163,7 +353,7 @@ export default function CreateStudent() {
                 Información académica
               </h2>
 
-              <div>
+              {/* <div>
                 <label
                   htmlFor="grupo"
                   className="block text-sm font-medium text-gray-700"
@@ -181,11 +371,11 @@ export default function CreateStudent() {
                   //   errors.grupo ? "border-red-500" : ""
                   // }`}
                   placeholder="1A"
-                />
-                {/* {errors.grupo && (
+                /> */}
+              {/* {errors.grupo && (
                 <p className="mt-1 text-sm text-red-600">{errors.grupo}</p>
               )} */}
-              </div>
+              {/* </div> */}
 
               <div>
                 <label
@@ -196,19 +386,20 @@ export default function CreateStudent() {
                 </label>
                 <select
                   id="nivel_educativo"
-                  name="nivel_educativo"
-                  // value={formData.nivel_educativo}
-                  // onChange={handleChange}
-                  className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm`}
+                  name="profile.nivEdu"
+                  value={formData.profile.nivEdu}
+                  onChange={onChange}
+                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
                   // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
                   //   errors.nivel_educativo ? "border-red-500" : ""
                   // }`}
                 >
                   <option value="">Seleccionar nivel</option>
-                  <option value="Preescolar">Preescolar</option>
-                  <option value="Primaria">Primaria</option>
-                  <option value="Secundaria">Secundaria</option>
-                  <option value="Preparatoria">Preparatoria</option>
+                  {niveles?.map((niv) => (
+                    <option key={niv.id} value={niv.id}>
+                      {niv.name}
+                    </option>
+                  ))}
                 </select>
                 {/* {errors.nivel_educativo && (
                 <p className="mt-1 text-sm text-red-600">
@@ -222,8 +413,9 @@ export default function CreateStudent() {
                   type="checkbox"
                   id="activo"
                   name="activo"
-                  // checked={formData.activo}
-                  // onChange={handleChange}
+                  value={formData.activo}
+                  checked={formData.activo === 1}
+                  onChange={onChange}
                   className="h-4 w-4 text-gray-600 focus:ring-gray-500 border-gray-300 rounded"
                 />
                 <label
@@ -243,15 +435,16 @@ export default function CreateStudent() {
                   htmlFor="tutor_nombre"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Nombre del tutor <span className="text-red-500">*</span>
+                  Nombre del tutor
+                  {/* <span className="text-red-500">*</span> */}
                 </label>
                 <input
                   type="text"
                   id="tutor_nombre"
                   name="tutor_nombre"
-                  // value={formData.tutor_nombre}
-                  // onChange={handleChange}
-                  className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm`}
+                  value={formData.tutor_nombre}
+                  onChange={onChange}
+                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
                   // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
                   //   errors.tutor_nombre ? "border-red-500" : ""
                   // }`}
@@ -269,15 +462,16 @@ export default function CreateStudent() {
                   htmlFor="tutor_telefono"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Teléfono del tutor <span className="text-red-500">*</span>
+                  Teléfono del tutor
+                  {/* <span className="text-red-500">*</span> */}
                 </label>
                 <input
                   type="tel"
                   id="tutor_telefono"
                   name="tutor_telefono"
-                  // value={formData.tutor_telefono}
-                  // onChange={handleChange}
-                  className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm`}
+                  value={formData.tutor_telefono}
+                  onChange={onChange}
+                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
                   // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
                   //   errors.tutor_telefono ? "border-red-500" : ""
                   // }`}

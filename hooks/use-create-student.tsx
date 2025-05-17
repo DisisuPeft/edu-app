@@ -1,9 +1,6 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 
-// // import { useRouter } from "next/navigation";
-// // import { useAppDispatch } from "@/app/redux/hooks";
 import { Toast } from "@/alerts/toast";
-// // import { useRouteTestMutation } from "@/app/redux/task/taskapiSlice";
 import { useEditUsersMutation } from "@/redux/sistema/SistemaApiSlice";
 import { useGetUserEditQuery } from "@/redux/sistema/SistemaApiSlice";
 import { useEffect } from "react";
@@ -15,13 +12,14 @@ export default function useCreateStudent() {
   const [formData, setFormData] = useState({
     curp: "",
     matricula: "",
-    lugar_nacimiento: null,
+    lugar_nacimiento: "",
     direccion: "",
     tutor_nombre: "",
     tutor_telefono: "",
-    activo: null,
-    grupo: null,
+    activo: 0,
+    // grupo: null,
     email: "",
+    municipio: null,
     user: {
       email: "",
       roleID: [],
@@ -57,13 +55,14 @@ export default function useCreateStudent() {
     setFormData({
       curp: "",
       matricula: "",
-      lugar_nacimiento: null,
+      lugar_nacimiento: "",
       direccion: "",
       tutor_nombre: "",
       tutor_telefono: "",
-      activo: null,
-      grupo: null,
+      activo: 0,
+      // grupo: null,
       email: "",
+      municipio: null,
       user: {
         email: "",
         roleID: [],
@@ -82,16 +81,22 @@ export default function useCreateStudent() {
     });
   };
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
+    const { name, value, type, checked } = event.target;
 
     const processedValue =
-      name === "curp" || name === "matricula" ? value.toUpperCase() : value;
+      type === "checkbox" && name === "activo"
+        ? checked
+          ? 1
+          : 0
+        : name === "curp" || name === "matricula"
+        ? value.toUpperCase()
+        : name === "profile.edad" ? parseInt(value) || ""
+        : name === "profile.nivEdu" || name === "profile.genero" ? parseInt(value) : name === "lugar_nacimiento" ? parseInt(value) :  value;
 
     const keys = name.split(".");
     // console.log(keys)
     if (keys.length === 2) {
       const [parentKey, childKey] = keys;
-      // console.log(parentKey, childKey)
       setFormData((prevData) => ({
         ...prevData,
         [parentKey]: {
@@ -100,11 +105,14 @@ export default function useCreateStudent() {
         },
       }));
     } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: processedValue,
-      }));
-    }
+      // if (type === "checkbox" && name === "activo"){
+      //   const checked = (event.target as HTMLInputElement).checked;
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: processedValue,
+        }));
+      }
+    // }
   };
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {

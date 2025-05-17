@@ -135,22 +135,6 @@ export default function useEditUser({id, onClose}: Props) {
       }));
     }
   };
-  // const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-  //   const checked = event.target.checked
-  //   const { name, value } = event.target;
-  //   const selectedRol = roles?.find((rol) => rol.id === parseInt(value))
-  //   console.log(name, value)
-  //   if (!selectedRol) return;
-
-  //   setFormData((prev) => ({
-  //     ...prev,
-  //     rol: checked ? [...prev.rol, selectedRol] : prev.rol.filter((r) => r.id !== selectedRol.id),
-  //     profile: {
-  //       ...prev.profile,
-  //       [name]: value,
-  //     },
-  //   }));
-  // };
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

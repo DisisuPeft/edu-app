@@ -5,10 +5,11 @@ import { useAppSelector } from "@/redux/hooks"
 // import { Modal } from "@/app/components/common/Modal"
 // import Loading from "@/app/components/common/Loading"
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice"
+import { Role } from "@/redux/interface/authentication/Users";
 
 interface Props {
     children: React.ReactNode;
-    allowedRoles?: []
+    allowedRoles?: string []
 }
 
 export default function RequireAuth({children, allowedRoles}: Props){
@@ -27,9 +28,9 @@ export default function RequireAuth({children, allowedRoles}: Props){
         redirect('/auth/login')
     }
 
-    // if (allowedRoles?.length && !user?.roleID?.some((r) => allowedRoles?.includes(r.name))) {
-    //     redirect("/unauthorized"); // o muestra un mensaje bonito
-    // }
+    if (allowedRoles?.length && !user?.roleID?.some((r: Role) => allowedRoles?.includes(r.name))) {
+        redirect("/unauthorized"); // o muestra un mensaje bonito
+    }
 
     return <>{children}</>
 }
