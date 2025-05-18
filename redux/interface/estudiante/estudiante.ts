@@ -4,6 +4,7 @@ import { NivelEducativo } from "../catalogos/nivel_educativo";
 import { EstadosRepublica } from "../catalogos/catalagos";
 
 export interface Estudiante {
+  id: number | null | undefined;
   user: User | null | undefined;
   perfil: Profile | null | undefined;
   curp: string | null | undefined;
@@ -20,4 +21,3 @@ export interface Estudiante {
   fecha_creacion: string | null | undefined;
   fecha_actualizacion: string | null | undefined;
 }
-

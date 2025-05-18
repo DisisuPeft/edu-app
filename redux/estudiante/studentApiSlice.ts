@@ -17,9 +17,20 @@ const studentsApiSlice = apiSlice.injectEndpoints({
         return Array.isArray(response) ? response : [];
       },
     }),
-    // retrieveLead: builder.query<Data, number>({
-    //   query: (id) => `/lead/${id}/`,
-    // }),
+    retrieveStudent: builder.query<Estudiante, number>({
+      query: (id) => `/student/${id}/`,
+    }),
+    retrieveEditStudent: builder.query<Estudiante, number>({
+      query: (id) => `/student/edit/${id}/`,
+    }),
+    // student/update/<int:id>
+    updateStudent: builder.mutation({
+      query: (payload) => ({
+        url: `/student/update/`,
+        method: "PATCH",
+        body: payload,
+      }),
+    }),
     // getTabs: builder.query<TabsModulos[], void>({
     //   query: () => "/tabs/all/",
     //   transformResponse: (response) => {
@@ -48,4 +59,10 @@ const studentsApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useCreateStudentMutation, useGetStudentsQuery } = studentsApiSlice;
+export const {
+  useCreateStudentMutation,
+  useGetStudentsQuery,
+  useRetrieveStudentQuery,
+  useRetrieveEditStudentQuery,
+  useUpdateStudentMutation,
+} = studentsApiSlice;

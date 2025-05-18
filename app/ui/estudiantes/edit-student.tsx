@@ -1,19 +1,27 @@
-"use client"
+"use client";
 
 import { ArrowLeftIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCreateStudent } from "@/hooks";
-import { useGetEntidadesQuery, useGetNivelesQuery } from "@/redux/catalogos/CatApiSlice";
+import { useEditStudent } from "@/hooks";
+import {
+  useGetEntidadesQuery,
+  useGetNivelesQuery,
+} from "@/redux/catalogos/CatApiSlice";
 import { useGetGeneroQuery } from "@/redux/catalogos/CatApiSlice";
 
-export default function CreateStudent() {
-  const router = useRouter()
-  const {formData, onChange, onSubmit, municipios} = useCreateStudent()
-  const {data:niveles} = useGetNivelesQuery()
-  const {data:genero} = useGetGeneroQuery()
-  const {data:entidades} = useGetEntidadesQuery()
-  
+interface Params {
+  id: string;
+}
+
+export default function EditStudent({ id }: Params) {
+  const router = useRouter();
+  const { formData, onChange, onSubmit, municipios } = useEditStudent(
+    parseInt(id)
+  );
+  const { data: niveles } = useGetNivelesQuery();
+  const { data: genero } = useGetGeneroQuery();
+  const { data: entidades } = useGetEntidadesQuery();
 
   return (
     <div className="container mx-auto px-4 py-8 text-gray-800">
@@ -47,8 +55,8 @@ export default function CreateStudent() {
                 <input
                   type="text"
                   id="nombre"
-                  name="profile.nombre"
-                  value={formData.profile.nombre}
+                  name="perfil.nombre"
+                  value={formData.perfil.nombre}
                   onChange={onChange}
                   className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
                   // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
@@ -70,8 +78,8 @@ export default function CreateStudent() {
                 <input
                   type="text"
                   id="apellidoP"
-                  name="profile.apellidoP"
-                  value={formData.profile.apellidoP}
+                  name="perfil.apellidoP"
+                  value={formData.perfil.apellidoP}
                   onChange={onChange}
                   className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
                   // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
@@ -93,8 +101,8 @@ export default function CreateStudent() {
                 <input
                   type="text"
                   id="apellidoM"
-                  name="profile.apellidoM"
-                  value={formData.profile.apellidoM}
+                  name="perfil.apellidoM"
+                  value={formData.perfil.apellidoM}
                   onChange={onChange}
                   className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
                   // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
@@ -143,8 +151,8 @@ export default function CreateStudent() {
                 </label>
                 <select
                   id="genero"
-                  name="profile.genero"
-                  value={formData.profile.genero}
+                  name="perfil.genero"
+                  value={formData.perfil.genero}
                   onChange={onChange}
                   className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
                   // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
@@ -226,8 +234,8 @@ export default function CreateStudent() {
                 <input
                   type="date"
                   id="fechaNacimiento"
-                  name="profile.fechaNacimiento"
-                  value={formData.profile.fechaNacimiento}
+                  name="perfil.fechaNacimiento"
+                  value={formData.perfil.fechaNacimiento}
                   onChange={onChange}
                   className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
                   // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
@@ -251,8 +259,8 @@ export default function CreateStudent() {
                 <input
                   type="text"
                   id="edad"
-                  name="profile.edad"
-                  value={formData.profile.edad}
+                  name="perfil.edad"
+                  value={formData.perfil.edad}
                   onChange={onChange}
                   className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
                   // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
@@ -363,8 +371,8 @@ export default function CreateStudent() {
                 <input
                   type="tel"
                   id="telefono"
-                  name="profile.telefono"
-                  value={formData.profile.telefono}
+                  name="perfil.telefono"
+                  value={formData.perfil.telefono}
                   onChange={onChange}
                   className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
                   // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
@@ -417,8 +425,8 @@ export default function CreateStudent() {
                 </label>
                 <select
                   id="nivel_educativo"
-                  name="profile.nivEdu"
-                  value={formData.profile.nivEdu}
+                  name="perfil.nivEdu"
+                  value={formData.perfil.nivEdu}
                   onChange={onChange}
                   className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
                   // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${

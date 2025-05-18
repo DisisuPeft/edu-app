@@ -4,13 +4,14 @@ import { TabsModulos } from "../interface/sistema/tabs";
 import { NivelEducativo } from "../interface/catalogos/nivel_educativo";
 import { Genero } from "../interface/catalogos/genero";
 import { Permission, Role } from "../interface/authentication/Users";
-import { EstadosRepublica } from "../interface/catalogos/catalagos";
+import { EstadosRepublica, Municipios } from "../interface/catalogos/catalagos";
 
 interface CatState {
   niveles_educativos: NivelEducativo | null;
   generos: Genero | null;
   roles: Role | null;
   entidades: EstadosRepublica | null;
+  municipios: Municipios | null;
   permissions: Permission | null
   isLoading: boolean;
 }
@@ -20,6 +21,7 @@ const initialState = {
   generos: null,
   roles: null,
   entidades: null,
+  municipios: null,
   permissions: null,
   isLoading: true,
 } as CatState;
@@ -42,6 +44,9 @@ const CatSlice = createSlice({
     },
     clearEntidad: (state) => {
       state.entidades = null;
+    },
+    clearMunicipios: (state) => {
+      state.municipios = null;
     },
     finishInitialLoadCatalogos: (state) => {
       state.isLoading = false;

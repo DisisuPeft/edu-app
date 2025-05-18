@@ -5,7 +5,7 @@ import { NivelEducativo } from "../interface/catalogos/nivel_educativo";
 import { TipoNivel } from "../interface/catalogos/tipo_nivel";
 import { TabsModulos } from "../interface/sistema/tabs";
 import { Genero } from "../interface/catalogos/genero";
-import { EstadosRepublica } from "../interface/catalogos/catalagos";
+import { EstadosRepublica, Municipios } from "../interface/catalogos/catalagos";
 
 const CatApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -39,6 +39,10 @@ const CatApiSlice = apiSlice.injectEndpoints({
         return Array.isArray(response) ? response : [];
       },
     }),
+    retrieveMunicipios: builder.query<Municipios[], number>({
+      query: (id) => `catalogos/entidad/municipios/${id}`,
+      
+    }),
   }),
 });
 // {mutation}, query access without brackets
@@ -49,4 +53,5 @@ export const {
   useGetRolesQuery,
   useGetPermissionQuery,
   useGetEntidadesQuery,
+  useRetrieveMunicipiosQuery
 } = CatApiSlice;

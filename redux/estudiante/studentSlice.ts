@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Modulos} from "../interface/sistema/modulos";
+import { Modulos } from "../interface/sistema/modulos";
 import { TabsModulos } from "../interface/sistema/tabs";
 import { Role } from "../interface/authentication/Users";
 
 interface studentState {
-  estudiantes: null
-  estudiante: null,
+  estudiantes: null;
+  estudiante: null;
   // pipelines: null,
   isLoading: boolean;
 }
@@ -22,10 +22,10 @@ const studentsSlice = createSlice({
   initialState,
   reducers: {
     clearStudents: (state) => {
-      state.estudiantes = null
+      state.estudiantes = null;
     },
     clearStudent: (state) => {
-      state.estudiante = null
+      state.estudiante = null;
     },
     // clearPipeline: (state) => {
     //   state.pipelines = null
@@ -36,5 +36,6 @@ const studentsSlice = createSlice({
   },
 });
 
-export const { clearStudent, clearStudents, finishInitialLoadStudents } = studentsSlice.actions;
+export const { clearStudent, clearStudents, finishInitialLoadStudents } =
+  studentsSlice.actions;
 export default studentsSlice.reducer;
