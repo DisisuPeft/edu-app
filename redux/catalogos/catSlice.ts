@@ -1,10 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Modulos} from "../interface/sistema/modulos";
+import { Modulos } from "../interface/sistema/modulos";
 import { TabsModulos } from "../interface/sistema/tabs";
 import { NivelEducativo } from "../interface/catalogos/nivel_educativo";
 import { Genero } from "../interface/catalogos/genero";
 import { Permission, Role } from "../interface/authentication/Users";
-import { EstadosRepublica, Municipios } from "../interface/catalogos/catalagos";
+import {
+  Especialidades,
+  EstadosRepublica,
+  Municipios,
+} from "../interface/catalogos/catalagos";
 
 interface CatState {
   niveles_educativos: NivelEducativo | null;
@@ -12,7 +16,8 @@ interface CatState {
   roles: Role | null;
   entidades: EstadosRepublica | null;
   municipios: Municipios | null;
-  permissions: Permission | null
+  especialidades: Especialidades | null;
+  permissions: Permission | null;
   isLoading: boolean;
 }
 
@@ -22,6 +27,7 @@ const initialState = {
   roles: null,
   entidades: null,
   municipios: null,
+  especialidades: null,
   permissions: null,
   isLoading: true,
 } as CatState;
@@ -47,6 +53,9 @@ const CatSlice = createSlice({
     },
     clearMunicipios: (state) => {
       state.municipios = null;
+    },
+    clearEspecialidades: (state) => {
+      state.especialidades = null;
     },
     finishInitialLoadCatalogos: (state) => {
       state.isLoading = false;
