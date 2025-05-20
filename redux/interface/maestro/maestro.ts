@@ -1,5 +1,10 @@
-import { User } from "../authentication/Users"
-import { Especialidades } from "../catalogos/catalagos";
+import { User } from "../authentication/Users";
+import {
+  Especialidades,
+  EstadosRepublica,
+  Municipios,
+  EstatusMaestro,
+} from "../catalogos/catalagos";
 import { Profile } from "../authentication/Users";
 
 export interface Maestro {
@@ -14,6 +19,9 @@ export interface Maestro {
   telefono: string | null | undefined;
   direccion: string | null | undefined;
   email: string | null | undefined;
+  estado: string | EstadosRepublica | null | undefined;
+  municipio: Municipios | string | null | undefined;
+  estatus: EstatusMaestro | string | null | undefined;
   activo: number | null | undefined;
   fecha_creacion: string | null | undefined;
   fecha_actualizacion: string | null | undefined;

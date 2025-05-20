@@ -7,6 +7,7 @@ import { Permission, Role } from "../interface/authentication/Users";
 import {
   Especialidades,
   EstadosRepublica,
+  EstatusMaestro,
   Municipios,
 } from "../interface/catalogos/catalagos";
 
@@ -18,6 +19,7 @@ interface CatState {
   municipios: Municipios | null;
   especialidades: Especialidades | null;
   permissions: Permission | null;
+  estatusmaestro: EstatusMaestro | null;
   isLoading: boolean;
 }
 
@@ -28,6 +30,7 @@ const initialState = {
   entidades: null,
   municipios: null,
   especialidades: null,
+  estatusmaestro: null,
   permissions: null,
   isLoading: true,
 } as CatState;
@@ -57,11 +60,24 @@ const CatSlice = createSlice({
     clearEspecialidades: (state) => {
       state.especialidades = null;
     },
+    ClearEstatusMaestro: (state) => {
+      state.estatusmaestro = null;
+    },
     finishInitialLoadCatalogos: (state) => {
       state.isLoading = false;
     },
   },
 });
 
-export const { clearNiveles, finishInitialLoadCatalogos } = CatSlice.actions;
+export const {
+  clearNiveles,
+  clearEntidad,
+  clearEspecialidades,
+  clearGeneros,
+  clearMunicipios,
+  clearPermission,
+  clearRoles,
+  ClearEstatusMaestro,
+  finishInitialLoadCatalogos,
+} = CatSlice.actions;
 export default CatSlice.reducer;

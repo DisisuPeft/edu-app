@@ -8,6 +8,7 @@ import { Genero } from "../interface/catalogos/genero";
 import {
   Especialidades,
   EstadosRepublica,
+  EstatusMaestro,
   Municipios,
 } from "../interface/catalogos/catalagos";
 
@@ -52,6 +53,12 @@ const CatApiSlice = apiSlice.injectEndpoints({
         return Array.isArray(response) ? response : [];
       },
     }),
+    retrieveEstatusMaestro: builder.query<EstatusMaestro[], void>({
+      query: () => "/catalagos/maestro/status/all/",
+      transformResponse: (response) => {
+        return Array.isArray(response) ? response : [];
+      },
+    }),
   }),
 });
 // {mutation}, query access without brackets
@@ -64,4 +71,5 @@ export const {
   useGetEntidadesQuery,
   useRetrieveMunicipiosQuery,
   useGetEspecialidadesQuery,
+  useRetrieveEstatusMaestroQuery,
 } = CatApiSlice;

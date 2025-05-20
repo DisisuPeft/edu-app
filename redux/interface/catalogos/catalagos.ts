@@ -7,6 +7,11 @@ export interface Especialidades {
   updated_at?: string | null | undefined;
 }
 
+export interface EstatusMaestro {
+  id: number | null | undefined;
+  name: string | null | undefined;
+}
+
 export interface Empresa {
   id: number | null | undefined;
   nombre: string | null | undefined;

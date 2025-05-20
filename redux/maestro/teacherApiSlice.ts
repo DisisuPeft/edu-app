@@ -17,20 +17,19 @@ const teacherApiSlice = apiSlice.injectEndpoints({
         return Array.isArray(response) ? response : [];
       },
     }),
-    // retrieveStudent: builder.query<Estudiante, number>({
-    //   query: (id) => `/student/${id}/`,
-    // }),
-    // retrieveEditStudent: builder.query<Estudiante, number>({
-    //   query: (id) => `/student/edit/${id}/`,
-    // }),
-    // // student/update/<int:id>
-    // updateStudent: builder.mutation({
-    //   query: (payload) => ({
-    //     url: `/student/update/`,
-    //     method: "PATCH",
-    //     body: payload,
-    //   }),
-    // }),
+    retrieveTeacher: builder.query<Maestro, number>({
+      query: (id) => `/teacher/${id}/`,
+    }),
+    retrieveEditTeacher: builder.query<Maestro, number>({
+      query: (id) => `/teacher/edit/${id}/`,
+    }),
+    updateTeacher: builder.mutation({
+      query: (payload) => ({
+        url: `/teacher/update/${payload.id}`,
+        method: "PATCH",
+        body: payload,
+      }),
+    }),
     // getTabs: builder.query<TabsModulos[], void>({
     //   query: () => "/tabs/all/",
     //   transformResponse: (response) => {
@@ -62,7 +61,7 @@ const teacherApiSlice = apiSlice.injectEndpoints({
 export const {
   useCreateTeacherMutation,
   useGetTeachersQuery,
-  // useRetrieveStudentQuery,
-  // useRetrieveEditStudentQuery,
-  // useUpdateStudentMutation,
+  useRetrieveTeacherQuery,
+  useRetrieveEditTeacherQuery,
+  useUpdateTeacherMutation,
 } = teacherApiSlice;

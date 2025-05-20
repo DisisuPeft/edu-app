@@ -8,6 +8,7 @@ import {
   useGetEntidadesQuery,
   useGetEspecialidadesQuery,
   useGetNivelesQuery,
+  useRetrieveEstatusMaestroQuery,
 } from "@/redux/catalogos/CatApiSlice";
 import { useGetGeneroQuery } from "@/redux/catalogos/CatApiSlice";
 
@@ -18,6 +19,7 @@ export default function CreateTeacher() {
   const { data: genero } = useGetGeneroQuery();
   const { data: entidades } = useGetEntidadesQuery();
   const { data: especialidades } = useGetEspecialidadesQuery();
+  const { data: estatusmaestro } = useRetrieveEstatusMaestroQuery();
 
   return (
     <div className="container mx-auto px-4 py-8 text-gray-800">
@@ -139,7 +141,7 @@ export default function CreateTeacher() {
               </div>
               <div>
                 <label
-                  htmlFor="matricula"
+                  htmlFor="rfc"
                   className="block text-sm font-medium text-gray-700"
                 >
                   RFC <span className="text-red-500">*</span>
@@ -157,31 +159,6 @@ export default function CreateTeacher() {
                   placeholder="XAXX010101000"
                   style={{ textTransform: "uppercase" }}
                   maxLength={13}
-                />
-                {/* {errors.matricula && (
-                <p className="mt-1 text-sm text-red-600">{errors.matricula}</p>
-              )} */}
-              </div>
-              <div>
-                <label
-                  htmlFor="matricula"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Numero de colaborador <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="numero_colaborador"
-                  name="numero_colaborador"
-                  value={formData.numero_colaborador}
-                  onChange={onChange}
-                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
-                  // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
-                  //   errors.matricula ? "border-red-500" : ""
-                  // }`}
-                  placeholder="23180525"
-                  style={{ textTransform: "uppercase" }}
-                  maxLength={8}
                 />
                 {/* {errors.matricula && (
                 <p className="mt-1 text-sm text-red-600">{errors.matricula}</p>
@@ -497,7 +474,7 @@ export default function CreateTeacher() {
               )} */}
               </div>
 
-              <div className="flex items-center">
+              {/* <div className="flex items-center">
                 <input
                   type="checkbox"
                   id="activo"
@@ -513,7 +490,7 @@ export default function CreateTeacher() {
                 >
                   Docente activo
                 </label>
-              </div>
+              </div> */}
 
               <h2 className="text-lg font-semibold text-gray-700 mt-6">
                 Informacion laboral
@@ -542,6 +519,79 @@ export default function CreateTeacher() {
                   {errors.fecha_nacimiento}
                 </p>
               )} */}
+              </div>
+              <div>
+                <label
+                  htmlFor="matricula"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Numero de colaborador <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="numero_colaborador"
+                  name="numero_colaborador"
+                  value={formData.numero_colaborador}
+                  onChange={onChange}
+                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
+                  // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
+                  //   errors.matricula ? "border-red-500" : ""
+                  // }`}
+                  placeholder="23180525"
+                  style={{ textTransform: "uppercase" }}
+                  maxLength={8}
+                />
+                {/* {errors.matricula && (
+                <p className="mt-1 text-sm text-red-600">{errors.matricula}</p>
+              )} */}
+              </div>
+              <div>
+                <label
+                  htmlFor="nivel_educativo"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Estatus del maestro
+                  {/* <span className="text-red-500">*</span> */}
+                </label>
+                <select
+                  id="estatus"
+                  name="estatus"
+                  value={formData.estatus}
+                  onChange={onChange}
+                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
+                  // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
+                  //   errors.nivel_educativo ? "border-red-500" : ""
+                  // }`}
+                >
+                  <option value="">Seleccionar un estatus</option>
+                  {estatusmaestro?.map((entidad) => (
+                    <option key={entidad.id} value={entidad.id}>
+                      {entidad.name}
+                    </option>
+                  ))}
+                </select>
+                {/* {errors.nivel_educativo && (
+                <p className="mt-1 text-sm text-red-600">
+                  {errors.nivel_educativo}
+                </p>
+              )} */}
+              </div>
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  id="activo"
+                  name="activo"
+                  value={formData.activo}
+                  checked={formData.activo === 1}
+                  onChange={onChange}
+                  className="h-4 w-4 text-gray-600 focus:ring-gray-500 border-gray-300 rounded"
+                />
+                <label
+                  htmlFor="activo"
+                  className="ml-2 block text-sm text-gray-700"
+                >
+                  Docente activo
+                </label>
               </div>
             </div>
           </div>

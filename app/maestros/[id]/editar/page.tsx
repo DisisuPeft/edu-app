@@ -1,10 +1,10 @@
-import EditStudent from "@/app/ui/estudiantes/edit-student";
+import EditTeacher from "@/app/ui/maestros/edit-teacher";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const { id } = await params;
   return (
     <div className="mt-10 text-gray-800">
-      <EditStudent id={id} />
+      <EditTeacher id={id} />
     </div>
   );
 }
