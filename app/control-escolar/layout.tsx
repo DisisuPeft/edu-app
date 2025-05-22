@@ -1,5 +1,6 @@
 import { RequireAuth } from "../utils";
 import Sidebar from "../ui/control-escolar/sidebar";
+import Header from "../ui/control-escolar/header";
 
 export const metadata = {
   title: "Control escolar",
@@ -12,10 +13,11 @@ interface Props {
 export default function Layout({ children }: Props) {
   return (
     <RequireAuth>
-      <div className="min-h-screen bg-gray-50">
-        <Sidebar />
-        <div className="flex-1 flex flex-col">
-          <main className="p-6 overflow-auto">{children}</main>
+      <div className="flex flex-col min-h-screen bg-gray-50">
+        <Header />
+        <div className="flex flex-col md:flex-row flex-1">
+          <Sidebar />
+          {children}
         </div>
       </div>
     </RequireAuth>
