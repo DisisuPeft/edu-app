@@ -68,7 +68,7 @@ export default function AboutSection() {
 
             {/* Call to Action Button */}
             <Link
-              href="#"
+              href="/about-us"
               className="inline-block bg-[#121b6a] text-white py-3 px-6 rounded font-medium hover:bg-[#0a1050] transition-all duration-500 hover:-translate-y-1 shadow-lg hover:shadow-xl mt-2 w-fit"
             >
               Saber más

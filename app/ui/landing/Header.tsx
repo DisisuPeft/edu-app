@@ -39,19 +39,19 @@ export default function Header() {
           >
             <div className="flex flex-col lg:flex-row lg:items-center p-4 lg:p-0">
               <Link
-                href="#"
+                href="/"
                 className="py-2 lg:py-4 px-3 text-white hover:text-[#121829] transition-colors font-medium"
               >
                 Inicio
               </Link>
               <Link
-                href="#"
+                href="/about-us"
                 className="py-2 lg:py-4 px-3 text-white hover:text-[#121829] transition-colors"
               >
                 Sobre nosotros
               </Link>
               <Link
-                href="#"
+                href="/oferta-educativa"
                 className="py-2 lg:py-4 px-3 text-white hover:text-[#121829] transition-colors"
               >
                 Diplomados
