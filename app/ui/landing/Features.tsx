@@ -1,56 +1,56 @@
-import { GraduationCap, Award, Clock } from "lucide-react"
-// const features = [
-//     {
-//       icon: <Map className="h-8 w-8 text-blue-600" />,
-//       title: "Mapeo inteligente",
-//       description: "Visualiza y optimiza tus rutas con nuestro sistema de mapeo avanzado.",
-//     },
-//     {
-//       icon: <TrendingUp className="h-8 w-8 text-blue-600" />,
-//       title: "Análisis de eficiencia",
-//       description: "Obtén insights detallados sobre el rendimiento de tus rutas y conductores.",
-//     },
-//     {
-//       icon: <Clock className="h-8 w-8 text-blue-600" />,
-//       title: "Ahorro de tiempo",
-//       description: "Reduce el tiempo de planificación y maximiza la eficiencia de tus entregas.",
-//     },
-//     {
-//       icon: <Shield className="h-8 w-8 text-blue-600" />,
-//       title: "Seguridad de datos",
-//       description: "Tus datos están seguros con nuestro sistema de encriptación de última generación.",
-//     },
-// ]
+import { GraduationCap, Globe, Home, BookOpen } from "lucide-react";
 
-export default function FeaturesSection() {
-    return (
-      <section id="features" className="container mx-auto px-4 py-16 h-[340px]">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="text-center hover:shadow-xl hover:-translate-y-2
-                                transition-all duration-300 ease-in-out bg-white p-4">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <GraduationCap className="w-8 h-8 text-[#121829]" />
+export default function ServicesSection() {
+  const services = [
+    {
+      icon: GraduationCap,
+      title: "Docentes Especializados",
+      description:
+        "Formación impartida por profesionales con experiencia y actualización constante en su campo.",
+    },
+    {
+      icon: Globe,
+      title: "Formación Integral",
+      description: "Educación con enfoque humano, profesional y ético.",
+    },
+    {
+      icon: Home,
+      title: "Enfoque Profesionalizante",
+      description:
+        "Diplomados orientados al ejercicio laboral real y competitivo.",
+    },
+    {
+      icon: BookOpen,
+      title: "Excelencia Académica",
+      description:
+        "Nuestros programas están diseñados para formar líderes altamente capacitados y comprometidos.",
+    },
+  ];
+
+  return (
+    <div className="py-12 md:py-16 lg:py-20">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {services.map((service, index) => (
+            <div key={index} className="group">
+              <div className="bg-white shadow-md rounded-lg text-center pt-3 transition-all duration-500 group-hover:bg-[#a20519] group-hover:-translate-y-2 min-h-[260px]">
+                <div className="p-4 flex flex-col justify-between h-full">
+                  <service.icon
+                    className="mx-auto mb-4 h-12 w-12 text-[#a20519] transition-colors duration-500 group-hover:text-white"
+                    strokeWidth={1.5}
+                  />
+                  <h5 className="mb-3 font-bold text-lg text-gray-800 transition-colors duration-500 group-hover:text-white">
+                    {service.title}
+                  </h5>
+                  <p className="text-gray-600 transition-colors duration-500 group-hover:text-white">
+                    {service.description}
+                  </p>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-700">Profesores Expertos</h3>
-              <p className="text-gray-700">Aprende de profesionales con amplia experiencia en la industria</p>
-          </div>
-          <div className="text-center hover:shadow-xl hover:-translate-y-2
-                                transition-all duration-300 ease-in-out bg-white p-4">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Clock className="w-8 h-8 text-[#121829]" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-700">Horarios Flexibles</h3>
-              <p className="text-gray-700">Estudia a tu ritmo y adapta el aprendizaje a tu agenda</p>
-          </div>
-          <div className="text-center hover:shadow-xl hover:-translate-y-2
-                                transition-all duration-300 ease-in-out bg-white p-4">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Award className="w-8 h-8 text-[#121829]" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-700">Certificación Oficial</h3>
-              <p className="text-gray-700">Obtén certificados reconocidos en la industria</p>
-          </div>
+            </div>
+          ))}
         </div>
-      </section>
-    )
+      </div>
+    </div>
+  );
 }
