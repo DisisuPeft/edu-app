@@ -16,7 +16,7 @@ export default function HeroCarousel() {
       title:
         "Una escuela comprometida con la formación especializada de calidad.",
       description: "Descrubre todos nuestros diplomados",
-      primaryButton: { text: "Explorar Diplomados", href: "#" },
+      primaryButton: { text: "Explorar Diplomados", href: "/oferta-educativa" },
       secondaryButton: { text: "Inscríbete Ahora", href: "#" },
     },
     {
@@ -25,7 +25,7 @@ export default function HeroCarousel() {
       title: "Diplomado en Urgencias Médicas",
       description:
         "Dirigido a profesionales y estudiantes del área de la salud, enfocado en la atención inmediata de emergencias médicas para salvar vidas y elevar la calidad del servicio en unidades médicas.",
-      primaryButton: { text: "Explorar Diplomados", href: "#" },
+      primaryButton: { text: "Explorar Diplomados", href: "/oferta-educativa" },
       secondaryButton: { text: "Inscríbete Ahora", href: "#" },
     },
     {
@@ -35,7 +35,7 @@ export default function HeroCarousel() {
       title: "Diplomado en Nutrición y suplementación en la salud hormonal",
       description:
         "Orientado al análisis del sistema hormonal y su vínculo con la nutrición, brindando herramientas para detectar desequilibrios y aplicar estrategias de alimentación y suplementación.",
-      primaryButton: { text: "Explorar Diplomados", href: "#" },
+      primaryButton: { text: "Explorar Diplomados", href: "/oferta-educativa" },
       secondaryButton: { text: "Más Información", href: "#" },
     },
     // {
@@ -141,12 +141,12 @@ export default function HeroCarousel() {
                     >
                       {slide.primaryButton.text}
                     </Link>
-                    <Link
+                    {/* <Link
                       href={slide.secondaryButton.href}
                       className="px-6 py-3 bg-white text-[#121b6a] font-medium rounded hover:bg-gray-100 transition-colors"
                     >
                       {slide.secondaryButton.text}
-                    </Link>
+                    </Link> */}
                   </div>
                 </div>
               </div>

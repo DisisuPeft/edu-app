@@ -3,10 +3,11 @@
 import { BookOpen, Menu, X, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-
+import { Modal } from "@/app/components/common/Modal";
+import LeadForm from "./lead-form";
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const [show, setShow] = useState<boolean>(false);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -56,6 +57,7 @@ export default function Header() {
               >
                 Diplomados
               </Link>
+              {/* call to action */}
               <Link
                 href="#"
                 className="py-2 lg:py-4 px-3 text-white hover:text-[#121829] transition-colors"
@@ -63,24 +65,28 @@ export default function Header() {
                 Contáctanos
               </Link>
             </div>
-            <Link
-              href="/auth/register"
+            <button
+              // href="/auth/register"
+              onClick={() => setShow(true)}
               className="hidden lg:flex items-center py-4 px-5 bg-[#121b6a] text-white hover:bg-[#1a2580] transition-colors"
             >
               Únete ahora
-              <ArrowRight className="ml-3" size={16} />
-            </Link>
+              {/* <ArrowRight className="ml-3" size={16} /> */}
+            </button>
           </div>
 
           {/* Mobile Join Button */}
-          <Link
-            href="/auth/register"
+          <button
+            // href="/auth/register"
             className="lg:hidden flex items-center py-2 px-4 bg-[#121b6a] text-white text-sm rounded-md mr-4"
           >
             Únete
-          </Link>
+          </button>
         </div>
       </nav>
+      <Modal show={show} onClose={() => setShow(false)}>
+        <LeadForm />
+      </Modal>
     </header>
   );
 }

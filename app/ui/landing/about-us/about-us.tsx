@@ -3,19 +3,41 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function AboutUsSection() {
+  const strengths = [
+    {
+      title: "Formación especializada",
+      description: "Diplomados diseñados por expertos del sector salud",
+      color: "#121b6a",
+    },
+    {
+      title: "Modalidad 100% en línea",
+      description: "Flexibilidad para estudiar desde cualquier lugar",
+      color: "#a20519",
+    },
+    {
+      title: "Acompañamiento cercano",
+      description: "Atención personalizada durante todo el proceso",
+      color: "#121b6a",
+    },
+    {
+      title: "En expansión",
+      description: "Alianzas académicas y sector salud",
+      color: "#a20519",
+    },
+  ];
   return (
     <section className="py-12 md:py-16 lg:py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Column - Image */}
           <div className="relative overflow-hidden rounded-lg h-64 md:h-80 lg:h-full min-h-[500px]">
-            <Image
+            {/* <Image
               src="/img/about.jpg"
               alt="Universidad Nacional Salvador Zubirán Anchondo"
               fill
               className="object-cover transition-transform duration-700 hover:scale-105"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
-            />
+            /> */}
             {/* Overlay for better text readability if needed */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
           </div>
@@ -145,22 +167,22 @@ export default function AboutUsSection() {
 
         {/* Statistics Section */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div className="text-center bg-white p-6 rounded-lg shadow-sm">
-            <div className="text-3xl font-bold text-[#121b6a] mb-2">25+</div>
-            <div className="text-gray-600 text-sm">Años de experiencia</div>
-          </div>
-          <div className="text-center bg-white p-6 rounded-lg shadow-sm">
-            <div className="text-3xl font-bold text-[#a20519] mb-2">5000+</div>
-            <div className="text-gray-600 text-sm">Estudiantes graduados</div>
-          </div>
-          <div className="text-center bg-white p-6 rounded-lg shadow-sm">
-            <div className="text-3xl font-bold text-[#121b6a] mb-2">50+</div>
-            <div className="text-gray-600 text-sm">Programas académicos</div>
-          </div>
-          <div className="text-center bg-white p-6 rounded-lg shadow-sm">
-            <div className="text-3xl font-bold text-[#a20519] mb-2">95%</div>
-            <div className="text-gray-600 text-sm">Tasa de empleabilidad</div>
-          </div>
+          {strengths.map((item, index) => {
+            return (
+              <div
+                key={index}
+                className="text-center bg-white p-6 rounded-lg shadow-sm"
+              >
+                <div
+                  className="text-3xl font-bold mb-2"
+                  style={{ color: item.color }}
+                >
+                  {item.title}
+                </div>
+                <div className="text-gray-600 text-sm">{item.description}</div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -1,3 +1,5 @@
+"use client";
+
 import {
   MapPin,
   Phone,
@@ -8,25 +10,36 @@ import {
   Linkedin,
 } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 export default function FooterSection() {
-  const quickLinks = [
-    { name: "Sobre nosotros", href: "#" },
-    { name: "Contacta con nosotros", href: "#" },
-    { name: "Diplomados", href: "#" },
+  const pathname = usePathname();
+  const [path, setPath] = useState("");
+
+  const [quickLinks, setQuickLinks] = useState([
+    { name: "Sobre nosotros", href: "/about-us" },
+    { name: "Contacta con nosotros", href: "#" }, //esta a whats
+    { name: "Diplomados", href: "/oferta-educativa" },
     // { name: "Términos y condiciones", href: "#" },
     // { name: "Política de privacidad", href: "#" },
-  ];
+  ]);
 
   const footerMenuLinks = [
     { name: "Inicio", href: "/" },
-    { name: "Sobre nosotros", href: "#" },
-    { name: "Diplomados", href: "#" },
+    { name: "Sobre nosotros", href: "/about-us" },
+    { name: "Diplomados", href: "/oferta-educativa" },
     { name: "Contacto", href: "#" },
   ];
 
+  // const match_links = (path: string) => {
+  //   return quickLinks.filter((link) => {
+  //     return link.href !== path;
+  //   });
+  // };
+
   return (
-    <footer className="bg-[#111] text-white pt-5 mt-5">
+    <footer className="bg-[#111] text-white">
       <div className="container mx-auto py-5 px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Quick Links Column */}
@@ -35,15 +48,21 @@ export default function FooterSection() {
               Accesos rápidos
             </h4>
             <div className="space-y-2">
-              {quickLinks.map((link, index) => (
-                <Link
-                  key={index}
-                  href={link.href}
-                  className="block text-white text-sm hover:tracking-wider transition-all duration-300 relative pl-4 before:content-['>'] before:absolute before:left-0 before:text-white"
-                >
-                  {link.name}
-                </Link>
-              ))}
+              {quickLinks.map((link, index) => {
+                const isActivate = link.href === pathname;
+                return (
+                  !isActivate && (
+                    <Link
+                      key={index}
+                      href={link.href}
+                      className="block text-white text-sm hover:tracking-wider transition-all duration-300 relative pl-4 before:content-['>'] before:absolute before:left-0 before:text-white"
+                    >
+                      {link.name}
+                    </Link>
+                  )
+                );
+                // return isActivate ? <div>Hola</div> : <div>Adios</div>;
+              })}
             </div>
           </div>
 
@@ -111,21 +130,24 @@ export default function FooterSection() {
           {/* Newsletter Column */}
           <div>
             <h4 className="text-white mb-4 text-lg font-semibold">
-              Newsletter
+              Contactanos
             </h4>
             <p className="text-sm mb-4 text-gray-300">
-              Mantente al día con nuestros últimos diplomados y noticias
-              académicas.
+              Si quieres saber mas, puedes ponerte en contacto con un asesor
+              educativo.
             </p>
             <div className="relative max-w-sm">
-              <input
+              {/* <input
                 type="email"
                 placeholder="Tu correo electrónico"
                 className="w-full px-4 py-3 pr-20 rounded-lg bg-gray-800 text-white placeholder-gray-400 border border-gray-600 focus:outline-none focus:border-[#121b6a] transition-colors"
-              />
-              <button className="absolute top-2 right-2 bg-[#121b6a] text-white px-4 py-1.5 rounded-md text-sm hover:bg-[#0a1050] transition-colors duration-300">
-                Únete
-              </button>
+              /> */}
+              <div className="flex 6">
+                {/* call to action wa.link */}
+                <button className="absolute top-2 right-2 bg-[#121b6a] text-white px-4 py-1.5 rounded-md text-sm hover:bg-[#0a1050] transition-colors duration-300">
+                  Contactar
+                </button>
+              </div>
             </div>
           </div>
         </div>

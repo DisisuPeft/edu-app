@@ -1,8 +1,12 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-
+import { useState } from "react";
+import { Modal } from "@/app/components/common/Modal";
+import LeadForm from "./lead-form";
 export default function DiplomadosSection() {
   // Sample data for diplomados
+  const [show, setShow] = useState<boolean>(false);
   const diplomados = [
     {
       id: 1,
@@ -21,14 +25,20 @@ export default function DiplomadosSection() {
       image:
         "/assets/img-landing/Diplomado-síndrome-de-down-y-problemas-de-aprendizaje.png",
     },
-    {
-      id: 4,
-      title: "Diplomado en pediatría",
-      image:
-        "/assets/img-landing/Diplomado-rehabilitación-de-la-articulación-temperomandibular.png",
-    },
+    // {
+    //   id: 4,
+    //   title: "Diplomado en pediatría",
+    //   image:
+    //     "/assets/img-landing/Diplomado-rehabilitación-de-la-articulación-temperomandibular.png",
+    // },
   ];
-
+  const onSubscribe = () => {
+    // const diplomado = diplomados.find((diplomado) => {
+    //   return diplomado.id === id;
+    // });
+    // console.log(diplomado);
+    setShow(true);
+  };
   return (
     <div className="py-12 md:py-16 lg:py-20 bg-[#121829]">
       <div className="container mx-auto px-4">
@@ -80,27 +90,30 @@ export default function DiplomadosSection() {
               </div>
               <div className="flex justify-center gap-2 mt-4">
                 <Link
-                  href="#"
+                  href="/oferta-educativa"
                   className="text-sm px-4 py-2 rounded-full border border-[#121b6a] text-[#121b6a] hover:bg-[#121b6a] hover:text-white transition-all"
                 >
                   Saber más
                 </Link>
-                <Link
-                  href="#"
-                  className="text-sm px-4 py-2 rounded-full bg-[#121b6a] text-white hover:bg-[#0a1050] transition-all"
-                >
-                  Únete ahora
-                </Link>
               </div>
               <div className="text-center p-4 pb-6">
-                <h5 className="font-semibold text-lg mb-2 text-[#121829]">
-                  {/* {diplomado.title} */}
-                </h5>
+                <h5 className="font-semibold text-lg mb-2 text-[#121829]"></h5>
               </div>
             </div>
           ))}
         </div>
       </div>
+      <div className="flex justify-center mt-10">
+        <button
+          onClick={() => setShow(true)}
+          className="text-sm px-4 py-2 rounded-full bg-[#a20519] w-[500px] h-[50px] text-white hover:bg-red-700 transition-all"
+        >
+          Únete ahora
+        </button>
+      </div>
+      <Modal show={show} onClose={() => setShow(false)}>
+        <LeadForm />
+      </Modal>
     </div>
   );
 }

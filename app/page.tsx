@@ -8,6 +8,7 @@ import TestSection from "@/app/ui/landing/TestSection";
 import AboutSection from "./ui/landing/about";
 import TeamSection from "./ui/landing/team";
 import TestimonialsSection from "./ui/landing/testimonial-section";
+import CallToSuscribe from "./ui/landing/ready-to";
 
 export default function Home() {
   return (
@@ -22,6 +23,9 @@ export default function Home() {
         <TestSection />
         <TeamSection />
         <TestimonialsSection />
+        <div className="p-5">
+          <CallToSuscribe />
+        </div>
       </main>
       <Footer />
     </div>

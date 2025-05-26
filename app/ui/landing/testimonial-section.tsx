@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { User } from "lucide-react";
 
 export default function TestimonialsSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -86,13 +87,14 @@ export default function TestimonialsSection() {
               <div className="text-center">
                 {/* User Image */}
                 <div className="relative w-20 h-20 mx-auto mb-3">
-                  <Image
+                  {/* <Image
                     src={testimonial.image || "/placeholder.svg"}
                     alt={testimonial.name}
                     fill
                     className="rounded-full border-2 border-gray-200 p-1 object-cover"
                     sizes="80px"
-                  />
+                  /> */}
+                  <User size={50} className="text-black" />
                 </div>
 
                 {/* User Info */}

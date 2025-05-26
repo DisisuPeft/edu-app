@@ -18,13 +18,13 @@ export default function AboutSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Left Column - Image */}
           <div className="relative h-64 md:h-80 lg:h-full min-h-[400px]">
-            <Image
+            {/* <Image
               src="/img/about.jpg"
               alt="Sobre nosotros"
               fill
               className="object-cover rounded-lg"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
-            />
+            /> */}
           </div>
 
           {/* Right Column - Content */}

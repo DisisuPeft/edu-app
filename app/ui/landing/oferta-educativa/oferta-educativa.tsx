@@ -1,63 +1,64 @@
 import { GraduationCap, Clock, Users, Award } from "lucide-react";
 import Link from "next/link";
+import CallToSuscribe from "../ready-to";
 
 export default function EducationalOfferingsSection() {
   // Array of diplomados data
   const diplomados = [
     {
       id: 1,
-      title: "Diplomado en línea de Urgencias Médicas",
+      title: "Diplomado en Urgencias Médicas",
       description:
-        "Desarrolla competencias especializadas en el manejo de emergencias médicas, protocolos de atención urgente y toma de decisiones críticas en situaciones de alta presión.",
+        "Diseñado para quienes enfrentan el reto diario de salvar vidas, este programa responde a una necesidad urgente en nuestro sistema de salud: formar profesionales capaces de actuar con decisión frente a situaciones críticas, elevando así la calidad y dignidad de la atención médica en todo el país.",
       duration: "6 meses",
-      students: "150+",
+      // students: "150+",
       icon: GraduationCap,
     },
     {
       id: 2,
-      title: "Diplomado en Medicina Interna",
+      title: "Diplomado en Nutrición y suplementación en la salud hormonal",
       description:
-        "Profundiza en el diagnóstico y tratamiento de enfermedades complejas del adulto, con enfoque en medicina basada en evidencia y actualización clínica.",
-      duration: "8 meses",
-      students: "120+",
-      icon: Award,
+        "Este diplomado capacita a profesionales en el arte y la ciencia de comprender el sistema hormonal como un reflejo integral del cuerpo y el entorno. A través de herramientas clínicas, nutricionales y bioquímicas, los participantes aprenden a identificar desequilibrios que impactan profundamente la salud, y a intervenir con precisión y conciencia.",
+      duration: "6 meses",
+      // students: "120+",
+      icon: GraduationCap,
     },
     {
       id: 3,
-      title: "Diplomado en Cardiología Clínica",
+      title: "Diplomado en Síndrome de Down y Problemas de Aprendizaje",
       description:
-        "Especialízate en el diagnóstico y manejo de enfermedades cardiovasculares, interpretación de estudios cardiológicos y prevención cardiovascular.",
-      duration: "7 meses",
+        "Este diplomado ofrece una mirada humana y especializada al síndrome de Down y a los retos del aprendizaje, formando profesionales y familias capaces de acompañar con empatía y conocimiento. Promueve un enfoque inclusivo que reconoce el valor único de cada persona y construye las bases para una sociedad verdaderamente equitativa.",
+      duration: "6 meses",
       students: "100+",
       icon: GraduationCap,
     },
-    {
-      id: 4,
-      title: "Diplomado en Pediatría Avanzada",
-      description:
-        "Actualiza tus conocimientos en el cuidado integral del paciente pediátrico, desde neonatología hasta adolescencia, con enfoque multidisciplinario.",
-      duration: "6 meses",
-      students: "90+",
-      icon: Users,
-    },
-    {
-      id: 5,
-      title: "Diplomado en Ginecología y Obstetricia",
-      description:
-        "Fortalece tus competencias en salud reproductiva femenina, atención obstétrica y procedimientos ginecológicos con las últimas técnicas.",
-      duration: "8 meses",
-      students: "110+",
-      icon: Award,
-    },
-    {
-      id: 6,
-      title: "Diplomado en Traumatología y Ortopedia",
-      description:
-        "Domina el manejo de lesiones traumatológicas, técnicas quirúrgicas ortopédicas y rehabilitación integral del sistema musculoesquelético.",
-      duration: "7 meses",
-      students: "80+",
-      icon: GraduationCap,
-    },
+    // {
+    //   id: 4,
+    //   title: "Diplomado en Pediatría Avanzada",
+    //   description:
+    //     "Actualiza tus conocimientos en el cuidado integral del paciente pediátrico, desde neonatología hasta adolescencia, con enfoque multidisciplinario.",
+    //   duration: "6 meses",
+    //   students: "90+",
+    //   icon: Users,
+    // },
+    // {
+    //   id: 5,
+    //   title: "Diplomado en Ginecología y Obstetricia",
+    //   description:
+    //     "Fortalece tus competencias en salud reproductiva femenina, atención obstétrica y procedimientos ginecológicos con las últimas técnicas.",
+    //   duration: "6 meses",
+    //   students: "110+",
+    //   icon: Award,
+    // },
+    // {
+    //   id: 6,
+    //   title: "Diplomado en Traumatología y Ortopedia",
+    //   description:
+    //     "Domina el manejo de lesiones traumatológicas, técnicas quirúrgicas ortopédicas y rehabilitación integral del sistema musculoesquelético.",
+    //   duration: "6 meses",
+    //   students: "80+",
+    //   icon: GraduationCap,
+    // },
   ];
 
   return (
@@ -103,19 +104,19 @@ export default function EducationalOfferingsSection() {
                   <Clock className="h-4 w-4 mr-1" />
                   <span>{diplomado.duration}</span>
                 </div>
-                <div className="flex items-center">
+                {/* <div className="flex items-center">
                   <Users className="h-4 w-4 mr-1" />
                   <span>{diplomado.students} estudiantes</span>
-                </div>
+                </div> */}
               </div>
 
               {/* Button */}
-              <Link
+              {/* <Link
                 href="#"
                 className="inline-block w-full text-center bg-[#121b6a] text-white px-4 py-2 rounded-lg hover:bg-[#0f1655] transition-colors duration-300 font-medium"
               >
                 Conoce más
-              </Link>
+              </Link> */}
             </div>
           ))}
         </div>
@@ -145,7 +146,7 @@ export default function EducationalOfferingsSection() {
                 Flexibilidad Horaria
               </h4>
               <p className="text-gray-600 text-sm">
-                Estudia a tu ritmo con acceso 24/7 a la plataforma
+                Estudia a tu ritmo con acceso 24/7 a nuestros tutores academicos
               </p>
             </div>
             <div className="text-center">
@@ -174,46 +175,24 @@ export default function EducationalOfferingsSection() {
         </div>
 
         {/* Call to Action Section */}
-        <div className="bg-[#121b6a] text-white py-12 px-6 rounded-lg text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">
-            ¿Estás listo para dar el siguiente paso en tu desarrollo
-            profesional?
-          </h2>
-          <p className="text-lg mb-6 opacity-90 max-w-2xl mx-auto">
-            Inscríbete hoy mismo y comienza a transformar tu carrera con
-            nuestros diplomados especializados.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link
-              href="/auth/register"
-              className="bg-white text-[#121b6a] hover:bg-gray-200 rounded-full px-8 py-3 font-semibold transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-            >
-              Inscribirme ahora
-            </Link>
-            <Link
-              href="#"
-              className="border-2 border-white text-white hover:bg-white hover:text-[#121b6a] rounded-full px-8 py-3 font-semibold transition-all duration-300"
-            >
-              Solicitar información
-            </Link>
-          </div>
-        </div>
+        <CallToSuscribe />
 
         {/* Contact Information */}
         <div className="text-center mt-12">
           <p className="text-gray-600 mb-2">¿Tienes dudas? Contáctanos</p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 text-sm">
+            {/* call to action wa.link */}
             <a
               href="tel:+525512345678"
               className="text-[#121b6a] hover:underline"
             >
-              📞 +52 (55) 1234-5678
+              📞 Conectame con un asesor
             </a>
             <a
               href="mailto:info@unszn.edu.mx"
               className="text-[#121b6a] hover:underline"
             >
-              ✉️ info@unszn.edu.mx
+              ✉️ direccioncomercialunszn@gmail.com
             </a>
             {/* <a href="#" className="text-[#121b6a] hover:underline">
               💬 Chat en línea
