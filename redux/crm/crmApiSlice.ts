@@ -21,6 +21,13 @@ const crmApiSlice = apiSlice.injectEndpoints({
     retrieveLead: builder.query<Data, number>({
       query: (id) => `/lead/${id}/`,
     }),
+    createLead: builder.mutation({
+      query: (payload) => ({
+        url: "/registration/lead-landing/",
+        method: "POST",
+        body: payload,
+      }),
+    }),
     // getTabs: builder.query<TabsModulos[], void>({
     //   query: () => "/tabs/all/",
     //   transformResponse: (response) => {
@@ -49,4 +56,5 @@ const crmApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetLeadsQuery, useRetrieveLeadQuery } = crmApiSlice;
+export const { useGetLeadsQuery, useRetrieveLeadQuery, useCreateLeadMutation } =
+  crmApiSlice;

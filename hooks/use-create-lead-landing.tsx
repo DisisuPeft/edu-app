@@ -7,15 +7,16 @@ import { useEffect } from "react";
 import { useCreateTeacherMutation } from "@/redux/maestro/teacherApiSlice";
 import { useRetrieveMunicipiosQuery } from "@/redux/catalogos/CatApiSlice";
 import { Alert } from "@/alerts/toast";
+import { useCreateLeadMutation } from "@/redux/crm/crmApiSlice";
 
 export default function useCreateLeadLanding() {
-  // const [entidad_id, setEntidad] = useState<number>()
-  const [createTeacher, { isLoading }] = useCreateTeacherMutation();
+  const [createLead, { isLoading }] = useCreateLeadMutation();
+
   const [formData, setFormData] = useState({
     nombre: "",
     correo: "",
     telefono: "",
-    interesado_en_id: "",
+    interesado_en: "",
   });
 
   const reset = () => {
@@ -23,14 +24,15 @@ export default function useCreateLeadLanding() {
       nombre: "",
       correo: "",
       telefono: "",
-      interesado_en_id: "",
+      interesado_en: "",
     });
   };
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
+    const processValue = name === "interesado_en" ? parseInt(value) : value;
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: processValue,
     });
   };
   // const transformValue = (
@@ -56,13 +58,12 @@ export default function useCreateLeadLanding() {
   // };
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // console.log(formData);
-    createTeacher(formData)
+    createLead(formData)
       .unwrap()
       .then((res) => {
         //     console.log(res);
         reset();
-        Alert({ title: "Exito", text: res, icon: "success" });
+        Alert({ title: "Registrado", text: res, icon: "success" });
       })
       .catch((error) => {
         // console.log(error);

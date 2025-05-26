@@ -97,6 +97,7 @@ export default function LeadForm() {
                 aria-label="Número de teléfono"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#121b6a] focus:border-[#121b6a] transition-colors"
                 placeholder="(55) 1234-5678"
+                maxLength={10}
               />
             </div>
 
@@ -109,9 +110,9 @@ export default function LeadForm() {
                 Diplomado de interés *
               </label>
               <select
-                id="interesado_en_id"
-                name="interesado_en_id"
-                value={formData.interesado_en_id}
+                id="interesado_en"
+                name="interesado_en"
+                value={formData.interesado_en}
                 onChange={onChange}
                 required
                 aria-label="Selecciona el diplomado de tu interés"

@@ -22,7 +22,7 @@ export default function Home() {
         <AboutSection />
         <TestSection />
         <TeamSection />
-        <TestimonialsSection />
+        {/* <TestimonialsSection /> */}
         <div className="p-5">
           <CallToSuscribe />
         </div>
