@@ -18,6 +18,12 @@ const crmApiSlice = apiSlice.injectEndpoints({
         return Array.isArray(response) ? response : [];
       },
     }),
+    retrieveRecentLeads: builder.query<Lead[], void>({
+      query: () => "/recent/leads/",
+      transformResponse: (response) => {
+        return Array.isArray(response) ? response : [];
+      },
+    }),
     retrieveLead: builder.query<Data, number>({
       query: (id) => `/lead/${id}/`,
     }),
@@ -56,5 +62,9 @@ const crmApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetLeadsQuery, useRetrieveLeadQuery, useCreateLeadMutation } =
-  crmApiSlice;
+export const {
+  useGetLeadsQuery,
+  useRetrieveLeadQuery,
+  useCreateLeadMutation,
+  useRetrieveRecentLeadsQuery,
+} = crmApiSlice;

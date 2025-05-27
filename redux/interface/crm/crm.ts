@@ -38,15 +38,15 @@ export interface Lead {
   nombre: string | null | undefined;
   correo: string | null | undefined;
   telefono: string | null | undefined;
-  interesado_en: ProgramaEducativo | number | null | undefined;
-  estatus: Estatus | number | null | undefined;
-  etapa: Etapas | number | null | undefined;
-  fuente: Fuentes | number | null | undefined;
-  vendedor_asignado: User | number | null | undefined;
+  interesado_en: ProgramaEducativo | string | number | null | undefined;
+  estatus: Estatus | string | number | null | undefined;
+  etapa: Etapas | string | number | null | undefined;
+  fuente: Fuentes | string | number | null | undefined;
+  vendedor_asignado: User | string | number | null | undefined;
   tiempo_primera_respuesta: number | null | undefined;
-  empresa: Empresa | number | null | undefined;
-  institucion: InstitucionAcademica | number | null | undefined;
-  etapa_anterior: Etapas | number | null | undefined;
+  empresa: Empresa | string | number | null | undefined;
+  institucion: InstitucionAcademica | string | number | null | undefined;
+  etapa_anterior: Etapas | string | number | null | undefined;
   fecha_creacion: string | null | undefined;
   fecha_actualizacion: string | null | undefined;
 }
