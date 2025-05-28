@@ -34,6 +34,9 @@ const crmApiSlice = apiSlice.injectEndpoints({
         body: payload,
       }),
     }),
+    EstadisticsLeads: builder.query<Data, void>({
+      query: () => "/leads/estadistics/",
+    }),
     // getTabs: builder.query<TabsModulos[], void>({
     //   query: () => "/tabs/all/",
     //   transformResponse: (response) => {
@@ -67,4 +70,5 @@ export const {
   useRetrieveLeadQuery,
   useCreateLeadMutation,
   useRetrieveRecentLeadsQuery,
+  useEstadisticsLeadsQuery,
 } = crmApiSlice;

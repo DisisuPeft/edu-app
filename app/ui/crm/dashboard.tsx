@@ -1,39 +1,16 @@
 import {
   useGetLeadsQuery,
   useRetrieveRecentLeadsQuery,
+  useEstadisticsLeadsQuery,
 } from "@/redux/crm/crmApiSlice";
 import { Users, Activity, PieChart, BarChart } from "lucide-react";
 import Link from "next/link";
 
 export default function DashboardCRM() {
-  const { data: leads, isLoading } = useGetLeadsQuery();
   const { data: recent_leads } = useRetrieveRecentLeadsQuery();
-  const total_leads = leads?.length;
-  // const leads_por_estapas = leads?.reduce((acc, lead) => {
-  //     // console.log(lead.etapa?.nombre)
-  //     acc[lead?.etapa.nombre] = (acc[lead?.estapa?.nombre] || 0) + 1
-  //     // console.log(lead)
-  //     return acc
-  // },
-  // {} as Record<string, number>
-  // )
-  const leadsByStage = leads?.reduce((acc, lead) => {
-    const etapa = lead?.etapa?.nombre?.trim();
-    if (etapa) {
-      acc[etapa] = (acc[etapa] || 0) + 1;
-    }
-    return acc;
-  }, {} as Record<string, number>);
+  const { data } = useEstadisticsLeadsQuery();
+  // console.log(data);
 
-  const leadsByPrograms = leads?.reduce((acc, lead) => {
-    const programa = lead?.interesado_en?.nombre?.trim();
-    if (programa) {
-      acc[programa] = (acc[programa] || 0) + 1;
-    }
-    //   console.log(acc)
-    return acc;
-  }, {} as Record<string, number>);
-  // console.log(leadsByPrograms)
   return (
     <div className="p-6 md:ml-64">
       {/* <h1 className="text-2xl font-bold mb-6 text-gray-800">Camapana activa: {leads[0]?.camapania?.nombre}</h1> */}
@@ -49,7 +26,7 @@ export default function DashboardCRM() {
             <div>
               <p className="text-sm text-gray-700">Total de leads</p>
               <p className="text-2xl font-semibold text-gray-800">
-                {total_leads}
+                {data?.total_leads}
               </p>
             </div>
           </div>
@@ -92,37 +69,52 @@ export default function DashboardCRM() {
         <div className="bg-white p-6 rounded-lg shadow text-gray-800">
           <h2 className="text-lg font-semibold mb-4">Leads por Etapa</h2>
           <div className="space-y-4">
-            {Object?.entries(leadsByStage || {})?.map(([stage, count]) => (
-              <div key={stage}>
-                <div className="flex justify-between mb-1">
-                  <span className="text-sm font-medium">{stage}</span>
-                  <span className="text-sm text-gray-500">{count} leads</span>
+            {data?.total_lead_etapa.map((etapa, index) => {
+              // console.log(etapa);
+              return (
+                <div key={index}>
+                  <div className="flex justify-between mb-1">
+                    <span className="text-sm font-medium">
+                      {etapa.etapa__nombre}
+                    </span>
+                    <span className="text-sm text-gray-500">
+                      {etapa.total} leads
+                    </span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div
+                      className="bg-blue-600 h-2 rounded-full"
+                      style={{
+                        width: `${(etapa.total / data?.total_leads) * 100}%`,
+                      }}
+                    ></div>
+                  </div>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div
-                    className="bg-blue-600 h-2 rounded-full"
-                    style={{ width: `${(count / total_leads) * 100}%` }}
-                  ></div>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
         <div className="bg-white p-6 rounded-lg shadow text-gray-800">
           <h2 className="text-lg font-semibold mb-4">Leads por Programa</h2>
           <div className="space-y-4">
-            {Object.entries(leadsByPrograms || {}).map(([program, count]) => (
-              <div key={program}>
+            {data?.total_lead_programa.map((program, index) => (
+              <div key={index}>
                 <div className="flex justify-between mb-1">
-                  <span className="text-sm font-medium">{program}</span>
+                  <span className="text-sm font-medium">
+                    {program.interesado_en__nombre}
+                  </span>
                   <span className="text-sm text-gray-500">
-                    {count > 1 ? `${count} leads` : `${count} lead`}
+                    {program.total > 1
+                      ? `${program.total} leads`
+                      : `${program.total} lead`}
                   </span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div
                     className="bg-green-600 h-2 rounded-full"
-                    style={{ width: `${(count / total_leads) * 100}%` }}
+                    style={{
+                      width: `${(program.total / data?.total_leads) * 100}%`,
+                    }}
                   ></div>
                 </div>
               </div>
