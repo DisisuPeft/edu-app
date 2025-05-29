@@ -49,6 +49,7 @@ export interface Lead {
   etapa_anterior: Etapas | string | number | null | undefined;
   fecha_creacion: string | null | undefined;
   fecha_actualizacion: string | null | undefined;
+  acciones: string;
 }
 
 export interface Pipeline {
@@ -60,4 +61,11 @@ export interface Pipeline {
   programa_nombre: string | null | undefined | ProgramaEducativo;
   unidad_academica_nombre: string | null | undefined | InstitucionAcademica;
   empresa: string | null | undefined | Empresa;
+}
+
+export interface LeadPaginationResponse {
+  count: number;
+  next: string;
+  previous: string;
+  results: Lead[];
 }

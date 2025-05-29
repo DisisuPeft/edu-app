@@ -1,9 +1,12 @@
 import { Column } from "@/redux/interface/data-table/data-table-types";
 import { useEffect, useState } from "react";
+import Link from "next/link";
+// import Edit, Trash2
+import { Trash2, Edit } from "lucide-react";
 
 interface ControlledProps<T> {
   columns: Column<T>[];
-  data: T[];
+  data: T[] | undefined;
   totalCount: number;
   currentPage: number;
   onPageChange: (page: number) => void;
@@ -21,7 +24,7 @@ export default function DataTable<T>({
   const totalPages = Math.ceil(totalCount / itemsPerPage);
   return (
     <div className="w-full">
-      <table className="min-w-full border border-gray-200">
+      <table className="min-w-full border border-gray-200 text-gray-800">
         <thead className="bg-gray-100 text-left">
           <tr>
             {columns.map((col) => (
@@ -32,11 +35,28 @@ export default function DataTable<T>({
           </tr>
         </thead>
         <tbody>
-          {data.map((item, idx) => (
+          {data?.map((item, idx) => (
             <tr key={idx}>
               {columns.map((col) => (
                 <td key={col.accessor as string} className="p-2 border">
-                  {String(item[col.accessor])}
+                  {col.accessor === "acciones" ? (
+                    <div className="flex gap-2">
+                      {/* <button onClick={() => onDelete(row.id)}>
+                        <Trash2 className="w-4 h-4 text-red-600" />
+                      </button> */}
+                      <Link
+                        href={{
+                          pathname: `/crm/leads/${item.id}`,
+                          query: { id: 6 },
+                        }}
+                      >
+                        <Edit className="text-blue-600" size={30} />
+                      </Link>
+                    </div>
+                  ) : (
+                    String(item[col.accessor])
+                  )}
+                  {/* {String(item[col.accessor])} */}
                 </td>
               ))}
             </tr>
@@ -45,7 +65,7 @@ export default function DataTable<T>({
       </table>
 
       {/* Paginación */}
-      <div className="flex justify-center gap-2 mt-4">
+      <div className="flex justify-center gap-2 mt-4 text-gray-800 p-2">
         <button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
