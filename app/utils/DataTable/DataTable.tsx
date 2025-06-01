@@ -11,6 +11,8 @@ interface ControlledProps<T> {
   currentPage: number;
   onPageChange: (page: number) => void;
   itemsPerPage: number;
+  path?: string;
+  query_id?: number;
 }
 
 export default function DataTable<T>({
@@ -20,6 +22,8 @@ export default function DataTable<T>({
   currentPage,
   onPageChange,
   itemsPerPage,
+  path,
+  query_id,
 }: ControlledProps<T>) {
   const totalPages = Math.ceil(totalCount / itemsPerPage);
   return (
@@ -46,8 +50,8 @@ export default function DataTable<T>({
                       </button> */}
                       <Link
                         href={{
-                          pathname: `/crm/leads/${item.id}`,
-                          query: { id: 6 },
+                          pathname: `${path}${item.id}`,
+                          query: { id: query_id },
                         }}
                       >
                         <Edit className="text-blue-600" size={30} />

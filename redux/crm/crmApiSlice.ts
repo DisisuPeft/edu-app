@@ -7,16 +7,14 @@ import {
   Data,
   LeadPaginationResponse,
 } from "../interface/crm/crm";
+import { ProgramaEducativo } from "../interface/control_escolar/programa_educativo";
+import {
+  Empresa,
+  InstitucionAcademica,
+} from "../interface/catalogos/catalagos";
 
 const crmApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    // createMenu: builder.mutation({
-    //   query: (payload) => ({
-    //     url: "url/to/define",
-    //     method: "POST",
-    //     body: payload,
-    //   }),
-    // }),
     getLeads: builder.query<LeadPaginationResponse, number | void>({
       query: (page) => `/leads/all/?page=${page}`,
     }),
@@ -39,18 +37,25 @@ const crmApiSlice = apiSlice.injectEndpoints({
     EstadisticsLeads: builder.query<Data, void>({
       query: () => "/leads/estadistics/",
     }),
-    // getTabs: builder.query<TabsModulos[], void>({
-    //   query: () => "/tabs/all/",
-    //   transformResponse: (response) => {
-    //     return Array.isArray(response) ? response : [];
-    //   },
-    // }),
-    // getUsers: builder.query<User[], void>({
-    //   query: () => "/cea/usuarios/",
-    //   transformResponse: (response) => {
-    //     return Array.isArray(response) ? response : [];
-    //   },
-    // }),
+    getPipelines: builder.query<Pipeline[], void>({
+      query: () => "/pipeline/all/",
+    }),
+    createPipeline: builder.mutation({
+      query: (payload) => ({
+        url: "/create/pipeline/",
+        method: "POST",
+        body: payload,
+      }),
+    }),
+    getPrograms: builder.query<ProgramaEducativo[], void>({
+      query: () => "/crm/programs/",
+    }),
+    getUnidadesAcademicas: builder.query<InstitucionAcademica[], void>({
+      query: () => "/crm/unidades-academicas/",
+    }),
+    getEmpresa: builder.query<Empresa[], void>({
+      query: () => "/crm/empresa/",
+    }),
     // getUserEdit: builder.query<User, number>({
     //   query: (id) => `/cea/usuario/${id}`,
     //   // transformResponse: (response) => {
@@ -73,4 +78,9 @@ export const {
   useCreateLeadMutation,
   useRetrieveRecentLeadsQuery,
   useEstadisticsLeadsQuery,
+  useGetPipelinesQuery,
+  useCreatePipelineMutation,
+  useGetEmpresaQuery,
+  useGetUnidadesAcademicasQuery,
+  useGetProgramsQuery,
 } = crmApiSlice;

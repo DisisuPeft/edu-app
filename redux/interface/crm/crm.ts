@@ -25,7 +25,7 @@ export interface Estatus {
 
 export interface Etapas {
   id: number | null | undefined;
-  nombre: string | null | undefined;
+  nombre: string;
   descripcion: string | null | undefined;
   orden: number | null | undefined;
   Pipline: Pipeline | undefined | null;
@@ -54,12 +54,13 @@ export interface Lead {
 
 export interface Pipeline {
   id: number | null;
-  nombre: string | null;
-  orden: number | null;
+  nombre: string;
+  orden: number;
   fecha_creacion: string | null;
+  etapas: Etapas | string | null;
   fecha_actualizacion: string | null;
-  programa_nombre: string | null | undefined | ProgramaEducativo;
-  unidad_academica_nombre: string | null | undefined | InstitucionAcademica;
+  programa: string | null | undefined | ProgramaEducativo;
+  unidad_academica: string | null | undefined | InstitucionAcademica;
   empresa: string | null | undefined | Empresa;
 }
 

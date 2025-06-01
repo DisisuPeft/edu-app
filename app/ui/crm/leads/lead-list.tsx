@@ -43,13 +43,19 @@ export default function LeadList() {
           <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
         </div>
 
-        <button
+        <Link
           // onClick={() => setShowCreateModal(true)}
+          href={{
+            pathname: "/crm/leads/create",
+            query: {
+              id: 6,
+            },
+          }}
           className="flex items-center px-4 py-2 bg-sky-500 rounded-lg text-white hover:bg-sky-700 transition-colors"
         >
           <Plus className="mr-2 h-5 w-5" />
           Nuevo Lead
-        </button>
+        </Link>
       </div>
       {/* Filtros */}
       <div className="bg-white p-4 rounded-lg shadow mb-6 text-gray-800">
@@ -132,6 +138,8 @@ export default function LeadList() {
           currentPage={page}
           itemsPerPage={10}
           onPageChange={onChangePage}
+          path={"/crm/leads/"}
+          query_id={6}
         />
         {/* <table className="min-w-full divide-y divide-gray-300 bg-white text-sm">
               <thead className="bg-gray-100">
