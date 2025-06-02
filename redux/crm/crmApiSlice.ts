@@ -6,6 +6,9 @@ import {
   Pipeline,
   Data,
   LeadPaginationResponse,
+  Fuentes,
+  Estatus,
+  Etapas,
 } from "../interface/crm/crm";
 import { ProgramaEducativo } from "../interface/control_escolar/programa_educativo";
 import {
@@ -47,6 +50,13 @@ const crmApiSlice = apiSlice.injectEndpoints({
         body: payload,
       }),
     }),
+    updatePipeline: builder.mutation({
+      query: (payload) => ({
+        url: `pipeline/update/${payload.id}`,
+        method: "PATCH",
+        body: payload,
+      }),
+    }),
     getPrograms: builder.query<ProgramaEducativo[], void>({
       query: () => "/crm/programs/",
     }),
@@ -55,6 +65,47 @@ const crmApiSlice = apiSlice.injectEndpoints({
     }),
     getEmpresa: builder.query<Empresa[], void>({
       query: () => "/crm/empresa/",
+    }),
+    getFuentes: builder.query<Fuentes[], void>({
+      query: () => "/crm/fuentes/",
+    }),
+    createFuente: builder.mutation({
+      query: (payload) => ({
+        url: "/crm/fuentes/create/",
+        method: "POST",
+        body: payload,
+      }),
+    }),
+    updateFuente: builder.mutation({
+      query: (payload) => ({
+        url: `/crm/fuentes/update/${payload.id}`,
+        method: "PATCH",
+        body: payload,
+      }),
+    }),
+    // crm/fuentes/update/<int:id>
+    getEstatus: builder.query<Estatus[], void>({
+      query: () => "/crm/estatus/",
+    }),
+    createEstatus: builder.mutation({
+      query: (payload) => ({
+        url: "/crm/estatus/create/",
+        method: "POST",
+        body: payload,
+      }),
+    }),
+    updateEstatus: builder.mutation({
+      query: (payload) => ({
+        url: `/crm/estatus/update/${payload.id}`,
+        method: "PATCH",
+        body: payload,
+      }),
+    }),
+    retrieveEtapas: builder.query<Etapas[], number>({
+      query: (id) => `/crm/etapas/${id}/`,
+    }),
+    retrieveVendedor: builder.query<User[], void>({
+      query: () => `/crm/vendedores/`,
     }),
     // getUserEdit: builder.query<User, number>({
     //   query: (id) => `/cea/usuario/${id}`,
@@ -83,4 +134,13 @@ export const {
   useGetEmpresaQuery,
   useGetUnidadesAcademicasQuery,
   useGetProgramsQuery,
+  useUpdatePipelineMutation,
+  useGetEstatusQuery,
+  useGetFuentesQuery,
+  useCreateEstatusMutation,
+  useCreateFuenteMutation,
+  useUpdateEstatusMutation,
+  useUpdateFuenteMutation,
+  useRetrieveEtapasQuery,
+  useRetrieveVendedorQuery,
 } = crmApiSlice;

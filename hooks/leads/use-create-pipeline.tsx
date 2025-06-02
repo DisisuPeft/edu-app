@@ -1,11 +1,18 @@
 import { Pipeline } from "@/redux/interface/crm/crm";
 import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { useCreatePipelineMutation } from "@/redux/crm/crmApiSlice";
+import {
+  useGetPipelinesQuery,
+  useUpdatePipelineMutation,
+} from "@/redux/crm/crmApiSlice";
 import { Alert } from "@/alerts/toast";
 export default function createPipeline(pipeline?: Pipeline) {
   const [createPipeline, { isLoading }] = useCreatePipelineMutation();
+  const [updatePipeline] = useUpdatePipelineMutation();
+  const { refetch } = useGetPipelinesQuery();
   const [etapa, setNewEtapa] = useState<string>("");
   const [formData, setFormData] = useState({
+    id: null,
     nombre: "",
     orden: 0,
     programa: "",
@@ -16,6 +23,7 @@ export default function createPipeline(pipeline?: Pipeline) {
 
   const reset = () => {
     setFormData({
+      id: null,
       nombre: "",
       orden: 0,
       programa: "",
@@ -28,6 +36,7 @@ export default function createPipeline(pipeline?: Pipeline) {
   useEffect(() => {
     if (pipeline) {
       setFormData({
+        id: pipeline.id,
         nombre: pipeline?.nombre,
         orden: pipeline?.orden,
         programa: pipeline?.programa?.id,
@@ -39,9 +48,10 @@ export default function createPipeline(pipeline?: Pipeline) {
   }, [pipeline]);
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
+    const processedValue = transformValue(name, value);
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: processedValue,
     }));
   };
   const onEtapaChange = (index: number, value: string) => {
@@ -63,24 +73,25 @@ export default function createPipeline(pipeline?: Pipeline) {
     type?: string,
     checked?: boolean
   ) => {
-    // const castToIntFields = [
-    //   "interesado_en_id",
-    //   "estatus_id",
-    //   "etapa_id",
-    //   "fuente_id",
-    //   "vendedor_asignado_id",
-    //   "empresa_id",
-    //   "institucion_id",
-    //   "campania_id",
-    // ];
-    const castToSplit = [
-      "etapas.nombre",
-      // "perfil.nivEdu",
-      // "perfil.genero",
-      // "lugar_nacimiento",
-      // "municipio",
+    const castToIntFields = [
+      "programa",
+      "empresa",
+      "unidad_academica",
+      //   "fuente_id",
+      //   "vendedor_asignado_id",
+      //   "empresa_id",
+      //   "institucion_id",
+      //   "campania_id",
     ];
-    if (castToSplit.includes(name)) return value;
+    // const castToSplit = [
+    //   "etapas.nombre",
+    // "perfil.nivEdu",
+    // "perfil.genero",
+    // "lugar_nacimiento",
+    // "municipio",
+    // ];
+    // if (castToSplit.includes(name)) return value;
+    if (castToIntFields.includes(name)) return parseInt(value);
     return value;
   };
   const handleMoveEtapa = (index: number, direction: "up" | "down") => {
@@ -139,24 +150,41 @@ export default function createPipeline(pipeline?: Pipeline) {
   };
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(formData);
-    createPipeline(formData)
-      .unwrap()
-      .then((res) => {
-        //     console.log(res);
-        reset();
-        Alert({ title: "Exito", text: res, icon: "success" });
-      })
-      .catch((error) => {
-        // console.log(error);
-        Alert({
-          title: "Alerta",
-          text: error?.data
-            ? "Uno o mas campos estan vacios"
-            : "Error, sin respuesta del servidor",
-          icon: "error",
-        });
-      });
+    // console.log(formData);
+    pipeline
+      ? updatePipeline(formData)
+          .unwrap()
+          .then((res) => {
+            refetch();
+            Alert({ title: "Exito", text: res, icon: "success" });
+          })
+          .catch((error) => {
+            // console.log(error);
+            Alert({
+              title: "Alerta",
+              text: error?.data
+                ? "Uno o mas campos estan vacios"
+                : "Error, sin respuesta del servidor",
+              icon: "error",
+            });
+          })
+      : createPipeline(formData)
+          .unwrap()
+          .then((res) => {
+            reset();
+            refetch();
+            Alert({ title: "Exito", text: res, icon: "success" });
+          })
+          .catch((error) => {
+            // console.log(error);
+            Alert({
+              title: "Alerta",
+              text: error?.data
+                ? "Uno o mas campos estan vacios"
+                : "Error, sin respuesta del servidor",
+              icon: "error",
+            });
+          });
   };
 
   return {

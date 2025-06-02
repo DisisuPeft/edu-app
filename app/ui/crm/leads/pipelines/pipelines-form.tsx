@@ -32,7 +32,7 @@ export default function PipelineForm({ pipeline }: PipelineModalProps) {
 
   return (
     <div className="flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+      <div className="bg-white rounded-lg w-full max-w-lg">
         <div className="flex justify-between items-center p-6 border-b">
           <h2 className="text-xl font-semibold">
             {pipeline ? "Editar Pipeline" : "Crear Nuevo Pipeline"}
@@ -60,7 +60,7 @@ export default function PipelineForm({ pipeline }: PipelineModalProps) {
                 className="block text-sm font-medium text-gray-700"
               >
                 Programa Educativo
-                {/* <span className="text-red-500">*</span> */}
+                <span className="text-red-500">*</span>
               </label>
               <select
                 id="programa"
@@ -71,8 +71,9 @@ export default function PipelineForm({ pipeline }: PipelineModalProps) {
                 // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
                 //   errors.nivel_educativo ? "border-red-500" : ""
                 // }`}
+                required
               >
-                <option value="">Seleccionar empresa</option>
+                <option value="">Seleccionar programa</option>
                 {programas?.map((p) => (
                   <option key={p.id} value={p.id}>
                     {p.nombre}
@@ -112,7 +113,7 @@ export default function PipelineForm({ pipeline }: PipelineModalProps) {
                 className="block text-sm font-medium text-gray-700"
               >
                 Institucion academica
-                {/* <span className="text-red-500">*</span> */}
+                <span className="text-red-500">*</span>
               </label>
               <select
                 id="unidad_academica"
@@ -123,8 +124,9 @@ export default function PipelineForm({ pipeline }: PipelineModalProps) {
                 // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
                 //   errors.nivel_educativo ? "border-red-500" : ""
                 // }`}
+                required
               >
-                <option value="">Seleccionar empresa</option>
+                <option value="">Seleccionar institucion</option>
                 {unidades_academicas?.map((ua) => (
                   <option key={ua.id} value={ua.id}>
                     {ua.nombre}
@@ -132,7 +134,7 @@ export default function PipelineForm({ pipeline }: PipelineModalProps) {
                 ))}
               </select>
             </div>
-            {pipeline && (
+            {/* {pipeline && (
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Orden <span className="text-red-500">*</span>
@@ -146,7 +148,7 @@ export default function PipelineForm({ pipeline }: PipelineModalProps) {
                   required
                 />
               </div>
-            )}
+            )} */}
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -165,6 +167,7 @@ export default function PipelineForm({ pipeline }: PipelineModalProps) {
                       value={etapa.nombre}
                       onChange={(e) => onEtapaChange(index, e.target.value)}
                       className="flex-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      required
                     />
                     <div className="flex ml-2">
                       <button

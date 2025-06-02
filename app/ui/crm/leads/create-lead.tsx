@@ -4,10 +4,25 @@ import { useCreateLead } from "@/hooks";
 import type React from "react";
 
 import { useState } from "react";
+import {
+  useGetEstatusQuery,
+  useGetFuentesQuery,
+  useGetProgramsQuery,
+  useGetPipelinesQuery,
+  useRetrieveVendedorQuery,
+  useGetEmpresaQuery,
+  useGetUnidadesAcademicasQuery,
+} from "@/redux/crm/crmApiSlice";
 
 export default function CreateLeadPage() {
-  const { formData, onChange, onSubmit } = useCreateLead();
-
+  const { formData, onChange, onSubmit, etapas } = useCreateLead();
+  const { data: programas } = useGetProgramsQuery();
+  const { data: estatus } = useGetEstatusQuery();
+  const { data: pipelines } = useGetPipelinesQuery();
+  const { data: fuentes } = useGetFuentesQuery();
+  const { data: vendedores } = useRetrieveVendedorQuery();
+  const { data: empresa } = useGetEmpresaQuery();
+  const { data: unidades_academicas } = useGetUnidadesAcademicasQuery();
   return (
     <div className="bg-gray-50 py-8 px-4 text-gray-800">
       <div className="max-w-2xl mx-auto">
@@ -109,12 +124,12 @@ export default function CreateLeadPage() {
                   onChange={onChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
                 >
-                  <option value="">Seleccionar...</option>
-                  <option value="1">Software de CRM</option>
-                  <option value="2">Consultoría</option>
-                  <option value="3">Capacitación</option>
-                  <option value="4">Soporte Técnico</option>
-                  <option value="5">Licencias</option>
+                  <option value="0">Seleccionar...</option>
+                  {programas?.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.nombre}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -133,22 +148,45 @@ export default function CreateLeadPage() {
                   onChange={onChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
                 >
-                  <option value="">Seleccionar...</option>
-                  <option value="1">Nuevo</option>
-                  <option value="2">En Proceso</option>
-                  <option value="3">Calificado</option>
-                  <option value="4">No Calificado</option>
-                  <option value="5">Cerrado</option>
+                  <option value="0">Seleccionar...</option>
+                  {estatus?.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.nombre}
+                    </option>
+                  ))}
                 </select>
               </div>
 
-              {/* Etapa */}
+              {/* Pipeline */}
               <div>
                 <label
-                  htmlFor="etapa_id"
+                  htmlFor="pipeline_id"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
-                  Etapa
+                  Pipelina
+                </label>
+                <select
+                  id="pipeline_id"
+                  name="pipeline_id"
+                  value={formData.pipeline_id}
+                  onChange={onChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+                >
+                  <option value="0">Seleccionar...</option>
+                  {pipelines?.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.nombre}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {/* Etapas */}
+              <div>
+                <label
+                  htmlFor="pipeline_id"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  Etapas
                 </label>
                 <select
                   id="etapa_id"
@@ -157,13 +195,12 @@ export default function CreateLeadPage() {
                   onChange={onChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
                 >
-                  <option value="">Seleccionar...</option>
-                  <option value="1">Prospecto</option>
-                  <option value="2">Contacto Inicial</option>
-                  <option value="3">Presentación</option>
-                  <option value="4">Propuesta</option>
-                  <option value="5">Negociación</option>
-                  <option value="6">Cierre</option>
+                  <option value="0">Seleccionar...</option>
+                  {etapas?.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.nombre}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -182,13 +219,12 @@ export default function CreateLeadPage() {
                   onChange={onChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
                 >
-                  <option value="">Seleccionar...</option>
-                  <option value="1">Sitio Web</option>
-                  <option value="2">Redes Sociales</option>
-                  <option value="3">Referido</option>
-                  <option value="4">Email Marketing</option>
-                  <option value="5">Llamada en Frío</option>
-                  <option value="6">Evento</option>
+                  <option value="0">Seleccionar...</option>
+                  {fuentes?.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.nombre}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -207,12 +243,12 @@ export default function CreateLeadPage() {
                   onChange={onChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
                 >
-                  <option value="">Seleccionar...</option>
-                  <option value="1">Juan Pérez</option>
-                  <option value="2">María García</option>
-                  <option value="3">Carlos López</option>
-                  <option value="4">Ana Martínez</option>
-                  <option value="5">Luis Rodríguez</option>
+                  <option value="0">Seleccionar...</option>
+                  {vendedores?.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.perfil.nombre_completo}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -231,12 +267,12 @@ export default function CreateLeadPage() {
                   onChange={onChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
                 >
-                  <option value="">Seleccionar...</option>
-                  <option value="1">TechCorp SA</option>
-                  <option value="2">Innovación Digital</option>
-                  <option value="3">Soluciones Empresariales</option>
-                  <option value="4">Grupo Tecnológico</option>
-                  <option value="5">Sistemas Avanzados</option>
+                  <option value="0">Seleccionar...</option>
+                  {empresa?.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.nombre}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -255,12 +291,12 @@ export default function CreateLeadPage() {
                   onChange={onChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
                 >
-                  <option value="">Seleccionar...</option>
-                  <option value="1">Universidad Nacional</option>
-                  <option value="2">Instituto Tecnológico</option>
-                  <option value="3">Colegio de Profesionales</option>
-                  <option value="4">Centro de Investigación</option>
-                  <option value="5">Academia de Ciencias</option>
+                  <option value="0">Seleccionar...</option>
+                  {unidades_academicas?.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.nombre}
+                    </option>
+                  ))}
                 </select>
               </div>
 

@@ -1,4 +1,5 @@
 import { useState, ChangeEvent, FormEvent } from "react";
+import { useRetrieveEtapasQuery } from "@/redux/crm/crmApiSlice";
 
 export default function createLead() {
   const [formData, setFormData] = useState({
@@ -7,6 +8,7 @@ export default function createLead() {
     telefono: "",
     interesado_en_id: "",
     estatus_id: "",
+    pipeline_id: "",
     etapa_id: "",
     fuente_id: "",
     vendedor_asignado_id: "",
@@ -22,6 +24,7 @@ export default function createLead() {
       telefono: "",
       interesado_en_id: "",
       estatus_id: "",
+      pipeline_id: "",
       etapa_id: "",
       fuente_id: "",
       vendedor_asignado_id: "",
@@ -30,6 +33,9 @@ export default function createLead() {
       campania_id: "",
     });
   };
+  const { data: etapas } = useRetrieveEtapasQuery(
+    formData.pipeline_id ? parseInt(formData.pipeline_id) : 0
+  );
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     const processValue = transformValue(name, value);
@@ -60,6 +66,7 @@ export default function createLead() {
   };
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log(formData);
     // createLead(formData)
     //   .unwrap()
     //   .then((res) => {
@@ -84,5 +91,6 @@ export default function createLead() {
     onChange,
     onSubmit,
     reset,
+    etapas,
   };
 }
