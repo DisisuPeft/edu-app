@@ -32,13 +32,13 @@ export default function DiplomadosSection() {
     //     "/assets/img-landing/Diplomado-rehabilitación-de-la-articulación-temperomandibular.png",
     // },
   ];
-  const onSubscribe = () => {
-    // const diplomado = diplomados.find((diplomado) => {
-    //   return diplomado.id === id;
-    // });
-    // console.log(diplomado);
-    setShow(true);
-  };
+  // const onSubscribe = () => {
+  //   // const diplomado = diplomados.find((diplomado) => {
+  //   //   return diplomado.id === id;
+  //   // });
+  //   // console.log(diplomado);
+  //   setShow(true);
+  // };
   return (
     <div className="py-12 md:py-16 lg:py-20 bg-[#121829]">
       <div className="container mx-auto px-4">

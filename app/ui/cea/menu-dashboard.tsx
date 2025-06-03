@@ -1,8 +1,8 @@
 "use client";
 
 import { useGetMenuQuery } from "@/redux/sistema/SistemaApiSlice";
-import MenuCard from "./components/menu-card";
-import { MenuItem } from "@/redux/interface/sistema/modulos";
+// import MenuCard from "./components/menu-card";
+// import { MenuItem } from "@/redux/interface/sistema/modulos";
 import {
   Users,
   GraduationCap,

@@ -1,12 +1,15 @@
 import useGenericsForm from "@/hooks/leads/use-form-generis";
 import { X } from "lucide-react";
-import { useState } from "react";
+// import { useState } from "react";
+type ItemType = {
+  id: number | null | undefined;
+  nombre: string | null | undefined;
+};
 interface Props {
   tipo: string;
-  item?: any;
+  item?: ItemType;
   onClose: (close: boolean) => void;
 }
-
 export default function GenericsForm({ tipo, item, onClose }: Props) {
   const { formData, onChange, onSubmit } = useGenericsForm(tipo, item);
 

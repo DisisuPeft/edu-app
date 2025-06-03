@@ -1,17 +1,17 @@
 "use client";
-import Link from "next/link";
-import NavLinks from "@/app/ui/dashboard/nav-links";
+// import Link from "next/link";
+// import NavLinks from "@/app/ui/dashboard/nav-links";
 // import AcmeLogo from '@/app/ui/acme-logo';
-import { UserIcon } from "@heroicons/react/16/solid";
+// import { UserIcon } from "@heroicons/react/16/solid";
 // import { useAppSelector } from '@/app/redux/hooks';
 // import { useLogoutMutation } from '@/app/redux/features/authApiSlice';
 // import { logout as setLogout } from '@/app/redux/features/authSlice';
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 // import { lusitana } from '../fonts';
-import Logout from "@/app/utils/auth/Logout";
-import CardWrapper from "./cards";
+// import Logout from "@/app/utils/auth/Logout";
+// import CardWrapper from "./cards";
 import { useState } from "react";
-import { User } from "@/redux/interface/authentication/Users";
+// import { User } from "@/redux/interface/authentication/Users";
 import { Modulos } from "@/redux/interface/sistema/modulos";
 // import { FormEvent } from 'react';
 // import { redirect } from 'next/navigation';
@@ -34,7 +34,7 @@ export default function SideNav() {
 
   useEffect(() => {
     setModulo(user);
-  }, [user]);
+  }, [user, modulo]);
   return (
     // <div className="flex h-full flex-col px-3 py-4 md:px-2 bg-[#121829]">
     //   <Link
@@ -81,10 +81,10 @@ export default function SideNav() {
     //   </div>
     // </div>
 
-        <aside className="w-[200px] bg-white shadow-xl h-full p-4 hidden md:block">
-          <h2 className="text-4xl font-semibold mb-4 text-gray-800">Módulos</h2>
-          <ul className="space-y-2">
-            {/* {links.map((link) => (
+    <aside className="w-[200px] bg-white shadow-xl h-full p-4 hidden md:block">
+      <h2 className="text-4xl font-semibold mb-4 text-gray-800">Módulos</h2>
+      <ul className="space-y-2">
+        {/* {links.map((link) => (
               <li
                 key={link}
                 className="hover:bg-gray-200 rounded px-2 py-1 cursor-pointer"
@@ -92,16 +92,13 @@ export default function SideNav() {
                 {link}
               </li>
             ))} */}
-              <li
-                className="hover:bg-gray-200 rounded px-2 py-1 cursor-pointer text-gray-800"
-              >
-                En construccion
-              </li>
-          </ul>
-          {/* <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2 relative top-[700px]">
+        <li className="hover:bg-gray-200 rounded px-2 py-1 cursor-pointer text-gray-800">
+          En construccion
+        </li>
+      </ul>
+      {/* <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2 relative top-[700px]">
               <Logout></Logout>
           </div> */}
-        </aside>
-
+    </aside>
   );
 }

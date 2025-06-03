@@ -1,20 +1,20 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { Send } from "lucide-react";
 
-interface LeadNoteFormProps {
-  leadId: string;
-  onAddNote?: (
-    leadId: string,
-    nota: { autor: string; contenido: string; fecha: string }
-  ) => void;
-}
+// interface LeadNoteFormProps {
+//   leadId?: string;
+//   onAddNote?: (
+//     leadId: string,
+//     nota: { autor: string; contenido: string; fecha: string }
+//   ) => void;
+// }
 
-export default function LeadNoteForm({ leadId, onAddNote }: LeadNoteFormProps) {
-//   const [nota, setNota] = useState("");
+export default function LeadNoteForm() {
+  //   const [nota, setNota] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("notas")
+    console.log("notas");
   };
 
   return (

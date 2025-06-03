@@ -1,5 +1,5 @@
 import CatalogoGenerico from "@/app/ui/crm/generics/catalogo-generico";
-import PipelinesList from "@/app/ui/crm/leads/pipelines/pipelines-list";
+// import PipelinesList from "@/app/ui/crm/leads/pipelines/pipelines-list";
 
 export default function Page() {
   return (

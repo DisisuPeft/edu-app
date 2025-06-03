@@ -3,14 +3,14 @@
 import Link from "next/link";
 import { SearchIcon } from "lucide-react";
 import { PlusIcon, EyeIcon, PencilIcon, TrashIcon } from "lucide-react";
-import { Estudiante } from "@/redux/interface/estudiante/estudiante";
+// import { Estudiante } from "@/redux/interface/estudiante/estudiante";
 import { useGetStudentsQuery } from "@/redux/estudiante/studentApiSlice";
 // interface TableProps {
 //     estudiantes?: Estudiante [] | []
 // }
 
 export default function StudentsTable() {
-  const { data: estudiantes, isLoading } = useGetStudentsQuery();
+  const { data: estudiantes } = useGetStudentsQuery();
   return (
     <div className="text-gray-800">
       <div className="flex flex-col sm:flex-row w-full md:w-auto gap-4">

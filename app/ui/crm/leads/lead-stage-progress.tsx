@@ -1,17 +1,17 @@
 "use client";
 
-import { useRetrieveLeadQuery } from "@/redux/crm/crmApiSlice";
-import Link from "next/link";
-import {
-  ArrowLeft,
-  Edit,
-  User,
-  Mail,
-  Phone,
-  BookOpen,
-  BarChart2,
-  Clock,
-} from "lucide-react";
+// import { useRetrieveLeadQuery } from "@/redux/crm/crmApiSlice";
+// import Link from "next/link";
+// import {
+//   ArrowLeft,
+//   Edit,
+//   User,
+//   Mail,
+//   Phone,
+//   BookOpen,
+//   BarChart2,
+//   Clock,
+// } from "lucide-react";
 import { Etapas, Pipeline } from "@/redux/interface/crm/crm";
 
 interface LeadStageProps {
@@ -35,7 +35,7 @@ export default function LeadStageProgress({
         {stages.map((stage, index) => {
           const isCompleted = currentIndex > index;
           const isCurrent = currentIndex === index;
-          const isPending = currentIndex < index;
+          // const isPending = currentIndex < index;
 
           return (
             <div

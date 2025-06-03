@@ -1,16 +1,21 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { X, Plus, Trash } from "lucide-react";
+// import { useState, useEffect } from "react";
+import {
+  // X,
+  Plus,
+  Trash,
+} from "lucide-react";
 import { useCreatePipeline } from "@/hooks";
-import { Etapas } from "@/redux/interface/crm/crm";
+import { Etapas, Pipeline } from "@/redux/interface/crm/crm";
 import {
   useGetEmpresaQuery,
   useGetProgramsQuery,
   useGetUnidadesAcademicasQuery,
 } from "@/redux/crm/crmApiSlice";
+
 interface PipelineModalProps {
-  pipeline?: any;
+  pipeline?: Pipeline;
 }
 
 export default function PipelineForm({ pipeline }: PipelineModalProps) {
@@ -23,7 +28,7 @@ export default function PipelineForm({ pipeline }: PipelineModalProps) {
     onSubmit,
     handleMoveEtapa,
     handleRemoveEtapa,
-    setFormData,
+    // setFormData,
     onEtapaChange,
     handleAddEtapa,
     etapa,

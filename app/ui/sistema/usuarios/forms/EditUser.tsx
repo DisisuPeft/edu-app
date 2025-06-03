@@ -4,19 +4,19 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
-  Box,
-  OutlinedInput,
-  Chip
+  // Box,
+  // OutlinedInput,
+  // Chip,
 } from "@mui/material";
-import { Theme, useTheme } from "@emotion/react";
 import { useEditUser } from "@/hooks";
-import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import dayjs, { Dayjs } from "dayjs";
-import { useGetGeneroQuery, useGetNivelesQuery, useGetRolesQuery, useGetPermissionQuery } from "@/redux/catalogos/CatApiSlice";
-import { useEffect } from "react";
-import { Role } from "@/redux/interface/authentication/Users";
-
+import {
+  useGetGeneroQuery,
+  useGetNivelesQuery,
+  useGetRolesQuery,
+  useGetPermissionQuery,
+} from "@/redux/catalogos/CatApiSlice";
+// import { useEffect } from "react";
+// import { Role } from "@/redux/interface/authentication/Users";
 
 // function getStyles(name: string, roles: Role[], theme: Theme) {
 //   return {
@@ -26,23 +26,26 @@ import { Role } from "@/redux/interface/authentication/Users";
 //   };
 // }
 interface Props {
-  id: number | undefined
-  onClose?: (event:boolean) => void
+  id: number | undefined;
+  onClose?: (event: boolean) => void;
 }
 
-export default function EditUser({id, onClose}:Props) {
+export default function EditUser({ id, onClose }: Props) {
   // console.log(id)
-  const { formData, onChange, onSubmit, setFormData } = useEditUser({id, onClose});
+  const { formData, onChange, onSubmit } = useEditUser({
+    id,
+    onClose,
+  });
   // const theme = useTheme()
   // console.log(id)
   const { data: niveles } = useGetNivelesQuery();
-  const {data: generos } = useGetGeneroQuery()
+  const { data: generos } = useGetGeneroQuery();
   const { data: roles } = useGetRolesQuery();
-  const {data: permissions} = useGetPermissionQuery()
+  const { data: permissions } = useGetPermissionQuery();
   // console.log(permissions);
-  useEffect(() => {
-    // console.log(roles);
-  });
+  // useEffect(() => {
+  //   // console.log(roles);
+  // });
   //Mas adelante la edad se debe setear de manera automatica con la fecha de nacimiento
   return (
     <div className="max-w-[900px] mx-auto mt-10 p-6">
@@ -158,7 +161,11 @@ export default function EditUser({id, onClose}:Props) {
           >
             <MenuItem value="0">Seleccionar</MenuItem>
             {niveles?.map((nivel) => {
-              return <MenuItem value={nivel.id ?? 0}>{nivel.name}</MenuItem>;
+              return (
+                <MenuItem value={nivel.id ?? 0} key={nivel.id}>
+                  {nivel.name}
+                </MenuItem>
+              );
             })}
           </Select>
         </FormControl>
@@ -173,7 +180,11 @@ export default function EditUser({id, onClose}:Props) {
           >
             <MenuItem value="0">Seleccionar</MenuItem>
             {generos?.map((gen) => {
-              return <MenuItem value={gen.id ?? 0}>{gen.name}</MenuItem>;
+              return (
+                <MenuItem value={gen.id ?? 0} key={gen.id}>
+                  {gen.name}
+                </MenuItem>
+              );
             })}
           </Select>
         </FormControl>

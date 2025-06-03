@@ -1,5 +1,5 @@
 import {
-  useGetLeadsQuery,
+  // useGetLeadsQuery,
   useRetrieveRecentLeadsQuery,
   useEstadisticsLeadsQuery,
 } from "@/redux/crm/crmApiSlice";

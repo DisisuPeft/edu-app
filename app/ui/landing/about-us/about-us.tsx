@@ -1,7 +1,7 @@
 "use client";
 import { Target, Eye } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
 import { useInView } from "../../animation/useInView";
 
 export default function AboutUsSection() {

@@ -1,6 +1,6 @@
 "use client";
 import { GraduationCap, Clock, Users, Award } from "lucide-react";
-import Link from "next/link";
+// import Link from "next/link";
 import CallToSuscribe from "../ready-to";
 import { useInView } from "../../animation/useInView";
 

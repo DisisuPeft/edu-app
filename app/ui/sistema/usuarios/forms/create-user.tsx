@@ -1,16 +1,16 @@
 import {
   TextField,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
+  // Select,
+  // MenuItem,
+  // FormControl,
+  // InputLabel,
 } from "@mui/material";
 import { useCreateUser } from "@/hooks";
-import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import dayjs, { Dayjs } from "dayjs";
-import { useGetNivelesQuery } from "@/redux/catalogos/CatApiSlice";
-import { useEffect } from "react";
+// import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+// import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+// import dayjs from "dayjs";
+// import { useGetNivelesQuery } from "@/redux/catalogos/CatApiSlice";
+// import { useEffect } from "react";
 
 export default function CreateUser() {
   const { formData, onChange } = useCreateUser();
@@ -20,12 +20,12 @@ export default function CreateUser() {
     event.preventDefault();
     // console.log("Guardar", formData);
   };
-  const convertedDate = (date: string) => {
-    return date ? dayjs(date) : null;
-  };
-  useEffect(() => {
-    // console.log(id);
-  });
+  // const convertedDate = (date: string) => {
+  //   return date ? dayjs(date) : null;
+  // };
+  // useEffect(() => {
+  //   // console.log(id);
+  // });
   //Mas adelante la edad se debe setear de manera automatica con la fecha de nacimiento
   return (
     <div className="w-[400px] md:w-full mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">

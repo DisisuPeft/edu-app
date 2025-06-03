@@ -7,7 +7,7 @@ import PrimarySection from "@/app/ui/landing/PrimarySection";
 import TestSection from "@/app/ui/landing/TestSection";
 import AboutSection from "./ui/landing/about";
 import TeamSection from "./ui/landing/team";
-import TestimonialsSection from "./ui/landing/testimonial-section";
+// import TestimonialsSection from "./ui/landing/testimonial-section";
 import CallToSuscribe from "./ui/landing/ready-to";
 
 export default function Home() {

@@ -1,8 +1,8 @@
 import { Column } from "@/redux/interface/data-table/data-table-types";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import Link from "next/link";
 // import Edit, Trash2
-import { Trash2, Edit } from "lucide-react";
+import { Edit } from "lucide-react";
 
 interface ControlledProps<T> {
   columns: Column<T>[];

@@ -8,7 +8,7 @@ interface Props {
   id: string;
 }
 export default function StudentView({ id }: Props) {
-  const { data: estudiante, isLoading } = useRetrieveStudentQuery(parseInt(id));
+  const { data: estudiante } = useRetrieveStudentQuery(parseInt(id));
 
   if (!estudiante) {
     return (

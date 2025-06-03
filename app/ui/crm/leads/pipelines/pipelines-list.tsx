@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Plus, Search, Edit, Trash } from "lucide-react";
 import { useGetPipelinesQuery } from "@/redux/crm/crmApiSlice";
 import { Etapas, Pipeline } from "@/redux/interface/crm/crm";
@@ -11,15 +11,15 @@ export default function PipelinesList() {
   const { data: pipelines } = useGetPipelinesQuery();
   const [searchTerm, setSearchTerm] = useState("");
   const [open, setOpen] = useState<boolean>(false);
-  const [currentPipeline, setCurrentPipeline] = useState<any>(null);
+  const [currentPipeline, setCurrentPipeline] = useState<Pipeline>();
   // console.log(pipelines);
   const handleEdit = (pipeline: Pipeline) => {
     setCurrentPipeline(pipeline);
     setOpen(true);
   };
-  const handleClose = (e: any) => {
+  const handleClose = () => {
     // console.log(e);
-    setCurrentPipeline(null);
+    setCurrentPipeline(undefined);
     setOpen(false);
   };
   return (

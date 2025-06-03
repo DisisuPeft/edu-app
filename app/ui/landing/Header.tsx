@@ -1,6 +1,11 @@
 "use client";
 
-import { BookOpen, Menu, X, ArrowRight } from "lucide-react";
+import {
+  // BookOpen,
+  Menu,
+  X,
+  // ArrowRight
+} from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { Modal } from "@/app/components/common/Modal";

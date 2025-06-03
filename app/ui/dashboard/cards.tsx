@@ -1,4 +1,4 @@
-'use client'
+"use client";
 // import {
 //   BanknotesIcon,
 //   ClockIcon,
@@ -9,8 +9,8 @@
 // import { GraduationCap } from "lucide-react";
 import { useGetMenuQuery } from "@/redux/sistema/SistemaApiSlice";
 import type React from "react";
-import { User } from "@/redux/interface/authentication/Users";
-import Image from "next/image";
+// import { User } from "@/redux/interface/authentication/Users";
+// import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
 import { Alert } from "@/alerts/toast";
@@ -76,16 +76,23 @@ import { DynamicIcon } from "../icons/dynamic-icon";
 //   );
 // }
 
-export default function Modulos(){
-  const {data:modulos, error, refetch} = useGetMenuQuery()
-  const message = serializeError(error)
+export default function Modulos() {
+  const { data: modulos, error } = useGetMenuQuery();
+  const message = serializeError(error);
   useEffect(() => {
-    if (error != undefined){
-      Alert({title: "Alerta", text: message, icon: "error", closeB: true, onCloseOut: true, onEscapeOut: true})
+    if (error != undefined) {
+      Alert({
+        title: "Alerta",
+        text: message,
+        icon: "error",
+        closeB: true,
+        onCloseOut: true,
+        onEscapeOut: true,
+      });
       // refetch()
     }
     // refetch()
-  }, [error])
+  }, [error, message]);
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-[50px] p-5">
       {modulos?.map((mod) => (

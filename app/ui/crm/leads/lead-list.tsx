@@ -3,7 +3,12 @@
 import DataTable from "@/app/utils/DataTable/DataTable";
 import { useGetLeadsQuery } from "@/redux/crm/crmApiSlice";
 import { Lead } from "@/redux/interface/crm/crm";
-import { Edit, Delete, Plus, Search, Filter } from "lucide-react";
+import {
+  // Edit, Delete,
+  Plus,
+  Search,
+  Filter,
+} from "lucide-react";
 import Link from "next/link";
 import { Column } from "@/redux/interface/data-table/data-table-types";
 import { useState } from "react";
@@ -12,7 +17,7 @@ import { useState } from "react";
 export default function LeadList() {
   const [page, setPage] = useState<number>(1);
 
-  const { data, isLoading } = useGetLeadsQuery(page);
+  const { data } = useGetLeadsQuery(page);
   const headers: Column<Lead>[] = [
     { label: "Nombre del Lead", accessor: "nombre" },
     { label: "Correo", accessor: "correo" },

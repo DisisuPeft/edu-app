@@ -12,7 +12,7 @@ import {
   BookOpen,
   BarChart2,
   Clock,
-  MessageSquare
+  MessageSquare,
 } from "lucide-react";
 import LeadStageProgress from "./lead-stage-progress";
 import { Etapas } from "@/redux/interface/crm/crm";
@@ -24,12 +24,12 @@ interface LeadDetailProps {
 export default function LeadDetail({ id }: LeadDetailProps) {
   const { data, isLoading } = useRetrieveLeadQuery(parseInt(id));
   // const [selectedEstatus, setSelectedEstatus] = useState(lead?.estatus || "");
-  const handleEtapaChange = (etapa: Etapas) => {
-    // const newStatus = e.target.value;
-    // console.log(etapa);
-    // setSelectedEstatus(newStatus);
-    // updateLeadStatus(data?.lead?.id, newStatus);
-  };
+  // const handleEtapaChange = (etapa: Etapas) => {
+  // const newStatus = e.target.value;
+  // console.log(etapa);
+  // setSelectedEstatus(newStatus);
+  // updateLeadStatus(data?.lead?.id, newStatus);
+  // };
   if (isLoading) {
     return (
       <div className="text-center py-10">

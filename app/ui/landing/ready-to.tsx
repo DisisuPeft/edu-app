@@ -1,7 +1,7 @@
 "use client";
 
 import { Modal } from "@/app/components/common/Modal";
-import Link from "next/link";
+// import Link from "next/link";
 import { useState } from "react";
 import LeadForm from "./lead-form";
 

@@ -2,12 +2,12 @@
 
 import {
   MapPin,
-  Phone,
+  // Phone,
   Mail,
-  Twitter,
+  // Twitter,
   Facebook,
   Instagram,
-  Linkedin,
+  // Linkedin,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -15,15 +15,15 @@ import { useState } from "react";
 
 export default function FooterSection() {
   const pathname = usePathname();
-  const [path, setPath] = useState("");
+  // const [path, setPath] = useState("");
 
-  const [quickLinks, setQuickLinks] = useState([
+  const quickLinks = [
     { name: "Sobre nosotros", href: "/about-us" },
     // { name: "Contacta con nosotros", href: "#" }, //esta a whats
     { name: "Diplomados", href: "/oferta-educativa" },
     // { name: "Términos y condiciones", href: "#" },
     // { name: "Política de privacidad", href: "#" },
-  ]);
+  ];
 
   const footerMenuLinks = [
     { name: "Inicio", href: "/" },
@@ -51,15 +51,15 @@ export default function FooterSection() {
               {quickLinks.map((link, index) => {
                 const isActivate = link.href === pathname;
                 return (
-                  // !isActivate && (
-                  <Link
-                    key={index}
-                    href={link.href}
-                    className="block text-white text-sm hover:tracking-wider transition-all duration-300 relative pl-4 before:content-['>'] before:absolute before:left-0 before:text-white"
-                  >
-                    {link.name}
-                  </Link>
-                  // )
+                  !isActivate && (
+                    <Link
+                      key={index}
+                      href={link.href}
+                      className="block text-white text-sm hover:tracking-wider transition-all duration-300 relative pl-4 before:content-['>'] before:absolute before:left-0 before:text-white"
+                    >
+                      {link.name}
+                    </Link>
+                  )
                 );
                 // return isActivate ? <div>Hola</div> : <div>Adios</div>;
               })}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Plus, Search, Edit, Trash } from "lucide-react";
 import {
   useGetEstatusQuery,
@@ -14,7 +14,10 @@ interface CatalogoGenericoProps {
   titulo: string;
   descripcion: string;
 }
-
+type ItemType = {
+  id: number | null | undefined;
+  nombre: string | null | undefined;
+};
 export default function CatalogoGenerico({
   tipo,
   titulo,
@@ -24,7 +27,7 @@ export default function CatalogoGenerico({
   const { data: fuentes } = useGetFuentesQuery();
   const [searchTerm, setSearchTerm] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [currentItem, setCurrentItem] = useState<any>(null);
+  const [currentItem, setCurrentItem] = useState<ItemType>();
 
   //   // Determinar qué datos y funciones usar según el tipo
   const items = tipo === "fuente" ? fuentes : estatus;
@@ -38,7 +41,7 @@ export default function CatalogoGenerico({
   //     item.nombre.toLowerCase().includes(searchTerm.toLowerCase())
   //   );
 
-  const handleEdit = (item: any) => {
+  const handleEdit = (item: ItemType) => {
     setCurrentItem(item);
     setShowModal(true);
   };
@@ -52,11 +55,11 @@ export default function CatalogoGenerico({
   const handleCloseModal = (close: boolean) => {
     // console.log(close);
     setShowModal(close);
-    setCurrentItem(null);
+    setCurrentItem(undefined);
   };
   const close = () => {
     setShowModal(false);
-    setCurrentItem(null);
+    setCurrentItem(undefined);
   };
 
   //   const handleSaveItem = (item: any) => {

@@ -5,7 +5,7 @@ import { Menu } from "lucide-react";
 import Link from "next/link";
 
 export default function Header() {
-  const { data: user, isLoading } = useRetrieveUserQuery();
+  const { data: user } = useRetrieveUserQuery();
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">

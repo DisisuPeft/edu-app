@@ -1,29 +1,26 @@
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemButton from "@mui/material/ListItemButton";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
+// import ListItemText from "@mui/material/ListItemText";
+// import ListItemButton from "@mui/material/ListItemButton";
+// import List from "@mui/material/List";
+// import Divider from "@mui/material/Divider";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Slide from "@mui/material/Slide";
-import { TransitionProps } from "@mui/material/transitions";
+// import Slide from "@mui/material/Slide";
+// import { TransitionProps } from "@mui/material/transitions";
 import { X } from "lucide-react";
 import { Transition } from "@/app/utils/Transition/Transition";
-import React, { useEffect } from "react";
-import EditUser from "./forms/EditUser";
-import CreateUser from "./forms/create-user";
+import React from "react";
 
 export default function UsersDialog({
   open,
-  setOpen,
   setClose,
-  children
+  children,
 }: {
   open: boolean;
-  setOpen?: () => void;
+  // setOpen?: () => void;
   setClose: (event: boolean) => void;
   children: React.ReactNode;
 }) {

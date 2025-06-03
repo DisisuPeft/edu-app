@@ -1,7 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { CheckCircle, AlertCircle, Loader2, Phone, Mail } from "lucide-react";
+// import { useState } from "react";
+import {
+  // CheckCircle, AlertCircle, Loader2, Phone,
+  Mail,
+} from "lucide-react";
 import useCreateLeadLanding from "@/hooks/use-create-lead-landing";
 
 export default function LeadForm() {

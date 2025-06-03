@@ -8,7 +8,7 @@ interface Props {
   id: string;
 }
 export default function TeacherView({ id }: Props) {
-  const { data: maestro, isLoading } = useRetrieveTeacherQuery(parseInt(id));
+  const { data: maestro } = useRetrieveTeacherQuery(parseInt(id));
 
   if (!maestro) {
     return (
