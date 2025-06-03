@@ -1,8 +1,11 @@
+"use client";
 import { Target, Eye } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useInView } from "../../animation/useInView";
 
 export default function AboutUsSection() {
+  const { ref, isVisible } = useInView();
   const strengths = [
     {
       title: "Formación especializada",
@@ -27,17 +30,23 @@ export default function AboutUsSection() {
   ];
   return (
     <section className="py-12 md:py-16 lg:py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
+      <div
+        ref={ref}
+        className={`container mx-auto px-4 transition-opacity duration-400 ${
+          isVisible ? "opacity-100 animate-fadeInDown" : "opacity-0"
+        }`}
+      >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Column - Image */}
           <div className="relative overflow-hidden rounded-lg h-64 md:h-80 lg:h-full min-h-[500px]">
-            {/* <Image
-              src="/img/about.jpg"
+            <Image
+              src="/assets/logos/unsza_logo.webp"
               alt="Universidad Nacional Salvador Zubirán Anchondo"
               fill
               className="object-cover transition-transform duration-700 hover:scale-105"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
-            /> */}
+              priority
+            />
             {/* Overlay for better text readability if needed */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
           </div>
@@ -171,7 +180,11 @@ export default function AboutUsSection() {
             return (
               <div
                 key={index}
-                className="text-center bg-white p-6 rounded-lg shadow-sm"
+                // className="text-center bg-white p-6 rounded-lg shadow-sm"
+                ref={ref}
+                className={`text-center bg-white p-6 rounded-lg shadow-sm transition-opacity duration-400 ${
+                  isVisible ? "opacity-100 animate-fadeInDown" : "opacity-0"
+                }`}
               >
                 <div
                   className="text-3xl font-bold mb-2"

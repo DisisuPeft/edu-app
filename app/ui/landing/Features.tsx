@@ -30,7 +30,7 @@ export default function ServicesSection() {
   return (
     <div className="py-12 md:py-16 lg:py-20">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-fadeInDown animation-delay-200">
           {services.map((service, index) => (
             <div key={index} className="group">
               <div className="bg-white shadow-md rounded-lg text-center pt-3 transition-all duration-500 group-hover:bg-[#a20519] group-hover:-translate-y-2 min-h-[260px]">

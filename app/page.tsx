@@ -12,7 +12,7 @@ import CallToSuscribe from "./ui/landing/ready-to";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-white">
       <Header />
       <main className="bg-white">
         <PrimarySection />

@@ -19,7 +19,7 @@ export default function FooterSection() {
 
   const [quickLinks, setQuickLinks] = useState([
     { name: "Sobre nosotros", href: "/about-us" },
-    { name: "Contacta con nosotros", href: "#" }, //esta a whats
+    // { name: "Contacta con nosotros", href: "#" }, //esta a whats
     { name: "Diplomados", href: "/oferta-educativa" },
     // { name: "Términos y condiciones", href: "#" },
     // { name: "Política de privacidad", href: "#" },
@@ -29,7 +29,7 @@ export default function FooterSection() {
     { name: "Inicio", href: "/" },
     { name: "Sobre nosotros", href: "/about-us" },
     { name: "Diplomados", href: "/oferta-educativa" },
-    { name: "Contacto", href: "#" },
+    // { name: "Contacto", href: "#" },
   ];
 
   // const match_links = (path: string) => {
@@ -51,15 +51,15 @@ export default function FooterSection() {
               {quickLinks.map((link, index) => {
                 const isActivate = link.href === pathname;
                 return (
-                  !isActivate && (
-                    <Link
-                      key={index}
-                      href={link.href}
-                      className="block text-white text-sm hover:tracking-wider transition-all duration-300 relative pl-4 before:content-['>'] before:absolute before:left-0 before:text-white"
-                    >
-                      {link.name}
-                    </Link>
-                  )
+                  // !isActivate && (
+                  <Link
+                    key={index}
+                    href={link.href}
+                    className="block text-white text-sm hover:tracking-wider transition-all duration-300 relative pl-4 before:content-['>'] before:absolute before:left-0 before:text-white"
+                  >
+                    {link.name}
+                  </Link>
+                  // )
                 );
                 // return isActivate ? <div>Hola</div> : <div>Adios</div>;
               })}
@@ -74,10 +74,27 @@ export default function FooterSection() {
                 <MapPin className="mr-3 h-4 w-4 flex-shrink-0" />
                 7ª sur oriente #163 Col. Terán, Tuxtla Gutiérrez, Chiapas.
               </p>
-              <p className="mb-2 flex items-center text-sm">
-                <Phone className="mr-3 h-4 w-4 flex-shrink-0" />
-                +52 (961) 580-5154
-              </p>
+              {/* <p className="mb-2 flex items-center text-sm"> */}
+              <a
+                href="https://wa.link/xcxh5p"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#25D366] hover:underline flex items-center gap-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-whatsapp"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M13.601 2.326A7.974 7.974 0 0 0 8.003 0a7.998 7.998 0 0 0-6.703 12.184L0 16l3.891-1.277A7.974 7.974 0 0 0 8 16c4.411 0 8-3.589 8-8 0-2.122-.847-4.122-2.399-5.674zM8 14.5a6.47 6.47 0 0 1-3.272-.89l-.234-.138-2.305.756.756-2.305-.138-.234A6.47 6.47 0 0 1 1.5 8c0-3.584 2.916-6.5 6.5-6.5 1.736 0 3.368.675 4.6 1.899A6.468 6.468 0 0 1 14.5 8c0 3.584-2.916 6.5-6.5 6.5z" />
+                  <path d="M11.107 9.113c-.158-.079-.934-.462-1.078-.515-.144-.054-.249-.079-.354.08-.105.158-.406.515-.498.62-.092.105-.184.118-.342.04-.158-.079-.666-.245-1.27-.78-.469-.417-.785-.933-.877-1.09-.092-.158-.01-.243.069-.322.071-.07.158-.184.237-.276.08-.092.105-.158.158-.263.053-.105.026-.197-.013-.276-.04-.079-.354-.855-.485-1.168-.127-.305-.258-.263-.354-.263-.092 0-.197-.013-.303-.013-.105 0-.276.04-.42.197-.144.158-.552.54-.552 1.31 0 .77.566 1.513.644 1.616.079.105 1.115 1.702 2.703 2.385.378.163.672.26.902.332.379.12.725.103.998.063.305-.046.934-.38 1.066-.746.131-.366.131-.679.092-.746-.04-.066-.144-.105-.303-.184z" />
+                </svg>
+                <p className="text-white">Escríbenos por WhatsApp</p>
+              </a>
+              {/* </p> */}
               <p className="mb-2 flex items-center text-sm">
                 <Mail className="mr-3 h-4 w-4 flex-shrink-0" />
                 direccioncomercialunszn@gmail.com
@@ -130,12 +147,12 @@ export default function FooterSection() {
           {/* Newsletter Column */}
           <div>
             <h4 className="text-white mb-4 text-lg font-semibold">
-              Contactanos
+              ¿Tienes dudas?
             </h4>
-            <p className="text-sm mb-4 text-gray-300">
+            {/* <p className="text-sm mb-4 text-gray-300">
               Si quieres saber mas, puedes ponerte en contacto con un asesor
               educativo.
-            </p>
+            </p> */}
             <div className="relative max-w-sm">
               {/* <input
                 type="email"
@@ -144,9 +161,27 @@ export default function FooterSection() {
               /> */}
               <div className="flex 6">
                 {/* call to action wa.link */}
-                <button className="absolute top-2 right-2 bg-[#121b6a] text-white px-4 py-1.5 rounded-md text-sm hover:bg-[#0a1050] transition-colors duration-300">
-                  Contactar
-                </button>
+                <a
+                  href="https://wa.link/xcxh5p"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline flex items-center gap-2"
+                >
+                  {/* <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-whatsapp"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M13.601 2.326A7.974 7.974 0 0 0 8.003 0a7.998 7.998 0 0 0-6.703 12.184L0 16l3.891-1.277A7.974 7.974 0 0 0 8 16c4.411 0 8-3.589 8-8 0-2.122-.847-4.122-2.399-5.674zM8 14.5a6.47 6.47 0 0 1-3.272-.89l-.234-.138-2.305.756.756-2.305-.138-.234A6.47 6.47 0 0 1 1.5 8c0-3.584 2.916-6.5 6.5-6.5 1.736 0 3.368.675 4.6 1.899A6.468 6.468 0 0 1 14.5 8c0 3.584-2.916 6.5-6.5 6.5z" />
+                    <path d="M11.107 9.113c-.158-.079-.934-.462-1.078-.515-.144-.054-.249-.079-.354.08-.105.158-.406.515-.498.62-.092.105-.184.118-.342.04-.158-.079-.666-.245-1.27-.78-.469-.417-.785-.933-.877-1.09-.092-.158-.01-.243.069-.322.071-.07.158-.184.237-.276.08-.092.105-.158.158-.263.053-.105.026-.197-.013-.276-.04-.079-.354-.855-.485-1.168-.127-.305-.258-.263-.354-.263-.092 0-.197-.013-.303-.013-.105 0-.276.04-.42.197-.144.158-.552.54-.552 1.31 0 .77.566 1.513.644 1.616.079.105 1.115 1.702 2.703 2.385.378.163.672.26.902.332.379.12.725.103.998.063.305-.046.934-.38 1.066-.746.131-.366.131-.679.092-.746-.04-.066-.144-.105-.303-.184z" />
+                  </svg> */}
+                  <p className="text-white">
+                    Un asesor educativo puede ayudarte.{" "}
+                  </p>
+                </a>
               </div>
             </div>
           </div>

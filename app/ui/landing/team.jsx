@@ -1,7 +1,8 @@
+"use client";
 import Image from "next/image";
-
+import { useInView } from "../animation/useInView";
 export default function TeamSection() {
-  // Sample data for team members
+  const { ref, isVisible } = useInView();
   const teamMembers = [
     {
       id: 1,
@@ -42,7 +43,13 @@ export default function TeamSection() {
 
   return (
     <div className="py-12 md:py-16 lg:py-20">
-      <div className="container mx-auto px-4">
+      <div
+        // className="container mx-auto px-4"
+        ref={ref}
+        className={`container mx-auto px-4 transition-opacity duration-400 ${
+          isVisible ? "opacity-100 animate-fadeInDown" : "opacity-0"
+        }`}
+      >
         {/* Section Header */}
         <div className="text-center mb-12">
           <h6 className="inline-block bg-white text-[#121829] text-sm font-semibold px-3 py-1 mb-4 border-l-4 border-[#121b6a]">

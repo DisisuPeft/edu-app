@@ -13,8 +13,7 @@ export default function HeroCarousel() {
       image:
         "/assets/img-landing/Diplomado-rehabilitación-de-la-articulación-temperomandibular-01.png",
       subtitle: "",
-      title:
-        "Una escuela comprometida con la formación especializada de calidad.",
+      title: "Formamos profesionales que quieren marcar la diferencia.",
       description: "Descrubre todos nuestros diplomados",
       primaryButton: { text: "Explorar Diplomados", href: "/oferta-educativa" },
       secondaryButton: { text: "Inscríbete Ahora", href: "#" },
@@ -51,13 +50,13 @@ export default function HeroCarousel() {
   ];
 
   // Auto-advance slides every 5 seconds
-  //   useEffect(() => {
-  //     const interval = setInterval(() => {
-  //       setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-  //     }, 20000);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    }, 10000);
 
-  //     return () => clearInterval(interval);
-  //   }, [slides.length]);
+    return () => clearInterval(interval);
+  }, [slides.length]);
 
   // Navigation functions
   const goToNextSlide = () => {

@@ -108,7 +108,7 @@ export default function DiplomadosSection() {
           onClick={() => setShow(true)}
           className="text-sm px-4 py-2 rounded-full bg-[#a20519] w-[500px] h-[50px] text-white hover:bg-red-700 transition-all"
         >
-          Únete ahora
+          Solicita más información
         </button>
       </div>
       <Modal show={show} onClose={() => setShow(false)}>

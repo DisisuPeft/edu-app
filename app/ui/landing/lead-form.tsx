@@ -156,13 +156,33 @@ export default function LeadForm() {
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4 text-sm">
               {/* call to action */}
               <p className="mb-2 flex items-center text-sm">
-                <Phone className="mr-3 h-4 w-4 flex-shrink-0" />
-                +52 (961) 580-5154
+                <a
+                  href="https://wa.link/xcxh5p"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#25D366] hover:underline flex items-center gap-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-whatsapp"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M13.601 2.326A7.974 7.974 0 0 0 8.003 0a7.998 7.998 0 0 0-6.703 12.184L0 16l3.891-1.277A7.974 7.974 0 0 0 8 16c4.411 0 8-3.589 8-8 0-2.122-.847-4.122-2.399-5.674zM8 14.5a6.47 6.47 0 0 1-3.272-.89l-.234-.138-2.305.756.756-2.305-.138-.234A6.47 6.47 0 0 1 1.5 8c0-3.584 2.916-6.5 6.5-6.5 1.736 0 3.368.675 4.6 1.899A6.468 6.468 0 0 1 14.5 8c0 3.584-2.916 6.5-6.5 6.5z" />
+                    <path d="M11.107 9.113c-.158-.079-.934-.462-1.078-.515-.144-.054-.249-.079-.354.08-.105.158-.406.515-.498.62-.092.105-.184.118-.342.04-.158-.079-.666-.245-1.27-.78-.469-.417-.785-.933-.877-1.09-.092-.158-.01-.243.069-.322.071-.07.158-.184.237-.276.08-.092.105-.158.158-.263.053-.105.026-.197-.013-.276-.04-.079-.354-.855-.485-1.168-.127-.305-.258-.263-.354-.263-.092 0-.197-.013-.303-.013-.105 0-.276.04-.42.197-.144.158-.552.54-.552 1.31 0 .77.566 1.513.644 1.616.079.105 1.115 1.702 2.703 2.385.378.163.672.26.902.332.379.12.725.103.998.063.305-.046.934-.38 1.066-.746.131-.366.131-.679.092-.746-.04-.066-.144-.105-.303-.184z" />
+                  </svg>
+                  <p className="text-gray-800">Escríbenos por WhatsApp</p>
+                </a>
               </p>
-              <p className="mb-2 flex items-center text-sm">
+              <a
+                href="mailto:direccioncomercialunszn@gmail.com"
+                className="mb-2 flex items-center text-sm"
+              >
                 <Mail className="mr-3 h-4 w-4 flex-shrink-0" />
                 direccioncomercialunszn@gmail.com
-              </p>
+              </a>
             </div>
           </div>
         </div>
