@@ -9,7 +9,7 @@ import { useGetTeachersQuery } from "@/redux/maestro/teacherApiSlice";
 // }
 
 export default function TeachersTable() {
-  const { data: maestros, isLoading } = useGetTeachersQuery();
+  const { data: maestros } = useGetTeachersQuery();
   if (!maestros) {
     return <div>Sin resultados</div>;
   }

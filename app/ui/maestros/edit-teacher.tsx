@@ -3,7 +3,6 @@
 import { ArrowLeftIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEditStudent } from "@/hooks";
 import {
   useGetEntidadesQuery,
   useGetEspecialidadesQuery,

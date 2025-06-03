@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+// import { useState } from "react";
 
 export default function FooterSection() {
   const pathname = usePathname();

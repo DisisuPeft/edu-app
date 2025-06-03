@@ -22,7 +22,7 @@ import { useAppSelector } from "@/redux/hooks";
 export default function SideNav() {
   // const [logout] = useLogoutMutation()
   // const {isAuth} = useAppSelector(state => state.auth)
-  const { data: user, isLoading, isFetching, refetch } = useRetrieveUserQuery();
+  const { data: user, refetch } = useRetrieveUserQuery();
   const [modulo, setModulo] = useState<Modulos | undefined>();
   const { isAuth } = useAppSelector((state) => state.auth);
 
@@ -30,7 +30,7 @@ export default function SideNav() {
     if (isAuth) {
       refetch();
     }
-  }, [isAuth]);
+  }, [isAuth, refetch]);
 
   useEffect(() => {
     setModulo(user);

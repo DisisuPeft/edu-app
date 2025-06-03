@@ -15,7 +15,7 @@ import {
   MessageSquare,
 } from "lucide-react";
 import LeadStageProgress from "./lead-stage-progress";
-import { Etapas } from "@/redux/interface/crm/crm";
+// import { Etapas } from "@/redux/interface/crm/crm";
 
 interface LeadDetailProps {
   id: string;

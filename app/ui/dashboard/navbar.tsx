@@ -18,7 +18,7 @@ export default function Navbar() {
       refetch();
       //   console.log(user)
     }
-  }, [isAuth, refetch()]);
+  }, [isAuth, refetch]);
 
   useEffect(() => {
     setObj(user?.usuario);
