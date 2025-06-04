@@ -3,7 +3,7 @@
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "@/redux/hooks";
-import { User } from "@/redux/interface/authentication/Users";
+import { User } from "@/redux/features/types";
 // import { Settings } from "lucide-react";
 import Logout from "@/app/utils/auth/Logout";
 import Link from "next/link";
@@ -21,7 +21,7 @@ export default function Navbar() {
   }, [isAuth, refetch]);
 
   useEffect(() => {
-    setObj(user?.usuario);
+    setObj(user);
   }, [user]);
   return (
     <nav className="h-16 bg-white shadow px-6 flex items-center justify-between fixed z-10 w-full">

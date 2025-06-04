@@ -14,6 +14,7 @@ import clsx from "clsx";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { useRouter } from "next/navigation";
 import { BookOpenIcon } from "@heroicons/react/24/outline";
+import { Role } from "@/redux/interface/authentication/Users";
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
 
@@ -77,10 +78,10 @@ export default function NavLinks() {
       {links.map((link) => {
         const LinkIcon = link.icon;
         const { roles = [] } = link || {};
-        const { roleID = [] } = user?.usuario || {};
+        const { roleID = [] } = user || {};
         // console.log(roleID)
         const canAccess = roles.some((role) =>
-          roleID.some((r) => r.id === role)
+          roleID.some((r: Role) => r.id === role)
         );
         return canAccess ? (
           <button

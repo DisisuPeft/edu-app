@@ -1,6 +1,6 @@
 import { Modulos } from "../interface/sistema/modulos";
 import { apiSlice } from "../services/apiSlice";
-import { User, Role } from "@/redux/interface/authentication/Users";
+import { User } from "../features/types";
 import { NivelEducativo } from "../interface/catalogos/nivel_educativo";
 import { TipoNivel } from "../interface/catalogos/tipo_nivel";
 import { TabsModulos } from "../interface/sistema/tabs";
@@ -20,7 +20,7 @@ const SistemaApiSlice = apiSlice.injectEndpoints({
         return Array.isArray(response) ? response : [];
       },
     }),
-    getTabs: builder.query<TabsModulos[], number>({
+    getTabs: builder.query<TabsModulos[], number | undefined>({
       query: (id) => `/tabs/all/${id}`,
       transformResponse: (response) => {
         return Array.isArray(response) ? response : [];

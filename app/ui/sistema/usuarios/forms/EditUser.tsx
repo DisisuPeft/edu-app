@@ -1,13 +1,3 @@
-import {
-  TextField,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  // Box,
-  // OutlinedInput,
-  // Chip,
-} from "@mui/material";
 import { useEditUser } from "@/hooks";
 import {
   useGetGeneroQuery,
@@ -15,196 +5,210 @@ import {
   useGetRolesQuery,
   useGetPermissionQuery,
 } from "@/redux/catalogos/CatApiSlice";
-// import { useEffect } from "react";
-// import { Role } from "@/redux/interface/authentication/Users";
 
-// function getStyles(name: string, roles: Role[], theme: Theme) {
-//   return {
-//     fontWeight: roles.includes(name)
-//       ? theme.typography.fontWeightMedium
-//       : theme.typography.fontWeightRegular,
-//   };
-// }
 interface Props {
   id: number | undefined;
   onClose?: (event: boolean) => void;
 }
 
 export default function EditUser({ id, onClose }: Props) {
-  // console.log(id)
   const { formData, onChange, onSubmit } = useEditUser({
     id,
     onClose,
   });
-  // const theme = useTheme()
-  // console.log(id)
+
   const { data: niveles } = useGetNivelesQuery();
   const { data: generos } = useGetGeneroQuery();
   const { data: roles } = useGetRolesQuery();
   const { data: permissions } = useGetPermissionQuery();
-  // console.log(permissions);
-  // useEffect(() => {
-  //   // console.log(roles);
-  // });
-  //Mas adelante la edad se debe setear de manera automatica con la fecha de nacimiento
+
   return (
     <div className="max-w-[900px] mx-auto mt-10 p-6">
       <form onSubmit={onSubmit} className="space-y-4">
         <div className="flex flex-col md:flex-row w-full gap-10">
-          <TextField
-            name="email"
-            label="email"
-            variant="outlined"
-            fullWidth
-            value={formData.email}
-            onChange={onChange}
-            className="mb-4"
-          />
+          <div className="flex flex-col w-full">
+            <label
+              htmlFor="email"
+              className="text-sm font-medium text-gray-700 mb-1"
+            >
+              Email
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={onChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+              placeholder="Ingrese el email"
+            />
+          </div>
 
-          <TextField
-            name="nombre"
-            label="Nombre"
-            type="text"
-            variant="outlined"
-            fullWidth
-            value={formData.profile.nombre}
-            onChange={onChange}
-            className="mb-4"
-          />
+          <div className="flex flex-col w-full">
+            <label
+              htmlFor="nombre"
+              className="text-sm font-medium text-gray-700 mb-1"
+            >
+              Nombre
+            </label>
+            <input
+              id="nombre"
+              name="nombre"
+              type="text"
+              value={formData.profile.nombre}
+              onChange={onChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+              placeholder="Ingrese el nombre"
+            />
+          </div>
         </div>
+
         <div className="flex flex-col md:flex-row w-full gap-10">
-          <TextField
-            name="apellidoP"
-            label="Apellido Paterno"
-            type="text"
-            variant="outlined"
-            fullWidth
-            value={formData.profile.apellidoP}
-            onChange={onChange}
-            className="mb-4"
-          />
+          <div className="flex flex-col w-full">
+            <label
+              htmlFor="apellidoP"
+              className="text-sm font-medium text-gray-700 mb-1"
+            >
+              Apellido Paterno
+            </label>
+            <input
+              id="apellidoP"
+              name="apellidoP"
+              type="text"
+              value={formData.profile.apellidoP}
+              onChange={onChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+              placeholder="Ingrese el apellido paterno"
+            />
+          </div>
 
-          <TextField
-            name="apellidoM"
-            label="Apellido Materno"
-            variant="outlined"
-            type="text"
-            fullWidth
-            value={formData.profile.apellidoM}
+          <div className="flex flex-col w-full">
+            <label
+              htmlFor="apellidoM"
+              className="text-sm font-medium text-gray-700 mb-1"
+            >
+              Apellido Materno
+            </label>
+            <input
+              id="apellidoM"
+              name="apellidoM"
+              type="text"
+              value={formData.profile.apellidoM}
+              onChange={onChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+              placeholder="Ingrese el apellido materno"
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col">
+          <label
+            htmlFor="fechaNacimiento"
+            className="text-sm font-medium text-gray-700 mb-1"
+          >
+            Fecha de Nacimiento
+          </label>
+          <input
+            id="fechaNacimiento"
+            type="date"
+            name="fechaNacimiento"
+            value={formData.profile.fechaNacimiento}
             onChange={onChange}
-            className="mb-4"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
           />
         </div>
-        {/* <TextField
-          name="edad"
-          label="Edad"
-          variant="outlined"
-          type="text"
-          fullWidth
-          value={formData.profile.edad}
-          onChange={onChange}
-          className="mb-4"
-        />
-        <TextField
-          name="apellidoM"
-          label="Apellido Materno"
-          variant="outlined"
-          fullWidth
-          value={formData.apellidoM}
-          onChange={onChange}
-          className="mb-4"
-        /> */}
 
-        {/* <TextField
-          name="fechaNacimiento"
-          label="Fecha de nacimiento"
-          variant="outlined"
-          fullWidth
-          type="date"
-          value={formData.fechaNacimiento}
-          onChange={onChange}
-          className="mb-4"
-        /> */}
-        {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker
-            sx={{
-              width: "100%",
-            }}
-            name="fechaNacimiento"
-            value={convertedDate(formData.fechaNacimiento)}
+        <div className="flex flex-col">
+          <label
+            htmlFor="edad"
+            className="text-sm font-medium text-gray-700 mb-1"
+          >
+            Edad
+          </label>
+          <input
+            id="edad"
+            name="edad"
+            type="number"
+            value={formData.profile.edad}
+            onChange={onChange}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+            placeholder="Ingrese la edad"
           />
-        </LocalizationProvider> */}
-        <input
-          type="date"
-          name="fechaNacimiento"
-          value={formData.profile.fechaNacimiento}
-          onChange={onChange}
-          className="border b-4 border-gray-400 rounded-md w-full p-2 focus:border-gray-900 focus:outline-hidden"
-        />
-        <TextField
-          name="edad"
-          label="Edad"
-          variant="outlined"
-          type="number"
-          fullWidth
-          value={formData.profile.edad}
-          onChange={onChange}
-          className="mb-4"
-        />
-        <FormControl fullWidth className="mb-4">
-          <InputLabel>Niveles educativos</InputLabel>
-          <Select
+        </div>
+
+        <div className="flex flex-col">
+          <label
+            htmlFor="nivEdu"
+            className="text-sm font-medium text-gray-700 mb-1"
+          >
+            Niveles Educativos
+          </label>
+          <select
+            id="nivEdu"
             name="nivEdu"
             value={formData.profile.nivEdu}
-            label="Nivel educativo"
             onChange={onChange}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white"
           >
-            <MenuItem value="0">Seleccionar</MenuItem>
-            {niveles?.map((nivel) => {
-              return (
-                <MenuItem value={nivel.id ?? 0} key={nivel.id}>
-                  {nivel.name}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
+            <option value="0">Seleccionar</option>
+            {niveles?.map((nivel) => (
+              <option value={nivel.id ?? 0} key={nivel.id}>
+                {nivel.name}
+              </option>
+            ))}
+          </select>
+        </div>
 
-        <FormControl fullWidth className="mb-4">
-          <InputLabel>Genero</InputLabel>
-          <Select
+        <div className="flex flex-col">
+          <label
+            htmlFor="genero"
+            className="text-sm font-medium text-gray-700 mb-1"
+          >
+            Género
+          </label>
+          <select
+            id="genero"
             name="genero"
             value={formData.profile.genero}
-            label="Nivel educativo"
             onChange={onChange}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white"
           >
-            <MenuItem value="0">Seleccionar</MenuItem>
-            {generos?.map((gen) => {
-              return (
-                <MenuItem value={gen.id ?? 0} key={gen.id}>
-                  {gen.name}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
-        <TextField
-          name="telefono"
-          label="Telefono celular"
-          variant="outlined"
-          type="text"
-          fullWidth
-          value={formData.profile.telefono}
-          onChange={onChange}
-          className="mb-4"
-        />
-        <div className="bg-white border rounded-md p-4">
-          <h2 className="text-sm font-medium mb-2">Seleccionar roles</h2>
+            <option value="0">Seleccionar</option>
+            {generos?.map((gen) => (
+              <option value={gen.id ?? 0} key={gen.id}>
+                {gen.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="flex flex-col">
+          <label
+            htmlFor="telefono"
+            className="text-sm font-medium text-gray-700 mb-1"
+          >
+            Teléfono Celular
+          </label>
+          <input
+            id="telefono"
+            name="telefono"
+            type="text"
+            value={formData.profile.telefono}
+            onChange={onChange}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+            placeholder="Ingrese el teléfono"
+          />
+        </div>
+
+        <div className="bg-white border border-gray-300 rounded-md p-4">
+          <h2 className="text-sm font-medium text-gray-700 mb-3">
+            Seleccionar Roles
+          </h2>
           <div className="flex flex-col space-y-2 max-h-48 overflow-y-auto">
             {roles?.map((role) => (
               <label
                 key={role.id}
-                className="flex items-center space-x-2 cursor-pointer hover:bg-gray-100 p-2 rounded-md transition"
+                className="flex items-center space-x-3 cursor-pointer hover:bg-gray-50 p-2 rounded-md transition-colors"
               >
                 <input
                   name="role"
@@ -212,20 +216,23 @@ export default function EditUser({ id, onClose }: Props) {
                   value={role.id}
                   checked={formData.roleID?.some((r) => r.id === role.id)}
                   onChange={onChange}
-                  className="form-checkbox h-4 w-4 text-blue-600"
+                  className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
                 />
-                <span className="text-sm">{role.name}</span>
+                <span className="text-sm text-gray-700">{role.name}</span>
               </label>
             ))}
           </div>
         </div>
-        <div className="bg-white border rounded-md p-4">
-          <h2 className="text-sm font-medium mb-2">Seleccionar Permisos</h2>
+
+        <div className="bg-white border border-gray-300 rounded-md p-4">
+          <h2 className="text-sm font-medium text-gray-700 mb-3">
+            Seleccionar Permisos
+          </h2>
           <div className="flex flex-col space-y-2 max-h-48 overflow-y-auto">
             {permissions?.map((p) => (
               <label
                 key={p.id}
-                className="flex items-center space-x-2 cursor-pointer hover:bg-gray-100 p-2 rounded-md transition"
+                className="flex items-center space-x-3 cursor-pointer hover:bg-gray-50 p-2 rounded-md transition-colors"
               >
                 <input
                   name="permission"
@@ -233,17 +240,18 @@ export default function EditUser({ id, onClose }: Props) {
                   value={p.id}
                   checked={formData.permission?.some((r) => r.id === p.id)}
                   onChange={onChange}
-                  className="form-checkbox h-4 w-4 text-blue-600"
+                  className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
                 />
-                <span className="text-sm">{p.name}</span>
+                <span className="text-sm text-gray-700">{p.name}</span>
               </label>
             ))}
           </div>
         </div>
+
         <div className="w-[20%]">
           <button
             type="submit"
-            className="w-full bg-sky-500 text-white py-2 rounded-lg hover:bg-sky-800 transition duration-300"
+            className="w-full bg-sky-500 text-white py-2 px-4 rounded-lg hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 transition-colors duration-300 font-medium"
           >
             Guardar
           </button>

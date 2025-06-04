@@ -4,7 +4,10 @@ import Link from "next/link";
 // import Edit, Trash2
 import { Edit } from "lucide-react";
 
-interface ControlledProps<T> {
+interface HasId {
+  id: number | string;
+}
+interface ControlledProps<T extends HasId> {
   columns: Column<T>[];
   data: T[] | undefined;
   totalCount: number;
@@ -15,7 +18,7 @@ interface ControlledProps<T> {
   query_id?: number;
 }
 
-export default function DataTable<T>({
+export default function DataTable<T extends HasId>({
   columns,
   data,
   totalCount,

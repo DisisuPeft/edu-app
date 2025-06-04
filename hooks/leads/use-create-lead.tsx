@@ -36,7 +36,9 @@ export default function createLead() {
   const { data: etapas } = useRetrieveEtapasQuery(
     formData.pipeline_id ? parseInt(formData.pipeline_id) : 0
   );
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = event.target;
     const processValue = transformValue(name, value);
     setFormData({

@@ -74,9 +74,13 @@ export default function useCreateTeacher() {
       },
     });
   };
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = event.target;
-
+  const onChange = (
+    event: ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value, type } = event.target;
+    const checked = (event.target as HTMLInputElement).checked;
     const processedValue = transformValue(name, value, type, checked);
     // console.log(entidad_id)
     // const { data: municipios } = useRetrieveMunicipiosQuery(entidad_id);

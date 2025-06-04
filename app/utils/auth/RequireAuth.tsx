@@ -6,6 +6,7 @@ import { useAppSelector } from "@/redux/hooks";
 // import Loading from "@/app/components/common/Loading"
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { Role } from "@/redux/interface/authentication/Users";
+// import { useEffect } from "react";
 
 interface Props {
   children: React.ReactNode;
@@ -24,12 +25,14 @@ export default function RequireAuth({ children, allowedRoles }: Props) {
   if (!isAuth) {
     redirect("/auth/login");
   }
-  //   console.log(user);
-  if (
-    allowedRoles?.length &&
-    !user?.usuario?.roleID?.some((r: Role) => allowedRoles?.includes(r.name))
-  ) {
-    redirect("/unauthorized"); // o muestra un mensaje bonito
+
+  if (allowedRoles?.length && user) {
+    const hasAccess = user?.roleID?.some((r: Role) =>
+      allowedRoles?.includes(r.name)
+    );
+    if (!hasAccess) {
+      redirect("/unauthorized");
+    }
   }
 
   return <>{children}</>;

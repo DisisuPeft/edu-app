@@ -14,7 +14,8 @@ import {
   flexRender,
   ColumnDef,
 } from "@tanstack/react-table";
-import { Permission, Role, User } from "@/redux/interface/authentication/Users";
+// import { Permission, Role, User } from "@/redux/interface/authentication/Users";
+import { User, Role, Permission } from "@/redux/features/types";
 //
 export default function TableUsers() {
   const { data, refetch } = useGetUsersQuery();
@@ -59,12 +60,12 @@ export default function TableUsers() {
       header: "Teléfono",
     },
     {
-      accessorFn: (row) => row.profile.genero_info?.name ?? "No definido",
+      accessorFn: (row) => row.profile.genero?.name ?? "No definido",
       id: "genero",
       header: "Género",
     },
     {
-      accessorFn: (row) => row.profile.nivEdu_info?.name ?? "No definido",
+      accessorFn: (row) => row.profile.nivEdu?.name ?? "No definido",
       id: "nivelEducativo",
       header: "Nivel educativo",
     },

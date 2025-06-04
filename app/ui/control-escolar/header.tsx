@@ -30,8 +30,7 @@ export default function Header() {
         <div className="flex items-center space-x-4">
           <div className="relative">
             <span className="inline-block text-center leading-8 text-gray-700 font-medium">
-              {user?.usuario?.profile?.nombre}{" "}
-              {user?.usuario?.profile?.apellidoP}
+              {user?.profile?.nombre} {user?.profile?.apellidoP}
             </span>
           </div>
         </div>

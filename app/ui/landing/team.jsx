@@ -9,35 +9,35 @@ export default function TeamSection() {
       name: "Dr. Carlos Lopez",
       role: "Director Administrativo",
       image:
-        "/assets/fotos-team/UNSZA-Dr-Carlos-López-Director-administrativo.png",
+        "/assets/fotos-team/UNSZA-Dr-Carlos-López-Director-administrativo.webp",
     },
     {
       id: 2,
       name: "Lic. Laura Molina",
       role: "Coordinadora Educativa",
       image:
-        "/assets/fotos-team/UNSZA-Lic-Laura-Molina-Coordinadora-Educativa.png",
+        "/assets/fotos-team/UNSZA-Lic-Laura-Molina-Coordinadora-Educativa.webp",
     },
     {
       id: 3,
       name: "Lic. Amayrani López",
       role: "Asesora Educativa",
       image:
-        "/assets/fotos-team/UNSZA-Lic-Amayrani-López-asesora-educativa.png",
+        "/assets/fotos-team/UNSZA-Lic-Amayrani-López-asesora-educativa.webp",
     },
     {
       id: 4,
       name: "Mtra. Andrea Brindis",
       role: "Asesora Educativa",
       image:
-        "/assets/fotos-team/UNSZA-Mtra-andrea-brindis-asesora-educativa.png",
+        "/assets/fotos-team/UNSZA-Mtra-andrea-brindis-asesora-educativa.webp",
     },
     {
       id: 5,
       name: "Mtra. Grecia Palacios",
       role: "Asesora Educativa",
       image:
-        "/assets/fotos-team/UNSZA-Mtra-Grecia-Palacios-asesora-educativa.png",
+        "/assets/fotos-team/UNSZA-Mtra-Grecia-Palacios-asesora-educativa.webp",
     },
   ];
 

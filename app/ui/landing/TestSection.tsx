@@ -11,19 +11,19 @@ export default function DiplomadosSection() {
     {
       id: 1,
       title: "Diplomado en urgencias médicas",
-      image: "/assets/img-landing/Diplomado-en-urgencias-médicas.png",
+      image: "/assets/img-landing/Diplomado-en-urgencias-médicas.webp",
     },
     {
       id: 2,
       title: "Diplomado en medicina interna",
       image:
-        "/assets/img-landing/Diplomado-nutrición-y-suplementación-en-la-salud-hormonal.png",
+        "/assets/img-landing/Diplomado-nutrición-y-suplementación-en-la-salud-hormonal.webp",
     },
     {
       id: 3,
       title: "Diplomado en cardiología",
       image:
-        "/assets/img-landing/Diplomado-síndrome-de-down-y-problemas-de-aprendizaje.png",
+        "/assets/img-landing/Diplomado-síndrome-de-down-y-problemas-de-aprendizaje.webp",
     },
     // {
     //   id: 4,

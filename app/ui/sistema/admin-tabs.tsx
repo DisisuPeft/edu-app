@@ -5,7 +5,7 @@ import Tabs from "./tabs";
 import { useGetTabsQuery } from "@/redux/sistema/SistemaApiSlice";
 import UsuariosPanel from "./usuarios/usuarios-panel";
 // import UnauthorizedPage from "../unauthorized"
-import { Inform } from "@/alerts/toast";
+// import { Inform } from "@/alerts/toast";
 import { useSearchParams } from "next/navigation";
 
 export default function AdminPage() {
@@ -19,11 +19,11 @@ export default function AdminPage() {
   //   console.log(params.get('id'))
   // })
   if (error) {
-    return Inform({
-      title: "Alerta",
-      text: "No tienes acceso a las pestanias",
-      icon: "error",
-    });
+    return (
+      <div className="shadow-xl bg-white">
+        <p className="text-gray-800">No tienes acceso a los submenus</p>
+      </div>
+    );
   }
   return (
     <div className="container mx-auto px-4 py-8 text-gray-800">

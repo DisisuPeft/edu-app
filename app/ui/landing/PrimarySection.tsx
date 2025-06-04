@@ -11,7 +11,7 @@ export default function HeroCarousel() {
   const slides = [
     {
       image:
-        "/assets/img-landing/Diplomado-rehabilitación-de-la-articulación-temperomandibular-01.png",
+        "/assets/img-landing/Diplomado-rehabilitación-de-la-articulación-temperomandibular-01.webp",
       subtitle: "",
       title: "Formamos profesionales que quieren marcar la diferencia.",
       description: "Descrubre todos nuestros diplomados",
@@ -19,7 +19,7 @@ export default function HeroCarousel() {
       secondaryButton: { text: "Inscríbete Ahora", href: "#" },
     },
     {
-      image: "/assets/img-landing/Diplomado-en-urgencias-médicas-01.png",
+      image: "/assets/img-landing/Diplomado-en-urgencias-médicas-01.webp",
       subtitle: "",
       title: "Diplomado en Urgencias Médicas",
       description:
@@ -29,7 +29,7 @@ export default function HeroCarousel() {
     },
     {
       image:
-        "/assets/img-landing/Diplomado-nutrición-y-suplementación-en-la-salud-hormonal01.png",
+        "/assets/img-landing/Diplomado-nutrición-y-suplementación-en-la-salud-hormonal01.webp",
       subtitle: "",
       title: "Diplomado en Nutrición y suplementación en la salud hormonal",
       description:
@@ -39,7 +39,7 @@ export default function HeroCarousel() {
     },
     // {
     //   image:
-    //     "/assets/img-landing/Diplomado-nutrición-y-suplementación-en-la-salud-hormonal01.png",
+    //     "/assets/img-landing/Diplomado-nutrición-y-suplementación-en-la-salud-hormonal01.webp",
     //   subtitle: "",
     //   title: "Diplomado en Síndrome de Down y Problemas de Aprendizaje",
     //   description:

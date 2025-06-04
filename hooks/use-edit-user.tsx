@@ -7,22 +7,24 @@ import { Toast, Alert } from "@/alerts/toast";
 import { useEditUsersMutation } from "@/redux/sistema/SistemaApiSlice";
 import { useGetUserEditQuery } from "@/redux/sistema/SistemaApiSlice";
 import { useEffect } from "react";
-import { User } from "@/redux/interface/authentication/Users";
-import { useGetRolesQuery, useGetPermissionQuery } from "@/redux/catalogos/CatApiSlice";
+import { User } from "@/redux/features/types";
+import {
+  useGetRolesQuery,
+  useGetPermissionQuery,
+} from "@/redux/catalogos/CatApiSlice";
 
 interface Props {
   id: number | undefined;
-  onClose?: (event: boolean) => void
+  onClose?: (event: boolean) => void;
 }
 
-// Se debe revisar este formulario porque no cambia 
-export default function useEditUser({id, onClose}: Props) {
-
+// Se debe revisar este formulario porque no cambia
+export default function useEditUser({ id, onClose }: Props) {
   const [editUsers, { isLoading }] = useEditUsersMutation();
-  const { data, refetch } = useGetUserEditQuery(id);
-  const {data:roles} = useGetRolesQuery()
-  const {data:permissions} = useGetPermissionQuery()
-  const [formData, setFormData] = useState<User>({
+  const { data: user, refetch } = useGetUserEditQuery(id);
+  const { data: roles } = useGetRolesQuery();
+  const { data: permissions } = useGetPermissionQuery();
+  const [formData, setFormData] = useState({
     id: 0,
     email: "",
     roleID: [],
@@ -39,35 +41,35 @@ export default function useEditUser({id, onClose}: Props) {
     },
   });
   useEffect(() => {
-    if(data) {
-      setFormData((prev) => ({
-        ...prev,
-        id: data?.id,
-        email: data?.email,
-        roleID: Array.isArray(data?.roleID)
-        ? data.roleID
-        : data?.roleID
-        ? [data.roleID]
-        : [],
-        permission: Array.isArray(data?.permission)
-        ? data.permission
-        : data?.permission
-        ? [data.permission]
-        : [],
+    if (user) {
+      setFormData({
+        ...user,
+        id: user?.id,
+        email: user?.email,
+        roleID: Array.isArray(user?.roleID)
+          ? user.roleID
+          : user?.roleID
+          ? [user.roleID]
+          : [],
+        permission: Array.isArray(user?.permission)
+          ? user.permission
+          : user?.permission
+          ? [user.permission]
+          : [],
         profile: {
-          ...prev.profile,
-          nombre: data.profile?.nombre ?? "",
-          apellidoP: data.profile?.apellidoP ?? "",
-          apellidoM: data.profile?.apellidoM ?? "",
-          edad: data.profile?.edad ?? "",
-          fechaNacimiento: data.profile?.fechaNacimiento,
-          genero: data.profile?.genero_info?.id,
-          nivEdu: data.profile?.nivEdu_info?.id,
-          telefono: data.profile?.telefono ?? "",
+          ...user.profile,
+          nombre: user.profile?.nombre ?? "",
+          apellidoP: user.profile?.apellidoP ?? "",
+          apellidoM: user.profile?.apellidoM ?? "",
+          edad: String(user.profile?.edad),
+          fechaNacimiento: user.profile?.fechaNacimiento ?? "",
+          genero: user.profile?.genero?.id,
+          nivEdu: user.profile?.nivEdu?.id,
+          telefono: user.profile?.telefono ?? "",
         },
-      }))
+      });
     }
-  }, [data]);
+  }, [user]);
   // const {
   //   email,
   //   nombre,
@@ -102,11 +104,13 @@ export default function useEditUser({id, onClose}: Props) {
   // const selectedP = permissions?.find((p) => p.id === parseInt(value))
   // if (!selectedP) return;
   //No actualiza permisos
-  const onChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const onChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, type, value } = event.target;
     // console.log(name, value)
     if (type === "checkbox" && name === "role") {
-      const checked = (event.target as HTMLInputElement).checked
+      const checked = (event.target as HTMLInputElement).checked;
       const selectedRol = roles?.find((rol) => rol.id === parseInt(value));
       if (!selectedRol) return;
       setFormData((prev) => ({
@@ -115,17 +119,17 @@ export default function useEditUser({id, onClose}: Props) {
           ? [...prev.roleID, selectedRol]
           : prev.roleID.filter((r) => r.id !== selectedRol.id),
       }));
-    } 
-    else if(type === "checkbox" && name === "permission"){
-      const checked = (event.target as HTMLInputElement).checked
-      const selectedP = permissions?.find((p) => p.id === parseInt(value))
+    } else if (type === "checkbox" && name === "permission") {
+      const checked = (event.target as HTMLInputElement).checked;
+      const selectedP = permissions?.find((p) => p.id === parseInt(value));
       if (!selectedP) return;
       setFormData((prev) => ({
         ...prev,
-        permission: checked ? [...prev.permission, selectedP] : prev.permission.filter((p) => p.id !== selectedP.id)
+        permission: checked
+          ? [...prev.permission, selectedP]
+          : prev.permission.filter((p) => p.id !== selectedP.id),
       }));
-    }
-    else {
+    } else {
       setFormData((prev) => ({
         ...prev,
         profile: {
@@ -143,20 +147,20 @@ export default function useEditUser({id, onClose}: Props) {
       .unwrap()
       .then((res) => {
         // console.log(res)
-        onClose(false)
-        refetch()
-    //     reset();
-    //     Toast({ message: "Tarea creada!", icon: "success" });
+        onClose(false);
+        refetch();
+        //     reset();
+        //     Toast({ message: "Tarea creada!", icon: "success" });
       })
       .catch((error) => {
-        console.log(error)
-    //     Toast({
-    //       message:
-    //         error?.data?.name[0] || error?.data?.description[0]
-    //           ? "Uno o mas campos estan vacios"
-    //           : "Error, sin respuesta del servidor",
-    //       icon: "error",
-    //     });
+        console.log(error);
+        //     Toast({
+        //       message:
+        //         error?.data?.name[0] || error?.data?.description[0]
+        //           ? "Uno o mas campos estan vacios"
+        //           : "Error, sin respuesta del servidor",
+        //       icon: "error",
+        //     });
       });
   };
 

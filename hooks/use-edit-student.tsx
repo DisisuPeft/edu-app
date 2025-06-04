@@ -81,7 +81,7 @@ export default function useEditStudent(id: number) {
           nombre: estudiante?.perfil?.nombre,
           apellidoP: estudiante?.perfil?.apellidoP || "",
           apellidoM: estudiante?.perfil?.apellidoM || "",
-          edad: estudiante?.perfil?.edad || "",
+          edad: String(estudiante?.perfil?.edad),
           fechaNacimiento: estudiante?.perfil?.fechaNacimiento || "",
           genero: estudiante?.perfil?.genero_info.id || null,
           nivEdu: estudiante?.perfil?.nivEdu_info.id || null,
@@ -95,8 +95,13 @@ export default function useEditStudent(id: number) {
     }
   }, [estudiante]);
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = event.target;
+  const onChange = (
+    event: ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value, type } = event.target;
+    const checked = (event.target as HTMLInputElement).checked;
     const processedValue =
       type === "checkbox" && name === "activo"
         ? checked

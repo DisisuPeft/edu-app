@@ -1,7 +1,8 @@
+// import { Maestro } from "./../interface/maestro/maestro";
 import { Modulos } from "../interface/sistema/modulos";
 import { apiSlice } from "../services/apiSlice";
 import { Estudiante } from "../interface/estudiante/estudiante";
-import { Maestro } from "../interface/maestro/maestro";
+import { MaestroView, Maestro } from "./types";
 const teacherApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createTeacher: builder.mutation({
@@ -17,7 +18,7 @@ const teacherApiSlice = apiSlice.injectEndpoints({
         return Array.isArray(response) ? response : [];
       },
     }),
-    retrieveTeacher: builder.query<Maestro, number>({
+    retrieveTeacher: builder.query<MaestroView, number>({
       query: (id) => `/teacher/${id}/`,
     }),
     retrieveEditTeacher: builder.query<Maestro, number>({

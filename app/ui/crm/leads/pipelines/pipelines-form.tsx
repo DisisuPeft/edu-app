@@ -7,15 +7,16 @@ import {
   Trash,
 } from "lucide-react";
 import { useCreatePipeline } from "@/hooks";
-import { Etapas, Pipeline } from "@/redux/interface/crm/crm";
+import { Etapas } from "@/redux/interface/crm/crm";
 import {
   useGetEmpresaQuery,
   useGetProgramsQuery,
   useGetUnidadesAcademicasQuery,
 } from "@/redux/crm/crmApiSlice";
+import { PipelinesResponse } from "@/redux/crm/types";
 
 interface PipelineModalProps {
-  pipeline?: Pipeline;
+  pipeline?: PipelinesResponse;
 }
 
 export default function PipelineForm({ pipeline }: PipelineModalProps) {

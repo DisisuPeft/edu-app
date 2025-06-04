@@ -81,26 +81,31 @@ export default function useEditTeacher(id: number) {
     if (maestro) {
       setFormData({
         ...maestro,
+        estado: String(maestro?.estado),
+        especialidad: String(maestro?.especialidad),
+        municipio: String(maestro?.municipio),
+        estatus: String(maestro?.estatus),
         perfil: {
           nombre: maestro?.perfil?.nombre,
           apellidoP: maestro?.perfil?.apellidoP || "",
           apellidoM: maestro?.perfil?.apellidoM || "",
-          edad: maestro?.perfil?.edad || "",
+          edad: String(maestro?.perfil?.edad),
           fechaNacimiento: maestro?.perfil?.fechaNacimiento || "",
           genero: maestro?.perfil?.genero_info.id || null,
           nivEdu: maestro?.perfil?.nivEdu_info.id || null,
           telefono: maestro?.perfil?.telefono || "",
         },
-        lugar_nacimiento: maestro?.estado?.toString() || "",
-        municipio: maestro.municipio?.toString() || "",
-        // tutor_nombre: maestro?.tutor_nombre || "",
-        // tutor_telefono: maestro?.tutor_telefono || "",
       });
     }
   }, [maestro]);
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = event.target;
+  const onChange = (
+    event: ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value, type } = event.target;
+    const checked = (event.target as HTMLInputElement).checked;
     const processedValue = transformValue(name, value, type, checked);
 
     const keys = name.split(".");

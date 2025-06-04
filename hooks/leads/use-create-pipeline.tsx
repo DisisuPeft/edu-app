@@ -1,4 +1,4 @@
-import { Pipeline } from "@/redux/interface/crm/crm";
+// import { Pipeline } from "@/redux/interface/crm/crm";
 import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { useCreatePipelineMutation } from "@/redux/crm/crmApiSlice";
 import {
@@ -6,7 +6,9 @@ import {
   useUpdatePipelineMutation,
 } from "@/redux/crm/crmApiSlice";
 import { Alert } from "@/alerts/toast";
-export default function createPipeline(pipeline?: Pipeline) {
+import { PipelinesResponse } from "@/redux/crm/types";
+
+export default function createPipeline(pipeline?: PipelinesResponse) {
   const [createPipeline, { isLoading }] = useCreatePipelineMutation();
   const [updatePipeline] = useUpdatePipelineMutation();
   const { refetch } = useGetPipelinesQuery();
@@ -39,14 +41,16 @@ export default function createPipeline(pipeline?: Pipeline) {
         id: pipeline.id,
         nombre: pipeline?.nombre,
         orden: pipeline?.orden,
-        programa: pipeline?.programa?.id,
-        unidad_academica: pipeline?.unidad_academica?.id,
-        empresa: pipeline?.empresa?.id,
+        programa: String(pipeline?.programa?.id),
+        unidad_academica: String(pipeline?.unidad_academica?.id),
+        empresa: String(pipeline?.empresa?.id),
         etapas: [...pipeline.etapas],
       });
     }
   }, [pipeline]);
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = event.target;
     const processedValue = transformValue(name, value);
     setFormData((prevData) => ({
@@ -150,7 +154,7 @@ export default function createPipeline(pipeline?: Pipeline) {
   };
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // console.log(formData);
+    console.log(formData);
     pipeline
       ? updatePipeline(formData)
           .unwrap()

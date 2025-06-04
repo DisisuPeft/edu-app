@@ -69,7 +69,7 @@ export default function DashboardCRM() {
         <div className="bg-white p-6 rounded-lg shadow text-gray-800">
           <h2 className="text-lg font-semibold mb-4">Leads por Etapa</h2>
           <div className="space-y-4">
-            {data?.total_lead_etapa.map((etapa, index) => {
+            {data?.total_lead_etapa?.map((etapa, index) => {
               // console.log(etapa);
               return (
                 <div key={index}>
@@ -85,7 +85,7 @@ export default function DashboardCRM() {
                     <div
                       className="bg-blue-600 h-2 rounded-full"
                       style={{
-                        width: `${(etapa.total / data?.total_leads) * 100}%`,
+                        width: `${(etapa?.total / data?.total_leads) * 100}%`,
                       }}
                     ></div>
                   </div>
@@ -97,14 +97,14 @@ export default function DashboardCRM() {
         <div className="bg-white p-6 rounded-lg shadow text-gray-800">
           <h2 className="text-lg font-semibold mb-4">Leads por Programa</h2>
           <div className="space-y-4">
-            {data?.total_lead_programa.map((program, index) => (
+            {data?.total_lead_programa?.map((program, index) => (
               <div key={index}>
                 <div className="flex justify-between mb-1">
                   <span className="text-sm font-medium">
                     {program.interesado_en__nombre}
                   </span>
                   <span className="text-sm text-gray-500">
-                    {program.total > 1
+                    {program?.total > 1
                       ? `${program.total} leads`
                       : `${program.total} lead`}
                   </span>
@@ -113,7 +113,7 @@ export default function DashboardCRM() {
                   <div
                     className="bg-green-600 h-2 rounded-full"
                     style={{
-                      width: `${(program.total / data?.total_leads) * 100}%`,
+                      width: `${(program?.total / data?.total_leads) * 100}%`,
                     }}
                   ></div>
                 </div>
@@ -162,7 +162,7 @@ export default function DashboardCRM() {
                     <div className="text-sm font-medium text-gray-900">
                       {lead.nombre}
                     </div>
-                    <div className="text-sm text-gray-500">{lead.correo}</div>
+                    {/* <div className="text-sm text-gray-500">{lead.correo}</div> */}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {lead?.interesado_en}

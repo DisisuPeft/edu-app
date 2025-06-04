@@ -1,5 +1,6 @@
 "use client";
 
+import { Etapa_pipeline } from "@/redux/crm/types";
 // import { useRetrieveLeadQuery } from "@/redux/crm/crmApiSlice";
 // import Link from "next/link";
 // import {
@@ -12,23 +13,21 @@
 //   BarChart2,
 //   Clock,
 // } from "lucide-react";
-import { Etapas, Pipeline } from "@/redux/interface/crm/crm";
+// import { Etapas, Pipeline } from "@/redux/interface/crm/crm";
 
 interface LeadStageProps {
-  stages: Pipeline[];
-  currentStage: Etapas;
-  onStageChange: (stage: Etapas) => void;
+  stages: Etapa_pipeline[];
+  currentStage: number;
+  onStageChange: (stage: Etapa_pipeline) => void;
 }
-
+// console.log(stages);
 export default function LeadStageProgress({
   stages,
   currentStage,
   onStageChange,
 }: LeadStageProps) {
-  const currentIndex = stages.findIndex(
-    (stage) => stage.id === currentStage.id
-  );
-  // console.log(currentIndex);
+  const currentIndex = stages.findIndex((stage) => stage.id === currentStage);
+  // console.log(stages);
   return (
     <div className="text-gray-800 w-full">
       <div className="flex items-center justify-between mb-4">

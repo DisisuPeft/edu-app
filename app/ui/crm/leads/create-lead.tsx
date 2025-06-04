@@ -173,11 +173,14 @@ export default function CreateLeadPage() {
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
                 >
                   <option value="0">Seleccionar...</option>
-                  {pipelines?.map((item) => (
-                    <option key={item.id} value={item.id}>
-                      {item.nombre}
-                    </option>
-                  ))}
+                  {pipelines?.map((item) => {
+                    console.log(item);
+                    return (
+                      <option key={item.id} value={item.id}>
+                        {item.nombre}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
               {/* Etapas */}

@@ -27,7 +27,9 @@ export default function useCreateLeadLanding() {
       interesado_en: "",
     });
   };
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = event.target;
     const processValue = name === "interesado_en" ? parseInt(value) : value;
     setFormData({

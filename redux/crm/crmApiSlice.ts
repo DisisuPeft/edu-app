@@ -1,33 +1,39 @@
+import { LeadPaginationResponse } from "./../interface/crm/crm";
+import {
+  PipelinesResponse,
+  ResponseData,
+  Etapa_Lead,
+  Programa_Lead,
+  EstatusResponse,
+  FuentesResponse,
+  VendedorRespose,
+  LeadResponse,
+  Etapa_pipeline,
+  ResponseRecentLead,
+} from "./types";
 import { Modulos } from "../interface/sistema/modulos";
 import { apiSlice } from "../services/apiSlice";
 import { User, Role } from "@/redux/interface/authentication/Users";
-import {
-  Lead,
-  Pipeline,
-  Data,
-  LeadPaginationResponse,
-  Fuentes,
-  Estatus,
-  Etapas,
-} from "../interface/crm/crm";
 import { ProgramaEducativo } from "../interface/control_escolar/programa_educativo";
 import {
   Empresa,
   InstitucionAcademica,
 } from "../interface/catalogos/catalagos";
 
+//   id: number | null | undefined;
+// nombre: string | null | undefined;
 const crmApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getLeads: builder.query<LeadPaginationResponse, number | void>({
       query: (page) => `/leads/all/?page=${page}`,
     }),
-    retrieveRecentLeads: builder.query<Lead[], void>({
+    retrieveRecentLeads: builder.query<ResponseRecentLead[], void>({
       query: () => "/recent/leads/",
       transformResponse: (response) => {
         return Array.isArray(response) ? response : [];
       },
     }),
-    retrieveLead: builder.query<Data, number>({
+    retrieveLead: builder.query<LeadResponse, number>({
       query: (id) => `/lead/${id}/`,
     }),
     createLead: builder.mutation({
@@ -37,10 +43,10 @@ const crmApiSlice = apiSlice.injectEndpoints({
         body: payload,
       }),
     }),
-    EstadisticsLeads: builder.query<Data, void>({
+    EstadisticsLeads: builder.query<ResponseData, void>({
       query: () => "/leads/estadistics/",
     }),
-    getPipelines: builder.query<Pipeline[], void>({
+    getPipelines: builder.query<PipelinesResponse[], void>({
       query: () => "/pipeline/all/",
     }),
     createPipeline: builder.mutation({
@@ -66,7 +72,7 @@ const crmApiSlice = apiSlice.injectEndpoints({
     getEmpresa: builder.query<Empresa[], void>({
       query: () => "/crm/empresa/",
     }),
-    getFuentes: builder.query<Fuentes[], void>({
+    getFuentes: builder.query<FuentesResponse[], void>({
       query: () => "/crm/fuentes/",
     }),
     createFuente: builder.mutation({
@@ -84,7 +90,7 @@ const crmApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     // crm/fuentes/update/<int:id>
-    getEstatus: builder.query<Estatus[], void>({
+    getEstatus: builder.query<EstatusResponse[], void>({
       query: () => "/crm/estatus/",
     }),
     createEstatus: builder.mutation({
@@ -101,10 +107,10 @@ const crmApiSlice = apiSlice.injectEndpoints({
         body: payload,
       }),
     }),
-    retrieveEtapas: builder.query<Etapas[], number>({
+    retrieveEtapas: builder.query<Etapa_pipeline[], number>({
       query: (id) => `/crm/etapas/${id}/`,
     }),
-    retrieveVendedor: builder.query<User[], void>({
+    retrieveVendedor: builder.query<VendedorRespose[], void>({
       query: () => `/crm/vendedores/`,
     }),
     // getUserEdit: builder.query<User, number>({

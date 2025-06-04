@@ -1,6 +1,6 @@
 import { Modulos } from "../interface/sistema/modulos";
 import { apiSlice } from "../services/apiSlice";
-import { Estudiante } from "../interface/estudiante/estudiante";
+import { Estudiante, EstudianteView } from "./types";
 
 const studentsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -17,7 +17,7 @@ const studentsApiSlice = apiSlice.injectEndpoints({
         return Array.isArray(response) ? response : [];
       },
     }),
-    retrieveStudent: builder.query<Estudiante, number>({
+    retrieveStudent: builder.query<EstudianteView, number>({
       query: (id) => `/student/${id}/`,
     }),
     retrieveEditStudent: builder.query<Estudiante, number>({

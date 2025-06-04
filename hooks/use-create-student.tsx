@@ -10,7 +10,7 @@ import { Alert } from "@/alerts/toast";
 
 export default function useCreateStudent() {
   // const [entidad_id, setEntidad] = useState<number>()
-  const [ createStudent, {isLoading} ] = useCreateStudentMutation();
+  const [createStudent, { isLoading }] = useCreateStudentMutation();
   const [formData, setFormData] = useState({
     curp: "",
     matricula: "",
@@ -38,7 +38,9 @@ export default function useCreateStudent() {
       telefono: "",
     },
   });
-  const {data:municipios} = useRetrieveMunicipiosQuery(formData.lugar_nacimiento ? parseInt(formData.lugar_nacimiento) : 0)
+  const { data: municipios } = useRetrieveMunicipiosQuery(
+    formData.lugar_nacimiento ? parseInt(formData.lugar_nacimiento) : 0
+  );
   const reset = () => {
     setFormData({
       curp: "",
@@ -68,9 +70,13 @@ export default function useCreateStudent() {
       },
     });
   };
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = event.target;
-
+  const onChange = (
+    event: ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value, type } = event.target;
+    const checked = (event.target as HTMLInputElement).checked;
     const processedValue =
       type === "checkbox" && name === "activo"
         ? checked
@@ -78,10 +84,15 @@ export default function useCreateStudent() {
           : 0
         : name === "curp" || name === "matricula"
         ? value.toUpperCase()
-        : name === "profile.edad" ? parseInt(value) || ""
-        : name === "profile.nivEdu" || name === "profile.genero" ? parseInt(value) : 
-        name === "lugar_nacimiento" ? parseInt(value) : name === "municipio" ? parseInt(value) : 
-        value;
+        : name === "profile.edad"
+        ? parseInt(value) || ""
+        : name === "profile.nivEdu" || name === "profile.genero"
+        ? parseInt(value)
+        : name === "lugar_nacimiento"
+        ? parseInt(value)
+        : name === "municipio"
+        ? parseInt(value)
+        : value;
     // console.log(entidad_id)
     // const { data: municipios } = useRetrieveMunicipiosQuery(entidad_id);
     const keys = name.split(".");
@@ -98,15 +109,15 @@ export default function useCreateStudent() {
     } else {
       // if (type === "checkbox" && name === "activo"){
       //   const checked = (event.target as HTMLInputElement).checked;
-        // const id = name === 
-        // const {data:municipios} = useRetrieveMunicipiosQuery(formData.lugar_nacimiento ? parseInt(formData.lugar_nacimiento) : 0)
-        // console.log(entidad_id)
-        setFormData((prevData) => ({
-          ...prevData,
-          // municipio: 
-          [name]: processedValue,
-        }));
-      }
+      // const id = name ===
+      // const {data:municipios} = useRetrieveMunicipiosQuery(formData.lugar_nacimiento ? parseInt(formData.lugar_nacimiento) : 0)
+      // console.log(entidad_id)
+      setFormData((prevData) => ({
+        ...prevData,
+        // municipio:
+        [name]: processedValue,
+      }));
+    }
     // }
   };
 
@@ -116,9 +127,9 @@ export default function useCreateStudent() {
     createStudent(formData)
       .unwrap()
       .then((res) => {
-        console.log(res)
+        console.log(res);
         reset();
-        Alert({title: "Exito", text: res, icon: "success"})
+        Alert({ title: "Exito", text: res, icon: "success" });
       })
       .catch((error) => {
         // console.log(error)
@@ -139,6 +150,6 @@ export default function useCreateStudent() {
     onChange,
     onSubmit,
     reset,
-    municipios
+    municipios,
   };
 }

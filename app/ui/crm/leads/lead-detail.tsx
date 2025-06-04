@@ -15,7 +15,7 @@ import {
   MessageSquare,
 } from "lucide-react";
 import LeadStageProgress from "./lead-stage-progress";
-// import { Etapas } from "@/redux/interface/crm/crm";
+import { Etapas } from "@/redux/interface/crm/crm";
 
 interface LeadDetailProps {
   id: string;
@@ -24,12 +24,12 @@ interface LeadDetailProps {
 export default function LeadDetail({ id }: LeadDetailProps) {
   const { data, isLoading } = useRetrieveLeadQuery(parseInt(id));
   // const [selectedEstatus, setSelectedEstatus] = useState(lead?.estatus || "");
-  // const handleEtapaChange = (etapa: Etapas) => {
-  // const newStatus = e.target.value;
-  // console.log(etapa);
-  // setSelectedEstatus(newStatus);
-  // updateLeadStatus(data?.lead?.id, newStatus);
-  // };
+  const handleEtapaChange = (etapa: Etapas) => {
+    // const newStatus = e.target.value;
+    console.log(etapa);
+    // setSelectedEstatus(newStatus);
+    // updateLeadStatus(data?.lead?.id, newStatus);
+  };
   if (isLoading) {
     return (
       <div className="text-center py-10">
@@ -43,7 +43,7 @@ export default function LeadDetail({ id }: LeadDetailProps) {
       </div>
     );
   }
-  // console.log(data?.lead);
+  // console.log(data.pipeline[0].id);
   return (
     <div className="text-gray-800">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
@@ -104,9 +104,7 @@ export default function LeadDetail({ id }: LeadDetailProps) {
                 <BookOpen className="h-5 w-5 text-gray-400 mr-2 mt-0.5" />
                 <div>
                   <p className="text-sm text-gray-500">Interes</p>
-                  <p className="font-medium">
-                    {data?.lead?.interesado_en?.nombre}
-                  </p>
+                  <p className="font-medium">{data?.lead?.interesado_en}</p>
                 </div>
               </div>
 
@@ -115,7 +113,7 @@ export default function LeadDetail({ id }: LeadDetailProps) {
                 <div>
                   <p className="text-sm text-gray-500">Fuente</p>
                   <p className="font-medium">
-                    {data?.lead?.fuente?.nombre || "No especificada"}
+                    {data?.lead?.fuente || "No especificada"}
                   </p>
                 </div>
               </div>
@@ -124,11 +122,7 @@ export default function LeadDetail({ id }: LeadDetailProps) {
                 <User className="h-5 w-5 text-gray-400 mr-2 mt-0.5" />
                 <div>
                   <p className="text-sm text-gray-500">Vendedor Asignado</p>
-                  <p className="font-medium">
-                    {data?.lead?.vendedor_asignado?.profile.nombre || ""}{" "}
-                    {data?.lead?.vendedor_asignado?.profile.apellidoP || ""}{" "}
-                    {data?.lead?.vendedor_asignado?.profile.apellidoM || ""}{" "}
-                  </p>
+                  <p className="font-medium">{data?.lead?.vendedor_asignado}</p>
                 </div>
               </div>
 
@@ -169,7 +163,7 @@ export default function LeadDetail({ id }: LeadDetailProps) {
               </h2>
               <LeadStageProgress
                 stages={data?.pipeline[0]?.etapas}
-                currentStage={data?.lead?.etapa}
+                currentStage={data?.lead?.etapa_id}
                 onStageChange={handleEtapaChange}
               />
             </div>
@@ -189,8 +183,8 @@ export default function LeadDetail({ id }: LeadDetailProps) {
                 </span>
               </div>
             </div>
-
-            <LeadNoteForm leadId={data?.lead.id} />
+            {/* leadId={data?.lead.id} */}
+            <LeadNoteForm />
 
             <div className="mt-6 space-y-4">
               {data?.lead?.notas.length > 0 ? (
@@ -255,7 +249,7 @@ export default function LeadDetail({ id }: LeadDetailProps) {
                     : "bg-gray-100 text-gray-800"
                 }`}
               >
-                {data?.lead?.etapa?.nombre || "No asignada"}
+                {data?.lead?.etapa || "No asignada"}
               </div>
             </div>
           </div>

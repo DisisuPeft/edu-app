@@ -3,17 +3,18 @@
 import { useState } from "react";
 import { Plus, Search, Edit, Trash } from "lucide-react";
 import { useGetPipelinesQuery } from "@/redux/crm/crmApiSlice";
-import { Etapas, Pipeline } from "@/redux/interface/crm/crm";
+import { Etapas } from "@/redux/interface/crm/crm";
 import { Modal } from "@/app/components/common/Modal";
 import PipelineForm from "./pipelines-form";
+import { PipelinesResponse } from "@/redux/crm/types";
 
 export default function PipelinesList() {
   const { data: pipelines } = useGetPipelinesQuery();
   const [searchTerm, setSearchTerm] = useState("");
   const [open, setOpen] = useState<boolean>(false);
-  const [currentPipeline, setCurrentPipeline] = useState<Pipeline>();
+  const [currentPipeline, setCurrentPipeline] = useState<PipelinesResponse>();
   // console.log(pipelines);
-  const handleEdit = (pipeline: Pipeline) => {
+  const handleEdit = (pipeline: PipelinesResponse) => {
     setCurrentPipeline(pipeline);
     setOpen(true);
   };
@@ -127,7 +128,7 @@ export default function PipelinesList() {
 
       {/* Modal de creación/edición */}
       {open && (
-        <Modal show={open} onClose={(e) => handleClose(e)}>
+        <Modal show={open} onClose={handleClose}>
           <div className="text-gray-800">
             <PipelineForm pipeline={currentPipeline} />
           </div>

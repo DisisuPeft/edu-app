@@ -1,11 +1,11 @@
 import TeacherView from "@/app/ui/maestros/teacher-view";
-type PageProps = {
-  params: {
-    id: string;
-  };
-};
-export default function Page({ params }: PageProps) {
-  const { id } = params;
+
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
   return (
     <div className="text-gray-800 mt-12">
       <TeacherView id={id} />
