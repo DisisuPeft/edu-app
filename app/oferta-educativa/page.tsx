@@ -5,7 +5,7 @@ import EducationalOfferingsSection from "../ui/landing/oferta-educativa/oferta-e
 export default function Page() {
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <EducationalOfferingsSection />
       <FooterSection />
     </div>
