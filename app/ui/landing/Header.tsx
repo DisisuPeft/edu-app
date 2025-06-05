@@ -26,7 +26,7 @@ export default function Header() {
         <div
           // className="container mx-auto flex items-center justify-between z-10"
           ref={ref}
-          className={`container mx-auto flex items-center justify-between z-10 transition-opacity duration-400 ${
+          className={`relative container mx-auto flex items-center justify-between z-10 transition-opacity duration-400 ${
             isVisible ? "opacity-100 animate-fadeInUp" : "opacity-0"
           }`}
         >
@@ -64,7 +64,7 @@ export default function Header() {
           <div
             className={`${
               isMenuOpen ? "block" : "hidden"
-            } lg:flex lg:items-center absolute lg:static top-full left-0 right-0 bg-[#a20519] lg:bg-transparent z-10`}
+            } lg:flex lg:items-center absolute lg:static top-full left-0 right-0 bg-[#a20519] lg:bg-transparent z-50`}
           >
             <div
               ref={ref}
