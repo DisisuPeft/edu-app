@@ -52,7 +52,7 @@ export default function DiplomadosSection() {
           {diplomados.map((diplomado) => (
             <div
               key={diplomado.id}
-              className="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-500 hover:-translate-y-1 hover:shadow-xl h-[300px] md:h-[480px] flex flex-col"
+              className="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-500 hover:-translate-y-1 hover:shadow-xl h-[350px] md:h-[480px] flex flex-col"
             >
               <div className="relative overflow-hidden">
                 <div className="aspect-w-16 aspect-h-9 relative">
