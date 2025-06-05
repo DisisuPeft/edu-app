@@ -26,10 +26,10 @@ export default function Header() {
         <div className="container mx-auto flex items-center justify-between z-10">
           {/* Logo */}
           <div
-            ref={ref}
-            className={`shadow-sm transition-opacity duration-400 ${
-              isVisible ? "opacity-100 animate-fadeInUp" : "opacity-0"
-            }`}
+          // ref={ref}
+          // className={`shadow-sm transition-opacity duration-400 ${
+          //   isVisible ? "opacity-100 animate-fadeInUp" : "opacity-0"
+          // }`}
           >
             <Link href="/" className="flex items-center px-4 py-4 lg:px-5">
               <h2 className="text-white text-xl font-bold m-0 flex items-center">
