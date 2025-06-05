@@ -155,7 +155,7 @@ export default function HeroCarousel() {
       ))}
 
       {/* Navigation Buttons */}
-      <div className="md:flex absolute top-1/2 right-8 transform -translate-y-1/2 z-20 flex flex-col gap-3">
+      <div className="hidden md:flex absolute top-1/2 right-8 transform -translate-y-1/2 z-20 flex flex-col gap-3">
         <button
           onClick={goToPrevSlide}
           className="w-10 h-10 flex items-center justify-center border border-white text-white rounded-full hover:bg-[#121b6a] hover:border-[#121b6a] transition-colors"

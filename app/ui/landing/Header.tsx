@@ -23,7 +23,13 @@ export default function Header() {
   return (
     <header className="bg-[#4b1804] shadow-sm">
       <nav className="sticky top-0 shadow-md bg-[#a20519] p-0">
-        <div className="container mx-auto flex items-center justify-between z-10">
+        <div
+          // className="container mx-auto flex items-center justify-between z-10"
+          ref={ref}
+          className={`container mx-auto flex items-center justify-between z-10 transition-opacity duration-400 ${
+            isVisible ? "opacity-100 animate-fadeInUp" : "opacity-0"
+          }`}
+        >
           {/* Logo */}
           <div
           // ref={ref}
@@ -110,14 +116,12 @@ export default function Header() {
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
-          <button
-            // href="/auth/register"
+          {/* <button
             onClick={() => setShow(true)}
             className="lg:hidden flex items-center py-4 px-5 bg-[#121b6a] text-white hover:bg-[#1a2580] transition-colors"
           >
             Solicita información
-            {/* <ArrowRight className="ml-3" size={16} /> */}
-          </button>
+          </button> */}
         </div>
       </nav>
       <Modal show={show} onClose={() => setShow(false)}>
