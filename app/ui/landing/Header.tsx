@@ -22,7 +22,7 @@ export default function Header() {
   };
   return (
     <header className="bg-[#4b1804] shadow-sm">
-      <nav className="sticky top-0 shadow-md bg-[#a20519] p-0 z-10">
+      <nav className="sticky top-0 shadow-md bg-[#a20519] p-0">
         <div className="container mx-auto flex items-center justify-between z-10">
           {/* Logo */}
           <div
@@ -37,8 +37,8 @@ export default function Header() {
                   src="/assets/logos/unsza_logo.webp"
                   alt="Sobre nosotros"
                   className="object-cover rounded-lg p-1"
-                  width={40}
-                  height={40}
+                  width={45}
+                  height={45}
                 />
                 UNSZA
               </h2>
@@ -46,13 +46,13 @@ export default function Header() {
           </div>
 
           {/* Mobile Menu Button */}
-          <button
+          {/* <button
             type="button"
-            className="mr-4 pl-10 lg:hidden text-white"
+            className="mr-4 lg:hidden text-white"
             onClick={toggleMenu}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          </button> */}
 
           {/* Navigation Links */}
           <div
@@ -104,10 +104,19 @@ export default function Header() {
 
           {/* Mobile Join Button */}
           <button
-            // href="/auth/register"
-            className="lg:hidden flex items-center py-2 px-4 bg-[#121b6a] text-white text-sm rounded-md mr-4"
+            type="button"
+            className="mr-4 lg:hidden text-white"
+            onClick={toggleMenu}
           >
-            Únete
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+          <button
+            // href="/auth/register"
+            onClick={() => setShow(true)}
+            className="lg:hidden flex items-center py-4 px-5 bg-[#121b6a] text-white hover:bg-[#1a2580] transition-colors"
+          >
+            Solicita información
+            {/* <ArrowRight className="ml-3" size={16} /> */}
           </button>
         </div>
       </nav>
