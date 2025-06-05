@@ -48,7 +48,7 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             type="button"
-            className="mr-4 p-2 lg:hidden text-white"
+            className="mr-4 pl-4 lg:hidden text-white z-10"
             onClick={toggleMenu}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}

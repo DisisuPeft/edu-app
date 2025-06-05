@@ -174,7 +174,7 @@ export default function CreateLeadPage() {
                 >
                   <option value="0">Seleccionar...</option>
                   {pipelines?.map((item) => {
-                    console.log(item);
+                    // console.log(item);
                     return (
                       <option key={item.id} value={item.id}>
                         {item.nombre}
