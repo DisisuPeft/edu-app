@@ -64,7 +64,7 @@ export default function Header() {
           <div
             className={`${
               isMenuOpen ? "block" : "hidden"
-            } lg:flex lg:items-center absolute lg:static top-full left-0 right-0 bg-[#a20519] lg:bg-transparent`}
+            } lg:flex lg:items-center absolute lg:static top-full left-0 right-0 bg-[#a20519] lg:bg-transparent z-10`}
           >
             <div
               ref={ref}
