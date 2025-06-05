@@ -23,7 +23,7 @@ export default function Header() {
   return (
     <header className="bg-[#4b1804] shadow-sm">
       <nav className="sticky top-0 shadow-md bg-[#a20519] p-0 z-10">
-        <div className="container mx-auto flex items-center justify-between">
+        <div className="container mx-auto flex items-center justify-between z-10">
           {/* Logo */}
           <div
             ref={ref}
@@ -48,7 +48,7 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             type="button"
-            className="mr-4 pl-4 lg:hidden text-white z-10"
+            className="mr-4 pl-10 lg:hidden text-white"
             onClick={toggleMenu}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
