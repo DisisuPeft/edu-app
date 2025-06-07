@@ -9,7 +9,8 @@ import {
   UserCircle,
   Settings,
   SchoolIcon,
-  Building2
+  Building2,
+  PiggyBank,
 } from "lucide-react";
 
 export const iconMap: Record<string, React.ElementType> = {
@@ -23,5 +24,6 @@ export const iconMap: Record<string, React.ElementType> = {
   "user-circle": UserCircle,
   settings: Settings,
   "chalkboard-teacher": SchoolIcon,
-  "building-two": Building2
+  "building-two": Building2,
+  "piggy-bank": PiggyBank,
 };

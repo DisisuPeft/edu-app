@@ -140,3 +140,7 @@ export type PipelineEditable = {
   empresa: number;
   etapas: [];
 };
+
+export type CampaniaResponse = {
+  id: number;
+};

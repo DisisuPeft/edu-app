@@ -10,6 +10,7 @@ import {
   LeadResponse,
   Etapa_pipeline,
   ResponseRecentLead,
+  CampaniaResponse,
 } from "./types";
 import { Modulos } from "../interface/sistema/modulos";
 import { apiSlice } from "../services/apiSlice";
@@ -113,19 +114,9 @@ const crmApiSlice = apiSlice.injectEndpoints({
     retrieveVendedor: builder.query<VendedorRespose[], void>({
       query: () => `/crm/vendedores/`,
     }),
-    // getUserEdit: builder.query<User, number>({
-    //   query: (id) => `/cea/usuario/${id}`,
-    //   // transformResponse: (response) => {
-    //   //   return Array.isArray(response) ? response : [];
-    //   // },
-    // }),
-    // editUsers: builder.mutation({
-    //   query: (payload) => ({
-    //     url: "/cea/usuarios/update/",
-    //     method: "PATCH",
-    //     body: payload,
-    //   }),
-    // }),
+    getCampanias: builder.query<CampaniaResponse, void>({
+      query: () => "/crm/campanias/",
+    }),
   }),
 });
 
@@ -149,4 +140,5 @@ export const {
   useUpdateFuenteMutation,
   useRetrieveEtapasQuery,
   useRetrieveVendedorQuery,
+  useGetCampaniasQuery,
 } = crmApiSlice;
