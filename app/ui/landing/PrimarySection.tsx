@@ -1,190 +1,309 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
-export default function HeroCarousel() {
+export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
     {
       image:
         "/assets/img-landing/Diplomado-rehabilitación-de-la-articulación-temperomandibular-01.webp",
-      subtitle: "",
-      title: "Formamos profesionales que quieren marcar la diferencia.",
-      description: "Descrubre todos nuestros diplomados",
-      primaryButton: { text: "Explorar Diplomados", href: "/oferta-educativa" },
-      secondaryButton: { text: "Inscríbete Ahora", href: "#" },
+      subtitle: "Excelencia Académica",
+      title: "Formamos profesionales que quieren marcar la diferencia",
+      description:
+        "Descubre nuestros diplomados diseñados para transformar tu práctica profesional y ampliar tus horizontes académicos.",
+      primaryButton: {
+        text: "Explorar Diplomados",
+        href: "/oferta-educativa",
+      },
+      secondaryButton: {
+        text: "Conoce UNSZA",
+        href: "/about-us",
+      },
     },
     {
       image: "/assets/img-landing/Diplomado-en-urgencias-médicas-01.webp",
-      subtitle: "",
+      subtitle: "Educación en Salud",
       title: "Diplomado en Urgencias Médicas",
       description:
-        "Dirigido a profesionales y estudiantes del área de la salud, enfocado en la atención inmediata de emergencias médicas para salvar vidas y elevar la calidad del servicio en unidades médicas.",
-      primaryButton: { text: "Explorar Diplomados", href: "/oferta-educativa" },
-      secondaryButton: { text: "Inscríbete Ahora", href: "#" },
+        "Formación especializada para actuar de manera rápida y eficaz ante emergencias. Ideal para profesionales que buscan salvar vidas y mejorar la calidad del servicio médico.",
+      primaryButton: {
+        text: "Ver Programa",
+        href: "/oferta-educativa",
+      },
+      secondaryButton: {
+        text: "Inscríbete Ahora",
+        href: "#",
+      },
     },
     {
       image:
         "/assets/img-landing/Diplomado-nutrición-y-suplementación-en-la-salud-hormonal01.webp",
-      subtitle: "",
-      title: "Diplomado en Nutrición y suplementación en la salud hormonal",
+      subtitle: "Ciencia y Bienestar",
+      title: "Diplomado en Nutrición y Salud Hormonal",
       description:
-        "Orientado al análisis del sistema hormonal y su vínculo con la nutrición, brindando herramientas para detectar desequilibrios y aplicar estrategias de alimentación y suplementación.",
-      primaryButton: { text: "Explorar Diplomados", href: "/oferta-educativa" },
-      secondaryButton: { text: "Más Información", href: "#" },
+        "Analiza el sistema hormonal y aprende estrategias nutricionales para equilibrarlo. Ideal para quienes buscan aplicar conocimientos científicos al bienestar integral.",
+      primaryButton: {
+        text: "Más Información",
+        href: "/oferta-educativa",
+      },
+      secondaryButton: {
+        text: "Inscríbete",
+        href: "#",
+      },
     },
-    // {
-    //   image:
-    //     "/assets/img-landing/Diplomado-nutrición-y-suplementación-en-la-salud-hormonal01.webp",
-    //   subtitle: "",
-    //   title: "Diplomado en Síndrome de Down y Problemas de Aprendizaje",
-    //   description:
-    //     "Enfocado en el abordaje integral del síndrome de Down y problemas de aprendizaje, con herramientas teóricas y prácticas para impulsar un desarrollo inclusivo y personalizado.",
-    //   primaryButton: { text: "Explorar Diplomados", href: "#" },
-    //   secondaryButton: { text: "Más Información", href: "#" },
-    // },
   ];
 
-  // Auto-advance slides every 5 seconds
+  // Auto-advance slides
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 10000);
-
-    return () => clearInterval(interval);
+    return () => clearInterval(timer);
   }, [slides.length]);
 
-  // Navigation functions
   const goToNextSlide = () => {
-    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
   };
 
   const goToPrevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
   };
 
   return (
-    <div className="relative w-full h-[600px] mb-0 overflow-hidden">
-      {/* Slides */}
-      {slides.map((slide, index) => (
-        <div
-          key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            currentSlide === index ? "opacity-100 z-10" : "opacity-0 z-0"
-          }`}
-        >
-          {/* Background Image */}
-          <div className="relative w-full h-full">
-            <div className="relative w-full h-[650px] bg-black">
-              <Image
-                src={slide.image || "/placeholder.svg"}
-                alt={slide.title}
-                fill
-                className="object-cover object-top"
-                priority={index === 0}
-              />
-            </div>
-            {/* <Image
-              src={slide.image || "/placeholder.svg"}
-              alt={slide.title}
-              width={1500}
-              height={500}
-              className="object-cover mx-auto max-h-[600px] w-full"
-              priority={index === 0}
-            /> */}
+    <section className="relative w-full h-screen min-h-[600px] overflow-hidden">
+      <AnimatePresence mode="wait">
+        {slides.map(
+          (slide, index) =>
+            currentSlide === index && (
+              <motion.div
+                key={index}
+                className="absolute inset-0"
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 1, ease: "easeInOut" }}
+              >
+                {/* Background Image */}
+                <div className="relative w-full h-full">
+                  <Image
+                    src={slide.image || "/placeholder.svg"}
+                    alt={slide.title}
+                    fill
+                    className="object-cover"
+                    priority={index === 0}
+                    quality={90}
+                  />
 
-            {/* Dark Overlay */}
-            <div className="absolute inset-0 bg-[rgba(24,29,56,0.7)] flex items-center">
-              <div className="container mx-auto px-4">
-                <div className="max-w-4xl">
-                  {/* Content with animations */}
-                  <h5
-                    className={`text-white text-lg md:text-xl uppercase mb-3 transform ${
-                      currentSlide === index ? "animate-fadeInDown" : ""
-                    }`}
-                  >
-                    {slide.subtitle}
-                  </h5>
-                  <h1
-                    className={`text-3xl md:text-5xl lg:text-6xl text-white font-bold mb-4 transform ${
-                      currentSlide === index
-                        ? "animate-fadeInDown animation-delay-200"
-                        : ""
-                    }`}
-                  >
-                    {slide.title}
-                  </h1>
-                  <p
-                    className={`text-white text-base md:text-lg mb-6 transform ${
-                      currentSlide === index
-                        ? "animate-fadeInDown animation-delay-400"
-                        : ""
-                    }`}
-                  >
-                    {slide.description}
-                  </p>
-                  <div
-                    className={`flex flex-wrap gap-4 transform ${
-                      currentSlide === index
-                        ? "animate-fadeInUp animation-delay-600"
-                        : ""
-                    }`}
-                  >
-                    <Link
-                      href={slide.primaryButton.href}
-                      className="px-6 py-3 bg-[#121b6a] text-white font-medium rounded hover:bg-[#0a1050] transition-colors"
-                    >
-                      {slide.primaryButton.text}
-                    </Link>
-                    {/* <Link
-                      href={slide.secondaryButton.href}
-                      className="px-6 py-3 bg-white text-[#121b6a] font-medium rounded hover:bg-gray-100 transition-colors"
-                    >
-                      {slide.secondaryButton.text}
-                    </Link> */}
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
+
+                  {/* Content Container */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                      <div className="max-w-4xl mx-auto text-center lg:text-left">
+                        {/* Subtitle */}
+                        <motion.h5
+                          className="text-white/90 text-sm md:text-base lg:text-lg uppercase tracking-widest font-medium mb-4"
+                          initial={{ opacity: 0, y: 30 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.8, delay: 0.2 }}
+                        >
+                          {slide.subtitle}
+                        </motion.h5>
+
+                        {/* Main Title */}
+                        <motion.h1
+                          className="text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6"
+                          initial={{ opacity: 0, y: 50 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 1, delay: 0.4 }}
+                        >
+                          {slide.title}
+                        </motion.h1>
+
+                        {/* Description */}
+                        <motion.p
+                          className="text-white/90 text-lg md:text-xl lg:text-2xl leading-relaxed mb-8 max-w-3xl mx-auto lg:mx-0"
+                          initial={{ opacity: 0, y: 30 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.8, delay: 0.6 }}
+                        >
+                          {slide.description}
+                        </motion.p>
+
+                        {/* Action Buttons */}
+                        <motion.div
+                          className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+                          initial={{ opacity: 0, y: 30 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.8, delay: 0.8 }}
+                        >
+                          <motion.div
+                            whileHover={{
+                              scale: 1.05,
+                              boxShadow: "0 20px 40px rgba(18, 27, 106, 0.4)",
+                            }}
+                            whileTap={{ scale: 0.95 }}
+                            transition={{ type: "spring", stiffness: 300 }}
+                          >
+                            <Link
+                              href={slide.primaryButton.href}
+                              className="inline-block px-8 py-4 bg-[#121b6a] text-white font-semibold text-lg rounded-lg hover:bg-[#0f1654] transition-all duration-300 shadow-lg"
+                              role="button"
+                              aria-label={slide.primaryButton.text}
+                            >
+                              {slide.primaryButton.text}
+                            </Link>
+                          </motion.div>
+
+                          <motion.div
+                            whileHover={{
+                              scale: 1.05,
+                              boxShadow: "0 20px 40px rgba(255, 255, 255, 0.2)",
+                            }}
+                            whileTap={{ scale: 0.95 }}
+                            transition={{ type: "spring", stiffness: 300 }}
+                          >
+                            <Link
+                              href={slide.secondaryButton.href}
+                              className="inline-block px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold text-lg rounded-lg border-2 border-white/30 hover:bg-white/20 hover:border-white/50 transition-all duration-300"
+                              role="button"
+                              aria-label={slide.secondaryButton.text}
+                            >
+                              {slide.secondaryButton.text}
+                            </Link>
+                          </motion.div>
+                        </motion.div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
+              </motion.div>
+            )
+        )}
+      </AnimatePresence>
 
-      {/* Navigation Buttons */}
-      <div className="hidden md:flex absolute top-1/2 right-8 transform -translate-y-1/2 z-20 flex flex-col gap-3">
-        <button
+      {/* Navigation Arrows */}
+      <div className="absolute top-1/2 left-4 right-4 flex justify-between items-center pointer-events-none z-20">
+        <motion.button
           onClick={goToPrevSlide}
-          className="w-10 h-10 flex items-center justify-center border border-white text-white rounded-full hover:bg-[#121b6a] hover:border-[#121b6a] transition-colors"
-          aria-label="Previous slide"
+          className="w-12 h-12 flex items-center justify-center bg-white/10 backdrop-blur-sm border border-white/30 text-white rounded-full hover:bg-white/20 hover:border-white/50 transition-all duration-300 pointer-events-auto"
+          whileHover={{ scale: 1.1, x: -5 }}
+          whileTap={{ scale: 0.9 }}
+          aria-label="Slide anterior"
         >
-          <ChevronLeft size={20} />
-        </button>
-        <button
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+        </motion.button>
+
+        <motion.button
           onClick={goToNextSlide}
-          className="w-10 h-10 flex items-center justify-center border border-white text-white rounded-full hover:bg-[#121b6a] hover:border-[#121b6a] transition-colors"
-          aria-label="Next slide"
+          className="w-12 h-12 flex items-center justify-center bg-white/10 backdrop-blur-sm border border-white/30 text-white rounded-full hover:bg-white/20 hover:border-white/50 transition-all duration-300 pointer-events-auto"
+          whileHover={{ scale: 1.1, x: 5 }}
+          whileTap={{ scale: 0.9 }}
+          aria-label="Siguiente slide"
         >
-          <ChevronRight size={20} />
-        </button>
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </motion.button>
       </div>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 z-20 flex gap-2">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`w-3 h-3 rounded-full transition-colors ${
-              currentSlide === index ? "bg-white" : "bg-white/50"
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+        <div className="flex gap-3">
+          {slides.map((_, index) => (
+            <motion.button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                currentSlide === index
+                  ? "bg-white scale-125"
+                  : "bg-white/50 hover:bg-white/70"
+              }`}
+              whileHover={{ scale: currentSlide === index ? 1.25 : 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              aria-label={`Ir al slide ${index + 1}`}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+
+      {/* Progress Bar */}
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/20 z-20">
+        <motion.div
+          className="h-full bg-white"
+          initial={{ width: "0%" }}
+          animate={{ width: "100%" }}
+          transition={{
+            duration: 10,
+            ease: "linear",
+            repeat: Number.POSITIVE_INFINITY,
+          }}
+          key={currentSlide}
+        />
+      </div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-20 hidden lg:block"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 1.5 }}
+      >
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{
+            duration: 2,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "easeInOut",
+          }}
+          className="flex flex-col items-center text-white/70"
+        >
+          <span className="text-sm uppercase tracking-wider mb-2">Desliza</span>
+          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
+            <motion.div
+              animate={{ y: [0, 12, 0] }}
+              transition={{
+                duration: 2,
+                repeat: Number.POSITIVE_INFINITY,
+                ease: "easeInOut",
+              }}
+              className="w-1 h-3 bg-white/70 rounded-full mt-2"
+            />
+          </div>
+        </motion.div>
+      </motion.div>
+    </section>
   );
 }
