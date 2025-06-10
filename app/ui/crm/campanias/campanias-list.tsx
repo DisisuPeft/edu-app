@@ -1,25 +1,25 @@
 "use client";
 
-import { useState, useContext } from "react";
+// import { useState, useContext } from "react";
 import {
   Plus,
   Search,
-  Edit,
-  Trash,
-  Calendar,
-  Target,
-  Users,
-  Megaphone,
+  // Edit,
+  // Trash,
+  // Calendar,
+  // Target,
+  // Users,
+  // Megaphone,
 } from "lucide-react";
 
-import { useGetCampaniasQuery } from "@/redux/crm/crmApiSlice";
+// import { useGetCampaniasQuery } from "@/redux/crm/crmApiSlice";
 
 export default function CampanasList() {
   //   const { campanas, leads, addCampana, updateCampana, deleteCampana } = useContext(LeadContext)
   //   const [searchTerm, setSearchTerm] = useState("")
   //   const [showModal, setShowModal] = useState(false)
   //   const [currentCampana, setCurrentCampana] = useState<any>(null)
-  const { data: campanias } = useGetCampaniasQuery();
+  // const { data: campanias } = useGetCampaniasQuery();
   //   // Filtrar campañas basado en búsqueda
   //   const filteredCampanas = campanas.filter(
   //     (campana: any) =>

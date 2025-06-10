@@ -10,12 +10,12 @@ import {
   Phone,
   Mail,
   MessageCircle,
-  Send,
-  User,
-  AtSign,
-  Building,
-  Calendar,
-  CheckCircle,
+  // Send,
+  // User,
+  // AtSign,
+  // Building,
+  // Calendar,
+  // CheckCircle,
 } from "lucide-react";
 
 // Custom hook for animation on scroll
@@ -30,11 +30,11 @@ export default function ContactSection() {
   const { ref, isVisible } = useInView();
 
   // WhatsApp configuration
-  const whatsappNumber = "5219611234567"; // Replace with actual WhatsApp number
-  const whatsappMessage = encodeURIComponent(
-    "Hola, me interesa obtener información sobre los diplomados y programas académicos de UNSZA. ¿Podrían brindarme asesoría personalizada?"
-  );
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+  // const whatsappNumber = "5219611234567"; // Replace with actual WhatsApp number
+  // const whatsappMessage = encodeURIComponent(
+  //   "Hola, me interesa obtener información sobre los diplomados y programas académicos de UNSZA. ¿Podrían brindarme asesoría personalizada?"
+  // );
+  // const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -71,11 +71,11 @@ export default function ContactSection() {
     },
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Form submission logic would go here
-    console.log("Form submitted");
-  };
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   // Form submission logic would go here
+  //   console.log("Form submitted");
+  // };
 
   return (
     <section className="py-16 md:py-20 lg:py-24 bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
@@ -168,7 +168,7 @@ export default function ContactSection() {
                   <br />
                   Tuxtla Gutiérrez, Chiapas
                   <br />
-                  C.P. 06000
+                  C.P. 29050
                 </p>
               </motion.div>
 
@@ -221,7 +221,7 @@ export default function ContactSection() {
                 <div className="ml-3">
                   <p className="text-sm text-gray-500">Teléfono</p>
                   <p className="font-semibold text-[#121829]">
-                    +52 55 1234 5678
+                    +52 961 580 5154
                   </p>
                 </div>
               </motion.a>
@@ -237,7 +237,7 @@ export default function ContactSection() {
                 <div className="ml-3">
                   <p className="text-sm text-gray-500">Email</p>
                   <p className="font-semibold text-[#121829]">
-                    info@unsza.edu.mx
+                    direccioncomercialunszn@gmail.com
                   </p>
                 </div>
               </motion.a>
@@ -272,7 +272,7 @@ export default function ContactSection() {
                 </div>
               </div>
               <motion.a
-                href={whatsappUrl}
+                href="https://wa.link/imczrl"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center bg-white text-[#25D366] px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors duration-300 w-full justify-center"
@@ -452,7 +452,7 @@ export default function ContactSection() {
 
           <div className="relative h-96">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.9234567890123!2d-99.1332!3d19.4326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f92c2c2c2c2c%3A0x1234567890abcdef!2sZócalo%2C%20Centro%20Histórico%2C%20Ciudad%20de%20México!5e0!3m2!1ses!2smx!4v1234567890123!5m2!1ses!2smx"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d238.7873493289777!2d-93.16473679592507!3d16.74691876054303!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85ecd90a903c47a3%3A0x976daaf856466fa5!2sUNSZA%20Universidad%20Nacional%20Salvador%20Zubir%C3%A1n%20Anchondo!5e0!3m2!1ses!2smx!4v1749589025138!5m2!1ses!2smx"
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -461,6 +461,7 @@ export default function ContactSection() {
               referrerPolicy="no-referrer-when-downgrade"
               className="w-full h-full"
             />
+            {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d238.7873493289777!2d-93.16473679592507!3d16.74691876054303!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85ecd90a903c47a3%3A0x976daaf856466fa5!2sUNSZA%20Universidad%20Nacional%20Salvador%20Zubir%C3%A1n%20Anchondo!5e0!3m2!1ses!2smx!4v1749589025138!5m2!1ses!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> */}
           </div>
         </motion.div>
 

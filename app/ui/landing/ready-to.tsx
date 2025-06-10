@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 
 export default function CallToSuscribe() {
   // WhatsApp number and pre-loaded message
-  const whatsappNumber = "5219611234567"; // Replace with actual WhatsApp number
-  const whatsappMessage = encodeURIComponent(
-    "Hola, quiero recibir información sobre los diplomados y programas académicos de UNSZA. ¿Podrían brindarme asesoría personalizada?"
-  );
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+  // const whatsappNumber = "5219611234567"; // Replace with actual WhatsApp number
+  // const whatsappMessage = encodeURIComponent(
+  //   "Hola, quiero recibir información sobre los diplomados y programas académicos de UNSZA. ¿Podrían brindarme asesoría personalizada?"
+  // );
+  // const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -36,7 +36,10 @@ export default function CallToSuscribe() {
   };
 
   return (
-    <section className="py-16 md:py-20 lg:py-24 bg-[#121b6a] relative overflow-hidden">
+    <section
+      className="py-16 md:py-20 lg:py-24 bg-[#121b6a] relative overflow-hidden"
+      id="cta"
+    >
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-10 left-10 w-32 h-32 bg-white rounded-full blur-3xl animate-pulse" />
@@ -178,7 +181,7 @@ export default function CallToSuscribe() {
           {/* WhatsApp CTA Button */}
           <motion.div variants={itemVariants}>
             <motion.a
-              href={whatsappUrl}
+              href="https://wa.link/wm6hyg"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center bg-[#25D366] text-white px-8 py-4 rounded-full font-bold text-lg shadow-2xl group relative overflow-hidden"

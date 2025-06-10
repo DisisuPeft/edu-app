@@ -7,7 +7,7 @@ import {
   Award,
   BookOpen,
   Star,
-  CheckCircle,
+  // CheckCircle,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useRef } from "react";
@@ -157,7 +157,7 @@ export default function EducationalOfferingsSection() {
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
         >
-          {diplomados.map((diplomado, index) => (
+          {diplomados.map((diplomado) => (
             <motion.div
               key={diplomado.id}
               className="group relative"

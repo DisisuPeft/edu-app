@@ -47,12 +47,12 @@ export default function AboutSection() {
     },
   ];
 
-  const stats = [
-    { number: "40+", label: "Años de experiencia" },
-    { number: "15,000+", label: "Egresados exitosos" },
-    { number: "50+", label: "Programas académicos" },
-    { number: "95%", label: "Satisfacción estudiantil" },
-  ];
+  // const stats = [
+  //   { number: "40+", label: "Años de experiencia" },
+  //   { number: "15,000+", label: "Egresados exitosos" },
+  //   { number: "50+", label: "Programas académicos" },
+  //   { number: "95%", label: "Satisfacción estudiantil" },
+  // ];
 
   const containerVariants = {
     hidden: { opacity: 0 },

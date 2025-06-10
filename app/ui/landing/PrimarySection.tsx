@@ -37,7 +37,7 @@ export default function Hero() {
       },
       secondaryButton: {
         text: "Inscríbete Ahora",
-        href: "#",
+        href: "#cta",
       },
     },
     {
@@ -53,7 +53,7 @@ export default function Hero() {
       },
       secondaryButton: {
         text: "Inscríbete",
-        href: "#",
+        href: "#cta",
       },
     },
   ];

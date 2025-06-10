@@ -395,7 +395,7 @@ export default function DiplomadosSection() {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-          {diplomados.map((diplomado, _index) => (
+          {diplomados.map((diplomado) => (
             <motion.div
               key={diplomado.id}
               className="group"
@@ -501,7 +501,7 @@ export default function DiplomadosSection() {
             </p>
             <motion.a
               // onClick={() => setShowModal(true)}
-              href="#"
+              href="https://wa.link/4ljecz"
               className="bg-white text-[#a20519] px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 shadow-lg"
               whileHover={{
                 scale: 1.05,

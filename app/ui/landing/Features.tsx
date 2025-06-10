@@ -12,7 +12,7 @@ import {
   Target,
   Heart,
 } from "lucide-react";
-import Image from "next/image";
+// import Image from "next/image";
 
 export default function ServicesSection() {
   const ref = useRef(null);
@@ -195,7 +195,7 @@ export default function ServicesSection() {
         </motion.div>
 
         {/* Bottom CTA Section */}
-        <motion.div
+        {/* <motion.div
           className="text-center mt-16"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -205,8 +205,8 @@ export default function ServicesSection() {
             className="bg-gradient-to-r from-[#a20519] to-[#121b6a] rounded-2xl p-8 md:p-12 text-white"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}
-          >
-            <h3 className="text-2xl md:text-3xl font-bold mb-4">
+          > */}
+        {/* <h3 className="text-2xl md:text-3xl font-bold mb-4">
               ¿Listo para formar parte de nuestra comunidad académica?
             </h3>
             <p className="text-white/90 mb-8 max-w-2xl mx-auto text-lg">
@@ -225,8 +225,8 @@ export default function ServicesSection() {
               whileTap={{ scale: 0.95 }}
             >
               Solicitar Información
-            </motion.a>
-            {/* <motion.a
+            </motion.a> */}
+        {/* <motion.a
               href="#"
               target="_blank"
               rel="noopener noreferrer"
@@ -249,8 +249,8 @@ export default function ServicesSection() {
               />
               Habla con un asesor
             </motion.a> */}
-          </motion.div>
-        </motion.div>
+        {/* </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );

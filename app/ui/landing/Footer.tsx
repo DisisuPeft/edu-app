@@ -19,7 +19,7 @@ export default function FooterSection() {
 
   const quickLinks = [
     { name: "Sobre nosotros", href: "/about-us" },
-    // { name: "Contacta con nosotros", href: "#" }, //esta a whats
+    { name: "Contacta con nosotros", href: "/contacto" }, //esta a whats
     { name: "Diplomados", href: "/oferta-educativa" },
     // { name: "Términos y condiciones", href: "#" },
     // { name: "Política de privacidad", href: "#" },
@@ -29,7 +29,7 @@ export default function FooterSection() {
     { name: "Inicio", href: "/" },
     { name: "Sobre nosotros", href: "/about-us" },
     { name: "Diplomados", href: "/oferta-educativa" },
-    // { name: "Contacto", href: "#" },
+    { name: "Contacto", href: "/contacto" },
   ];
 
   // const match_links = (path: string) => {
