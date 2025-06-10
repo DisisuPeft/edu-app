@@ -149,9 +149,9 @@ export default function AboutUsSection() {
               <p className="text-lg leading-relaxed max-w-3xl">
                 Somos una institución educativa comprometida con la excelencia
                 académica y la formación integral de profesionales en el área de
-                la salud. Con más de dos décadas de experiencia, nos hemos
-                consolidado como una universidad de prestigio que combina la
-                tradición educativa con la innovación tecnológica.
+                la salud. Nos hemos consolidado como una universidad de
+                prestigio que combina la tradición educativa con la innovación
+                tecnológica.
               </p>
               <p className="text-lg leading-relaxed max-w-3xl">
                 Nuestros programas académicos están diseñados para responder a
@@ -206,7 +206,7 @@ export default function AboutUsSection() {
                 <p className="text-gray-700 leading-relaxed">
                   Ser una institución educativa de vanguardia, con excelencia en
                   la formación de profesionales altamente especializados,
-                  reconocida a nivel nacional e internacional.
+                  reconocida a nivel nacional.
                 </p>
               </motion.div>
             </motion.div>

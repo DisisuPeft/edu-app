@@ -211,7 +211,7 @@ export default function ContactSection() {
               variants={itemVariants}
             >
               <motion.a
-                href="tel:+525512345678"
+                href="tel:+52961 580 5154"
                 className="flex items-center bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100"
                 whileHover={{ scale: 1.02 }}
               >
@@ -227,7 +227,7 @@ export default function ContactSection() {
               </motion.a>
 
               <motion.a
-                href="mailto:info@unsza.edu.mx"
+                href="mailto:direccioncomercialunszn@gmail.com"
                 className="flex items-center bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100"
                 whileHover={{ scale: 1.02 }}
               >

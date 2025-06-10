@@ -192,8 +192,7 @@ export default function AboutSection() {
                 Nuestro compromiso trasciende las aulas: impulsamos la
                 investigación, el desarrollo integral y la actualización
                 continua, brindando oportunidades reales de crecimiento en áreas
-                estratégicas como salud, educación, tecnología y ciencias
-                humanas.
+                estratégicas como salud y educación.
               </p>
             </motion.div>
 
