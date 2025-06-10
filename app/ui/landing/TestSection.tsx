@@ -502,7 +502,7 @@ export default function DiplomadosSection() {
             <motion.a
               // onClick={() => setShowModal(true)}
               href="https://wa.link/4ljecz"
-              className="bg-white text-[#a20519] px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 shadow-lg"
+              className="w-full max-w-xs mx-auto bg-white text-[#a20519] px-6 py-3 rounded-full font-bold text-base sm:text-lg text-center hover:bg-gray-100 transition-all duration-300 shadow-lg"
               whileHover={{
                 scale: 1.05,
                 boxShadow: "0 20px 40px rgba(255, 255, 255, 0.3)",
