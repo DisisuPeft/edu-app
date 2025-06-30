@@ -18,8 +18,9 @@ export default function AboutUsSection() {
 
   const strengths = [
     {
-      title: "Formación especializada",
-      description: "Diplomados diseñados por expertos del sector salud",
+      title: "Formación reconocida por RVOE",
+      description:
+        "Estudia con validez oficial en diplomados creados por profesionales del sector salud",
       color: "#121b6a",
       icon: BookOpen,
     },
@@ -147,18 +148,26 @@ export default function AboutUsSection() {
               variants={itemVariants}
             >
               <p className="text-lg leading-relaxed max-w-3xl">
-                Somos una institución educativa comprometida con la excelencia
-                académica y la formación integral de profesionales en el área de
-                la salud. Nos hemos consolidado como una universidad de
-                prestigio que combina la tradición educativa con la innovación
-                tecnológica.
+                Somos una universidad dinámica, en constante evolución
+                educativa, comprometida con la formación de profesionales de
+                alto nivel en un entorno académico de excelencia. Nos enfocamos
+                en desarrollar habilidades y competencias que impulsen a
+                nuestros estudiantes, contribuyendo activamente al avance del
+                conocimiento y la innovación en distintas áreas del saber.
               </p>
               <p className="text-lg leading-relaxed max-w-3xl">
-                Nuestros programas académicos están diseñados para responder a
-                las necesidades actuales del sector salud, ofreciendo una
-                formación práctica y teórica que prepara a nuestros estudiantes
-                para enfrentar los desafíos profesionales con competencia y
-                ética.
+                La madurez natural de la persona es el resultado del desarrollo
+                armónico de las virtudes humanas. Todos los seres humanos
+                nacemos con dignidad, pero es a través de la educación y la
+                práctica de los valores como construimos una verdadera dignidad
+                moral.
+              </p>
+              <p className="text-lg leading-relaxed max-w-3xl">
+                Convertir los valores en hábitos nos permite forjar virtudes, y
+                esas virtudes son las que conquistamos día a día en nuestro
+                camino de crecimiento personal. Este compromiso profundo con la
+                formación del carácter es la esencia de nuestro lema:{" "}
+                <strong>“Educar para conquistar virtudes”.</strong>
               </p>
             </motion.div>
 
@@ -221,12 +230,14 @@ export default function AboutUsSection() {
               </h5>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                 {[
-                  { letter: "E", name: "Excelencia", color: "#121b6a" },
-                  { letter: "I", name: "Integridad", color: "#a20519" },
-                  { letter: "R", name: "Responsabilidad", color: "#121b6a" },
-                  { letter: "I", name: "Innovación", color: "#a20519" },
+                  { letter: "H", name: "Honradez", color: "#121b6a" },
+                  { letter: "S", name: "Solidaridad", color: "#a20519" },
+                  { letter: "J", name: "Justicia social", color: "#121b6a" },
+                  { letter: "G", name: "Generosidad", color: "#a20519" },
+                  { letter: "C", name: "Comprensión", color: "#121b6a" },
+                  { letter: "L", name: "Lealtad", color: "#a20519" },
                   { letter: "C", name: "Compromiso", color: "#121b6a" },
-                  { letter: "É", name: "Ética", color: "#a20519" },
+                  { letter: "B", name: "Bondad", color: "#a20519" },
                 ].map((value, index) => (
                   <motion.div
                     key={index}

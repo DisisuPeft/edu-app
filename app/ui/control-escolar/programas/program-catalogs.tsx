@@ -2,7 +2,7 @@
 
 import { useGetCatalogoProgramaQuery } from "@/redux/control-escolar/programas-educativos/programApiSlice";
 import { Filter } from "lucide-react";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppDispatch } from "@/redux/hooks";
 import {
   setProgramCatalog,
   setError,
@@ -45,7 +45,7 @@ export default function ProgramCatalog() {
     if (error && "status" in error) {
       dispatch(setError("Error al cargar los programas"));
     }
-  }, [data, error, isSuccess, isLoading]);
+  }, [data, error, isSuccess, isLoading, dispatch]);
 
   return (
     <div className="bg-white rounded-lg shadow overflow-hidden">

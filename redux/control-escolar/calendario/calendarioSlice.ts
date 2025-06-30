@@ -1,16 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 // import { ProgramaEducativoCatalog } from "./types";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { CiclosResponse } from "./types";
+import { CicloResponse, CiclosResponse } from "./types";
 
 interface calendarioState {
-  ciclos: CiclosResponse;
+  ciclos: CiclosResponse | null;
+  ciclo: CicloResponse | null;
   isLoading: boolean;
+  ciclo_id: number | null;
   errorMessage: string | null;
 }
 
 const initialState = {
   ciclos: null,
+  ciclo: null,
+  ciclo_id: null,
   isLoading: true,
   errorMessage: null,
 } as calendarioState;
@@ -19,7 +23,7 @@ const calendarioSlice = createSlice({
   name: "calendario",
   initialState,
   reducers: {
-    clearCiclo: (state) => {
+    clearCiclos: (state) => {
       state.ciclos = null;
     },
     finishInitialLoad: (state) => {
@@ -31,13 +35,26 @@ const calendarioSlice = createSlice({
     clearError: (state) => {
       state.errorMessage = null;
     },
-    setCiclo: (state, action: PayloadAction<CiclosResponse>) => {
+    setCiclos: (state, action: PayloadAction<CiclosResponse>) => {
       state.ciclos = action.payload;
+    },
+    setCiclo: (state, action: PayloadAction<CicloResponse>) => {
+      state.ciclo = action.payload;
+    },
+    setCicloId: (state, action: PayloadAction<number>) => {
+      state.ciclo_id = action.payload;
     },
   },
 });
 
-export const { clearCiclo, setCiclo, setError, clearError, finishInitialLoad } =
-  calendarioSlice.actions;
+export const {
+  clearCiclos,
+  setCiclos,
+  setError,
+  clearError,
+  finishInitialLoad,
+  setCicloId,
+  setCiclo,
+} = calendarioSlice.actions;
 
 export default calendarioSlice.reducer;

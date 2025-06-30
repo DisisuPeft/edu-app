@@ -57,18 +57,18 @@ export default function CallToSuscribe() {
         >
           {/* Badge */}
           <motion.div
-            className="inline-flex items-center bg-white/10 backdrop-blur-sm text-white text-sm font-semibold px-4 py-2 rounded-full mb-8"
+            className="inline-flex items-center bg-white/10 backdrop-blur-sm text-white text-lg font-semibold px-4 py-2 rounded-full mb-8"
             variants={itemVariants}
           >
-            <svg
+            {/* <svg
               className="w-4 h-4 mr-2"
               fill="currentColor"
               viewBox="0 0 24 24"
             >
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c1.54 0 3-.35 4.31-.99L22 22l-1.01-5.69C21.65 15 22 13.54 22 12c0-5.52-4.48-10-10-10zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
               <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67V7z" />
-            </svg>
-            Asesoría Personalizada
+            </svg> */}
+            UNSZA
           </motion.div>
 
           {/* Main Title */}
@@ -87,10 +87,11 @@ export default function CallToSuscribe() {
             className="text-lg md:text-xl text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed"
             variants={itemVariants}
           >
-            Nuestros asesores académicos están listos para guiarte en la
-            elección del programa perfecto para tus objetivos. Recibe
-            información personalizada sobre diplomados, horarios, modalidades y
-            beneficios exclusivos.
+            Ofrecemos diplomados, maestrías y doctorados con validez oficial
+            (RVOE), diseñados para responder a desafios reales del sector salud
+            y otras áreas estratégicas. Nuestro equipo académico está listo para
+            orientarte en cada paso. Conoce nuestras modalidades, beneficios y
+            el programa ideal para ti.
           </motion.p>
 
           {/* Features Grid */}

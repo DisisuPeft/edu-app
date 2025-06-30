@@ -12,7 +12,7 @@ import { useState } from "react";
 
 export default function CalendarioModule() {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [selectedView, setSelectedView] = useState<"month" | "year">("month");
+  // const [selectedView, setSelectedView] = useState<"month" | "year">("month");
   const [selectedCycle, setSelectedCycle] = useState("2023-2024");
 
   // Datos de ejemplo para ciclos escolares
@@ -147,10 +147,10 @@ export default function CalendarioModule() {
     });
   };
 
-  const hasEvent = (date: Date) => {
-    const dateStr = date.toISOString().split("T")[0];
-    return eventosImportantes.some((evento) => evento.fecha === dateStr);
-  };
+  // const hasEvent = (date: Date) => {
+  //   const dateStr = date.toISOString().split("T")[0];
+  //   return eventosImportantes.some((evento) => evento.fecha === dateStr);
+  // };
 
   const getEventForDate = (date: Date) => {
     const dateStr = date.toISOString().split("T")[0];

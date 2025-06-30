@@ -25,34 +25,161 @@ export default function EducationalOfferingsSection() {
   const { ref, isVisible } = useInView();
 
   // Array of diplomados data
-  const diplomados = [
+  // const diplomados = [
+  //   {
+  //     id: 1,
+  //     title: "Diplomado en Urgencias Médicas",
+  //     description:
+  //       "Diseñado para quienes enfrentan el reto diario de salvar vidas, este programa responde a una necesidad urgente en nuestro sistema de salud: formar profesionales capaces de actuar con decisión frente a situaciones críticas, elevando así la calidad y dignidad de la atención médica en todo el país.",
+  //     duration: "6 meses",
+  //     icon: GraduationCap,
+  //     featured: true,
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Diplomado en Nutrición y suplementación en la salud hormonal",
+  //     description:
+  //       "Este diplomado capacita a profesionales en el arte y la ciencia de comprender el sistema hormonal como un reflejo integral del cuerpo y el entorno. A través de herramientas clínicas, nutricionales y bioquímicas, los participantes aprenden a identificar desequilibrios que impactan profundamente la salud, y a intervenir con precisión y conciencia.",
+  //     duration: "6 meses",
+  //     icon: GraduationCap,
+  //     featured: false,
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Diplomado en Síndrome de Down y Problemas de Aprendizaje",
+  //     description:
+  //       "Este diplomado ofrece una mirada humana y especializada al síndrome de Down y a los retos del aprendizaje, formando profesionales y familias capaces de acompañar con empatía y conocimiento. Promueve un enfoque inclusivo que reconoce el valor único de cada persona y construye las bases para una sociedad verdaderamente equitativa.",
+  //     duration: "6 meses",
+  //     students: "100+",
+  //     icon: GraduationCap,
+  //     featured: false,
+  //   },
+  // ];
+
+  const oferta = [
     {
-      id: 1,
-      title: "Diplomado en Urgencias Médicas",
-      description:
-        "Diseñado para quienes enfrentan el reto diario de salvar vidas, este programa responde a una necesidad urgente en nuestro sistema de salud: formar profesionales capaces de actuar con decisión frente a situaciones críticas, elevando así la calidad y dignidad de la atención médica en todo el país.",
-      duration: "6 meses",
-      icon: GraduationCap,
-      featured: true,
+      tipo: "Diplomados",
+      items: [
+        {
+          id: 1,
+          title: "Diplomado en Curación de Heridas, Pie Diabético",
+          description:
+            "Manejo avanzado en el tratamiento de heridas crónicas y pie diabético.",
+          duration: "6 meses",
+          featured: true,
+          icon: Star,
+        },
+        {
+          id: 2,
+          title: "Diplomado en Nutrición y Suplementación en la Salud Hormonal",
+          description:
+            "Especialízate en el equilibrio hormonal a través de la nutrición funcional.",
+          duration: "6 meses",
+          featured: false,
+          icon: Star,
+        },
+        {
+          id: 3,
+          title:
+            "Diplomado en Rehabilitación de la Articulación Temporomandibular",
+          description:
+            "Técnicas de rehabilitación para trastornos de la articulación temporomandibular.",
+          duration: "6 meses",
+          featured: false,
+          icon: Star,
+        },
+        {
+          id: 4,
+          title: "Diplomado en Síndrome de Down y Problemas de Aprendizaje",
+          description:
+            "Atención integral para niños con Síndrome de Down y dificultades escolares.",
+          duration: "6 meses",
+          featured: false,
+          icon: Star,
+        },
+        {
+          id: 5,
+          title: "Diplomado en Urgencias Médicas",
+          description:
+            "Capacitación intensiva en la atención prehospitalaria y emergencias clínicas.",
+          duration: "6 meses",
+          featured: true,
+          icon: Star,
+        },
+      ],
     },
     {
-      id: 2,
-      title: "Diplomado en Nutrición y suplementación en la salud hormonal",
-      description:
-        "Este diplomado capacita a profesionales en el arte y la ciencia de comprender el sistema hormonal como un reflejo integral del cuerpo y el entorno. A través de herramientas clínicas, nutricionales y bioquímicas, los participantes aprenden a identificar desequilibrios que impactan profundamente la salud, y a intervenir con precisión y conciencia.",
-      duration: "6 meses",
-      icon: GraduationCap,
-      featured: false,
+      tipo: "Maestrías",
+      items: [
+        {
+          id: 101,
+          title: "Administración de Instituciones y Servicios de Salud",
+          description:
+            "Formación directiva en el manejo estratégico del sistema de salud.",
+          duration: "2 años",
+          featured: true,
+          icon: Star,
+        },
+        {
+          id: 102,
+          title: "Estrategias Didácticas y Evaluación por Competencias",
+          description:
+            "Domina las metodologías modernas de enseñanza y evaluación.",
+          duration: "2 años",
+          featured: false,
+          icon: Star,
+        },
+        {
+          id: 103,
+          title: "Educación",
+          description:
+            "Desarrolla capacidades para el diseño y gestión de procesos educativos.",
+          duration: "2 años",
+          featured: false,
+          icon: Star,
+        },
+        {
+          id: 104,
+          title: "Administración y Legislación Empresarial",
+          description:
+            "Lidera empresas con conocimiento legal y administrativo.",
+          duration: "2 años",
+          featured: false,
+          icon: Star,
+        },
+        {
+          id: 105,
+          title: "Evaluación de Estadísticas en Salud Pública",
+          description:
+            "Aplica herramientas estadísticas para mejorar políticas sanitarias.",
+          duration: "2 años",
+          featured: false,
+          icon: Star,
+        },
+        {
+          id: 106,
+          title: "Docencia en Enfermería",
+          description:
+            "Forma a los futuros profesionales de enfermería desde la práctica educativa.",
+          duration: "2 años",
+          featured: true,
+          icon: Star,
+        },
+      ],
     },
     {
-      id: 3,
-      title: "Diplomado en Síndrome de Down y Problemas de Aprendizaje",
-      description:
-        "Este diplomado ofrece una mirada humana y especializada al síndrome de Down y a los retos del aprendizaje, formando profesionales y familias capaces de acompañar con empatía y conocimiento. Promueve un enfoque inclusivo que reconoce el valor único de cada persona y construye las bases para una sociedad verdaderamente equitativa.",
-      duration: "6 meses",
-      students: "100+",
-      icon: GraduationCap,
-      featured: false,
+      tipo: "Doctorado",
+      items: [
+        {
+          id: 201,
+          title: "Dirección y Gestión de Instituciones y Servicios de Salud",
+          description:
+            "Programa doctoral para líderes en políticas y administración sanitaria.",
+          duration: "2 años y 6 meses",
+          featured: true,
+          icon: Star,
+        },
+      ],
     },
   ];
 
@@ -152,77 +279,120 @@ export default function EducationalOfferingsSection() {
 
         {/* Diplomados Grid */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20"
+          className="flex flex-col"
           variants={containerVariants}
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
         >
-          {diplomados.map((diplomado) => (
-            <motion.div
-              key={diplomado.id}
-              className="group relative"
-              variants={itemVariants}
-              whileHover={{
-                y: -8,
-                transition: { duration: 0.3, ease: "easeOut" },
-              }}
-            >
-              <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 p-8 border border-gray-200 h-full flex flex-col relative overflow-hidden">
-                {/* Featured Badge */}
-                {diplomado.featured && (
-                  <div className="absolute top-4 right-4 bg-gradient-to-r from-[#a20519] to-red-600 text-white px-3 py-1 rounded-full text-xs font-bold">
-                    <Star className="w-3 h-3 inline mr-1" />
-                    Destacado
-                  </div>
-                )}
+          {oferta.map((grupo) => (
+            <div key={grupo.tipo}>
+              <h2 className="text-4xl font-bold mb-6 text-[#121b6a] mt-10 text-center">
+                {grupo.tipo}
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {grupo.items.map((programa) => (
+                  <motion.div
+                    key={programa.id}
+                    className=""
+                    variants={itemVariants}
+                    whileHover={{
+                      y: -8,
+                      transition: { duration: 0.3, ease: "easeOut" },
+                    }}
+                  >
+                    <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 p-8 border border-gray-200 h-full flex flex-col relative overflow-hidden">
+                      {programa.featured && (
+                        <div className="absolute top-4 right-4 bg-gradient-to-r from-[#a20519] to-red-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                          <Star className="w-3 h-3 inline mr-1" />
+                          Destacado
+                        </div>
+                      )}
 
-                {/* Icon Container */}
-                <div className="flex items-center justify-center w-20 h-20 bg-gradient-to-br from-[#121b6a]/10 to-[#a20519]/10 rounded-2xl mb-6 group-hover:bg-gradient-to-br group-hover:from-[#121b6a] group-hover:to-[#a20519] transition-all duration-500">
-                  <diplomado.icon className="h-10 w-10 text-[#121b6a] group-hover:text-white transition-colors duration-500" />
-                </div>
+                      <div className="flex items-center justify-center w-20 h-20 bg-gradient-to-br from-[#121b6a]/10 to-[#a20519]/10 rounded-2xl mb-6 group-hover:bg-gradient-to-br group-hover:from-[#121b6a] group-hover:to-[#a20519] transition-all duration-500">
+                        <programa.icon className="h-10 w-10 text-[#121b6a] group-hover:text-white transition-colors duration-500 " />
+                      </div>
 
-                {/* Content */}
-                <div className="flex-grow">
-                  <h3 className="text-xl font-bold text-[#121829] mb-4 leading-tight group-hover:text-[#a20519] transition-colors duration-300">
-                    {diplomado.title}
-                  </h3>
+                      <div className="flex-grow">
+                        <h3 className="text-xl font-bold text-[#121829] mb-4 leading-tight group-hover:text-[#a20519] transition-colors duration-300">
+                          {programa.title}
+                        </h3>
 
-                  <p className="text-gray-600 mb-6 leading-relaxed text-base line-clamp-4">
-                    {diplomado.description}
-                  </p>
-                </div>
+                        <p className="text-gray-600 mb-6 leading-relaxed text-base line-clamp-4">
+                          {programa.description}
+                        </p>
+                      </div>
 
-                {/* Stats */}
-                <div className="flex items-center justify-between mb-6 text-sm">
-                  <div className="flex items-center bg-gray-50 px-3 py-2 rounded-full">
-                    <Clock className="h-4 w-4 mr-2 text-[#121b6a]" />
-                    <span className="font-medium text-gray-700">
-                      {diplomado.duration}
-                    </span>
-                  </div>
-                  {/* {diplomado.students && (
-                    <div className="flex items-center bg-[#a20519]/10 px-3 py-2 rounded-full">
-                      <Users className="h-4 w-4 mr-2 text-[#a20519]" />
-                      <span className="font-medium text-[#a20519]">
-                        {diplomado.students}
-                      </span>
+                      <div className="flex items-center justify-between mb-6 text-sm">
+                        <div className="flex items-center bg-gray-50 px-3 py-2 rounded-full">
+                          <Clock className="h-4 w-4 mr-2 text-[#121b6a]" />
+                          <span className="font-medium text-gray-700">
+                            {programa.duration}
+                          </span>
+                        </div>
+                      </div>
+
+                      <motion.div
+                        className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#121b6a] to-[#a20519] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
+                        initial={{ scaleX: 0 }}
+                      />
                     </div>
-                  )} */}
-                </div>
-
-                {/* Hover Indicator */}
-                <motion.div
-                  className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#121b6a] to-[#a20519] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
-                  initial={{ scaleX: 0 }}
-                />
+                  </motion.div>
+                ))}
               </div>
-            </motion.div>
+            </div>
+            // <motion.div
+            //   key={diplomado.id}
+            //   className="group relative"
+            //   variants={itemVariants}
+            //   whileHover={{
+            //     y: -8,
+            //     transition: { duration: 0.3, ease: "easeOut" },
+            //   }}
+            // >
+            //   <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 p-8 border border-gray-200 h-full flex flex-col relative overflow-hidden">
+
+            //     {diplomado.featured && (
+            //       <div className="absolute top-4 right-4 bg-gradient-to-r from-[#a20519] to-red-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+            //         <Star className="w-3 h-3 inline mr-1" />
+            //         Destacado
+            //       </div>
+            //     )}
+
+            //     <div className="flex items-center justify-center w-20 h-20 bg-gradient-to-br from-[#121b6a]/10 to-[#a20519]/10 rounded-2xl mb-6 group-hover:bg-gradient-to-br group-hover:from-[#121b6a] group-hover:to-[#a20519] transition-all duration-500">
+            //       <diplomado.icon className="h-10 w-10 text-[#121b6a] group-hover:text-white transition-colors duration-500" />
+            //     </div>
+
+            //     <div className="flex-grow">
+            //       <h3 className="text-xl font-bold text-[#121829] mb-4 leading-tight group-hover:text-[#a20519] transition-colors duration-300">
+            //         {diplomado.title}
+            //       </h3>
+
+            //       <p className="text-gray-600 mb-6 leading-relaxed text-base line-clamp-4">
+            //         {diplomado.description}
+            //       </p>
+            //     </div>
+
+            //     <div className="flex items-center justify-between mb-6 text-sm">
+            //       <div className="flex items-center bg-gray-50 px-3 py-2 rounded-full">
+            //         <Clock className="h-4 w-4 mr-2 text-[#121b6a]" />
+            //         <span className="font-medium text-gray-700">
+            //           {diplomado.duration}
+            //         </span>
+            //       </div>
+            //     </div>
+
+            //     <motion.div
+            //       className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#121b6a] to-[#a20519] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
+            //       initial={{ scaleX: 0 }}
+            //     />
+            //   </div>
+            // </motion.div>
           ))}
         </motion.div>
 
         {/* Features Section */}
         <motion.div
-          className="bg-white rounded-2xl shadow-xl p-8 md:p-12 mb-20 border border-gray-100"
+          className="bg-white rounded-2xl shadow-xl p-8 md:p-12 mb-20 border border-gray-100 mt-12"
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, delay: 1.2 }}

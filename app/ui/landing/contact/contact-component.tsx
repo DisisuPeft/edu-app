@@ -234,9 +234,9 @@ export default function ContactSection() {
                 <div className="w-10 h-10 bg-[#a20519]/10 rounded-lg flex items-center justify-center">
                   <Mail className="w-5 h-5 text-[#a20519]" />
                 </div>
-                <div className="ml-3">
+                <div className="ml-3 w-full max-w-[250px]">
                   <p className="text-sm text-gray-500">Email</p>
-                  <p className="font-semibold text-[#121829]">
+                  <p className="font-semibold text-[#121829] break-words whitespace-pre-wrap">
                     direccioncomercialunszn@gmail.com
                   </p>
                 </div>

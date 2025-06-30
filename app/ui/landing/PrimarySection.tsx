@@ -13,11 +13,11 @@ export default function Hero() {
       image:
         "/assets/img-landing/Diplomado-rehabilitación-de-la-articulación-temperomandibular-01.webp",
       subtitle: "Excelencia Académica",
-      title: "Formamos profesionales que quieren marcar la diferencia",
+      title: "Educar para conquistar virtudes",
       description:
         "Descubre nuestros diplomados diseñados para transformar tu práctica profesional y ampliar tus horizontes académicos.",
       primaryButton: {
-        text: "Explorar Diplomados",
+        text: "Explorar Oferta Educativa",
         href: "/oferta-educativa",
       },
       secondaryButton: {
@@ -26,13 +26,13 @@ export default function Hero() {
       },
     },
     {
-      image: "/assets/img-landing/Diplomado-en-urgencias-médicas-01.webp",
+      image: "/assets/img-landing/UNSZN-01-Diplomado-UM-R.webp",
       subtitle: "Educación en Salud",
       title: "Diplomado en Urgencias Médicas",
       description:
         "Formación especializada para actuar de manera rápida y eficaz ante emergencias. Ideal para profesionales que buscan salvar vidas y mejorar la calidad del servicio médico.",
       primaryButton: {
-        text: "Ver Programa",
+        text: "Ver Diplomado",
         href: "/oferta-educativa",
       },
       secondaryButton: {
@@ -57,14 +57,14 @@ export default function Hero() {
       },
     },
   ];
-
+  // const [timer, setTimer] = useState<number | null>(null);
   // Auto-advance slides
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 10000);
     return () => clearInterval(timer);
-  }, [slides.length]);
+  }, [currentSlide, slides.length]);
 
   const goToNextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -165,7 +165,7 @@ export default function Hero() {
                             </Link>
                           </motion.div>
 
-                          <motion.div
+                          {/* <motion.div
                             whileHover={{
                               scale: 1.05,
                               boxShadow: "0 20px 40px rgba(255, 255, 255, 0.2)",
@@ -181,7 +181,7 @@ export default function Hero() {
                             >
                               {slide.secondaryButton.text}
                             </Link>
-                          </motion.div>
+                          </motion.div> */}
                         </motion.div>
                       </div>
                     </div>

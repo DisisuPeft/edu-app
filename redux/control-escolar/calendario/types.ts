@@ -13,6 +13,11 @@ export interface CiclosResponse {
   results: Ciclos[];
 }
 
+export type CicloResponse = {
+  id: number;
+  rango_fechas: string;
+};
+
 // export type ProgramaEducativoCatalog = {
 //   id: number;
 //   nombre: string;
