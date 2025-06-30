@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Provider from "../redux/provider";
 import { Setup } from "./utils";
-
+import { Analytics } from "@vercel/analytics/next";
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
 //   subsets: ["latin"],
@@ -30,6 +30,7 @@ export default function RootLayout({
         <Provider>
           <Setup />
           {children}
+          <Analytics />
         </Provider>
       </body>
     </html>
