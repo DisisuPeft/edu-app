@@ -106,6 +106,24 @@ export default function EducationalOfferingsSection() {
           featured: true,
           icon: Star,
         },
+        {
+          id: 6,
+          title: "Diplomado en Derecho Animal",
+          description:
+            "Estudio legal y ético sobre la protección y el bienestar de los animales en distintos contextos.",
+          duration: "6 meses",
+          featured: true,
+          icon: Star,
+        },
+        {
+          id: 7,
+          title: "Diplomado en Protección legal para el ejercicio médico",
+          description:
+            "Formación especializada en responsabilidad jurídica, derechos del paciente y defensa profesional en el ámbito médico.",
+          duration: "6 meses",
+          featured: true,
+          icon: Star,
+        },
       ],
     },
     {
