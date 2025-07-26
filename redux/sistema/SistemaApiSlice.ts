@@ -3,10 +3,17 @@ import { apiSlice } from "../services/apiSlice";
 import { User } from "../features/types";
 import { NivelEducativo } from "../interface/catalogos/nivel_educativo";
 import { TipoNivel } from "../interface/catalogos/tipo_nivel";
-import { TabsModulos } from "../interface/sistema/tabs";
+import { TabsModulos, Pestanias } from "../interface/sistema/tabs";
 
 const SistemaApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    retrievePestanias: builder.query<Pestanias[], void>({
+      query: () => "plataforma/pestanias/",
+      transformResponse: (response) => {
+        return Array.isArray(response) ? response : [];
+      },
+    }),
+    // A boorraaaar
     createMenu: builder.mutation({
       query: (payload) => ({
         url: "url/to/define",
@@ -49,6 +56,7 @@ const SistemaApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
+  useRetrievePestaniasQuery,
   useCreateMenuMutation,
   useGetMenuQuery,
   useGetTabsQuery,

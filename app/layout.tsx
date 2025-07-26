@@ -4,6 +4,7 @@ import "./globals.css";
 import Provider from "../redux/provider";
 import { Setup } from "./utils";
 import { Analytics } from "@vercel/analytics/next";
+import AlertUser from "./utils/alert/alert";
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
 //   subsets: ["latin"],
@@ -28,6 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Provider>
+          <AlertUser />
           <Setup />
           {children}
           <Analytics />

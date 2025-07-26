@@ -145,34 +145,18 @@ export default function Calender() {
             return (
               <div
                 key={index}
-                className={`min-h-[80px] p-2 border border-gray-100 ${
+                className={`group min-h-[80px] p-2 border border-gray-100 ${
                   day.isCurrentMonth ? "bg-white" : "bg-gray-50"
-                } ${
-                  isToday ? "bg-blue-50 border-blue-200" : ""
-                } hover:bg-sky-500 cursor-pointer`}
+                } ${isToday ? "bg-blue-500 border-blue-200" : ""}
+                hover:bg-sky-500 cursor-pointer`}
               >
                 <div
                   className={`text-sm ${
                     day.isCurrentMonth ? "text-gray-900" : "text-gray-400"
-                  } ${isToday ? "font-bold text-blue-600" : ""}`}
+                  } ${isToday ? "font-bold" : ""} group-hover:text-white`}
                 >
                   {day.date.getDate()}
                 </div>
-                {evento && (
-                  <div
-                    className={`mt-1 px-1 py-0.5 rounded text-xs ${
-                      evento.tipo === "inicio"
-                        ? "bg-green-100 text-green-800"
-                        : evento.tipo === "fin"
-                        ? "bg-red-100 text-red-800"
-                        : evento.tipo === "vacacion"
-                        ? "bg-yellow-100 text-yellow-800"
-                        : "bg-blue-100 text-blue-800"
-                    }`}
-                  >
-                    {evento.evento}
-                  </div>
-                )}
               </div>
             );
           })}

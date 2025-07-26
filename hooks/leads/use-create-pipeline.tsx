@@ -8,7 +8,7 @@ import {
 import { Alert } from "@/alerts/toast";
 import { PipelinesResponse } from "@/redux/crm/types";
 
-export default function createPipeline(pipeline?: PipelinesResponse) {
+export default function useCreatePipeline(pipeline?: PipelinesResponse) {
   const [createPipeline, { isLoading }] = useCreatePipelineMutation();
   const [updatePipeline] = useUpdatePipelineMutation();
   const { refetch } = useGetPipelinesQuery();

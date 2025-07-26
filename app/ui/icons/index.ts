@@ -11,6 +11,10 @@ import {
   SchoolIcon,
   Building2,
   PiggyBank,
+  Home,
+  ClipboardCheck,
+  User,
+  School,
 } from "lucide-react";
 
 export const iconMap: Record<string, React.ElementType> = {
@@ -26,4 +30,8 @@ export const iconMap: Record<string, React.ElementType> = {
   "chalkboard-teacher": SchoolIcon,
   "building-two": Building2,
   "piggy-bank": PiggyBank,
+  home: Home,
+  clipboardckeck: ClipboardCheck,
+  user: User,
+  school: School,
 };

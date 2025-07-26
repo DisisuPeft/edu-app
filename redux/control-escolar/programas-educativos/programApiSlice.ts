@@ -1,12 +1,30 @@
 import { apiSlice } from "../../services/apiSlice";
-import { ProgramaEducativoCatalogResponse } from "./types";
+import { CursoCardsType, CursoPaginatedType } from "./types";
 
 const programApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getCatalogoPrograma: builder.query<ProgramaEducativoCatalogResponse, void>({
-      query: () => "/control-escolar/programas-educativos/",
+    getCursos: builder.query<CursoCardsType[], void>({
+      query: () => "student/cursos/",
+    }),
+    getPaginetedCursos: builder.query<CursoPaginatedType, number>({
+      query: (page) => `student/cursos/all/?=${page}`,
+    }),
+    getCursoPanel: builder.query<
+      CursoCardsType[],
+      { id: number; accion?: string }
+    >({
+      query: ({ id, accion }) => `student/cursos/${id}/?accion=${accion}`,
+      // transformResponse: (response: CursoCardsType) => {
+      //   // Si es arreglo, lo devuelves directo
+      //   // Si es objeto, lo metes en un arreglo
+      //   return [response];
+      // },
     }),
   }),
 });
 
-export const { useGetCatalogoProgramaQuery } = programApiSlice;
+export const {
+  useGetCursosQuery,
+  useGetPaginetedCursosQuery,
+  useGetCursoPanelQuery,
+} = programApiSlice;

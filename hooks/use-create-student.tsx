@@ -4,7 +4,7 @@ import { Toast } from "@/alerts/toast";
 import { useEditUsersMutation } from "@/redux/sistema/SistemaApiSlice";
 import { useGetUserEditQuery } from "@/redux/sistema/SistemaApiSlice";
 import { useEffect } from "react";
-import { useCreateStudentMutation } from "@/redux/estudiante/studentApiSlice";
+import { useCreateStudentMutation } from "@/redux/features/estudiante/studentApiSlice";
 import { useRetrieveMunicipiosQuery } from "@/redux/catalogos/CatApiSlice";
 import { Alert } from "@/alerts/toast";
 

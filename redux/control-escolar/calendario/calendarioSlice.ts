@@ -1,11 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 // import { ProgramaEducativoCatalog } from "./types";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { CicloResponse, CiclosResponse } from "./types";
+import {
+  CicloResponse,
+  CiclosResponse,
+  CiclosForQueryType,
+  Ciclos,
+} from "./types";
 
 interface calendarioState {
   ciclos: CiclosResponse | null;
-  ciclo: CicloResponse | null;
+  ciclo: Ciclos | null;
+  ciclosForQuery: CiclosForQueryType | null;
   isLoading: boolean;
   ciclo_id: number | null;
   errorMessage: string | null;
@@ -15,6 +21,7 @@ const initialState = {
   ciclos: null,
   ciclo: null,
   ciclo_id: null,
+  ciclosForQuery: null,
   isLoading: true,
   errorMessage: null,
 } as calendarioState;
@@ -38,11 +45,14 @@ const calendarioSlice = createSlice({
     setCiclos: (state, action: PayloadAction<CiclosResponse>) => {
       state.ciclos = action.payload;
     },
-    setCiclo: (state, action: PayloadAction<CicloResponse>) => {
+    setCiclo: (state, action: PayloadAction<Ciclos>) => {
       state.ciclo = action.payload;
     },
     setCicloId: (state, action: PayloadAction<number>) => {
       state.ciclo_id = action.payload;
+    },
+    setCiclosForQuery: (state, action: PayloadAction<CiclosForQueryType>) => {
+      state.ciclosForQuery = action.payload;
     },
   },
 });
@@ -55,6 +65,7 @@ export const {
   finishInitialLoad,
   setCicloId,
   setCiclo,
+  setCiclosForQuery,
 } = calendarioSlice.actions;
 
 export default calendarioSlice.reducer;

@@ -3,7 +3,14 @@ export type Ciclos = {
   name: string;
   fecha_inicio: string | null;
   fecha_fin: string | null;
-  estados: number | null;
+  estado: number | null;
+};
+
+export type cicloSelect = {
+  id: number;
+  name: string;
+  rango_fechas: string | null;
+  estado: number | null;
 };
 
 export interface CiclosResponse {
@@ -18,21 +25,8 @@ export type CicloResponse = {
   rango_fechas: string;
 };
 
-// export type ProgramaEducativoCatalog = {
-//   id: number;
-//   nombre: string;
-//   descripcion?: string;
-//   tipo?: number | null;
-//   institucion?: number | null;
-//   duracion_horas?: number;
-//   fecha_inicio?: string;
-//   fecha_fin?: string;
-//   horario?: string;
-//   costo_inscripcion?: string;
-//   costo_mensualidad?: string;
-//   activo: number;
-//   maestro?: number | null;
-//   modalidad?: number | null;
-//   fecha_creacion: string;
-//   fecha_actualizacion?: string;
-// };
+interface CiclosForQuery {
+  id: number;
+  name: string;
+}
+export type CiclosForQueryType = CiclosForQuery[];

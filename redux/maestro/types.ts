@@ -1,4 +1,4 @@
-import { Lugar, Perfil, Municipio } from "../estudiante/types";
+import { Lugar, Perfil, Municipio } from "../features/estudiante/types";
 
 export type Maestro = {
   id: number;

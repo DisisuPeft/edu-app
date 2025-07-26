@@ -1,3 +1,4 @@
+import { SubModulo } from "./../../interface/control_escolar/programa_educativo";
 export interface ProgramaEducativo {
   id: number;
   nombre: string;
@@ -40,21 +41,20 @@ export interface ProgramaEducativoCatalogResponse {
   results: ProgramaEducativo[];
 }
 
-// export type ProgramaEducativoCatalog = {
-//   id: number;
-//   nombre: string;
-//   descripcion?: string;
-//   tipo?: number | null;
-//   institucion?: number | null;
-//   duracion_horas?: number;
-//   fecha_inicio?: string;
-//   fecha_fin?: string;
-//   horario?: string;
-//   costo_inscripcion?: string;
-//   costo_mensualidad?: string;
-//   activo: number;
-//   maestro?: number | null;
-//   modalidad?: number | null;
-//   fecha_creacion: string;
-//   fecha_actualizacion?: string;
-// };
+export type CursoCardsType = {
+  activo: number | null;
+  descripcion: string | null;
+  duracion_horas: number | null;
+  id: number | null;
+  institucion: number | string | null;
+  nombre: string | null;
+  tipo: string | null;
+  submodulos?: SubModulo[];
+};
+
+export interface CursoPaginatedType {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: CursoCardsType[];
+}
