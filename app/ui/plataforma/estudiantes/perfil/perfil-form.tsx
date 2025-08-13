@@ -1,9 +1,5 @@
 "use client";
-import Link from "next/link";
-import { ArrowLeftIcon } from "lucide-react";
 import usePerfilForm from "@/hooks/plataforma/perfil/use-perfil-form";
-import { useAppDispatch } from "@/redux/hooks";
-import { setAlert } from "@/redux/features/alert/alertSlice";
 
 export default function PerfilForm() {
   const {

@@ -4,6 +4,7 @@ import { useAppDispatch } from "@/redux/hooks";
 import { useLoginMutation } from "@/redux/features/authApiSlice";
 import { setAuth } from "@/redux/features/authSlice";
 import { Toast } from "@/alerts/toast";
+import { setAlert } from "@/redux/features/alert/alertSlice";
 
 export default function useLogin() {
   const router = useRouter();
@@ -35,7 +36,7 @@ export default function useLogin() {
       })
       .catch(() => {
         Toast({
-          message: "Failed to log in, inform in section Support",
+          message: "Failed to log in, check your credentials",
           icon: "error",
         });
       });

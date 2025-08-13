@@ -9,7 +9,7 @@ type Tab = "Módulos" | "Actividades y Exámenes" | "Comunidad";
 export default function TabsPanel({ id }: { id: string }) {
   const [activeTab, setActiveTab] = useState<Tab>("Módulos");
 
-  const tabs: Tab[] = ["Módulos", "Actividades y Exámenes", "Comunidad"];
+  const tabs: Tab[] = ["Módulos", "Comunidad"];
 
   return (
     <div className="w-full">
@@ -21,9 +21,6 @@ export default function TabsPanel({ id }: { id: string }) {
 
       <main className="mt-6 bg-white p-6 rounded-lg shadow-sm">
         {activeTab === "Módulos" && <ModulosPanel id={id} />}
-        {/* {activeTab === "modulos" && <ModulosPanel />}
-          {activeTab === "actividades-y-examenes" && <ActividadExamenPanel />}
-          {activeTab === "comunidad" && <ComunidadPanel />} */}
       </main>
     </div>
   );

@@ -17,14 +17,16 @@ export default function Logout() {
       .unwrap()
       .then(() => {
         dispatch(setLogout());
-        dispatch(apiSlice.util.resetApiState())
+        dispatch(apiSlice.util.resetApiState());
       });
   };
   return (
     <form onSubmit={handleLogout}>
-      <button className="flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium bg-[#a20519] text-white md:flex-none md:justify-start md:p-2 md:px-3">
+      <button className="flex h-[50px] grow items-center justify-center gap-2 rounded-md p-3 bg-[#a20519] text-white md:flex-none md:p-2 md:px-3">
+        {/* <div className="flex justify-center"> */}
         <PowerIcon className="w-6" />
-        {/* <div className="hidden md:block">Cerrar sesion</div> */}
+        {/* </div> */}
+        <div className="hidden md:block">Cerrar sesion</div>
       </button>
     </form>
   );

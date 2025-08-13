@@ -15,7 +15,7 @@ export default function AlertUser() {
       const timeout = setTimeout(() => dispatch(clearAlert()), 4000);
       return () => clearTimeout(timeout);
     }
-  }, [alert]);
+  }, [alert, dispatch]);
 
   if (!alert) return null;
 

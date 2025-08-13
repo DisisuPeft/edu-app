@@ -32,8 +32,7 @@ export default function usePerfilForm() {
   const { data: generos, error: errorG } = useGetGeneroQuery();
   const { data: niveles, error: errorNiv } = useGetNivelesQuery();
 
-  const [updateStudentProfile, { isLoading }] =
-    useUpdateStudentProfileMutation();
+  const [updateStudentProfile] = useUpdateStudentProfileMutation();
 
   const entidad =
     data?.lugar_nacimiento?.toString() ?? watch("lugar_nacimiento");

@@ -19,8 +19,8 @@ export default function ClientWrapper({
         {/* Header móvil */}
         <header className="flex justify-between items-center p-4 bg-white border-b md:hidden">
           <div className="flex items-center gap-2">
-            <School className="h-6 w-6 text-blue-600" />
-            <h1 className="text-xl font-bold">Plataforma</h1>
+            <School className="h-6 w-6 text-black" />
+            <h1 className="text-xl font-bold text-black">Plataforma</h1>
           </div>
           <button
             onClick={() => setSidebarOpen(true)}

@@ -1,37 +1,11 @@
 "use client";
-import {
-  Home,
-  BookOpen,
-  ClipboardCheck,
-  BarChart2,
-  User,
-  X,
-  School,
-} from "lucide-react";
+import { X, School } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useRetrievePestaniasQuery } from "@/redux/sistema/SistemaApiSlice";
 import { DynamicIcon } from "../icons/dynamic-icon";
-
-// const navItems = [
-//   { name: "Inicio", icon: Home, href: "/plataforma" },
-//   {
-//     name: "Mis Cursos",
-//     icon: "book-open",
-//     href: "/plataforma/cursos",
-//   },
-//   {
-//     name: "Actividades",
-//     icon: "book-open",
-//     href: "/plataforma/actividades",
-//   },
-//   {
-//     name: "Calificaciones",
-//     icon: "book-open",
-//     href: "/plataforma/calificaciones",
-//   },
-//   { name: "Perfil", icon: User, href: "/plataforma/perfil" },
-// ];
+import { Logout } from "@/app/utils";
+import useCheckPerfil from "@/hooks/plataforma/perfil/use-perfil-check";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -41,7 +15,8 @@ interface SidebarProps {
 export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
   const path = usePathname();
   const { data: navItems } = useRetrievePestaniasQuery();
-  // console.log(navItems.map);
+  const { isProfileEmpty } = useCheckPerfil();
+
   return (
     <>
       {/* Overlay para móvil */}
@@ -61,7 +36,7 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
         <div className="p-4 flex justify-between items-center border-b h-16">
           <div className="flex items-center gap-3">
             <School className="h-8 w-8 text-black" />
-            <h2 className="text-2xl font-bold text-gray-800">Plataforma</h2>
+            <h2 className="text-2xl font-bold text-black">Plataforma</h2>
           </div>
           <button
             onClick={() => setSidebarOpen(false)}
@@ -70,29 +45,34 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
             <X className="h-6 w-6" />
           </button>
         </div>
-        {/*               className={`flex items-center px-4 py-2.5 text-sm font-medium rounded-lg transition-colors ${
-                item.href === path
-                  ? "bg-blue-100 text-blue-700"
-                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-              }`} */}
         <nav className="flex-1 px-4 py-4 space-y-2">
-          {navItems?.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className={`flex items-center px-4 py-2.5 text-sm font-medium rounded-lg transition-colors ${
-                item.href === path
-                  ? "bg-blue-100 text-blue-700"
-                  : "text-black hover:bg-gray-100 hover:text-gray-900"
-              }`}
-            >
-              <DynamicIcon iconName={item.icon} size={20} color="black" />
-              <span className="ml-2">{item.name}</span>
-            </Link>
-          ))}
+          {navItems?.map((item) => {
+            return (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`flex items-center px-4 py-2.5 text-sm font-medium rounded-lg transition-colors ${
+                  item.href === path
+                    ? "bg-blue-100 text-blue-700"
+                    : "text-black hover:bg-gray-100 hover:text-gray-900"
+                }`}
+              >
+                <DynamicIcon iconName={item.icon} size={20} color="black" />
+                <span className="ml-2">{item.name}</span>
+              </Link>
+            );
+          })}
         </nav>
-        <div className="p-4 border-t">
-          <p className="text-xs text-gray-500">© 2025 Plataforma Educativa</p>
+        <div className="flex flex-col gap-4 justify-center p-4 border-t">
+          {isProfileEmpty && (
+            <div className="bg-orange-400 border border-orange-300 text-white px-4 py-3 rounded-md text-xl text-center">
+              Actualiza tus datos
+            </div>
+          )}
+          <div className="flex justify-center">
+            <Logout />
+          </div>
+          {/* <p className="text-xs text-gray-500">© 2025 Plataforma Educativa</p> */}
         </div>
       </aside>
     </>

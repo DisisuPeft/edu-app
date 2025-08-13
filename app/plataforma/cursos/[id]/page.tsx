@@ -8,16 +8,16 @@ export default async function Page({
 }) {
   const { id } = await params;
   return (
-    <div className="">
-      <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
-        <header className="mb-8">
-          <CursoHeader id={id} />
-        </header>
+    // <div className="">
+    <div className="mx-auto p-4 sm:p-6 lg:p-8">
+      <header className="mb-8">
+        <CursoHeader id={id} />
+      </header>
 
-        <div className="w-full">
-          <TabsPanel id={id} />
-        </div>
+      <div className="w-full">
+        <TabsPanel id={id} />
       </div>
+      {/* </div> */}
     </div>
   );
 }

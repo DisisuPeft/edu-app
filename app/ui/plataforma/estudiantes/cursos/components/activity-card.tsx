@@ -1,6 +1,6 @@
 interface ActivityCardProps {
   titulo: string;
-  buttonText: string;
+  buttonText?: string;
   tipo?: "actividad" | "examen";
   estado?: "pendiente" | "completado";
 }
@@ -17,7 +17,6 @@ const typeText = {
 
 export default function ActivityCard({
   titulo,
-  buttonText,
   tipo,
   estado,
 }: ActivityCardProps) {
@@ -40,9 +39,11 @@ export default function ActivityCard({
         </div>
         <h3 className="font-semibold text-gray-800 mb-4">{titulo}</h3>
       </div>
-      <button className="w-full mt-auto px-4 py-2 bg-gray-100 text-gray-800 font-semibold rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
-        {buttonText}
-      </button>
+      {/* {buttonText ?? (
+        <button className="w-full mt-auto px-4 py-2 bg-gray-100 text-gray-800 font-semibold rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
+          {buttonText}
+        </button>
+      )} */}
     </div>
   );
 }
