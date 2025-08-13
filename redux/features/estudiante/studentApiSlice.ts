@@ -1,5 +1,5 @@
 import { apiSlice } from "../../services/apiSlice";
-import { Estudiante, EstudianteView } from "./types";
+import { Estudiante, EstudianteView, totalCount } from "./types";
 import { EstudianteForm } from "@/redux/interface/perfil/form-types";
 
 const studentsApiSlice = apiSlice.injectEndpoints({
@@ -31,6 +31,9 @@ const studentsApiSlice = apiSlice.injectEndpoints({
         body: payload,
       }),
     }),
+    retrieveTotalCursos: builder.query<totalCount, void>({
+      query: () => "/student/total-programs/",
+    }),
   }),
 });
 
@@ -40,4 +43,5 @@ export const {
   useRetrieveStudentQuery,
   useRetrieveEditProfileStudentQuery,
   useUpdateStudentProfileMutation,
+  useRetrieveTotalCursosQuery,
 } = studentsApiSlice;

@@ -71,3 +71,5 @@ export type EstudianteView = {
   perfil: Perfil;
   municipio: string;
 };
+
+export type totalCount = number | null;

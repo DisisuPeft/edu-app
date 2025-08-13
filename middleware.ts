@@ -3,15 +3,15 @@ import type { NextRequest } from "next/server";
 
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-
-  if (pathname === "/" || pathname === "/auth/register") {
+  // || pathname === "/auth/register"
+  if (pathname === "/") {
     return NextResponse.redirect(new URL("/auth/login", request.url));
   }
 
   return NextResponse.next();
 }
-
+// "/auth/register"
 export const config = {
   // no incluimos /auth/login para evitar loops
-  matcher: ["/", "/auth/register"],
+  matcher: ["/"],
 };
