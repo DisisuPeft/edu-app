@@ -2,8 +2,9 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export default function middleware(request: NextRequest) {
-  // console.log(request)
-  if (request.nextUrl.pathname === "/" && "/auth/register") {
+  const { pathname } = request.nextUrl;
+
+  if (pathname === "/" || pathname === "/auth/register") {
     return NextResponse.redirect(new URL("/auth/login", request.url));
   }
 
@@ -11,5 +12,6 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
+  // no incluimos /auth/login para evitar loops
   matcher: ["/", "/auth/register"],
 };
