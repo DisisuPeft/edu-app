@@ -1,0 +1,140 @@
+"use client";
+
+// import { useState } from "react";
+// import { DeleteModal } from "@/app/components/admin/delete-modal";
+// import { StatCard } from "../estudiantes/stat-card";
+// import { Users, UserCheck, UserX, GraduationCap } from "lucide-react";
+// import { UserTable } from "@/app/components/admin/user-table";
+
+// const usuariosData = [
+//   {
+//     id: 1,
+//     nombre: "Alex Rodriguez",
+//     email: "alex.rodriguez@email.com",
+//     fechaRegistro: "2024-01-15",
+//     estado: "Activo",
+//     cursosInscritos: 4,
+//     ultimoAcceso: "2025-01-14",
+//   },
+//   {
+//     id: 2,
+//     nombre: "Maria González",
+//     email: "maria.gonzalez@email.com",
+//     fechaRegistro: "2024-02-20",
+//     estado: "Activo",
+//     cursosInscritos: 3,
+//     ultimoAcceso: "2025-01-13",
+//   },
+//   {
+//     id: 3,
+//     nombre: "Carlos Mendoza",
+//     email: "carlos.mendoza@email.com",
+//     fechaRegistro: "2024-03-10",
+//     estado: "Inactivo",
+//     cursosInscritos: 2,
+//     ultimoAcceso: "2024-12-20",
+//   },
+//   {
+//     id: 4,
+//     nombre: "Ana Jiménez",
+//     email: "ana.jimenez@email.com",
+//     fechaRegistro: "2024-01-05",
+//     estado: "Suspendido",
+//     cursosInscritos: 1,
+//     ultimoAcceso: "2024-11-15",
+//   },
+// ];
+export default function AdminPage() {
+  // const [usuarios, setUsuarios] = useState(usuariosData);
+
+  return (
+    <div className="space-y-8">
+      <div className="p-6">
+        <h1 className="text-3xl font-bold text-gray-900">
+          Panel de Administración
+        </h1>
+        <p className="text-gray-600 mt-1">
+          Gestiona usuarios y supervisa la actividad del sistema.
+        </p>
+      </div>
+
+      {/* Estadísticas del Sistema */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* <StatCard
+          icon={<Users className="h-6 w-6" />}
+          label="Total Usuarios"
+          value={usuarios.length.toString()}
+          color="text-blue-600 bg-blue-100"
+        />
+        <StatCard
+          icon={<UserCheck className="h-6 w-6" />}
+          label="Usuarios Activos"
+          value={usuarios
+            .filter((u) => u.estado === "Activo")
+            .length.toString()}
+          color="text-green-600 bg-green-100"
+        />
+        <StatCard
+          icon={<UserX className="h-6 w-6" />}
+          label="Usuarios Inactivos"
+          value={usuarios
+            .filter((u) => u.estado === "Inactivo")
+            .length.toString()}
+          color="text-red-600 bg-red-100"
+        />
+        <StatCard
+          icon={<GraduationCap className="h-6 w-6" />}
+          label="Promedio Cursos"
+          value={(
+            usuarios.reduce((acc, u) => acc + u.cursosInscritos, 0) /
+            usuarios.length
+          ).toFixed(1)}
+          color="text-purple-600 bg-purple-100"
+        /> */}
+      </div>
+
+      {/* Tabla de Usuarios */}
+      {/* <UserTable
+        usuarios={usuarios}
+        onCreateUser={handleCreateUser}
+        onEditUser={handleEditUser}
+        onDeleteUser={handleDeleteUser}
+      /> */}
+
+      {/* Modal para Crear/Editar Usuario */}
+
+      {/* Modal para Confirmar Eliminación */}
+      {/* {deleteModalOpen && userToDelete && (
+        <DeleteModal
+          userName={userToDelete.nombre}
+          onConfirm={handleConfirmDelete}
+          onCancel={() => {
+            setDeleteModalOpen(false);
+            setUserToDelete(null);
+          }}
+        />
+      )} */}
+    </div>
+  );
+}
+// <div className="overflow-x-auto">
+//   {events?.response ? (
+//     <div>
+//       <DataTable data={events?.response?.data} columns={headers} />
+//       <div className="flex justify-end gap-4 mt-4 p-4">
+//         <button
+//           className="rounded-full"
+//           onClick={() => setPage((p) => Math.max(p - 1, 1))}
+//         >
+//           <ChevronLeftCircle />
+//         </button>
+//         <button onClick={() => setPage((p) => p + 1)}>
+//           <ChevronRightCircle />
+//         </button>
+//       </div>
+//     </div>
+//   ) : (
+//     // <div></div>
+//     <div>No existe datos</div>
+//   )}
+// </div>
