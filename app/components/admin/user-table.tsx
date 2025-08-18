@@ -55,7 +55,7 @@ export function UserTable() {
     {
       header: "Email",
       cell: ({ row }) => {
-        <div className="text-black">{row?.original?.user?.email}</div>;
+        return <div className="text-black">{row?.original?.user?.email}</div>;
       },
     },
     // { header: "Fecha del evento", accessorKey: "fecha_evento" },
