@@ -59,61 +59,11 @@ export default function AdminPage() {
       </div>
 
       {/* Estadísticas del Sistema */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {/* <StatCard
-          icon={<Users className="h-6 w-6" />}
-          label="Total Usuarios"
-          value={usuarios.length.toString()}
-          color="text-blue-600 bg-blue-100"
-        />
-        <StatCard
-          icon={<UserCheck className="h-6 w-6" />}
-          label="Usuarios Activos"
-          value={usuarios
-            .filter((u) => u.estado === "Activo")
-            .length.toString()}
-          color="text-green-600 bg-green-100"
-        />
-        <StatCard
-          icon={<UserX className="h-6 w-6" />}
-          label="Usuarios Inactivos"
-          value={usuarios
-            .filter((u) => u.estado === "Inactivo")
-            .length.toString()}
-          color="text-red-600 bg-red-100"
-        />
-        <StatCard
-          icon={<GraduationCap className="h-6 w-6" />}
-          label="Promedio Cursos"
-          value={(
-            usuarios.reduce((acc, u) => acc + u.cursosInscritos, 0) /
-            usuarios.length
-          ).toFixed(1)}
-          color="text-purple-600 bg-purple-100"
-        /> */}
-      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
 
       {/* Tabla de Usuarios */}
       {/* <UserTable
-        usuarios={usuarios}
-        onCreateUser={handleCreateUser}
-        onEditUser={handleEditUser}
-        onDeleteUser={handleDeleteUser}
       /> */}
-
-      {/* Modal para Crear/Editar Usuario */}
-
-      {/* Modal para Confirmar Eliminación */}
-      {/* {deleteModalOpen && userToDelete && (
-        <DeleteModal
-          userName={userToDelete.nombre}
-          onConfirm={handleConfirmDelete}
-          onCancel={() => {
-            setDeleteModalOpen(false);
-            setUserToDelete(null);
-          }}
-        />
-      )} */}
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { apiSlice } from "./services/apiSlice";
 import authReducer from "@/redux/features/authSlice";
 import SistemaReducer from "@/redux/sistema/SistemaSlice";
 import alertReducer from "@/redux/features/alert/alertSlice";
+import adminReducer from "@/redux/features/admin/adminSlice";
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     auth: authReducer,
     sistema: SistemaReducer,
     alert: alertReducer,
+    admin: adminReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
