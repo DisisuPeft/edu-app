@@ -138,10 +138,10 @@ export function UserTable() {
               className="rounded-full"
               onClick={() => dispatch(setPage(Math.max(page - 1, 1)))}
             >
-              <ChevronLeftCircle />
+              <ChevronLeftCircle className="text-black" />
             </button>
             <button onClick={() => dispatch(setPage(page + 1))}>
-              <ChevronRightCircle />
+              <ChevronRightCircle className="text-black" />
             </button>
           </div>
         </div>
