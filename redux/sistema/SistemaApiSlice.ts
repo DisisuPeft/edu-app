@@ -1,8 +1,6 @@
 import { Modulos } from "../interface/sistema/modulos";
 import { apiSlice } from "../services/apiSlice";
 import { User } from "../features/types";
-import { NivelEducativo } from "../interface/catalogos/nivel_educativo";
-import { TipoNivel } from "../interface/catalogos/tipo_nivel";
 import { TabsModulos, Pestanias } from "../interface/sistema/tabs";
 
 const SistemaApiSlice = apiSlice.injectEndpoints({
@@ -52,6 +50,14 @@ const SistemaApiSlice = apiSlice.injectEndpoints({
         body: payload,
       }),
     }),
+
+    addAccessUser: builder.mutation({
+      query: (payload) => ({
+        url: "/plataforma/add-access/",
+        method: "POST",
+        body: payload,
+      }),
+    }),
   }),
 });
 
@@ -63,4 +69,5 @@ export const {
   useGetUsersQuery,
   useEditUsersMutation,
   useGetUserEditQuery,
+  useAddAccessUserMutation,
 } = SistemaApiSlice;

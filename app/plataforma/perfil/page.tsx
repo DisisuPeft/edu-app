@@ -9,7 +9,6 @@ export default function Page() {
         <h1 className="text-3xl font-bold text-gray-900">
           <UserName title="Perfil de" />
         </h1>
-        <p className="text-gray-600 mt-1">Consulta tus datos y actualizalos</p>
       </div>
       <PerfilForm />
     </div>

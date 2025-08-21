@@ -11,3 +11,12 @@ export interface Modulos {
   route: string;
 }
 
+export type Module = { id: number; name: string };
+
+export type TabModule = { id: number; name: string; moduleId?: number };
+
+export type FormValues = {
+  user: number;
+  module: number; // para sistema_modulo_usuario
+  tabmodule: number[]; // para sistema_tabsmodulo_user
+};

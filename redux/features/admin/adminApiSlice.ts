@@ -6,7 +6,14 @@ const adminApiSlice = apiSlice.injectEndpoints({
     ObtainUsers: builder.query<UsersResponse, { q: string; page: number }>({
       query: ({ q, page }) => `/plataforma/retrieve-users/?page=${page}&q=${q}`,
     }),
+    createUsers: builder.mutation({
+      query: (payload) => ({
+        url: "/plataforma/users/create",
+        method: "POST",
+        body: payload,
+      }),
+    }),
   }),
 });
 
-export const { useObtainUsersQuery } = adminApiSlice;
+export const { useObtainUsersQuery, useCreateUsersMutation } = adminApiSlice;

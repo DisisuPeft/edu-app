@@ -1,5 +1,15 @@
 "use client";
-import usePerfilForm from "@/hooks/plataforma/perfil/use-perfil-form";
+import useUserProfileForm from "@/hooks/plataforma/admin/use-create-user";
+import { Controller } from "react-hook-form";
+import {
+  FormControl,
+  // InputLabel,
+  Select,
+  MenuItem,
+  Checkbox,
+  ListItemText,
+  // OutlinedInput,
+} from "@mui/material";
 // import Link from "next/link";
 
 export default function UserCreateForm() {
@@ -11,390 +21,356 @@ export default function UserCreateForm() {
     generos,
     niveles,
     municipios,
-  } = usePerfilForm();
+    errors,
+    isDirty,
+    isSubmitting,
+    control,
+    roles,
+  } = useUserProfileForm();
+
   return (
-    <div className="container mx-auto px-4 text-gray-800">
-      {/* <div className="mb-6">
-        <Link
-          href="/estudiantes"
-          className="inline-flex items-center text-gray-600 hover:text-gray-900"
-        >
-          <ArrowLeftIcon className="h-5 w-5 mr-2" />
-          Volver a la lista
-        </Link>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="mx-auto max-w-4xl space-y-6 p-6 text-black"
+    >
+      {/* <h2 className="text-xl font-semibold">Estudiante</h2> */}
+
+      {/* Identificación */}
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div>
+          <label className="block text-sm font-medium">CURP</label>
+          <input
+            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2 uppercase tracking-wide"
+            {...register("curp")}
+            maxLength={18}
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium">RFC</label>
+          <input
+            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2 uppercase tracking-wide"
+            {...register("rfc")}
+            maxLength={13}
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium">Estudiante activo</label>
+          {/* <input
+            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2"
+            {...register("matricula", { required: true })}
+          />
+          {errors.matricula && (
+            <p className="text-sm text-red-600">Requerido</p>
+          )} */}
+          <Controller
+            name="activo"
+            control={control}
+            render={({ field: { value, onChange, ...rest } }) => (
+              <input
+                type="checkbox"
+                className="mt-2 h-5 w-5"
+                // el checkbox necesita booleano:
+                checked={value === 1}
+                // y tú guardas 0/1 en RHF:
+                onChange={(e) => onChange(e.target.checked ? 1 : 0)}
+                {...rest}
+              />
+            )}
+          />
+        </div>
+      </div>
+
+      {/* Contacto */}
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div>
+          <label className="block text-sm font-medium">Email</label>
+          <input
+            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2"
+            type="email"
+            {...register("user.email")}
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium">Contraseña</label>
+          <input
+            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2"
+            type="text"
+            {...register("user.password")}
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium">Rol del usuario</label>
+          <Controller
+            name="user.roleID"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <FormControl fullWidth size="small">
+                {/* <InputLabel id="rol-label">Roles</InputLabel> */}
+                <Select
+                  labelId="rol-label"
+                  multiple
+                  // input={<OutlinedInput label="Roles" />}
+                  value={field.value ?? []}
+                  // MUI puede entregar string[]; normalizamos a number[]
+                  onChange={(e) => {
+                    const raw = e.target.value;
+                    const arr = Array.isArray(raw) ? raw : [raw];
+                    field.onChange(arr.map((v) => Number(v)));
+                  }}
+                  renderValue={(selected) => {
+                    const ids = selected as number[];
+                    return roles
+                      ?.filter((r) => ids.includes(Number(r.id)))
+                      .map((r) => r.name)
+                      .join(", ");
+                  }}
+                >
+                  {roles?.map((r) => {
+                    const idNum = Number(r.id);
+                    const selected = (field.value ?? []).includes(idNum);
+                    return (
+                      <MenuItem key={r.id} value={idNum}>
+                        <Checkbox checked={selected} />
+                        <ListItemText primary={r.name} />
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            )}
+          />
+        </div>
+      </div>
+
+      {/* Dirección */}
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div>
+          <label className="block text-sm font-medium">Teléfono</label>
+          <input
+            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2"
+            {...register("perfil.telefono")}
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium">Dirección</label>
+          <input
+            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2"
+            {...register("direccion")}
+          />
+        </div>
+      </div>
+
+      {/* Tutor */}
+      {/* <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div>
+          <label className="block text-sm font-medium">Tutor - Nombre</label>
+          <input
+            className="mt-1 w-full rounded-md border p-2"
+            {...register("tutor_nombre")}
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium">Tutor - Teléfono</label>
+          <input
+            className="mt-1 w-full rounded-md border p-2"
+            {...register("tutor_telefono")}
+          />
+        </div>
       </div> */}
 
-      <div className="bg-white rounded-lg shadow p-6">
-        <h1 className="text-2xl font-bold text-gray-800 mb-6">
-          {/* Agregar nuevo estudiante */}
-          {/* <button
-            onClick={() =>
-              dispatch(
-                setAlert({ type: "success", message: "Probando alerta" })
-              )
-            }
+      {/* Perfil */}
+      <h2 className="pt-2 text-4xl font-semibold">Perfil</h2>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div>
+          <label className="block text-sm font-medium">Nombre</label>
+          <input
+            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2"
+            {...register("perfil.nombre", { required: true })}
+          />
+          {errors.perfil?.nombre && (
+            <p className="text-sm text-red-600">Requerido</p>
+          )}
+        </div>
+        <div>
+          <label className="block text-sm font-medium">Apellido Paterno</label>
+          <input
+            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2"
+            {...register("perfil.apellidoP")}
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium">Apellido Materno</label>
+          <input
+            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2"
+            {...register("perfil.apellidoM")}
+          />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+        <div>
+          <label className="block text-sm font-medium">Edad</label>
+          <input
+            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2"
+            type="number"
+            {...register("perfil.edad", { valueAsNumber: true })}
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium">Fecha Nacimiento</label>
+          <input
+            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2"
+            type="date"
+            {...register("perfil.fechaNacimiento")}
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium">Género</label>
+          <select
+            id="genero"
+            name="profile.genero"
+            {...register("perfil.genero")}
+            className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
           >
-            Probar alerta
-          </button> */}
-        </h1>
-        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-4">
-              <h2 className="text-lg font-semibold text-gray-700">
-                Información personal
-              </h2>
-              <div>
-                <label
-                  htmlFor="curp"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Nombre <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="nombre"
-                  name="profile.nombre"
-                  {...register("perfil.nombre")}
-                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
-                  // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
-                  //   errors.curp ? "border-red-500" : ""
-                  // }`}
-                  placeholder=""
-                />
-                {/* {errors.curp && (
-                    <p className="mt-1 text-sm text-red-600">{errors.curp}</p>
-                  )} */}
-              </div>
-              <div>
-                <label
-                  htmlFor="curp"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Apellido Paterno <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="apellidoP"
-                  name="profile.apellidoP"
-                  {...register("perfil.apellidoP")}
-                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
-                  // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
-                  //   errors.curp ? "border-red-500" : ""
-                  // }`}
-                  placeholder=""
-                />
-                {/* {errors.curp && (
-                    <p className="mt-1 text-sm text-red-600">{errors.curp}</p>
-                  )} */}
-              </div>
-              <div>
-                <label
-                  htmlFor="curp"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Apellido Materno <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="apellidoM"
-                  name="profile.apellidoM"
-                  {...register("perfil.apellidoM")}
-                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
-                  // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
-                  //   errors.curp ? "border-red-500" : ""
-                  // }`}
-                  placeholder=""
-                />
-                {/* {errors.curp && (
-                    <p className="mt-1 text-sm text-red-600">{errors.curp}</p>
-                  )} */}
-              </div>
+            <option value="">Seleccionar genero</option>
+            {generos?.map((niv) => (
+              <option key={niv.id} value={niv.id}>
+                {niv.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label className="block text-sm font-medium">Nivel Educativo</label>
+          <select
+            id="nivel_educativo"
+            name="profile.nivEdu"
+            {...register("perfil.nivEdu")}
+            className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
+            // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
+            //   errors.nivel_educativo ? "border-red-500" : ""
+            // }`}
+          >
+            <option value="">Seleccionar nivel</option>
+            {niveles?.map((niv) => (
+              <option key={niv.id} value={niv.id}>
+                {niv.name}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
 
-              <div>
-                <label
-                  htmlFor="curp"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  CURP
-                  {/* <span className="text-red-500">*</span> */}
-                </label>
-                <input
-                  type="text"
-                  id="curp"
-                  name="curp"
-                  {...register("curp")}
-                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
-                  // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
-                  //   errors.curp ? "border-red-500" : ""
-                  // }`}
-                  placeholder="ABCD123456HDFXYZ01"
-                  maxLength={18}
-                  style={{ textTransform: "uppercase" }}
-                />
-                {/* {errors.curp && (
-                    <p className="mt-1 text-sm text-red-600">{errors.curp}</p>
-                  )} */}
-              </div>
+      {/* Catálogos / relaciones simples por id */}
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div>
+          <label className="block text-sm font-medium">Profesion</label>
+          <input
+            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2"
+            type="text"
+            {...register("especialidad")}
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium">
+            Lugar de Nacimiento
+          </label>
+          <select
+            id="estado"
+            name="lugar_nacimiento"
+            {...register("lugar_nacimiento")}
+            className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
+            // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
+            //   errors.nivel_educativo ? "border-red-500" : ""
+            // }`}
+          >
+            <option value="">Seleccionar un estado</option>
+            {entidades?.map((entidad) => (
+              <option key={entidad.id} value={entidad.id}>
+                {entidad.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label className="block text-sm font-medium">Municipio</label>
+          <select
+            id="municipio"
+            name="municipio"
+            {...register("municipio")}
+            className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
+            // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
+            //   errors.nivel_educativo ? "border-red-500" : ""
+            // }`}
+          >
+            <option value="">Seleccionar un estado</option>
+            {municipios?.map((m) => (
+              <option key={m.id} value={m.id}>
+                {m.nombre}
+              </option>
+            ))}
+          </select>
+        </div>
+        {/* <div>
+          <label className="block text-sm font-medium">Grupo (id)</label>
+          <input
+            className="mt-1 w-full rounded-md border p-2"
+            type="number"
+            {...register("grupo", { valueAsNumber: true })}
+          />
+        </div> */}
+      </div>
 
-              <div>
-                <label
-                  htmlFor="nivel_educativo"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Genero <span className="text-red-500">*</span>
-                </label>
-                <select
-                  id="genero"
-                  name="profile.genero"
-                  {...register("perfil.genero")}
-                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
-                >
-                  <option value="">Seleccionar genero</option>
-                  {generos?.map((niv) => (
-                    <option key={niv.id} value={niv.id}>
-                      {niv.name}
-                    </option>
-                  ))}
-                </select>
-                {/* {errors.nivel_educativo && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {errors.nivel_educativo}
-                    </p>
-                  )} */}
-              </div>
+      {/* Perfil.user como id (por tu ejemplo) */}
+      {/* <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div>
+          <label className="block text-sm font-medium">Perfil - User ID</label>
+          <input
+            className="mt-1 w-full rounded-md border p-2"
+            type="number"
+            {...register("", { valueAsNumber: true })}
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium">User (Raíz)</label>
+          <input
+            className="mt-1 w-full rounded-md border p-2 bg-gray-50"
+            readOnly
+            // value={u?.email ?? ""}
+            placeholder="Sin usuario asignado"
+          />
+        </div>
+      </div> */}
 
-              <div>
-                <label
-                  htmlFor="fechaNacimiento"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Fecha de nacimiento <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="date"
-                  id="fechaNacimiento"
-                  name="profile.fechaNacimiento"
-                  {...register("perfil.fechaNacimiento")}
-                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
-                  // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
-                  //   errors.fecha_nacimiento ? "border-red-500" : ""
-                  // }`}
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="edad"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Edad <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="edad"
-                  name="profile.edad"
-                  {...register("perfil.edad")}
-                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
-                  // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
-                  //   errors.matricula ? "border-red-500" : ""
-                  // }`}
-                  placeholder=""
-                  // style={{ textTransform: "uppercase" }}
-                  maxLength={100}
-                />
-                {/* {errors.matricula && (
-                    <p className="mt-1 text-sm text-red-600">{errors.matricula}</p>
-                  )} */}
-              </div>
-              <div>
-                <label
-                  htmlFor="nivel_educativo"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Estado
-                  {/* <span className="text-red-500">*</span> */}
-                </label>
-                <select
-                  id="estado"
-                  name="lugar_nacimiento"
-                  {...register("lugar_nacimiento")}
-                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
-                  // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
-                  //   errors.nivel_educativo ? "border-red-500" : ""
-                  // }`}
-                >
-                  <option value="">Seleccionar un estado</option>
-                  {entidades?.map((entidad) => (
-                    <option key={entidad.id} value={entidad.id}>
-                      {entidad.name}
-                    </option>
-                  ))}
-                </select>
-                {/* {errors.nivel_educativo && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {errors.nivel_educativo}
-                    </p>
-                  )} */}
-              </div>
-              <div>
-                <label
-                  htmlFor="nivel_educativo"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Municipio
-                  {/* <span className="text-red-500">*</span> */}
-                </label>
-                <select
-                  id="municipio"
-                  name="municipio"
-                  {...register("municipio")}
-                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
-                  // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
-                  //   errors.nivel_educativo ? "border-red-500" : ""
-                  // }`}
-                >
-                  <option value="">Seleccionar un estado</option>
-                  {municipios?.map((m) => (
-                    <option key={m.id} value={m.id}>
-                      {m.nombre}
-                    </option>
-                  ))}
-                </select>
-                {/* {errors.nivel_educativo && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {errors.nivel_educativo}
-                    </p>
-                  )} */}
-              </div>
-              <div>
-                <label
-                  htmlFor="direccion"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Dirección
-                  {/* <span className="text-red-500">*</span> */}
-                </label>
-                <textarea
-                  id="direccion"
-                  name="direccion"
-                  {...register("direccion")}
-                  rows={3}
-                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
-                  // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
-                  //   errors.direccion ? "border-red-500" : ""
-                  // }`}
-                  placeholder="Calle, número, colonia, ciudad, estado, CP"
-                />
-                {/* {errors.direccion && (
-                    <p className="mt-1 text-sm text-red-600">{errors.direccion}</p>
-                  )} */}
-              </div>
-
-              <div>
-                <label
-                  htmlFor="telefono"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Teléfono <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="tel"
-                  id="telefono"
-                  name="profile.telefono"
-                  {...register("perfil.telefono")}
-                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
-                  // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
-                  //   errors.telefono ? "border-red-500" : ""
-                  // }`}
-                  placeholder="1234567890"
-                  maxLength={10}
-                />
-                {/* {errors.telefono && (
-                    <p className="mt-1 text-sm text-red-600">{errors.telefono}</p>
-                  )} */}
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h2 className="text-lg font-semibold text-gray-700">
-                Información académica
-              </h2>
-
-              {/* <div>
-                    <label
-                      htmlFor="grupo"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Grupo <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="grupo"
-                      name="grupo"
-                      // value={formData.grupo}
-                      // onChange={handleChange}
-                      className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
-                      // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
-                      //   errors.grupo ? "border-red-500" : ""
-                      // }`}
-                      placeholder="1A"
-                    /> */}
-              {/* {errors.grupo && (
-                    <p className="mt-1 text-sm text-red-600">{errors.grupo}</p>
-                  )} */}
-              {/* </div> */}
-
-              <div>
-                <label
-                  htmlFor="nivel_educativo"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Nivel educativo <span className="text-red-500">*</span>
-                </label>
-                <select
-                  id="nivel_educativo"
-                  name="profile.nivEdu"
-                  {...register("perfil.nivEdu")}
-                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
-                  // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
-                  //   errors.nivel_educativo ? "border-red-500" : ""
-                  // }`}
-                >
-                  <option value="">Seleccionar nivel</option>
-                  {niveles?.map((niv) => (
-                    <option key={niv.id} value={niv.id}>
-                      {niv.name}
-                    </option>
-                  ))}
-                </select>
-                {/* {errors.nivel_educativo && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {errors.nivel_educativo}
-                    </p>
-                  )} */}
-              </div>
-            </div>
-          </div>
-
-          <div className="flex justify-end space-x-3">
-            {/* <button
+      {/* Acciones */}
+      <div className="flex justify-end space-x-3">
+        {/* <button
               type="button"
               //   onClick={() => router.back()}
               className="fixed bottom-4 right-4 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition"
             >
               Cancelar
             </button> */}
-            <button
-              type="submit"
-              // disabled={isSubmitting}
-              className="fixed bottom-6 right-8 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition"
-            >
-              {/* {isSubmitting ? "Guardando..." : "Guardar"} */}
-              Guardar
-            </button>
-          </div>
-        </form>
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="fixed bottom-6 right-8 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition"
+        >
+          {isSubmitting ? "Guardando..." : "Guardar"}
+        </button>
+        {!isDirty && <span className="text-sm text-gray-500">Sin cambios</span>}
       </div>
-    </div>
+      {/* <div className="flex items-center gap-3 pt-4">
+        <button
+          type="submit"
+          className="rounded-lg border px-4 py-2 font-medium shadow-sm hover:bg-gray-50 disabled:opacity-50"
+        >
+          {isSubmitting ? "Guardando..." : "Guardar"}
+        </button>
+        {!isDirty && <span className="text-sm text-gray-500">Sin cambios</span>}
+      </div> */}
+    </form>
   );
 }

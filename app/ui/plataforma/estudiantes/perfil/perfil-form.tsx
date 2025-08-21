@@ -1,5 +1,6 @@
 "use client";
 import usePerfilForm from "@/hooks/plataforma/perfil/use-perfil-form";
+// import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 
 export default function PerfilForm() {
   const {
@@ -25,7 +26,6 @@ export default function PerfilForm() {
 
       <div className="bg-white rounded-lg shadow p-6">
         <h1 className="text-2xl font-bold text-gray-800 mb-6">
-          Agregar nuevo estudiante
           {/* <button
             onClick={() =>
               dispatch(
@@ -134,7 +134,31 @@ export default function PerfilForm() {
                     <p className="mt-1 text-sm text-red-600">{errors.curp}</p>
                   )} */}
               </div>
-
+              <div>
+                <label
+                  htmlFor="rfc"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  RFC
+                  {/* <span className="text-red-500">*</span> */}
+                </label>
+                <input
+                  type="text"
+                  id="rfc"
+                  name="rfc"
+                  {...register("rfc")}
+                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
+                  // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
+                  //   errors.curp ? "border-red-500" : ""
+                  // }`}
+                  placeholder="ABCD123456HDF"
+                  maxLength={13}
+                  style={{ textTransform: "uppercase" }}
+                />
+                {/* {errors.curp && (
+                    <p className="mt-1 text-sm text-red-600">{errors.curp}</p>
+                  )} */}
+              </div>
               <div>
                 <label
                   htmlFor="nivel_educativo"
@@ -318,7 +342,28 @@ export default function PerfilForm() {
               <h2 className="text-lg font-semibold text-gray-700">
                 Información académica
               </h2>
-
+              <div>
+                <label
+                  htmlFor="especialidad"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Especialidad
+                </label>
+                <input
+                  type="text"
+                  id="especialidad"
+                  name="especialidad"
+                  {...register("especialidad")}
+                  className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
+                  // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
+                  //   errors.curp ? "border-red-500" : ""
+                  // }`}
+                  placeholder=""
+                />
+                {/* {errors.curp && (
+                    <p className="mt-1 text-sm text-red-600">{errors.curp}</p>
+                  )} */}
+              </div>
               {/* <div>
                     <label
                       htmlFor="grupo"

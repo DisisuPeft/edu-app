@@ -54,6 +54,8 @@ export default function usePerfilForm() {
         direccion: data.direccion ?? "",
         telefono: data.telefono ?? "",
         activo: data.activo ?? 1,
+        rfc: data?.rfc,
+        especialidad: data?.especialidad,
         perfil: data.perfil
           ? {
               nombre: data.perfil.nombre || "",

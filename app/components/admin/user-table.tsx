@@ -7,6 +7,7 @@ import {
   ChevronLeftCircle,
   ChevronRightCircle,
   Eye,
+  UserRoundCog,
 } from "lucide-react";
 import Link from "next/link";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
@@ -17,13 +18,19 @@ import { useEffect, useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Estudiante } from "@/redux/features/admin/types";
 import { setPage } from "@/redux/features/admin/adminSlice";
+import { Modal } from "../common/Modal";
+import PermissionsAccessForm from "@/app/ui/plataforma/admin/access-permissions";
+import { useGetMenuQuery } from "@/redux/sistema/SistemaApiSlice";
 
 export function UserTable() {
   const dispatch = useAppDispatch();
   const [searchByName, setSearchByName] = useState<string>("");
-
+  const [open, setOpen] = useState<boolean>(false);
   const { q, page } = useAppSelector((state) => state.admin);
   const { data, refetch } = useObtainUsersQuery({ q, page });
+  const { data: modules } = useGetMenuQuery();
+  const [userId, setUserId] = useState<number | null>();
+  // const { data: tabsmodules } = useGetTabsQuery();
   // console.log(data);
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -38,7 +45,12 @@ export function UserTable() {
         refetch();
       }, 2000);
     }
-  }, [searchByName]);
+  }, [searchByName, dispatch]);
+
+  const handleOpenModal = (id: number) => {
+    setUserId(id);
+    setOpen(true);
+  };
 
   const headers: ColumnDef<Estudiante>[] = [
     {
@@ -72,12 +84,23 @@ export function UserTable() {
       id: "acciones",
       header: "Acciones",
       cell: ({ row }) => {
-        const id = row.original.id;
-        console.log(id);
+        // const id = row?.original?.id;
+        const userId = row?.original?.user?.id;
+        // console.log(id);
         return (
-          <Link href={`#`}>
-            <Eye />
-          </Link>
+          <div className="flex flex-row gap-4 p-2">
+            <Link href={`#`}>
+              <Eye />
+            </Link>
+            <div>
+              <button
+                title="Permisos y accesos"
+                onClick={() => handleOpenModal(userId)}
+              >
+                <UserRoundCog />
+              </button>
+            </div>
+          </div>
         );
       },
     },
@@ -85,6 +108,10 @@ export function UserTable() {
   return (
     <div className="bg-white rounded-xl shadow-md p-6">
       {/* Header con búsqueda y filtros */}
+      <Modal show={open} onClose={() => setOpen(false)}>
+        {/* <div></div> */}
+        <PermissionsAccessForm userId={userId} modules={modules} />
+      </Modal>
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <h2 className="text-xl font-bold text-gray-800">Gestión de Usuarios</h2>
 
