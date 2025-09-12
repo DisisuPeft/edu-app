@@ -1,18 +1,17 @@
 "use client";
 
 import { AlertTriangle } from "lucide-react";
+import { Estudiante } from "@/redux/features/admin/types";
 
 interface DeleteModalProps {
-  userName: string;
-  onConfirm: () => void;
-  onCancel: () => void;
+  estudiante?: Estudiante;
+  onCancel?: () => void;
 }
 
-export function DeleteModal({
-  userName,
-  onConfirm,
-  onCancel,
-}: DeleteModalProps) {
+export function DeleteModal({ estudiante, onCancel }: DeleteModalProps) {
+  const onConfirm = (id: number) => {
+    console.log(`elminaste al estudiante con ID: ${id}`);
+  };
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl shadow-xl w-full max-w-md p-6">
@@ -32,7 +31,7 @@ export function DeleteModal({
 
         <p className="text-gray-700 mb-6">
           ¿Estás seguro de que deseas eliminar al usuario{" "}
-          <strong>{userName}</strong>?
+          <strong>{estudiante?.user?.email}</strong>?
         </p>
 
         <div className="flex gap-3">
@@ -43,7 +42,7 @@ export function DeleteModal({
             Cancelar
           </button>
           <button
-            onClick={onConfirm}
+            onClick={() => onConfirm(estudiante.id)}
             className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
           >
             Eliminar

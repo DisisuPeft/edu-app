@@ -6,30 +6,34 @@ import {
   Plus,
   ChevronLeftCircle,
   ChevronRightCircle,
-  Eye,
+  PencilIcon,
   UserRoundCog,
+  Trash2Icon,
 } from "lucide-react";
 import Link from "next/link";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
-import { setQ, clearQ } from "@/redux/features/admin/adminSlice";
+import { setQ } from "@/redux/features/admin/adminSlice";
 import { DataTable } from "@/app/utils/DataTable/DataTable";
 import { useObtainUsersQuery } from "@/redux/features/admin/adminApiSlice";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Estudiante } from "@/redux/features/admin/types";
 import { setPage } from "@/redux/features/admin/adminSlice";
 import { Modal } from "../common/Modal";
 import PermissionsAccessForm from "@/app/ui/plataforma/admin/access-permissions";
 import { useGetMenuQuery } from "@/redux/sistema/SistemaApiSlice";
+import { DeleteModal } from "./delete-modal";
 
 export function UserTable() {
   const dispatch = useAppDispatch();
   const [searchByName, setSearchByName] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
   const { q, page } = useAppSelector((state) => state.admin);
-  const { data, refetch } = useObtainUsersQuery({ q, page });
+  const { data } = useObtainUsersQuery({ q, page });
   const { data: modules } = useGetMenuQuery();
   const [userId, setUserId] = useState<number | null>();
+  const [openDeleteModel, setDeleteModal] = useState<boolean>(false);
+  const [student, setStudent] = useState<Estudiante>();
   // const { data: tabsmodules } = useGetTabsQuery();
   // console.log(data);
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -38,14 +42,16 @@ export function UserTable() {
     }
   };
 
-  useEffect(() => {
-    if (searchByName === "") {
-      dispatch(clearQ());
-      setTimeout(() => {
-        refetch();
-      }, 2000);
-    }
-  }, [searchByName, dispatch]);
+  // useEffect(() => {
+  //   if (searchByName === "") {
+  //     dispatch(clearQ());
+  //     if (!isLoading) {
+  //       setTimeout(() => {
+  //         refetch();
+  //       }, 5000);
+  //     }
+  //   }
+  // }, [searchByName, dispatch]);
 
   const handleOpenModal = (id: number) => {
     setUserId(id);
@@ -84,13 +90,14 @@ export function UserTable() {
       id: "acciones",
       header: "Acciones",
       cell: ({ row }) => {
-        // const id = row?.original?.id;
+        const id = row?.original?.id;
         const userId = row?.original?.user?.id;
+        const value = row.original;
         // console.log(id);
         return (
           <div className="flex flex-row gap-4 p-2">
-            <Link href={`#`}>
-              <Eye />
+            <Link href={`/plataforma/settings/update/${id}`}>
+              <PencilIcon />
             </Link>
             <div>
               <button
@@ -100,18 +107,39 @@ export function UserTable() {
                 <UserRoundCog />
               </button>
             </div>
+            <div>
+              <button
+                title="Permisos y accesos"
+                onClick={() => {
+                  setStudent(value);
+                  setDeleteModal(true);
+                }}
+              >
+                <Trash2Icon />
+              </button>
+            </div>
           </div>
         );
       },
     },
   ];
+
+  const isMorePages = data?.count < 10;
+
   return (
     <div className="bg-white rounded-xl shadow-md p-6">
-      {/* Header con búsqueda y filtros */}
+      {/* Modales */}
       <Modal show={open} onClose={() => setOpen(false)}>
         {/* <div></div> */}
         <PermissionsAccessForm userId={userId} modules={modules} />
       </Modal>
+      {openDeleteModel && (
+        <DeleteModal
+          estudiante={student}
+          onCancel={() => setDeleteModal(false)}
+        />
+      )}
+      {/* Header con búsqueda y filtros */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <h2 className="text-xl font-bold text-gray-800">Gestión de Usuarios</h2>
 
@@ -128,22 +156,6 @@ export function UserTable() {
               className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full sm:w-64 text-black"
             />
           </div>
-
-          {/* Filtro por estado */}
-          {/* <div className="relative">
-            <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-            <select
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-              className="pl-10 pr-8 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white text-black"
-            >
-              <option value="Todos">Todos</option>
-              <option value="Activo">Activos</option>
-              <option value="Inactivo">Inactivos</option>
-              <option value="Suspendido">Suspendidos</option>
-            </select>
-          </div> */}
-
           {/* Botón crear usuario */}
           <Link
             href="/plataforma/settings/create"
@@ -167,7 +179,11 @@ export function UserTable() {
             >
               <ChevronLeftCircle className="text-black" />
             </button>
-            <button onClick={() => dispatch(setPage(page + 1))}>
+
+            <button
+              onClick={() => dispatch(setPage(page + 1))}
+              disabled={isMorePages}
+            >
               <ChevronRightCircle className="text-black" />
             </button>
           </div>

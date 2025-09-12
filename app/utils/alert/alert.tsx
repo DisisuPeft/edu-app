@@ -20,11 +20,13 @@ export default function AlertUser() {
   if (!alert) return null;
 
   return (
-    <div className="fixed top-4 right-4 z-50">
+    <div className="fixed top-[80px] right-6 z-[100px]">
       <Alert
         icon={
           alert.type === "success" ? (
-            <Check fontSize="inherit" />
+            <div className="rounded-full">
+              <Check fontSize="inherit" />
+            </div>
           ) : (
             <X fontSize="inherit" />
           )

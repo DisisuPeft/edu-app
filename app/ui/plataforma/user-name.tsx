@@ -17,5 +17,7 @@ export default function UserName({ title }: UserCardProps) {
     return <p>Fail to user fetch</p>;
   }
 
-  return `${title} ${data?.profile?.nombre} ${data?.profile?.apellidoP} ${data?.profile?.apellidoM}`;
+  return `${title} ${data?.profile?.nombre} ${data?.profile?.apellidoP} ${
+    data?.profile?.apellidoM === null ? "" : data?.profile?.apellidoM
+  }`;
 }

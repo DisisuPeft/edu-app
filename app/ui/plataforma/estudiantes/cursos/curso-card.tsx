@@ -9,9 +9,14 @@ interface CursoCardProps {
   path?: string | null;
 }
 import { useGetCursosQuery } from "@/redux/control-escolar/programas-educativos/programApiSlice";
+import useIsAdmin from "@/hooks/plataforma/admin/is-admin";
 
 export function CursoWrapper() {
-  const { data: cursos } = useGetCursosQuery();
+  const { isAdmin } = useIsAdmin();
+  // console.log(isAdmin);
+  const { data: cursos } = useGetCursosQuery(undefined, {
+    skip: isAdmin,
+  });
   return (
     <div>
       {cursos?.map((curso) => {

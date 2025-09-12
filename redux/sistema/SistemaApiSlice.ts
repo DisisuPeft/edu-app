@@ -11,6 +11,9 @@ const SistemaApiSlice = apiSlice.injectEndpoints({
         return Array.isArray(response) ? response : [];
       },
     }),
+    ObtainSubmodules: builder.query<Pestanias[], number>({
+      query: (id) => `/plataforma/retrive-submodules/${id}`,
+    }),
     // A boorraaaar
     createMenu: builder.mutation({
       query: (payload) => ({
@@ -70,4 +73,5 @@ export const {
   useEditUsersMutation,
   useGetUserEditQuery,
   useAddAccessUserMutation,
+  useObtainSubmodulesQuery,
 } = SistemaApiSlice;

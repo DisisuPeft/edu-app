@@ -4,11 +4,17 @@ import { useEffect, useState } from "react";
 export default function useCheckPerfil() {
   const { data: user } = useRetrieveUserQuery();
 
-  //   const [isProfileEmpty, setProfileEmpty] = useState(false);
+  let isProfileEmpty = false;
 
-  const isProfileEmpty = Object.values(user?.profile || {}).some(
-    (value) => value === null
+  const is_admin = Object.values(user?.roleID || {}).some(
+    (value) => value.name === "Administrador"
   );
+
+  if (!is_admin) {
+    isProfileEmpty = Object.values(user?.profile || {}).some(
+      (value) => value === null
+    );
+  }
 
   return { isProfileEmpty };
 }

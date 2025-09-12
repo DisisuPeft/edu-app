@@ -22,11 +22,11 @@ export default function Logout() {
   };
   return (
     <form onSubmit={handleLogout}>
-      <button className="flex h-[50px] grow items-center justify-center gap-2 rounded-md p-3 bg-[#a20519] text-white md:flex-none md:p-2 md:px-3">
+      <button className="flex h-[50px] grow items-center justify-center gap-2 rounded-full p-3 bg-[#a20519] text-white md:flex-none md:p-2 md:px-3">
         {/* <div className="flex justify-center"> */}
         <PowerIcon className="w-6" />
         {/* </div> */}
-        <div className="hidden md:block">Cerrar sesion</div>
+        {/* <div className="hidden md:block">Cerrar sesion</div> */}
       </button>
     </form>
   );

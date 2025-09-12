@@ -2,8 +2,8 @@ import { UserTable } from "@/app/components/admin/user-table";
 
 export default function Page() {
   return (
-    <div className="space-y-8">
-      <div className="p-6">
+    <div className="space-y-8 py-14">
+      <div className="m-0 p-6">
         <h1 className="text-3xl font-bold text-gray-900">
           Panel de Administración
         </h1>
@@ -13,7 +13,7 @@ export default function Page() {
       </div>
 
       {/* Estadísticas del Sistema */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+      {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div> */}
 
       {/* Tabla de Usuarios */}
       <UserTable />

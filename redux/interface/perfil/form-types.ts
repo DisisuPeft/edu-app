@@ -32,3 +32,36 @@ export type EstudianteForm = {
   user: User | null | undefined;
   matricula: string | null | undefined;
 };
+
+export const defaultUserForm: User = {
+  id: null,
+  email: "",
+  password: "",
+  roleID: [],
+};
+
+export const defaultPerfilForm: Perfil = {
+  nombre: "",
+  apellidoP: "",
+  apellidoM: "",
+  edad: "",
+  fechaNacimiento: "", // o un valor inicial calculado
+  genero: "", // usa "" hasta que el usuario seleccione
+  nivEdu: "",
+  telefono: "",
+};
+
+export const defaultEstudianteForm: EstudianteForm = {
+  id: null,
+  perfil: defaultPerfilForm,
+  curp: "",
+  lugar_nacimiento: null,
+  municipio: null,
+  rfc: "",
+  especialidad: "",
+  direccion: "",
+  telefono: "",
+  activo: null,
+  user: defaultUserForm,
+  matricula: "",
+};

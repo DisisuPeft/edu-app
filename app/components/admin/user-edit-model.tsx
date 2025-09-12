@@ -1,5 +1,5 @@
 "use client";
-import useUserProfileForm from "@/hooks/plataforma/admin/use-create-user";
+import Link from "next/link";
 import { Controller } from "react-hook-form";
 import {
   FormControl,
@@ -10,10 +10,11 @@ import {
   ListItemText,
   // OutlinedInput,
 } from "@mui/material";
-import Link from "next/link";
+// import { useParams } from "next/navigation";
+import useUserEditProfileForm from "@/hooks/plataforma/admin/use-edit-user";
 // import Link from "next/link";
 
-export default function UserCreateForm() {
+export default function UserEditForm({ id }: { id: string }) {
   const {
     register,
     handleSubmit,
@@ -23,11 +24,11 @@ export default function UserCreateForm() {
     niveles,
     municipios,
     errors,
-    isDirty,
+    // isDirty,
     isSubmitting,
     control,
     roles,
-  } = useUserProfileForm();
+  } = useUserEditProfileForm(id);
 
   return (
     <form
@@ -372,17 +373,8 @@ export default function UserCreateForm() {
             Cancelar
           </Link>
         </div>
-        {!isDirty && <span className="text-sm text-gray-500">Sin cambios</span>}
+        {/* {!isDirty && <span className="text-sm text-gray-500">Sin cambios</span>} */}
       </div>
-      {/* <div className="flex items-center gap-3 pt-4">
-        <button
-          type="submit"
-          className="rounded-lg border px-4 py-2 font-medium shadow-sm hover:bg-gray-50 disabled:opacity-50"
-        >
-          {isSubmitting ? "Guardando..." : "Guardar"}
-        </button>
-        {!isDirty && <span className="text-sm text-gray-500">Sin cambios</span>}
-      </div> */}
     </form>
   );
 }

@@ -3,6 +3,13 @@ export type TipoNivel = {
   name: string;
 };
 
+interface UserStudent {
+  id: number;
+  email: string | null;
+  password: string | null;
+  roleID: number[] | null;
+}
+
 export type NivelEducativo = {
   id: number;
   name: string;
@@ -46,11 +53,11 @@ export type Estudiante = {
   tutor_telefono: string;
   activo: number;
   grupo: null;
-  user: null;
+  user: UserStudent | null;
   fecha_actualizacion: string | null;
-  fecha_creacion: string;
+  fecha_creacion: string | null;
   email: string;
-  perfil: Perfil;
+  perfil: Perfil | null;
   municipio: Municipio;
 };
 
