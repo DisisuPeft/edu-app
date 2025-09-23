@@ -1,16 +1,16 @@
-// import Image from "next/image";
+import Image from "next/image";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen flex">
       {/* Lado izquierdo con mapa difuminado */}
       <div className="hidden lg:block lg:w-1/2 relative">
-        {/* <Image
-            src="/assets/doctor-giving-presentation-team-interim-doctors.jpg"
-            alt="Mapa de fondo"
-            layout="fill"
-            objectFit="cover"
-            className="filter"
-          /> */}
+        <Image
+          src="/assets/logos/unsza_logo.webp"
+          alt="Mapa de fondo"
+          layout="fill"
+          objectFit="cover"
+          className="filter"
+        />
         <div className="absolute inset-0"></div>
       </div>
 

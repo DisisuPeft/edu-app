@@ -1,6 +1,9 @@
+import { Role } from "../types";
+
 export type UserRef = {
   id: number;
   email: string;
+  roleID: Role[];
 };
 
 // Opcional: si prefieres expresar el booleano entero explícitamente
@@ -15,7 +18,7 @@ export type Perfil = {
   genero: number;
   nivEdu: number;
   telefono: string;
-  user: number | null;
+  user: UserRef;
 };
 
 export type Estudiante = {
@@ -31,7 +34,6 @@ export type Estudiante = {
   email: string;
   perfil: Perfil;
   municipio: number;
-  user: UserRef | null;
 };
 
 export interface UsersResponse {
@@ -40,3 +42,28 @@ export interface UsersResponse {
   previous: string | null;
   results: Estudiante[];
 }
+
+export type TipoDocumento = {
+  id: number;
+  nombre: number | null;
+};
+
+interface File {
+  download_url: string | null;
+  name: string | null;
+  path: string | null;
+  public_url: string | null;
+}
+
+interface Material {
+  id: number;
+  file: File;
+  programa_id: number | null;
+  type_id: number | null;
+}
+export type MaterialType = {
+  count: number | null;
+  next: string | null;
+  previous: string | null;
+  results: Material[];
+};

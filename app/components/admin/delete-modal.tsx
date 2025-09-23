@@ -31,7 +31,7 @@ export function DeleteModal({ estudiante, onCancel }: DeleteModalProps) {
 
         <p className="text-gray-700 mb-6">
           ¿Estás seguro de que deseas eliminar al usuario{" "}
-          <strong>{estudiante?.user?.email}</strong>?
+          <strong>{estudiante?.perfil?.user?.email}</strong>?
         </p>
 
         <div className="flex gap-3">

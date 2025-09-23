@@ -20,15 +20,15 @@ const studentsApiSlice = apiSlice.injectEndpoints({
     retrieveStudent: builder.query<EstudianteView, number>({
       query: (id) => `/student/${id}/`,
     }),
-    retrieveEditProfileStudent: builder.query<EstudianteForm, number>({
-      query: (id) => `/student/profile/${id}/`,
+    retrieveEditProfileStudent: builder.query<EstudianteForm, void>({
+      query: () => `/student/profile/`,
     }),
     // student/update/<int:id>
     updateStudentProfile: builder.mutation({
-      query: ({ id, payload }) => ({
-        url: `/student/update/profile/${id}/`,
+      query: (body) => ({
+        url: `/student/update/profile/`,
         method: "PATCH",
-        body: payload,
+        body: body,
       }),
     }),
     retrieveTotalCursos: builder.query<totalCount, void>({

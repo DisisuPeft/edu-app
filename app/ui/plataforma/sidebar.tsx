@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRetrievePestaniasQuery } from "@/redux/sistema/SistemaApiSlice";
 import { DynamicIcon } from "../icons/dynamic-icon";
 import { Logout } from "@/app/utils";
+import Image from "next/image";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -39,14 +40,20 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
           </button>
 
           {/* Branding, siempre visible */}
+          <Image
+            src="/assets/logos/unsza_logo.webp"
+            alt="logo"
+            width={40}
+            height={40}
+          />
           <span className="text-lg md:text-xl font-bold text-gray-900 tracking-tight">
-            Plataforma
+            UNSZA
           </span>
         </div>
 
         {/* Acciones (notificaciones, perfil, etc.) */}
         <div className="flex items-center gap-3">
-          <button
+          {/* <button
             className="p-2.5 rounded-xl hover:bg-gray-100/80 transition-all duration-200 relative"
             aria-label="Notificaciones"
           >
@@ -59,7 +66,7 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
               <path d="M12 2a7 7 0 00-7 7v3.586l-.707.707A1 1 0 005 15h14a1 1 0 00.707-1.707L19 12.586V9a7 7 0 00-7-7zm0 20a3 3 0 003-3H9a3 3 0 003 3z" />
             </svg>
             <div className="absolute -top-1 -right-1 h-3 w-3 bg-[#a20519] rounded-full border-2 border-white"></div>
-          </button>
+          </button> */}
 
           {/* Avatar o menú de usuario */}
           <Logout />

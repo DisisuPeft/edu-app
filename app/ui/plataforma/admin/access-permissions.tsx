@@ -34,7 +34,7 @@ export default function PermissionsAccessForm({ userId, modules }: Props) {
   } = useUserAccess({
     userId,
   });
-
+  // console.log(userId);
   return (
     <Card className="max-w-2xl">
       <CardContent>

@@ -60,7 +60,6 @@ export default function useUserEditProfileForm(id: string) {
         especialidad: estudiante.especialidad,
         direccion: estudiante.direccion,
         activo: estudiante.activo,
-        user: estudiante.user,
       };
       reset(mapped, { keepDirtyValues: true, keepErrors: true });
     }

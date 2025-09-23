@@ -1,8 +1,9 @@
 "use client";
 
-import { CursoCard } from "./curso-card";
+// import { CursoCard } from "./curso-card";
 import { useState } from "react";
 import { useGetPaginetedCursosQuery } from "@/redux/control-escolar/programas-educativos/programApiSlice";
+import { CursoCard } from "./curso-card";
 
 export default function CursosList() {
   const [page, setPage] = useState<number | null>(1);
@@ -45,7 +46,7 @@ export default function CursosList() {
           <button
             onClick={handlePrevious}
             disabled={page === 1}
-            className="px-4 py-2 bg-sky-500 rounded hover:bg-sky-700 disabled:opacity-50"
+            className="px-4 py-2 bg-primary rounded hover:bg-red-500 disabled:opacity-50"
           >
             Anterior
           </button>
@@ -57,7 +58,7 @@ export default function CursosList() {
           <button
             onClick={handleNext}
             disabled={page === totalPages}
-            className="px-4 py-2 bg-sky-500 rounded hover:bg-sky-700 disabled:opacity-50"
+            className="px-4 py-2 bg-primary rounded hover:bg-red-500 disabled:opacity-50"
           >
             Siguiente
           </button>

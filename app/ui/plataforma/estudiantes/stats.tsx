@@ -9,10 +9,10 @@ export default function StatComponent() {
     <div>
       {!isLoading && (
         <StatCard
-          icon={<BookOpen className="h-6 w-6" />}
-          label="Cursos Activos"
+          icon={<BookOpen className="h-6 max-w-xl" />}
+          label="Diplomado(s) activo"
           value={total}
-          color="text-blue-600 bg-blue-100"
+          color="text-white bg-primary"
         />
       )}
     </div>

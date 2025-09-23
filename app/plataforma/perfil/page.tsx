@@ -4,7 +4,7 @@ import UserName from "@/app/ui/plataforma/user-name";
 
 export default function Page() {
   return (
-    <div className="space-y-8 p-10">
+    <div className="space-y-8 p-10 mt-12">
       <div>
         <h1 className="text-3xl font-bold text-gray-900">
           <UserName title="Perfil de" />

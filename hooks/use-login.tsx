@@ -4,7 +4,6 @@ import { useAppDispatch } from "@/redux/hooks";
 import { useLoginMutation } from "@/redux/features/authApiSlice";
 import { setAuth } from "@/redux/features/authSlice";
 import { Toast } from "@/alerts/toast";
-import { setAlert } from "@/redux/features/alert/alertSlice";
 
 export default function useLogin() {
   const router = useRouter();
@@ -31,7 +30,7 @@ export default function useLogin() {
         // console.log(res)
         dispatch(setAuth());
         // dispatch(finishInitialLoad())
-        Toast({ message: "Logged in", icon: "success" });
+        // Toast({ message: "Logged in", icon: "success" });
         router.push("/plataforma");
       })
       .catch(() => {

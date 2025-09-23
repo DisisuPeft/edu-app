@@ -14,6 +14,7 @@ interface Perfil {
   genero: number | string;
   nivEdu: number | string;
   telefono: string | null;
+  user: User | null | undefined;
 }
 
 type IntBool = 0 | 1;
@@ -29,7 +30,6 @@ export type EstudianteForm = {
   direccion: string | null | undefined;
   telefono: string | null | undefined;
   activo: IntBool | null | undefined;
-  user: User | null | undefined;
   matricula: string | null | undefined;
 };
 
@@ -45,10 +45,11 @@ export const defaultPerfilForm: Perfil = {
   apellidoP: "",
   apellidoM: "",
   edad: "",
-  fechaNacimiento: "", // o un valor inicial calculado
-  genero: "", // usa "" hasta que el usuario seleccione
+  fechaNacimiento: "",
+  genero: "",
   nivEdu: "",
   telefono: "",
+  user: defaultUserForm,
 };
 
 export const defaultEstudianteForm: EstudianteForm = {
@@ -62,6 +63,5 @@ export const defaultEstudianteForm: EstudianteForm = {
   direccion: "",
   telefono: "",
   activo: null,
-  user: defaultUserForm,
   matricula: "",
 };

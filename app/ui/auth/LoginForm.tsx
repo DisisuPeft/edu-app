@@ -51,7 +51,7 @@ export default function LoginForm() {
         </div>
 
         <div className="flex items-center justify-between">
-          <div className="flex items-center">
+          {/* <div className="flex items-center">
             <input
               id="remember-me"
               name="remember-me"
@@ -64,7 +64,7 @@ export default function LoginForm() {
             >
               Recuérdame
             </label>
-          </div>
+          </div> */}
 
           {/* <div className="text-sm">
             <Link href="#" className="font-medium text-[#121829]">
@@ -81,7 +81,7 @@ export default function LoginForm() {
           <Button
             type="submit"
             disabled={isLoading}
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#121829] hover:bg-[#121829] focus:outline-none focus:ring-2 focus:ring-offset-2"
+            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2"
           >
             Iniciar sesión
           </Button>

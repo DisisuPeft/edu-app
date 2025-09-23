@@ -4,13 +4,13 @@ import { CursoWrapper } from "./cursos/curso-card";
 
 export default function StudentDashboard() {
   return (
-    <div className="space-y-8 p-10">
+    <div className="space-y-8 p-10 mt-12">
       <div>
         <h1 className="text-3xl font-bold text-gray-900">
           <UserName title="Bienvenido de nuevo," />
         </h1>
         <p className="text-gray-600 mt-1">
-          Aquí tienes un resumen de tu actividad reciente.
+          Aquí tienes un resumen de tus diplomados.
         </p>
       </div>
 

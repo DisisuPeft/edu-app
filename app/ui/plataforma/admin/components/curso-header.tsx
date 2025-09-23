@@ -17,11 +17,6 @@ export default function CursoHeader({ id }: { id: string }) {
   }
   return (
     <div className="mt-12">
-      <div className="flex items-center gap-2 text-sm mb-2 text-black">
-        <span>{"Diplomado"}</span>
-        <span>{"→"}</span>
-        <span>{"En progreso"}</span>
-      </div>
       <h1 className="text-3xl font-bold text-gray-900">{curso[0]?.nombre}</h1>
       <p className="text-md text-gray-600 mt-1">{curso[0]?.descripcion}</p>
     </div>

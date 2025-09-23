@@ -33,347 +33,424 @@ export default function UserEditForm({ id }: { id: string }) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mx-auto max-w-4xl space-y-6 p-6 text-black"
+      className="mx-auto max-w-7xl space-y-8 p-8 bg-white rounded-2xl border border-gray-100 text-black"
     >
-      {/* <h2 className="text-xl font-semibold">Estudiante</h2> */}
-
       {/* Identificación */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        <div>
-          <label className="block text-sm font-medium">CURP</label>
-          <input
-            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2 uppercase tracking-wide"
-            {...register("curp")}
-            maxLength={18}
-          />
+      <div className="space-y-6">
+        <div className="border-b border-gray-200 pb-4">
+          <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+            <div className="w-2 h-6 bg-blue-500 rounded-full"></div>
+            Información de Identificación
+          </h3>
+          <p className="text-sm text-gray-600 mt-1">
+            Datos oficiales de identificación
+          </p>
         </div>
 
-        <div>
-          <label className="block text-sm font-medium">RFC</label>
-          <input
-            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2 uppercase tracking-wide"
-            {...register("rfc")}
-            maxLength={13}
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Estudiante activo</label>
-          {/* <input
-            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2"
-            {...register("matricula", { required: true })}
-          />
-          {errors.matricula && (
-            <p className="text-sm text-red-600">Requerido</p>
-          )} */}
-          <Controller
-            name="activo"
-            control={control}
-            render={({ field: { value, onChange, ...rest } }) => (
-              <input
-                type="checkbox"
-                className="mt-2 h-5 w-5"
-                // el checkbox necesita booleano:
-                checked={value === 1}
-                // y tú guardas 0/1 en RHF:
-                onChange={(e) => onChange(e.target.checked ? 1 : 0)}
-                {...rest}
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              CURP
+            </label>
+            <input
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 uppercase tracking-wide text-sm"
+              {...register("curp")}
+              maxLength={18}
+              placeholder="Ingresa tu CURP"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              RFC
+            </label>
+            <input
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 uppercase tracking-wide text-sm"
+              {...register("rfc")}
+              maxLength={13}
+              placeholder="Ingresa tu RFC"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              Estudiante activo
+            </label>
+            <div className="flex items-center pt-2">
+              <Controller
+                name="activo"
+                control={control}
+                render={({ field: { value, onChange, ...rest } }) => (
+                  <label className="relative inline-flex items-center cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="sr-only peer"
+                      checked={value === 1}
+                      onChange={(e) => onChange(e.target.checked ? 1 : 0)}
+                      {...rest}
+                    />
+                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                    <span className="ml-3 text-sm text-gray-600">
+                      Actualmente estudiando
+                    </span>
+                  </label>
+                )}
               />
-            )}
-          />
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Contacto */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        <div>
-          <label className="block text-sm font-medium">Email</label>
-          <input
-            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2"
-            type="email"
-            {...register("user.email")}
-          />
+      <div className="space-y-6">
+        <div className="border-b border-gray-200 pb-4">
+          <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+            <div className="w-2 h-6 bg-green-500 rounded-full"></div>
+            Información de Contacto
+          </h3>
+          <p className="text-sm text-gray-600 mt-1">
+            Datos de acceso y comunicación
+          </p>
         </div>
-        <div>
-          <label className="block text-sm font-medium">Contraseña</label>
-          <input
-            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2"
-            type="text"
-            {...register("user.password")}
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Rol del usuario</label>
-          <Controller
-            name="user.roleID"
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <FormControl fullWidth size="small">
-                {/* <InputLabel id="rol-label">Roles</InputLabel> */}
-                <Select
-                  labelId="rol-label"
-                  multiple
-                  // input={<OutlinedInput label="Roles" />}
-                  value={field.value ?? []}
-                  // MUI puede entregar string[]; normalizamos a number[]
-                  onChange={(e) => {
-                    const raw = e.target.value;
-                    const arr = Array.isArray(raw) ? raw : [raw];
-                    field.onChange(arr.map((v) => Number(v)));
-                  }}
-                  renderValue={(selected) => {
-                    const ids = selected as number[];
-                    return roles
-                      ?.filter((r) => ids.includes(Number(r.id)))
-                      .map((r) => r.name)
-                      .join(", ");
-                  }}
-                >
-                  {roles?.map((r) => {
-                    const idNum = Number(r.id);
-                    const selected = (field.value ?? []).includes(idNum);
-                    return (
-                      <MenuItem key={r.id} value={idNum}>
-                        <Checkbox checked={selected} />
-                        <ListItemText primary={r.name} />
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </FormControl>
+
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              Email
+            </label>
+            <input
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-200"
+              type="email"
+              {...register("perfil.user.email")}
+              placeholder="correo@ejemplo.com"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              Contraseña
+            </label>
+            <input
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-200"
+              type="text"
+              {...register("perfil.user.password")}
+              placeholder="Ingresa una contraseña"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              Rol del usuario
+            </label>
+            <Controller
+              name="perfil.user.roleID"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <FormControl fullWidth size="small">
+                  <Select
+                    labelId="rol-label"
+                    multiple
+                    value={field.value ?? []}
+                    onChange={(e) => {
+                      const raw = e.target.value;
+                      const arr = Array.isArray(raw) ? raw : [raw];
+                      field.onChange(arr.map((v) => Number(v)));
+                    }}
+                    renderValue={(selected) => {
+                      const ids = selected as number[];
+                      return roles
+                        ?.filter((r) => ids.includes(Number(r.id)))
+                        .map((r) => r.name)
+                        .join(", ");
+                    }}
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: "0.5rem",
+                        backgroundColor: "#f9fafb",
+                        "&:hover": {
+                          backgroundColor: "#ffffff",
+                        },
+                        "&.Mui-focused": {
+                          backgroundColor: "#ffffff",
+                          "& .MuiOutlinedInput-notchedOutline": {
+                            borderColor: "#10b981",
+                            borderWidth: "2px",
+                          },
+                        },
+                      },
+                    }}
+                  >
+                    {roles?.map((r) => {
+                      const idNum = Number(r.id);
+                      const selected = (field.value ?? []).includes(idNum);
+                      return (
+                        <MenuItem key={r.id} value={idNum}>
+                          <Checkbox checked={selected} />
+                          <ListItemText primary={r.name} />
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </FormControl>
+              )}
+            />
+            {errors.perfil?.user?.roleID && (
+              <p className="text-sm text-red-500 flex items-center gap-1 mt-1">
+                <span className="w-4 h-4 text-red-500">⚠</span>
+                Este campo es requerido
+              </p>
             )}
-          />
-          {errors.user?.roleID && (
-            <p className="text-sm text-red-600">Requerido</p>
-          )}
+          </div>
         </div>
       </div>
 
       {/* Dirección */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <div>
-          <label className="block text-sm font-medium">Teléfono</label>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-gray-700">
+            Teléfono
+          </label>
           <input
-            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2"
+            className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-200"
             {...register("perfil.telefono")}
+            placeholder="Número de teléfono"
           />
         </div>
-        <div>
-          <label className="block text-sm font-medium">Dirección</label>
+
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-gray-700">
+            Dirección
+          </label>
           <input
-            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2"
+            className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-200"
             {...register("direccion")}
+            placeholder="Dirección completa"
           />
         </div>
       </div>
-
-      {/* Tutor */}
-      {/* <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <div>
-          <label className="block text-sm font-medium">Tutor - Nombre</label>
-          <input
-            className="mt-1 w-full rounded-md border p-2"
-            {...register("tutor_nombre")}
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Tutor - Teléfono</label>
-          <input
-            className="mt-1 w-full rounded-md border p-2"
-            {...register("tutor_telefono")}
-          />
-        </div>
-      </div> */}
 
       {/* Perfil */}
-      <h2 className="pt-2 text-4xl font-semibold">Perfil</h2>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        <div>
-          <label className="block text-sm font-medium">Nombre</label>
-          <input
-            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2"
-            {...register("perfil.nombre", { required: true })}
-          />
-          {errors.perfil?.nombre && (
-            <p className="text-sm text-red-600">Requerido</p>
-          )}
+      <div className="space-y-6">
+        <div className="border-b border-gray-200 pb-4">
+          <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+            <div className="w-2 h-6 bg-purple-500 rounded-full"></div>
+            Información Personal
+          </h3>
+          <p className="text-sm text-gray-600 mt-1">
+            Datos personales y académicos
+          </p>
         </div>
-        <div>
-          <label className="block text-sm font-medium">Apellido Paterno</label>
-          <input
-            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2"
-            {...register("perfil.apellidoP", { required: true })}
-          />
-          {errors.perfil?.apellidoP && (
-            <p className="text-sm text-red-600">Requerido</p>
-          )}
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Apellido Materno</label>
-          <input
-            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2"
-            {...register("perfil.apellidoM", { required: true })}
-          />
-          {errors.perfil?.apellidoM && (
-            <p className="text-sm text-red-600">Requerido</p>
-          )}
-        </div>
-      </div>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
-        <div>
-          <label className="block text-sm font-medium">Edad</label>
-          <input
-            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2"
-            type="number"
-            {...register("perfil.edad", { valueAsNumber: true })}
-          />
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              Nombre
+            </label>
+            <input
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all duration-200"
+              {...register("perfil.nombre", { required: true })}
+              placeholder="Tu nombre"
+            />
+            {errors.perfil?.nombre && (
+              <p className="text-sm text-red-500 flex items-center gap-1 mt-1">
+                <span className="w-4 h-4 text-red-500">⚠</span>
+                Este campo es requerido
+              </p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              Apellido Paterno
+            </label>
+            <input
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all duration-200"
+              {...register("perfil.apellidoP", { required: true })}
+              placeholder="Apellido paterno"
+            />
+            {errors.perfil?.apellidoP && (
+              <p className="text-sm text-red-500 flex items-center gap-1 mt-1">
+                <span className="w-4 h-4 text-red-500">⚠</span>
+                Este campo es requerido
+              </p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              Apellido Materno
+            </label>
+            <input
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all duration-200"
+              {...register("perfil.apellidoM", { required: true })}
+              placeholder="Apellido materno"
+            />
+            {errors.perfil?.apellidoM && (
+              <p className="text-sm text-red-500 flex items-center gap-1 mt-1">
+                <span className="w-4 h-4 text-red-500">⚠</span>
+                Este campo es requerido
+              </p>
+            )}
+          </div>
         </div>
-        <div>
-          <label className="block text-sm font-medium">Fecha Nacimiento</label>
-          <input
-            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2"
-            type="date"
-            {...register("perfil.fechaNacimiento")}
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Género</label>
-          <select
-            id="genero"
-            name="profile.genero"
-            {...register("perfil.genero")}
-            className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
-          >
-            <option value="">Seleccionar genero</option>
-            {generos?.map((niv) => (
-              <option key={niv.id} value={niv.id}>
-                {niv.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Nivel Educativo</label>
-          <select
-            id="nivel_educativo"
-            name="profile.nivEdu"
-            {...register("perfil.nivEdu")}
-            className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
-            // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
-            //   errors.nivel_educativo ? "border-red-500" : ""
-            // }`}
-          >
-            <option value="">Seleccionar nivel</option>
-            {niveles?.map((niv) => (
-              <option key={niv.id} value={niv.id}>
-                {niv.name}
-              </option>
-            ))}
-          </select>
+
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              Edad
+            </label>
+            <input
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all duration-200"
+              type="number"
+              {...register("perfil.edad", { valueAsNumber: true })}
+              placeholder="Edad"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              Fecha Nacimiento
+            </label>
+            <input
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all duration-200"
+              type="date"
+              {...register("perfil.fechaNacimiento")}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              Género
+            </label>
+            <select
+              id="genero"
+              name="profile.genero"
+              {...register("perfil.genero")}
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all duration-200 appearance-none cursor-pointer"
+            >
+              <option value="">Seleccionar género</option>
+              {generos?.map((niv) => (
+                <option key={niv.id} value={niv.id}>
+                  {niv.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              Nivel Educativo
+            </label>
+            <select
+              id="nivel_educativo"
+              name="profile.nivEdu"
+              {...register("perfil.nivEdu")}
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all duration-200 appearance-none cursor-pointer"
+            >
+              <option value="">Seleccionar nivel</option>
+              {niveles?.map((niv) => (
+                <option key={niv.id} value={niv.id}>
+                  {niv.name}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
       {/* Catálogos / relaciones simples por id */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        <div>
-          <label className="block text-sm font-medium">Profesion</label>
-          <input
-            className="mt-1 w-full rounded-md border border-2 border-gray-400 p-2"
-            type="text"
-            {...register("especialidad")}
-          />
+      <div className="space-y-6">
+        <div className="border-b border-gray-200 pb-4">
+          <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+            <div className="w-2 h-6 bg-orange-500 rounded-full"></div>
+            Información Adicional
+          </h3>
+          <p className="text-sm text-gray-600 mt-1">Profesión y ubicación</p>
         </div>
-        <div>
-          <label className="block text-sm font-medium">
-            Lugar de Nacimiento
-          </label>
-          <select
-            id="estado"
-            name="lugar_nacimiento"
-            {...register("lugar_nacimiento")}
-            className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
-            // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
-            //   errors.nivel_educativo ? "border-red-500" : ""
-            // }`}
-          >
-            <option value="">Seleccionar un estado</option>
-            {entidades?.map((entidad) => (
-              <option key={entidad.id} value={entidad.id}>
-                {entidad.name}
-              </option>
-            ))}
-          </select>
+
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              Profesión
+            </label>
+            <input
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition-all duration-200"
+              type="text"
+              {...register("especialidad")}
+              placeholder="Tu profesión o especialidad"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              Lugar de Nacimiento
+            </label>
+            <select
+              id="estado"
+              name="lugar_nacimiento"
+              {...register("lugar_nacimiento")}
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition-all duration-200 appearance-none cursor-pointer"
+            >
+              <option value="">Seleccionar un estado</option>
+              {entidades?.map((entidad) => (
+                <option key={entidad.id} value={entidad.id}>
+                  {entidad.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              Municipio
+            </label>
+            <select
+              id="municipio"
+              name="municipio"
+              {...register("municipio")}
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition-all duration-200 appearance-none cursor-pointer"
+            >
+              <option value="">Seleccionar municipio</option>
+              {municipios?.map((m) => (
+                <option key={m.id} value={m.id}>
+                  {m.nombre}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-        <div>
-          <label className="block text-sm font-medium">Municipio</label>
-          <select
-            id="municipio"
-            name="municipio"
-            {...register("municipio")}
-            className={`mt-1 p-2 border-2 border-gray-400 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-700 focus:ring-gray-500 sm:text-sm`}
-            // className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm ${
-            //   errors.nivel_educativo ? "border-red-500" : ""
-            // }`}
-          >
-            <option value="">Seleccionar un estado</option>
-            {municipios?.map((m) => (
-              <option key={m.id} value={m.id}>
-                {m.nombre}
-              </option>
-            ))}
-          </select>
-        </div>
-        {/* <div>
-          <label className="block text-sm font-medium">Grupo (id)</label>
-          <input
-            className="mt-1 w-full rounded-md border p-2"
-            type="number"
-            {...register("grupo", { valueAsNumber: true })}
-          />
-        </div> */}
       </div>
 
-      {/* Perfil.user como id (por tu ejemplo) */}
-      {/* <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <div>
-          <label className="block text-sm font-medium">Perfil - User ID</label>
-          <input
-            className="mt-1 w-full rounded-md border p-2"
-            type="number"
-            {...register("", { valueAsNumber: true })}
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">User (Raíz)</label>
-          <input
-            className="mt-1 w-full rounded-md border p-2 bg-gray-50"
-            readOnly
-            // value={u?.email ?? ""}
-            placeholder="Sin usuario asignado"
-          />
-        </div>
-      </div> */}
-
       {/* Acciones */}
-      <div className="flex items-center justify-end space-x-4 p-5">
-        <div className="relative bottom-6 top-10 right-4 flex gap-4">
+      <div className="flex items-center justify-end space-x-4 pt-8 border-t border-gray-200">
+        <div className="flex gap-4">
+          <Link
+            href="/plataforma/settings"
+            className="px-6 py-3 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-all duration-200 flex items-center gap-2"
+          >
+            <span>←</span>
+            Cancelar
+          </Link>
+
           <button
             type="submit"
             disabled={isSubmitting}
-            className="bg-blue-600 text-white p-4 rounded-md shadow-lg hover:bg-blue-700 transition"
+            className="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg font-medium hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-xl"
           >
-            {isSubmitting ? "Guardando..." : "Guardar"}
+            {isSubmitting ? (
+              <>
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                Guardando...
+              </>
+            ) : (
+              <>
+                <span>✓</span>
+                Guardar
+              </>
+            )}
           </button>
-
-          <Link
-            href="/plataforma/settings"
-            className="bg-red-600 text-white p-4 rounded-md shadow-lg hover:bg-red-700 transition"
-          >
-            Cancelar
-          </Link>
         </div>
-        {/* {!isDirty && <span className="text-sm text-gray-500">Sin cambios</span>} */}
       </div>
     </form>
   );

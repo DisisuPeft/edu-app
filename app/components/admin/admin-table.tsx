@@ -24,7 +24,7 @@ import PermissionsAccessForm from "@/app/ui/plataforma/admin/access-permissions"
 import { useGetMenuQuery } from "@/redux/sistema/SistemaApiSlice";
 import { DeleteModal } from "./delete-modal";
 
-export function UserTable() {
+export function AdminUserTable() {
   const dispatch = useAppDispatch();
   const [searchByName, setSearchByName] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
@@ -54,7 +54,6 @@ export function UserTable() {
   // }, [searchByName, dispatch]);
 
   const handleOpenModal = (id: number) => {
-    // console.log(id);
     setUserId(id);
     setOpen(true);
   };
@@ -94,9 +93,9 @@ export function UserTable() {
       header: "Acciones",
       cell: ({ row }) => {
         const id = row?.original?.id;
-        // const userId = row?.original?.user?.id;
+        const userId = row?.original?.perfil?.user?.id;
         const value = row.original;
-        console.log(row?.original);
+        // console.log(id);
         return (
           <div className="flex flex-row gap-4 p-2">
             <Link href={`/plataforma/settings/update/${id}`}>
@@ -105,7 +104,7 @@ export function UserTable() {
             <div>
               <button
                 title="Permisos y accesos"
-                onClick={() => handleOpenModal(row?.original?.perfil?.user?.id)}
+                onClick={() => handleOpenModal(userId)}
               >
                 <UserRoundCog />
               </button>
@@ -145,7 +144,7 @@ export function UserTable() {
       {/* Header con búsqueda y filtros */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <h2 className="text-xl font-bold text-gray-800">
-          Gestión de Estudiantes
+          Gestión de Usuario administrador
         </h2>
 
         <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">

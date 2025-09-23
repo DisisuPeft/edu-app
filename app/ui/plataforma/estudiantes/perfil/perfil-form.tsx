@@ -14,28 +14,8 @@ export default function PerfilForm() {
   } = usePerfilForm();
   return (
     <div className="container mx-auto px-4 py-4 text-gray-800">
-      {/* <div className="mb-6">
-        <Link
-          href="/estudiantes"
-          className="inline-flex items-center text-gray-600 hover:text-gray-900"
-        >
-          <ArrowLeftIcon className="h-5 w-5 mr-2" />
-          Volver a la lista
-        </Link>
-      </div> */}
-
       <div className="bg-white rounded-lg shadow p-6">
-        <h1 className="text-2xl font-bold text-gray-800 mb-6">
-          {/* <button
-            onClick={() =>
-              dispatch(
-                setAlert({ type: "success", message: "Probando alerta" })
-              )
-            }
-          >
-            Probar alerta
-          </button> */}
-        </h1>
+        <h1 className="text-2xl font-bold text-gray-800 mb-6"></h1>
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-4">

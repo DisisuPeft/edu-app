@@ -13,13 +13,11 @@ import {
   useGetGeneroQuery,
   useGetNivelesQuery,
 } from "@/redux/catalogos/CatApiSlice";
-import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { setAlert } from "@/redux/features/alert/alertSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppDispatch } from "@/redux/hooks";
 
 export default function usePerfilForm() {
-  const { data: user } = useRetrieveUserQuery();
-  const { data } = useRetrieveEditProfileStudentQuery(user?.id);
+  const { data } = useRetrieveEditProfileStudentQuery();
   const {
     register,
     handleSubmit,
@@ -49,8 +47,8 @@ export default function usePerfilForm() {
         id: data.id,
         // user: data.user,
         curp: data.curp || "",
-        lugar_nacimiento: data.lugar_nacimiento?.toString() ?? "",
-        municipio: data.municipio?.toString() ?? "",
+        lugar_nacimiento: data.lugar_nacimiento?.toString() ?? null,
+        municipio: data.municipio?.toString() ?? null,
         direccion: data.direccion ?? "",
         telefono: data.telefono ?? "",
         activo: data.activo ?? 1,
@@ -88,18 +86,16 @@ export default function usePerfilForm() {
   }
   const onSubmit = (data: EstudianteForm) => {
     // console.log(data);
-    updateStudentProfile({
-      id: user.id,
-      payload: data,
-    })
+    updateStudentProfile(data)
       .unwrap()
       .then((res) => {
         dispatch(setAlert({ type: "success", message: `${res}` }));
       })
       .catch((error) => {
-        dispatch(
-          setAlert({ type: "error", message: `Error al actualizar los datos` })
-        );
+        const errorMessage = Array.isArray(error?.data)
+          ? "Respuesta sin serializer"
+          : error?.data;
+        dispatch(setAlert({ type: "error", message: errorMessage }));
       });
   };
 

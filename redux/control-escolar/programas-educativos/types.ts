@@ -50,6 +50,7 @@ export type CursoCardsType = {
   nombre: string | null;
   tipo: string | null;
   submodulos?: SubModulo[];
+  modalidad?: string;
 };
 
 export interface CursoPaginatedType {
