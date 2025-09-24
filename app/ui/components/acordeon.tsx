@@ -1,5 +1,6 @@
 "use client";
 
+import clsx from "clsx";
 import type React from "react";
 
 import { useState, type ReactNode } from "react";
@@ -7,6 +8,7 @@ import { useState, type ReactNode } from "react";
 interface AcordeonProps {
   title: string;
   children: ReactNode;
+  className?: string;
 }
 
 function ChevronDownIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -28,24 +30,44 @@ function ChevronDownIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-export default function Acordeon({ title, children }: AcordeonProps) {
+export default function Acordeon({
+  title,
+  children,
+  className,
+}: AcordeonProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border border-gray-200 rounded-lg bg-white">
+    <div
+      className={clsx(
+        "group border border-border rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden font-sans",
+        className
+      )}
+    >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex justify-between items-center p-4 text-left font-semibold text-gray-800 hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-lg"
+        className="w-full flex justify-between items-center p-6 text-left font-semibold text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 transition-all duration-200"
         aria-expanded={isOpen}
       >
-        <span>{title}</span>
+        <span className="text-lg font-semibold text-balance">{title}</span>
         <ChevronDownIcon
-          className={`w-5 h-5 text-gray-500 transform transition-transform duration-200 ${
-            isOpen ? "rotate-180" : ""
-          }`}
+          className={clsx(
+            "w-5 h-5 text-muted-foreground transform transition-all duration-300 ease-out",
+            isOpen ? "rotate-180 text-primary" : "group-hover:text-foreground"
+          )}
         />
       </button>
-      {isOpen && <div className="p-4 border-t border-gray-200">{children}</div>}
+
+      <div
+        className={clsx(
+          "overflow-hidden transition-all duration-300 ease-out",
+          isOpen ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
+        )}
+      >
+        <div className="px-6 pb-6 pt-2 border-t border-border/50">
+          <div className="space-y-1">{children}</div>
+        </div>
+      </div>
     </div>
   );
 }
