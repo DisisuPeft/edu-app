@@ -28,7 +28,7 @@ export default function CourseEnrollment({
   const dispatch = useAppDispatch();
   const { data: diplomados } = useRetrieveDiplomadosQuery({
     q: null,
-    page: null,
+    page: 1,
   });
   const handleInscription = (curso_id: number) => {
     const next = { curso_id, estudiante_id };
