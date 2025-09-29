@@ -28,7 +28,7 @@ const adminApiSlice = apiSlice.injectEndpoints({
     }),
     retrieveDiplomados: builder.query<
       CursoPaginatedType,
-      { q: string; page: number }
+      { q: string; page: number | null }
     >({
       query: ({ q, page }) => `/plataforma/programas/all/?q=${q}&page=${page}`,
     }),

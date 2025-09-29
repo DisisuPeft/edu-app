@@ -5,13 +5,14 @@
 import { ChevronLeftCircle, ChevronRightCircle } from "lucide-react";
 import { DataTable } from "@/app/utils/DataTable/DataTable";
 import { useRetrieveDiplomadosQuery } from "@/redux/features/admin/adminApiSlice";
-import { useAppSelector, useAppDispatch } from "@/redux/hooks";
-import { setPage } from "@/redux/features/admin/adminSlice";
+import { useAppDispatch } from "@/redux/hooks";
+// import { setPage } from "@/redux/features/admin/adminSlice";
 import { CursoCardsType } from "@/redux/control-escolar/programas-educativos/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/app/ui/Button";
 import { useInscriptionStudentMutation } from "@/redux/features/admin/adminApiSlice";
 import { setAlert } from "@/redux/features/alert/alertSlice";
+// import { useState } from "react";
 //  7  1  1  4  1  1  6  3
 // 83 56 28 10 49 28 47 37
 // console.log((37 % 7) + 1);
@@ -21,10 +22,14 @@ export default function CourseEnrollment({
 }: {
   estudiante_id: string;
 }) {
-  const { q, page } = useAppSelector((state) => state.admin);
+  // const { q, page } = useAppSelector((state) => state.admin);
   const [inscriptionStudent] = useInscriptionStudentMutation();
+  // const [page, setPage] = useState<number | null>();
   const dispatch = useAppDispatch();
-  const { data: diplomados } = useRetrieveDiplomadosQuery({ q: q, page: page });
+  const { data: diplomados } = useRetrieveDiplomadosQuery({
+    q: null,
+    page: null,
+  });
   const handleInscription = (curso_id: number) => {
     const next = { curso_id, estudiante_id };
     inscriptionStudent(next)
@@ -44,7 +49,7 @@ export default function CourseEnrollment({
         );
       });
   };
-  const isMorePages = diplomados?.count <= 10;
+  // const isMorePages = diplomados?.count <= 10;
   const headers: ColumnDef<CursoCardsType>[] = [
     {
       header: "Nombre",
@@ -93,21 +98,18 @@ export default function CourseEnrollment({
       {diplomados?.results ? (
         <div>
           <DataTable data={diplomados?.results} columns={headers} />
-          <div className="flex justify-end gap-4 mt-4 p-4">
+          {/* <div className="flex justify-end gap-4 mt-4 p-4">
             <button
               className="rounded-full"
-              onClick={() => dispatch(setPage(Math.max(page - 1, 1)))}
+              onClick={() => setPage(Math.max(page - 1, 1))}
             >
               <ChevronLeftCircle className="text-black" />
             </button>
 
-            <button
-              onClick={() => dispatch(setPage(page + 1))}
-              disabled={isMorePages}
-            >
+            <button onClick={() => setPage(page + 1)} disabled={isMorePages}>
               <ChevronRightCircle className="text-black" />
             </button>
-          </div>
+          </div> */}
         </div>
       ) : (
         <div className="text-black">No data found</div>
