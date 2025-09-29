@@ -96,7 +96,7 @@ export function UserTable() {
         const id = row?.original?.id;
         // const userId = row?.original?.user?.id;
         const value = row.original;
-        console.log(row?.original);
+        // console.log(row?.original);
         return (
           <div className="flex flex-row gap-4 p-2">
             <Link href={`/plataforma/settings/update/${id}`}>
