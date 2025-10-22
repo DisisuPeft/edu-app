@@ -1,7 +1,14 @@
 import { useUploadResources } from "@/hooks";
-import { Controller } from "react-hook-form";
+// import { useRetrieveFilesQuery } from "@/redux/features/admin/fileApiSlice";
+import { Trash2 } from "lucide-react";
+import { useState } from "react";
+import { Modal } from "@/app/components/common/Modal";
+import DeleteFiles from "./delete-files";
+import { Material } from "@/redux/features/admin/types";
 
 export default function UploadPage({ id }: { id: string }) {
+  const [show, setShow] = useState<boolean>(false);
+  const [file, setFile] = useState<Material | null>(null);
   const {
     onSubmit,
     removeFile,
@@ -9,16 +16,82 @@ export default function UploadPage({ id }: { id: string }) {
     handleDrop,
     handleFileSelect,
     handleSubmit,
-    control,
-    errors,
+    // control,
+    // errors,
     isValid,
     dragActive,
     files,
-    documentos,
+    // documentos,
+    materiales,
   } = useUploadResources(id);
+
+  // const { data: materiales } = useRetrieveFilesQuery(parseInt(id));
+
+  // const deleteFile = (id: number) => {
+  //   console.log(id);
+  // };
+
+  // const openModal = () => {
+  //   setShow(true);
+  // };
+
+  const closeModal = (value?: boolean) => {
+    if (!value) {
+      return setShow(false);
+    }
+    return setShow(value);
+  };
 
   return (
     <div className="bg-white font-sans text-black">
+      <Modal show={show} onClose={closeModal}>
+        <DeleteFiles material={file} onCancel={closeModal} id={id} />
+      </Modal>
+      {materiales?.results ? (
+        <div className="border-b-4 border-primary">
+          {/* border-b-4 border-primary  */}
+          <header className="border-b-4 border-primary bg-card">
+            <div className="max-w-4xl mx-auto px-6 py-8">
+              <h1 className="text-3xl font-bold text-primary mb-2">
+                Archivos subidos
+              </h1>
+              <p className="text-muted text-lg">Materiales adjunto de apoyo</p>
+            </div>
+          </header>
+          <div>
+            {materiales?.results?.map((material, index) => (
+              <div
+                key={index}
+                className="flex items-center justify-between p-3 bg-muted rounded-lg hover:bg-muted/80 transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  {/* <span className="text-lg">{material.icon}</span>  cursor-pointer group*/}
+                  <div>
+                    <div className="font-medium text-sm text-foreground">
+                      {material?.file?.name}
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      {/* {material.type} • {material.size} */}
+                    </div>
+                  </div>
+                </div>
+                <div className="">
+                  {/* <div className="w-5 h-5 border-2 border-muted-foreground rounded rotate-45"></div> */}
+                  <Trash2
+                    className="cursor-pointer group"
+                    onClick={() => {
+                      setFile(material);
+                      setShow(true);
+                    }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div></div>
+      )}
       <header className="border-b-4 border-primary bg-card">
         <div className="max-w-4xl mx-auto px-6 py-8">
           <h1 className="text-3xl font-bold text-primary mb-2">
@@ -114,85 +187,6 @@ export default function UploadPage({ id }: { id: string }) {
                   </div>
                 </div>
               )}
-            </div>
-          </section>
-
-          {/* PASO 2: Metadatos */}
-          <section className="mb-12">
-            <div className="border-4 border-primary bg-card p-8 rounded-lg">
-              <h2 className="text-xl font-bold text-primary mb-4 uppercase tracking-wide">
-                Metadatos
-              </h2>
-
-              <div className="grid md:grid-cols-1 gap-6">
-                {/* TypeFile */}
-                <div>
-                  <label className="block font-bold text-primary mb-2 uppercase tracking-wide">
-                    Tipo de Archivo
-                  </label>
-                  <Controller
-                    name="typeId"
-                    control={control}
-                    rules={{ required: "Selecciona un tipo" }}
-                    render={({ field }) => (
-                      <select
-                        {...field}
-                        className="w-full p-3 border-4 border-primary bg-input text-foreground"
-                      >
-                        <option value="">-- selecciona --</option>
-                        {documentos?.map((doc) => (
-                          <option key={doc.nombre} value={doc.id}>
-                            {doc.nombre}
-                          </option>
-                        ))}
-                      </select>
-                    )}
-                  />
-                  {errors.typeId && (
-                    <p className="text-destructive text-sm mt-1">
-                      {errors.typeId.message as string}
-                    </p>
-                  )}
-                </div>
-                -
-                {/* <div>
-                  <label className="block font-bold text-primary mb-2 uppercase tracking-wide">
-                    Módulo
-                  </label>
-                  <Controller
-                    name="moduloId"
-                    control={control}
-                    render={({ field }) => (
-                      <input
-                        type="number"
-                        min={1}
-                        placeholder="ID de módulo"
-                        {...field}
-                        className="w-full p-3 border-4 border-primary bg-input text-foreground"
-                      />
-                    )}
-                  />
-                </div>
-=
-                <div>
-                  <label className="block font-bold text-primary mb-2 uppercase tracking-wide">
-                    Submódulo
-                  </label>
-                  <Controller
-                    name="submoduloId"
-                    control={control}
-                    render={({ field }) => (
-                      <input
-                        type="number"
-                        min={1}
-                        placeholder="ID de submódulo"
-                        {...field}
-                        className="w-full p-3 border-4 border-primary bg-input text-foreground"
-                      />
-                    )}
-                  />
-                </div> */}
-              </div>
             </div>
           </section>
         </main>

@@ -55,7 +55,7 @@ interface File {
   public_url: string | null;
 }
 
-interface Material {
+export interface Material {
   id: number;
   file: File;
   programa_id: number | null;
@@ -66,4 +66,11 @@ export type MaterialType = {
   next: string | null;
   previous: string | null;
   results: Material[];
+};
+
+export type FileType = {
+  count: number | null;
+  next: string | null;
+  previous: string | null;
+  results: File[];
 };

@@ -29,17 +29,14 @@ export default function RightPanel({ id }: { id: string }) {
                       key={index}
                       className="flex items-center justify-between p-3 bg-muted rounded-lg hover:bg-muted/80 transition-colors cursor-pointer group"
                       onClick={() =>
-                        handleDownload(
-                          material?.file?.download_url,
-                          material?.file?.name
-                        )
+                        handleDownload(material?.download_url, material?.name)
                       }
                     >
                       <div className="flex items-center gap-3">
                         {/* <span className="text-lg">{material.icon}</span> */}
                         <div>
                           <div className="font-medium text-sm text-foreground">
-                            {material?.file?.name}
+                            {material?.name}
                           </div>
                           <div className="text-xs text-muted-foreground">
                             {/* {material.type} • {material.size} */}

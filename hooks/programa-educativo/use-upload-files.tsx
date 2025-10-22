@@ -6,6 +6,7 @@ import { useRetrieveTypeDocumentosQuery } from "@/redux/features/admin/adminApiS
 import { useSendDocumentsMutation } from "@/redux/features/admin/adminApiSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { setAlert } from "@/redux/features/alert/alertSlice";
+import { useRetrieveFilesQuery } from "@/redux/features/admin/fileApiSlice";
 
 type FormData = {
   files: File[];
@@ -17,6 +18,7 @@ type FormData = {
 export default function useUploadResources(id: string) {
   const [dragActive, setDragActive] = useState(false);
   const [sendDocuments] = useSendDocumentsMutation();
+  const { data: materiales, refetch } = useRetrieveFilesQuery(parseInt(id));
   const dispatch = useAppDispatch();
   const {
     control,
@@ -28,7 +30,7 @@ export default function useUploadResources(id: string) {
   } = useForm<FormData>({
     defaultValues: {
       files: [],
-      typeId: "",
+      typeId: 1,
       moduloId: "",
       programaId: parseInt(id),
     },
@@ -81,6 +83,7 @@ export default function useUploadResources(id: string) {
         dispatch(
           setAlert({ type: "success", message: "Documento(s) subido(s)" })
         );
+        refetch();
         reset();
       })
       .catch(() => {
@@ -108,5 +111,6 @@ export default function useUploadResources(id: string) {
     dragActive,
     files,
     documentos,
+    materiales,
   };
 }

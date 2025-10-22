@@ -87,22 +87,22 @@ export default function DiplomadosPage() {
 
   const totalPages = Math.ceil(cursos?.count / 10);
 
-  const categorias = [
-    "Todas",
-    "Administración",
-    "Marketing",
-    "Finanzas",
-    "Recursos Humanos",
-    "Tecnología",
-    "Sostenibilidad",
-  ];
-  const modalidades = ["Todas", "Virtual", "Presencial", "Híbrida"];
-  const niveles = ["Todos", "Básico", "Intermedio", "Avanzado"];
+  // const categorias = [
+  //   "Todas",
+  //   "Administración",
+  //   "Marketing",
+  //   "Finanzas",
+  //   "Recursos Humanos",
+  //   "Tecnología",
+  //   "Sostenibilidad",
+  // ];
+  // const modalidades = ["Todas", "Virtual", "Presencial", "Híbrida"];
+  // const niveles = ["Todos", "Básico", "Intermedio", "Avanzado"];
 
   return (
     <div className="text-black mt-12">
       {/* Header */}
-      <header className="bg-card border-b border-border">
+      <header className="bg-card border-b-2 border-gray-400">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
@@ -128,11 +128,11 @@ export default function DiplomadosPage() {
       </header>
 
       {/* Filters Section */}
-      <section className="bg-background border-b border-border">
+      <section className="bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col lg:flex-row gap-4">
             {/* Search Bar */}
-            <div className="flex-1">
+            {/* <div className="flex-1">
               <div className="relative">
                 <svg
                   className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted w-5 h-5"
@@ -150,13 +150,13 @@ export default function DiplomadosPage() {
                 <input
                   type="text"
                   placeholder="Buscar diplomados..."
-                  className="w-full pl-10 pr-4 py-3 bg-input border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent text-foreground placeholder-muted"
+                  className="w-full pl-10 pr-4 py-3 bg-input border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring focus:border-gray-600 text-foreground placeholder-muted"
                 />
               </div>
-            </div>
+            </div> */}
 
             {/* Filter Dropdowns */}
-            <div className="flex flex-col sm:flex-row gap-3">
+            {/* <div className="flex flex-col sm:flex-row gap-3">
               <select className="px-4 py-3 bg-input border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring text-foreground min-w-[140px]">
                 <option value="">Categoría</option>
                 {categorias.map((categoria) => (
@@ -183,7 +183,7 @@ export default function DiplomadosPage() {
                   </option>
                 ))}
               </select>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

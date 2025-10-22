@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useCallback } from "react";
 import { createPortal } from "react-dom";
 
@@ -70,7 +69,7 @@ export const Modal: React.FC<ModalProps> = ({
   };
 
   if (!isMounted) return null;
-//   console.log(transparent)
+  //   console.log(transparent)
   return createPortal(
     <div
       className={`fixed inset-0 overflow-y-auto px-4 py-[200px] sm:px-0 z-50 transition-opacity duration-200 ${
@@ -80,7 +79,7 @@ export const Modal: React.FC<ModalProps> = ({
     >
       <div
         className={`fixed inset-0 transform transition-all ${
-          show ? "opacity-100" : "opacity-0"
+          show ? "opacity-20" : "opacity-0"
         }`}
       >
         <div className="absolute inset-0 bg-gray-500 opacity-75" />
@@ -90,7 +89,9 @@ export const Modal: React.FC<ModalProps> = ({
           transparent ? "" : "bg-white"
         } rounded-lg overflow-hidden ${
           transparent ? "shadow-none" : "shadow-xl"
-        } transform transition-all w-full sm:mx-auto ${maxWidthClass[maxWidth]}`}
+        } transform transition-all w-full sm:mx-auto ${
+          maxWidthClass[maxWidth]
+        }`}
         onClick={(e: React.MouseEvent) => e.stopPropagation()}
       >
         {children}
