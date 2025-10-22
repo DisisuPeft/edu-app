@@ -99,7 +99,7 @@ export function UserTable() {
         // console.log(row?.original);
         return (
           <div className="flex flex-row gap-4 p-2">
-            <Link href={`/plataforma/settings/update/${id}`}>
+            <Link href={`/plataforma/estudiantes/update/${id}`}>
               <PencilIcon />
             </Link>
             <div>
@@ -163,7 +163,7 @@ export function UserTable() {
           </div>
           {/* Botón crear usuario */}
           <Link
-            href="/plataforma/settings/create"
+            href="/plataforma/estudiantes/create"
             className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
           >
             <Plus className="h-4 w-4" />

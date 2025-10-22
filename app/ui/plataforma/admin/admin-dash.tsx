@@ -39,7 +39,7 @@ export default function HomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
           {/* Tarjeta Crear Usuarios */}
-          <Link href="/plataforma/settings/create" className="group">
+          <Link href="/plataforma/estudiantes/create" className="group">
             <div className="h-64 transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer border-2 border-border hover:border-primary rounded-lg bg-card">
               <div className="flex flex-col items-center justify-center h-full p-8 text-center">
                 <div className="mb-6 p-4 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">

@@ -28,9 +28,10 @@ const adminApiSlice = apiSlice.injectEndpoints({
     }),
     retrieveDiplomados: builder.query<
       CursoPaginatedType,
-      { q: string; page: number | null }
+      { q: string; page: number | null; estudiante_id?: number | null }
     >({
-      query: ({ q, page }) => `/plataforma/programas/all/?q=${q}&page=${page}`,
+      query: ({ q, page, estudiante_id }) =>
+        `/plataforma/programas/all/?q=${q}&page=${page}&estudiante_id=${estudiante_id}`,
     }),
     retrieveTypeDocumentos: builder.query<TipoDocumento[], void>({
       query: () => "/plataforma/diplomados/documentos/",
@@ -49,6 +50,13 @@ const adminApiSlice = apiSlice.injectEndpoints({
         body: body,
       }),
     }),
+    desinscripcion: builder.mutation({
+      query: (body) => ({
+        method: "PATCH",
+        url: "/plataforma/programas/desinscribir/",
+        body: body,
+      }),
+    }),
     getMateriales: builder.query<FileType, string>({
       query: (id) => `/plataforma/materiales/?programa_id=${id}`,
     }),
@@ -64,5 +72,6 @@ export const {
   useRetrieveTypeDocumentosQuery,
   useSendDocumentsMutation,
   useInscriptionStudentMutation,
+  useDesinscripcionMutation,
   useGetMaterialesQuery,
 } = adminApiSlice;

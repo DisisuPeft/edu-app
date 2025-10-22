@@ -51,6 +51,19 @@ export default function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
+  const estudiantesMatch = pathname.match(
+    /^\/plataforma\/estudiantes\/update\/(\d+)\/?$/
+  );
+  if (estudiantesMatch) {
+    const rawId = estudiantesMatch[1];
+    if (!/^\d+$/.test(rawId)) {
+      return NextResponse.next();
+    }
+    const encoded = encodePayload({ id: rawId });
+    url.pathname = `/plataforma/estudiantes/update/${encoded}`;
+    return NextResponse.redirect(url);
+  }
+
   return NextResponse.next();
 }
 
@@ -62,5 +75,6 @@ export const config = {
     "/plataforma/cursos/:id(\\d+)",
     "/diplomados/:id(\\d+)",
     "/plataforma/diplomados/:id(\\d+)",
+    "/plataforma/estudiantes/update/:id(\\d+)",
   ],
 };

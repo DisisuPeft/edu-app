@@ -71,7 +71,11 @@ import Link from "next/link";
 export default function DiplomadosPage() {
   // Datos de ejemplo - aquí conectarías tu lógica
   const [page, setPage] = useState<number | null>(1);
-  const { data: cursos } = useRetrieveDiplomadosQuery({ q: "", page: page });
+  const { data: cursos } = useRetrieveDiplomadosQuery({
+    q: "",
+    page: page,
+    estudiante_id: null,
+  });
 
   const handlePrevious = () => {
     if (page > 1) {
@@ -110,7 +114,19 @@ export default function DiplomadosPage() {
                 {"Diplomados Institucionales"}
               </h1>
               <p className="text-muted mt-2 text-lg">
-                {/* {"Descubre nuestros programas de formación especializada"} */}
+                <select
+                  id="campaña"
+                  name="campaña"
+                  // {...register("lugar_nacimiento")}
+                  className="w-full px-4 py-3 rounded-lg border border-gray-400 bg-gray-50 focus:bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition-all duration-200 appearance-none cursor-pointer"
+                >
+                  <option value="">Seleccionar una campaña</option>
+                  {/* {entidades?.map((entidad) => (
+                    <option key={entidad.id} value={entidad.id}>
+                      {entidad.name}
+                    </option>
+                  ))} */}
+                </select>
               </p>
             </div>
             <div className="hidden md:flex items-center space-x-4">

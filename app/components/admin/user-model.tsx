@@ -436,7 +436,7 @@ export default function UserCreateForm() {
       <div className="flex items-center justify-end space-x-4 pt-8 border-t border-gray-200">
         <div className="flex gap-4">
           <Link
-            href="/plataforma/settings"
+            href="/plataforma/estudiantes"
             className="px-6 py-3 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-all duration-200 flex items-center gap-2"
           >
             <span>←</span>

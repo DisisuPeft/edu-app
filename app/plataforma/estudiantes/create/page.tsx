@@ -6,7 +6,7 @@ export default function Page() {
       <div className="flex flex-row max-w-[600px]">
         {/* <div className="flex justify-center items-center">
           <Link
-            href="/plataforma/settings"
+           
             className="inline-flex items-center text-gray-800 hover:text-gray-900 ml-4 rounded-full p-4"
           >
             <ArrowLeftIcon className="h-[40px] w-[30px] mr-2" />
