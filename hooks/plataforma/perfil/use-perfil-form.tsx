@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { EstudianteForm } from "@/redux/interface/perfil/form-types";
 import { useRetrieveMunicipiosQuery } from "@/redux/catalogos/CatApiSlice";
@@ -7,8 +7,6 @@ import {
   useUpdateStudentProfileMutation,
 } from "@/redux/features/estudiante/studentApiSlice";
 import { useGetEntidadesQuery } from "@/redux/catalogos/CatApiSlice";
-import { Alert } from "@mui/material";
-import { Check, X } from "lucide-react";
 import {
   useGetGeneroQuery,
   useGetNivelesQuery,
@@ -17,7 +15,7 @@ import { setAlert } from "@/redux/features/alert/alertSlice";
 import { useAppDispatch } from "@/redux/hooks";
 
 export default function usePerfilForm() {
-  const { data } = useRetrieveEditProfileStudentQuery();
+  const { data, isLoading } = useRetrieveEditProfileStudentQuery();
   const {
     register,
     handleSubmit,
@@ -42,44 +40,21 @@ export default function usePerfilForm() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (data) {
-      reset({
+    if (!isLoading && data && municipios) {
+      const mapped = {
         id: data.id,
-        // user: data.user,
-        curp: data.curp || "",
-        lugar_nacimiento: data.lugar_nacimiento?.toString() ?? null,
-        municipio: data.municipio?.toString() ?? null,
-        direccion: data.direccion ?? "",
-        telefono: data.telefono ?? "",
-        activo: data.activo ?? 1,
-        rfc: data?.rfc,
-        especialidad: data?.especialidad,
-        perfil: data.perfil
-          ? {
-              nombre: data.perfil.nombre || "",
-              apellidoP: data.perfil.apellidoP || "",
-              apellidoM: data.perfil.apellidoM || "",
-              edad: data.perfil.edad || "",
-              fechaNacimiento: data.perfil.fechaNacimiento || "",
-              genero: data.perfil.genero || "",
-              nivEdu: data.perfil.nivEdu || "",
-              telefono: data.perfil.telefono || "",
-              // user: data.perfil.user,
-            }
-          : {
-              nombre: "",
-              apellidoP: "",
-              apellidoM: "",
-              edad: "",
-              fechaNacimiento: "",
-              genero: "",
-              nivEdu: "",
-              telefono: "",
-              // user: data.user,
-            },
-      });
+        perfil: data.perfil,
+        curp: data.curp,
+        lugar_nacimiento: data.lugar_nacimiento,
+        municipio: data.municipio,
+        rfc: data.rfc,
+        especialidad: data.especialidad,
+        direccion: data.direccion,
+        activo: data.activo,
+      };
+      reset(mapped, { keepDirtyValues: true, keepErrors: true });
     }
-  }, [data, reset, municipios]);
+  }, [isLoading, reset, municipios]);
 
   if (errorResponse || errorG || errorNiv) {
     console.error("error to fetching data");

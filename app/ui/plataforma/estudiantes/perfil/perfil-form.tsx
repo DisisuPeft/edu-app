@@ -411,7 +411,7 @@ export default function PerfilForm() {
             <button
               type="submit"
               // disabled={isSubmitting}
-              className="fixed bottom-6 right-8 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition"
+              className="fixed bottom-6 right-8 bg-primary text-white p-4 rounded-full shadow-lg hover:bg-red-700 transition"
             >
               {/* {isSubmitting ? "Guardando..." : "Guardar"} */}
               Guardar
