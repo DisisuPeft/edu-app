@@ -1,7 +1,7 @@
 import { apiSlice } from "@/redux/services/apiSlice";
 import { UsersResponse } from "./types";
 import { EstudianteForm } from "@/redux/interface/perfil/form-types";
-import { CursoPaginatedType } from "@/redux/control-escolar/programas-educativos/types";
+import { DiplomadoType } from "@/redux/control-escolar/programas-educativos/types";
 import { TipoDocumento, FileType } from "./types";
 
 const adminApiSlice = apiSlice.injectEndpoints({
@@ -27,7 +27,7 @@ const adminApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     retrieveDiplomados: builder.query<
-      CursoPaginatedType,
+      DiplomadoType,
       { q: string; page: number | null; estudiante_id?: number | null }
     >({
       query: ({ q, page, estudiante_id }) =>

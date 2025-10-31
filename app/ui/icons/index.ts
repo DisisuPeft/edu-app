@@ -15,6 +15,7 @@ import {
   ClipboardCheck,
   User,
   School,
+  Megaphone,
 } from "lucide-react";
 
 export const iconMap: Record<string, React.ElementType> = {
@@ -34,4 +35,5 @@ export const iconMap: Record<string, React.ElementType> = {
   clipboardckeck: ClipboardCheck,
   user: User,
   school: School,
+  megaphone: Megaphone,
 };

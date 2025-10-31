@@ -4,6 +4,7 @@
 import { useState } from "react";
 import { useRetrieveDiplomadosQuery } from "@/redux/features/admin/adminApiSlice";
 import Link from "next/link";
+import Image from "next/image";
 
 // export default function CursosList() {
 //   const [page, setPage] = useState<number | null>(1);
@@ -113,21 +114,16 @@ export default function DiplomadosPage() {
               <h1 className="text-3xl font-bold text-foreground font-sans">
                 {"Diplomados Institucionales"}
               </h1>
-              <p className="text-muted mt-2 text-lg">
+              {/* <p className="text-muted mt-2 text-lg">
                 <select
                   id="campaña"
                   name="campaña"
-                  // {...register("lugar_nacimiento")}
                   className="w-full px-4 py-3 rounded-lg border border-gray-400 bg-gray-50 focus:bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition-all duration-200 appearance-none cursor-pointer"
                 >
                   <option value="">Seleccionar una campaña</option>
-                  {/* {entidades?.map((entidad) => (
-                    <option key={entidad.id} value={entidad.id}>
-                      {entidad.name}
-                    </option>
-                  ))} */}
+
                 </select>
-              </p>
+              </p> */}
             </div>
             <div className="hidden md:flex items-center space-x-4">
               <div className="bg-secondary/10 px-4 py-2 rounded-lg">
@@ -222,111 +218,72 @@ export default function DiplomadosPage() {
         </div> */}
 
         {/* Diplomados Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {cursos?.results?.map((diplomado) => (
-            <article
-              key={diplomado.id}
-              className="bg-card rounded-xl border border-border overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group"
-            >
-              {/* Image */}
-              <div className="relative overflow-hidden">
-                {/* <img
-                  src={diplomado.imagen || "/placeholder.svg"}
-                  alt={diplomado.titulo}
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                /> */}
-                <div className="absolute top-4 left-4">
-                  {/* <span className="bg-secondary text-secondary-foreground px-3 py-1 rounded-full text-sm font-medium">
-                    {diplomado.categoria}
-                  </span> */}
+        <div className="flex flex-col">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {cursos?.results?.map((programa) => (
+              <article
+                key={programa.id}
+                className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-200 overflow-hidden h-full flex flex-col"
+              >
+                {/* Imagen de portada */}
+                <div className="relative aspect-[16/9] overflow-hidden">
+                  {programa.imagen_url ? (
+                    <Image
+                      src={programa.imagen_url} // URL absoluta o /ruta-local
+                      alt={programa.nombre}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
+                      priority={false}
+                    />
+                  ) : (
+                    // Fallback si no hay imagen
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#0D1B48] via-[#40143e] to-[#9B1C31]" />
+                  )}
+                  {/* Overlay sutil para legibilidad del título si lo quisieras arriba */}
+                  <div className="absolute inset-0 bg-black/10" />
                 </div>
-                <div className="absolute top-4 right-4">
-                  {/* <span className="bg-background/90 text-foreground px-3 py-1 rounded-full text-sm font-medium">
-                    {diplomado.nivel}
-                  </span> */}
-                </div>
-              </div>
 
-              {/* Content */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-foreground mb-3 font-sans leading-tight">
-                  {diplomado.nombre}
-                </h3>
+                {/* Contenido */}
+                <div className="p-6 flex flex-col flex-1">
+                  <h3 className="text-xl font-bold text-[#121829] mb-3 leading-tight group-hover:text-[#a20519] transition-colors duration-300">
+                    {programa.nombre}
+                  </h3>
 
-                <p className="text-muted text-sm leading-relaxed mb-4">
-                  {diplomado.descripcion}
-                </p>
+                  <p className="text-gray-600 leading-relaxed text-base line-clamp-4 mb-6">
+                    {programa.descripcion}
+                  </p>
 
-                {/* Details */}
-                <div className="space-y-2 mb-4">
-                  <div className="flex items-center text-sm">
-                    <svg
-                      className="w-4 h-4 text-muted mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+                  {/* Botón / CTA opcional */}
+                  <div className="mt-auto">
+                    {/* Reemplaza href según tu routing */}
+                    <Link
+                      href={`/plataforma/diplomados/${programa.id}`}
+                      className="inline-flex items-center gap-2 text-[#0D1B48] font-semibold hover:text-[#a20519] transition-colors"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                    <span className="text-foreground font-medium">
-                      Duración:
-                    </span>
-                    <span className="text-muted ml-1">
-                      {diplomado?.duracion_horas}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center text-sm">
-                    <svg
-                      className="w-4 h-4 text-muted mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </svg>
-                    <span className="text-foreground font-medium">
-                      Modalidad:
-                    </span>
-                    <span className="text-muted ml-1">
-                      {diplomado?.modalidad}
-                    </span>
+                      Ver más
+                      <svg
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </Link>
                   </div>
                 </div>
 
-                {/* Price and CTA */}
-                <div className="flex items-center justify-between pt-4 border-t border-border">
-                  <div>
-                    <span className="text-2xl font-bold text-secondary">
-                      {/* {diplomado.precio} */}
-                    </span>
-                  </div>
-                  <Link
-                    href={`/plataforma/diplomados/${diplomado.id}`}
-                    className="bg-primary text-white px-6 py-2 rounded-lg font-medium hover:bg-primary/90 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ring"
-                  >
-                    {"Ver más"}
-                  </Link>
-                </div>
-              </div>
-            </article>
-          ))}
+                {/* Barra inferior animada */}
+                <div className="h-1 bg-gradient-to-r from-[#121b6a] to-[#a20519] origin-left" />
+              </article>
+            ))}
+          </div>
         </div>
 
         {/* Load More Button */}

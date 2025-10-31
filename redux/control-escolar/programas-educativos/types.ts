@@ -52,6 +52,20 @@ export type CursoCardsType = {
   submodulos?: SubModulo[];
   modalidad?: string;
   inscrito: boolean | null;
+  imagen_url: string | null;
+  banner_url: string | null;
+};
+
+export type Diplomados = {
+  id: number;
+  nombre: string;
+  descripcion: string;
+  imagen_url: string | null;
+  banner_url: string | null;
+  tipo: string | null;
+  modalidad: string | null;
+  duracion_horas: number | null;
+  inscrito: boolean | null;
 };
 
 export interface CursoPaginatedType {
@@ -59,4 +73,11 @@ export interface CursoPaginatedType {
   next: string | null;
   previous: string | null;
   results: CursoCardsType[];
+}
+
+export interface DiplomadoType {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Diplomados[];
 }

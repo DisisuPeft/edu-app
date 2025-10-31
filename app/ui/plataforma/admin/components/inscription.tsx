@@ -10,13 +10,14 @@ import {
 } from "@/redux/features/admin/adminApiSlice";
 import { useAppDispatch } from "@/redux/hooks";
 // import { setPage } from "@/redux/features/admin/adminSlice";
-import { CursoCardsType } from "@/redux/control-escolar/programas-educativos/types";
+// import { CursoCardsType } from "@/redux/control-escolar/programas-educativos/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/app/ui/Button";
 import { useInscriptionStudentMutation } from "@/redux/features/admin/adminApiSlice";
 import { setAlert } from "@/redux/features/alert/alertSlice";
 import { useState } from "react";
 import { Modal } from "@/app/components/common/Modal";
+import { Diplomados } from "@/redux/control-escolar/programas-educativos/types";
 //  7  1  1  4  1  1  6  3
 // 83 56 28 10 49 28 47 37
 // console.log((37 % 7) + 1);
@@ -36,6 +37,7 @@ export default function CourseEnrollment({
   const [tipo, setTipo] = useState<Tipo>();
   const [idRaw, setIdRaw] = useState<number>();
   const dispatch = useAppDispatch();
+
   const { data: diplomados, refetch } = useRetrieveDiplomadosQuery({
     q: null,
     page: 1,
@@ -94,12 +96,12 @@ export default function CourseEnrollment({
     }
   };
   const isMorePages = diplomados?.count <= 10;
-  const headers: ColumnDef<CursoCardsType>[] = [
+  const headers: ColumnDef<Diplomados>[] = [
     {
       header: "Nombre",
       accessorKey: "nombre",
     },
-    { header: "Descripcion", accessorKey: "descripcion" },
+    // { header: "Descripcion", accessorKey: "descripcion" },
     { header: "Duracion en horas", accessorKey: "duracion_horas" },
     // {
     //   header: "Email",

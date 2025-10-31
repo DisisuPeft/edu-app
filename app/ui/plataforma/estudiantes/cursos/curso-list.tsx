@@ -37,6 +37,7 @@ export default function CursosList() {
               progress={50} //este va a cambiar
               type={curso.tipo}
               path={path}
+              imagen={curso.imagen_url}
             />
           );
         })}
