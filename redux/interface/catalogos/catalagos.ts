@@ -74,3 +74,32 @@ export interface Municipios {
   activo: number | null | undefined;
   clave: string | null | undefined;
 }
+
+export interface TipoPrograma {
+  id: number;
+  nombre: string;
+}
+
+export interface InstitucionAcademica {
+  id: number;
+  nombre: string;
+}
+
+export type TipoProgramaPaginated = {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: TipoPrograma[];
+};
+
+export type InstitutoPaginated = {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: InstitucionAcademica[];
+};
+
+export type Option = {
+  id: number;
+  nombre: string;
+};

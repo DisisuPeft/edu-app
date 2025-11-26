@@ -1,16 +1,18 @@
-import { Modulos } from "../interface/sistema/modulos";
+// import { Modulos } from "../interface/sistema/modulos";
 import { apiSlice } from "../services/apiSlice";
-import { User, Role, Permission } from "@/redux/interface/authentication/Users";
+import { Role, Permission } from "@/redux/interface/authentication/Users";
 import { NivelEducativo } from "../interface/catalogos/nivel_educativo";
-import { TipoNivel } from "../interface/catalogos/tipo_nivel";
-import { TabsModulos } from "../interface/sistema/tabs";
+// import { TipoNivel } from "../interface/catalogos/tipo_nivel";
+// import { TabsModulos } from "../interface/sistema/tabs";
 import { Genero } from "../interface/catalogos/genero";
 import {
   Especialidades,
   EstadosRepublica,
   EstatusMaestro,
   Municipios,
+  Option,
 } from "../interface/catalogos/catalagos";
+import { PaginatedResponse } from "../interface/pagination";
 
 const CatApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -59,6 +61,9 @@ const CatApiSlice = apiSlice.injectEndpoints({
         return Array.isArray(response) ? response : [];
       },
     }),
+    retrieveMetodoPago: builder.query<PaginatedResponse<Option>, void>({
+      query: () => `/catalagos/metodos-pago/?paginated=${null}`,
+    }),
   }),
 });
 // {mutation}, query access without brackets
@@ -72,4 +77,5 @@ export const {
   useRetrieveMunicipiosQuery,
   useGetEspecialidadesQuery,
   useRetrieveEstatusMaestroQuery,
+  useRetrieveMetodoPagoQuery,
 } = CatApiSlice;

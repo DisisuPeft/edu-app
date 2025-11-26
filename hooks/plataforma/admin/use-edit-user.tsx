@@ -44,12 +44,16 @@ export default function useUserEditProfileForm(id: string) {
   const entidad =
     estudiante?.lugar_nacimiento?.toString() ?? watch("lugar_nacimiento");
 
-  const { data: municipios } = useRetrieveMunicipiosQuery(
-    entidad ? parseInt(entidad) : 0
-  );
+  const {
+    data: municipios,
+    error: errorM,
+    isLoading: isLoadingM,
+  } = useRetrieveMunicipiosQuery(entidad ? parseInt(entidad) : 0, {
+    skip: !entidad,
+  });
 
   useEffect(() => {
-    if (!isLoading && estudiante) {
+    if (!isLoading && estudiante && !isLoadingM) {
       const mapped = {
         id: estudiante.id,
         perfil: estudiante.perfil,
@@ -63,9 +67,9 @@ export default function useUserEditProfileForm(id: string) {
       };
       reset(mapped, { keepDirtyValues: true, keepErrors: true });
     }
-  }, [isLoading, reset]);
+  }, [isLoading, reset, estudiante, isLoadingM]);
 
-  if (errorResponse || errorG || errorNiv || errorRole) {
+  if (errorResponse || errorG || errorNiv || errorRole || errorM) {
     console.error("error to fetching data");
   }
   const estuent_id = watch("id");

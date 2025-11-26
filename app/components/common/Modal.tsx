@@ -72,27 +72,27 @@ export const Modal: React.FC<ModalProps> = ({
   //   console.log(transparent)
   return createPortal(
     <div
-      className={`fixed inset-0 overflow-y-auto px-4 py-[200px] sm:px-0 z-50 transition-opacity duration-200 ${
+      role="dialog"
+      aria-modal="true"
+      className={`fixed inset-0 z-[9999] flex items-center justify-center px-4 sm:px-0 transition-opacity duration-300 ${
         show ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
-      onClick={close}
+      onClick={onClose}
     >
+      {/* === Fondo del modal (solo una capa, control total aquí) === */}
       <div
-        className={`fixed inset-0 transform transition-all ${
-          show ? "opacity-20" : "opacity-0"
-        }`}
-      >
-        <div className="absolute inset-0 bg-gray-500 opacity-75" />
-      </div>
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300"
+        aria-hidden="true"
+      />
+
+      {/* === Contenido del modal === */}
       <div
-        className={`mb-6 ${
-          transparent ? "" : "bg-white"
-        } rounded-lg overflow-hidden ${
-          transparent ? "shadow-none" : "shadow-xl"
-        } transform transition-all w-full sm:mx-auto ${
+        className={`relative z-10 w-full sm:mx-auto ${
           maxWidthClass[maxWidth]
-        }`}
-        onClick={(e: React.MouseEvent) => e.stopPropagation()}
+        } ${transparent ? "" : "bg-white"} rounded-lg ${
+          transparent ? "shadow-none" : "shadow-2xl"
+        } max-h-[90vh] overflow-y-auto p-6 transform transition-all duration-300`}
+        onClick={(e) => e.stopPropagation()}
       >
         {children}
       </div>

@@ -12,7 +12,7 @@ export default function AlertUser() {
   // console.log(alert);
   useEffect(() => {
     if (alert) {
-      const timeout = setTimeout(() => dispatch(clearAlert()), 4000);
+      const timeout = setTimeout(() => dispatch(clearAlert()), 8000);
       return () => clearTimeout(timeout);
     }
   }, [alert, dispatch]);
@@ -20,7 +20,7 @@ export default function AlertUser() {
   if (!alert) return null;
 
   return (
-    <div className="fixed top-[80px] right-6 z-[100px]">
+    <div className="fixed top-[80px] right-6 z-[600px]">
       <Alert
         icon={
           alert.type === "success" ? (

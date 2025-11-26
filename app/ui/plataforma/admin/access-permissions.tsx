@@ -36,7 +36,7 @@ export default function PermissionsAccessForm({ userId, modules }: Props) {
   });
   // console.log(userId);
   return (
-    <Card className="max-w-2xl">
+    <Card className="max-w-2xl z-50">
       <CardContent>
         <Typography variant="h6" gutterBottom>
           Permisos y accesos
@@ -61,6 +61,10 @@ export default function PermissionsAccessForm({ userId, modules }: Props) {
                     // convierte a number o null si está vacío
                     field.onChange(val === "" ? null : Number(val));
                   }}
+                  MenuProps={{
+                    container: document.body,
+                    PaperProps: { style: { zIndex: 1400 } }, // > z del modal
+                  }}
                 >
                   <MenuItem value="">
                     <em>Selecciona un módulo</em>
@@ -72,10 +76,6 @@ export default function PermissionsAccessForm({ userId, modules }: Props) {
                     </MenuItem>
                   ))}
                 </Select>
-
-                {/* {error && (
-        // <FormHelperText>Selecciona un módulo</FormHelperText>
-      )} */}
               </FormControl>
             )}
           />
@@ -103,6 +103,10 @@ export default function PermissionsAccessForm({ userId, modules }: Props) {
                       .filter((t) => ids.includes(Number(t.id)))
                       .map((t) => t.name)
                       .join(", ");
+                  }}
+                  MenuProps={{
+                    container: document.body,
+                    PaperProps: { style: { zIndex: 1400 } }, // > z del modal
                   }}
                 >
                   {tabsmodules?.map((t) => {

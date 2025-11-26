@@ -7,4 +7,7 @@ export { default as useUploadResources } from "@/hooks/programa-educativo/use-up
 export { default as useComments } from "@/hooks/plataforma/comunidad/use-comments";
 export { default as useCreateEnlace } from "@/hooks/plataforma/enlaces/use-create-enlace";
 export { default as useCreateCampania } from "@/hooks/plataforma/campania/use-create-campania";
+export { default as useProgramaForm } from "@/hooks/programa-educativo/use-programa-form";
+export { default as useInscripcionPrograma } from "@/hooks/programa-educativo/use-inscripcion-programa";
+export { default as usePagos } from "@/hooks/programa-educativo/use-pago";
 // export { default as useCreatePipeline}

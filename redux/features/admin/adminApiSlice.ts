@@ -3,6 +3,12 @@ import { UsersResponse } from "./types";
 import { EstudianteForm } from "@/redux/interface/perfil/form-types";
 import { DiplomadoType } from "@/redux/control-escolar/programas-educativos/types";
 import { TipoDocumento, FileType } from "./types";
+import {
+  PagoFormData,
+  ProgramaEducativoFormData,
+  TipoPagoResponse,
+} from "@/redux/interface/control_escolar/types/programa-educativo";
+import { Response } from "@/redux/interface/response";
 
 const adminApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -28,10 +34,18 @@ const adminApiSlice = apiSlice.injectEndpoints({
     }),
     retrieveDiplomados: builder.query<
       DiplomadoType,
-      { q: string; page: number | null; estudiante_id?: number | null }
+      {
+        q: string;
+        page: number | null;
+        estudiante_id?: number | null;
+        campania_programa?: number | null;
+      }
     >({
-      query: ({ q, page, estudiante_id }) =>
-        `/plataforma/programas/all/?q=${q}&page=${page}&estudiante_id=${estudiante_id}`,
+      query: ({ q, page, estudiante_id, campania_programa }) =>
+        `/control-escolar/programas/?q=${q}&page=${page}&estudiante_id=${estudiante_id}&campania-programa=${campania_programa}`,
+    }),
+    retrieveDiplomado: builder.query<ProgramaEducativoFormData, string>({
+      query: (id) => `/control-escolar/programas/${id}/`,
     }),
     retrieveTypeDocumentos: builder.query<TipoDocumento[], void>({
       query: () => "/plataforma/diplomados/documentos/",
@@ -43,9 +57,12 @@ const adminApiSlice = apiSlice.injectEndpoints({
         body: formData,
       }),
     }),
-    inscriptionStudent: builder.mutation({
-      query: (body) => ({
-        url: "/plataforma/programas/inscription/",
+    inscriptionStudent: builder.mutation<
+      Response,
+      { estudiante: string; campaniaPrograma: number; body: PagoFormData }
+    >({
+      query: ({ estudiante, campaniaPrograma, body }) => ({
+        url: `/control-escolar/inscripciones/?estudiante=${estudiante}&campania-programa=${campaniaPrograma}`,
         method: "POST",
         body: body,
       }),
@@ -59,6 +76,9 @@ const adminApiSlice = apiSlice.injectEndpoints({
     }),
     getMateriales: builder.query<FileType, string>({
       query: (id) => `/plataforma/materiales/?programa_id=${id}`,
+    }),
+    getTipoPago: builder.query<TipoPagoResponse, void>({
+      query: () => "/control-escolar/tipos-pagos/",
     }),
   }),
 });
@@ -74,4 +94,6 @@ export const {
   useInscriptionStudentMutation,
   useDesinscripcionMutation,
   useGetMaterialesQuery,
+  useRetrieveDiplomadoQuery,
+  useGetTipoPagoQuery,
 } = adminApiSlice;

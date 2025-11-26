@@ -1,3 +1,4 @@
+import { CampaniaPrograma } from "@/redux/features/campanias/type";
 import { SubModulo } from "./../../interface/control_escolar/programa_educativo";
 export interface ProgramaEducativo {
   id: number;
@@ -66,6 +67,7 @@ export type Diplomados = {
   modalidad: string | null;
   duracion_horas: number | null;
   inscrito: boolean | null;
+  campania_programa: CampaniaPrograma[];
 };
 
 export interface CursoPaginatedType {

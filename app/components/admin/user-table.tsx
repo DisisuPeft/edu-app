@@ -7,7 +7,7 @@ import {
   ChevronLeftCircle,
   ChevronRightCircle,
   PencilIcon,
-  UserRoundCog,
+  // UserRoundCog,
   Trash2Icon,
 } from "lucide-react";
 import Link from "next/link";
@@ -19,19 +19,19 @@ import { useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Estudiante } from "@/redux/features/admin/types";
 import { setPage } from "@/redux/features/admin/adminSlice";
-import { Modal } from "../common/Modal";
-import PermissionsAccessForm from "@/app/ui/plataforma/admin/access-permissions";
-import { useGetMenuQuery } from "@/redux/sistema/SistemaApiSlice";
+// import { Modal } from "../common/Modal";
+// import PermissionsAccessForm from "@/app/ui/plataforma/admin/access-permissions";
+// import { useGetMenuQuery } from "@/redux/sistema/SistemaApiSlice";
 import { DeleteModal } from "./delete-modal";
 
 export function UserTable() {
   const dispatch = useAppDispatch();
   const [searchByName, setSearchByName] = useState<string>("");
-  const [open, setOpen] = useState<boolean>(false);
+  // const [open, setOpen] = useState<boolean>(false);
   const { q, page } = useAppSelector((state) => state.admin);
   const { data } = useObtainUsersQuery({ q, page });
-  const { data: modules } = useGetMenuQuery();
-  const [userId, setUserId] = useState<number | null>();
+  // const { data: modules } = useGetMenuQuery();
+  // const [userId, setUserId] = useState<number | null>();
   const [openDeleteModel, setDeleteModal] = useState<boolean>(false);
   const [student, setStudent] = useState<Estudiante>();
   // const { data: tabsmodules } = useGetTabsQuery();
@@ -53,11 +53,11 @@ export function UserTable() {
   //   }
   // }, [searchByName, dispatch]);
 
-  const handleOpenModal = (id: number) => {
-    // console.log(id);
-    setUserId(id);
-    setOpen(true);
-  };
+  // const handleOpenModal = (id: number) => {
+  //   // console.log(id);
+  //   setUserId(id);
+  //   setOpen(true);
+  // };
 
   const headers: ColumnDef<Estudiante>[] = [
     {
@@ -102,14 +102,14 @@ export function UserTable() {
             <Link href={`/plataforma/estudiantes/update/${id}`}>
               <PencilIcon />
             </Link>
-            <div>
+            {/* <div>
               <button
                 title="Permisos y accesos"
                 onClick={() => handleOpenModal(row?.original?.perfil?.user?.id)}
               >
                 <UserRoundCog />
               </button>
-            </div>
+            </div> */}
             <div>
               <button
                 title="Permisos y accesos"
@@ -132,10 +132,9 @@ export function UserTable() {
   return (
     <div className="bg-white rounded-xl shadow-md p-6">
       {/* Modales */}
-      <Modal show={open} onClose={() => setOpen(false)}>
-        {/* <div></div> */}
+      {/* <Modal show={open} onClose={() => setOpen(false)}>
         <PermissionsAccessForm userId={userId} modules={modules} />
-      </Modal>
+      </Modal> */}
       {openDeleteModel && (
         <DeleteModal
           estudiante={student}
