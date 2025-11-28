@@ -1,6 +1,6 @@
 import UserName from "../user-name";
 import StatComponent from "./stats";
-import { CursoWrapper } from "./cursos/curso-card";
+import DiplomasCatalog from "./oferta/oferta-page";
 
 export default function StudentDashboard() {
   return (
@@ -23,8 +23,8 @@ export default function StudentDashboard() {
       <h2 className="text-2xl font-bold text-gray-800 mb-4">
         Continuar Aprendiendo
       </h2>
-      <div className="flex flex-col">
-        <CursoWrapper />
+      <div className="">
+        <DiplomasCatalog />
       </div>
     </div>
   );

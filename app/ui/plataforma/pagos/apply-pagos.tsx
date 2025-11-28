@@ -85,7 +85,7 @@ export default function ApplyPagos({ pagos, ins, refetch }: Props) {
   }, [pagos]);
 
   return (
-    <main className="bg-gray-50 p-4 md:p-8">
+    <main className="bg-gray-50 p-4 md:p-8 font-serif">
       <div className="max-w-7xl mx-auto">
         {/* Notificación de éxito */}
         {/* {notificacion && (
@@ -98,9 +98,9 @@ export default function ApplyPagos({ pagos, ins, refetch }: Props) {
         <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Recuadro 1: Pagos Pendientes */}
           <section className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4 font-serif">
               Pagos Pendientes
-              <span className="ml-2 text-sm font-normal text-gray-500">
+              <span className="ml-2 text-sm font-normal text-gray-500 font-serif">
                 ({pendientes.length})
               </span>
             </h2>
@@ -117,17 +117,17 @@ export default function ApplyPagos({ pagos, ins, refetch }: Props) {
                       className="flex items-start justify-between p-4 border border-gray-200 rounded-lg hover:border-blue-300 transition-colors"
                     >
                       <div className="flex-1">
-                        <p className="font-medium text-gray-900">
+                        <p className="font-medium text-gray-900 font-serif">
                           {pago.periodo ?? pago.tipo_pago_r}
                         </p>
-                        <p className="text-lg font-semibold text-primary mt-1">
+                        <p className="text-lg font-semibold text-primary mt-1 font-serif">
                           {formatCurrency(Number(pago.monto))}
                         </p>
                       </div>
                       <button
                         onClick={() => moverAPorPagar(pago)}
                         aria-label={`Pagar ${pago.periodo ?? pago.tipo_pago_r}`}
-                        className={`ml-4 px-4 py-2 bg-primary text-white text-sm font-medium rounded-md hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors`}
+                        className={`ml-4 px-4 py-2 bg-primary text-white text-sm font-medium rounded-md hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors font-serif`}
                       >
                         Pagar
                       </button>

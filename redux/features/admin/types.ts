@@ -53,6 +53,7 @@ interface File {
   name: string | null;
   path: string | null;
   public_url: string | null;
+  id: number;
 }
 
 export interface Material {

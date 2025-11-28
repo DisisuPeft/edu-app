@@ -83,3 +83,23 @@ export interface DiplomadoType {
   previous: string | null;
   results: Diplomados[];
 }
+
+export type ProgramaType = {
+  id: number;
+  tipo: string;
+  nombre: string;
+  descripcion: string;
+  imagen_url: string | null;
+  duracion: string;
+};
+
+export type DiplomadoCampaniaType = {
+  programa: ProgramaType;
+};
+
+export type DiplomadoCampaniaPaginatedType = {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: DiplomadoCampaniaType[];
+};

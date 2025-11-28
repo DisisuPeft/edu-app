@@ -23,7 +23,7 @@ export default function CommunityThread({ diplomadoId }: CommunityThreadProps) {
         <div className="rounded-2xl bg-white p-4 shadow-sm">
           <CommentForm diplomadoId={diplomadoId} />
         </div>
-        <div className="mt-4 rounded-2xl bg-white p-6 text-center text-gray-500 shadow-sm">
+        <div className="mt-4 rounded-2xl bg-white p-6 text-center text-gray-500 shadow-sm font-serif">
           Aún no hay comentarios. ¡Sé el primero en participar!
         </div>
       </section>

@@ -21,7 +21,7 @@ export default function ModulosPanel({
       <div className="grid grid-cols-[2fr,1fr] gap-4">
         <div className="space-y-2">
           <h2 className="text-2xl font-bold text-foreground text-balance">
-            Contenido del Curso
+            Contenido del diplomado
           </h2>
           <p className="text-muted-foreground text-pretty">
             Explora todos los módulos disponibles

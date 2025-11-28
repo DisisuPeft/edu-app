@@ -56,7 +56,7 @@ export default function Calender({ programaId }: { programaId: string }) {
           {days_on_week.map((day) => (
             <div
               key={day}
-              className="p-2 text-center text-sm font-medium text-gray-500"
+              className="p-2 text-center text-sm font-medium text-gray-500 font-serif"
             >
               {day}
             </div>
@@ -75,14 +75,14 @@ export default function Calender({ programaId }: { programaId: string }) {
                 className={`group min-h-[80px] p-2 border border-gray-200 ${
                   day.isCurrentMonth ? "bg-white" : "bg-gray-50"
                 } ${
-                  isToday ? "bg-blue-50 border-blue-200" : ""
+                  isToday ? "bg-red-50 border-red-400" : ""
                 } hover:bg-red-500 cursor-pointer transition-colors`}
               >
                 <div
                   className={`text-sm ${
                     day.isCurrentMonth ? "text-gray-900" : "text-gray-400"
                   } ${
-                    isToday ? "font-bold text-blue-600" : ""
+                    isToday ? "font-bold text-red-600 text-[20px]" : ""
                   } group-hover:text-white`}
                 >
                   {day.date.getDate()}
@@ -105,7 +105,7 @@ export default function Calender({ programaId }: { programaId: string }) {
             );
           })}
           <Modal show={selectedView} onClose={() => setSelectedView(false)}>
-            <div className="flex flex-col items-center justify-center gap-4 p-6 text-center">
+            <div className="flex flex-col items-center justify-center gap-4 p-6 text-center font-serif">
               {/* Icono */}
               <div className="text-4xl text-red-500">📘</div>
 
@@ -113,7 +113,12 @@ export default function Calender({ programaId }: { programaId: string }) {
               <h2 className="text-xl font-semibold text-gray-800">
                 {selectClass?.titulo}
               </h2>
-
+              <h2 className="text-xl font-serif text-gray-800">
+                Clave de acceso:{" "}
+                <span className="font-bold">
+                  {selectClass?.password_platform}
+                </span>
+              </h2>
               {/* Enlace */}
               <a
                 href={selectClass?.link}

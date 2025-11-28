@@ -21,7 +21,7 @@ export default function ActivityCard({
   estado,
 }: ActivityCardProps) {
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-4 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow duration-200">
+    <div className="bg-white border border-gray-200 rounded-lg p-4 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow duration-200 font-serif">
       <div>
         <div className="flex justify-between items-start mb-2">
           {tipo && (

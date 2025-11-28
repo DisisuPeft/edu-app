@@ -80,6 +80,14 @@ const adminApiSlice = apiSlice.injectEndpoints({
     getTipoPago: builder.query<TipoPagoResponse, void>({
       query: () => "/control-escolar/tipos-pagos/",
     }),
+
+    downloadMaterial: builder.query<Blob, string>({
+      query: (id) => ({
+        url: `/plataforma/materiales/${id}/download/`,
+        method: "GET",
+        responseHandler: (response) => response.blob(), // <- aquí pedimos un blob
+      }),
+    }),
   }),
 });
 
@@ -96,4 +104,5 @@ export const {
   useGetMaterialesQuery,
   useRetrieveDiplomadoQuery,
   useGetTipoPagoQuery,
+  useLazyDownloadMaterialQuery,
 } = adminApiSlice;

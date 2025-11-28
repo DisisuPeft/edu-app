@@ -55,10 +55,10 @@ export default function PagosTable() {
   return (
     <Card>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-semibold text-gray-800">
+        <h2 className="text-xl font-semibold text-gray-800 font-serif">
           Registro de Pagos
         </h2>
-        <span className="text-sm text-gray-800">
+        <span className="text-sm text-gray-800 font-serif">
           {pagos?.count} {pagos?.count === 1 ? "pago" : "pagos"}
         </span>
       </div>
@@ -67,7 +67,7 @@ export default function PagosTable() {
         <div className="text-center py-12">
           <div className="mb-4 text-5xl">💳</div>
           <p className="text-gray-800 mb-2">No hay pagos registrados</p>
-          <p className="text-sm text-gray-800">
+          <p className="text-sm text-gray-800 font-serif">
             Comienza registrando el primer pago
           </p>
         </div>

@@ -7,7 +7,7 @@ import { CursoCard } from "./curso-card";
 
 export default function CursosList() {
   const [page, setPage] = useState<number | null>(1);
-  const { data: cursos } = useGetPaginetedCursosQuery(page);
+  const { data } = useGetPaginetedCursosQuery(page);
 
   const handlePrevious = () => {
     if (page > 1) {
@@ -16,28 +16,28 @@ export default function CursosList() {
   };
 
   const handleNext = () => {
-    if (page < cursos.count) {
+    if (page < data?.count) {
       setPage(page + 1);
     }
   };
 
-  const totalPages = Math.ceil(cursos?.count / 10);
+  const totalPages = Math.ceil(data?.count / 10);
 
   // console.log(totalPages);
   return (
     <div className="flex flex-col">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {cursos?.results.map((curso) => {
-          const path = `/plataforma/cursos/${curso.id}`;
+        {data?.results.map((curso) => {
+          const path = `/plataforma/cursos/${curso.programa.id}`;
           return (
             <CursoCard
-              key={curso.id}
-              title={curso.nombre}
-              description={curso.descripcion}
-              progress={50} //este va a cambiar
-              type={curso.tipo}
+              key={curso.programa.id}
+              title={curso.programa.nombre}
+              description={curso.programa.descripcion}
+              // progress={50} //este va a cambiar
+              type={curso.programa.tipo}
               path={path}
-              imagen={curso.imagen_url}
+              imagen={curso.programa.imagen_url}
             />
           );
         })}

@@ -33,4 +33,5 @@ export type Enlace = {
   descripcion?: string;
   plataforma: number;
   plataforma_name: string;
+  password_platform: string;
 };

@@ -40,7 +40,7 @@ export default function Acordeon({
   return (
     <div
       className={clsx(
-        "group border border-border rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden font-sans",
+        "group border border-border rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden font-serif",
         className
       )}
     >

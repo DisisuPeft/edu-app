@@ -1,12 +1,19 @@
+import { ModulosType } from "@/redux/interface/sistema/modulos";
 import { apiSlice } from "../../services/apiSlice";
-import { CursoCardsType, CursoPaginatedType } from "./types";
+import {
+  CursoCardsType,
+  // CursoPaginatedType,
+  DiplomadoCampaniaType,
+  DiplomadoCampaniaPaginatedType,
+  ProgramaType,
+} from "./types";
 
 const programApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getCursos: builder.query<CursoCardsType[], void>({
+    getCursos: builder.query<DiplomadoCampaniaType[], void>({
       query: () => "student/cursos/",
     }),
-    getPaginetedCursos: builder.query<CursoPaginatedType, number>({
+    getPaginetedCursos: builder.query<DiplomadoCampaniaPaginatedType, number>({
       query: (page) => `student/cursos/all/?=${page}`,
     }),
     getCursoPanel: builder.query<
@@ -20,6 +27,24 @@ const programApiSlice = apiSlice.injectEndpoints({
       //   return [response];
       // },
     }),
+    getCursoPanelEstudiante: builder.query<
+      CursoCardsType,
+      { id: number; accion?: string }
+    >({
+      query: ({ id, accion }) => `/plataforma/cursos/${id}/?accion=${accion}`,
+      // transformResponse: (response: CursoCardsType) => {
+      //   // Si es arreglo, lo devuelves directo
+      //   // Si es objeto, lo metes en un arreglo
+      //   return [response];
+      // },
+    }),
+    getModulos: builder.query<ModulosType[], { id: number; accion?: string }>({
+      query: ({ id, accion }) =>
+        `/plataforma/cursos/modulos/?accion=${accion}&programa=${id}`,
+    }),
+    getOferta: builder.query<ProgramaType[], void>({
+      query: () => "/control-escolar/programas/oferta/",
+    }),
   }),
 });
 
@@ -27,4 +52,7 @@ export const {
   useGetCursosQuery,
   useGetPaginetedCursosQuery,
   useGetCursoPanelQuery,
+  useGetCursoPanelEstudianteQuery,
+  useGetModulosQuery,
+  useGetOfertaQuery,
 } = programApiSlice;

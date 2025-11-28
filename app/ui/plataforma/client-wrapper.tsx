@@ -17,7 +17,7 @@ export default function ClientWrapper({
       {/* <div className="flex-1 flex flex-col overflow-hidden"> */}
       <main
         className={`flex-1 overflow-y-auto ${
-          sidebarOpen ? "md:ml-[0px]" : "md:ml-[-200px]"
+          sidebarOpen ? "md:ml-[0px]" : "md:ml-[-60px]"
         }`}
       >
         {children}

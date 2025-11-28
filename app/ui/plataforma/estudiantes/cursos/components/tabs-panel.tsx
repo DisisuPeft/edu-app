@@ -26,7 +26,7 @@ export default function TabsPanel({ id }: { id: string }) {
         setActiveTab={(tab) => setActiveTab(tab)}
       />
 
-      <main className="mt-6 bg-white p-6 rounded-lg shadow-sm">
+      <main className="mt-6 bg-white p-6 rounded-lg shadow-sm font-serif">
         {activeTab === "Módulos" && <ModulosPanel id={id} />}
         {activeTab === "Comunidad" && <CommunityThread diplomadoId={id} />}
         {activeTab === "Calendario de clases" && <Calender programaId={id} />}

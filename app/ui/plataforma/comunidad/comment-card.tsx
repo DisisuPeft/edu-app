@@ -18,14 +18,14 @@ export default function CommentCard({
   const avatar = useMemo(() => {
     const ini = initialsFromName(node.usuario);
     return (
-      <div className="h-10 w-10 rounded-full bg-red-600 text-white flex items-center justify-center text-sm font-semibold">
+      <div className="h-10 w-10 rounded-full bg-red-600 text-white flex items-center justify-center text-sm font-semibold font-serif">
         {ini}
       </div>
     );
   }, [node.usuario]);
   //   console.log(typeof node.id);
   return (
-    <div className="flex gap-3">
+    <div className="flex gap-3 font-serif">
       {avatar}
       <div className="flex-1">
         <div className="inline-block rounded-2xl bg-gray-100 px-4 py-2">

@@ -114,7 +114,7 @@ export default function StudentPaymentsPage({ raw_param }: Props) {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2 font-serif">
             Estado de Cuenta
           </h1>
           <p className="text-gray-600">
@@ -124,18 +124,18 @@ export default function StudentPaymentsPage({ raw_param }: Props) {
 
         {/* Información del Alumno */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">
+          <h2 className="text-xl font-semibold text-gray-800 mb-4 font-serif">
             Información del Alumno
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <p className="text-sm text-gray-600">Nombre</p>
-              <p className="text-base font-medium text-gray-900">
+              <p className="text-sm text-gray-600 font-serif">Nombre</p>
+              <p className="text-base font-medium text-gray-900 font-serif">
                 {student?.perfil}
               </p>
             </div>
             <div>
-              <p className="text-sm text-gray-600">RFC</p>
+              <p className="text-sm text-gray-600 font-serif">RFC</p>
               <p className="text-base font-medium text-gray-900">
                 {student?.rfc ?? "N/A"}
               </p>
@@ -148,7 +148,7 @@ export default function StudentPaymentsPage({ raw_param }: Props) {
           {/* Total General */}
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-sm font-medium text-gray-600">
+              <h3 className="text-sm font-medium text-gray-600 font-serif">
                 Total General
               </h3>
               <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
@@ -197,11 +197,11 @@ export default function StudentPaymentsPage({ raw_param }: Props) {
                             isPaid ? "bg-green-500" : "bg-blue-500"
                           }`}
                         ></span>
-                        <span className="text-gray-700">
+                        <span className="text-gray-700 font-serif">
                           {item.campania_programa_r?.campania}
                         </span>
                         {isPaid && (
-                          <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">
+                          <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full font-serif">
                             Pagado
                           </span>
                         )}
@@ -210,7 +210,7 @@ export default function StudentPaymentsPage({ raw_param }: Props) {
                   );
                 })}{" "}
                 <div className="mt-4">
-                  <p className="text-2xl font-bold text-yellow-600">
+                  <p className="text-2xl font-bold text-yellow-600 font-serif">
                     {formatCurrency(totalPorPagar)}
                   </p>
                 </div>
@@ -220,7 +220,9 @@ export default function StudentPaymentsPage({ raw_param }: Props) {
 
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-sm font-medium text-gray-600">Pagado</h3>
+              <h3 className="text-sm font-medium text-gray-600 font-serif">
+                Pagado
+              </h3>
               <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
                 <svg
                   className="w-5 h-5 text-green-600"
@@ -238,7 +240,7 @@ export default function StudentPaymentsPage({ raw_param }: Props) {
               </div>
             </div>
 
-            <p className="text-2xl font-bold text-green-600">
+            <p className="text-2xl font-bold text-green-600 font-serif">
               $
               {student?.inscripciones
                 .reduce(
@@ -248,7 +250,7 @@ export default function StudentPaymentsPage({ raw_param }: Props) {
                 .toLocaleString()}
             </p>
 
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-gray-500 mt-1 font-serif">
               {
                 student?.inscripciones.filter(
                   (item) => Number(item.total_pagado) > 0
@@ -273,17 +275,17 @@ export default function StudentPaymentsPage({ raw_param }: Props) {
                   className="bg-white rounded-lg shadow-sm border border-gray-200 p-6"
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-sm font-medium text-gray-600">
+                    <h3 className="text-sm font-medium text-gray-600 font-serif">
                       Promo aplicada
                     </h3>
                     <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
                       <Percent className="w-5 h-5 text-red-600" />
                     </div>
                   </div>
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-gray-500 mt-1 font-serif">
                     {inscripcion.notas_precio_custom}
                   </p>
-                  <p className="text-2xl font-bold text-red-600">
+                  <p className="text-2xl font-bold text-red-600 font-serif">
                     {inscripcion.costo_mensualidad_acordado}
                   </p>
                 </div>
@@ -295,7 +297,7 @@ export default function StudentPaymentsPage({ raw_param }: Props) {
         {/* Tabla de Cuentas por Cobrar */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-xl font-semibold text-gray-800">
+            <h2 className="text-xl font-semibold text-gray-800 font-serif">
               Cuentas por Cobrar
             </h2>
           </div>
@@ -309,7 +311,7 @@ export default function StudentPaymentsPage({ raw_param }: Props) {
                   {student?.inscripciones.map((inscripcion, index) => (
                     <button
                       key={inscripcion.id}
-                      className={`py-2 px-1 border-b-2 font-medium text-sm ml-2 ${
+                      className={`py-2 px-1 border-b-2 font-medium text-sm ml-2 font-serif ${
                         activeTab === index
                           ? "border-blue-500 text-blue-600"
                           : "border-transparent text-gray-500 hover:text-gray-700"
@@ -331,8 +333,8 @@ export default function StudentPaymentsPage({ raw_param }: Props) {
               </div>
               {/* Cards Mobile */}
               <div className="flex flex-col justify-center items-center p-4">
-                <div>
-                  <h1 className="text-xl font-semibold text-gray-800 mb-4">
+                <div className="mb-4">
+                  <h1 className="text-xl font-semibold text-gray-800 mb-4 font-serif">
                     Pagos completados
                   </h1>
                 </div>

@@ -20,3 +20,16 @@ export type FormValues = {
   module: number; // para sistema_modulo_usuario
   tabmodule: number[]; // para sistema_tabsmodulo_user
 };
+
+export type ModulosType = {
+  id: number;
+  nombre: string;
+  descripcion: string;
+  submodulos: SubModulo[];
+};
+
+export type SubModulo = {
+  id: number;
+  titulo: string;
+  descripcion: string;
+};

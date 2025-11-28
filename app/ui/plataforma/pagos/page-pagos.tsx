@@ -4,7 +4,7 @@ import PagosTable from "./pagos-table";
 // Componente Principal
 export default function GestionPagos() {
   return (
-    <div className="h-screen bg-white p-4 md:p-8 font-sans">
+    <div className="h-screen bg-white p-4 md:p-8 font-serif">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">

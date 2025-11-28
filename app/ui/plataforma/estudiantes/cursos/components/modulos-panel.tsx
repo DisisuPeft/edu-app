@@ -1,10 +1,10 @@
 import Acordeon from "@/app/ui/components/acordeon";
 import ActivityCard from "./activity-card";
-import { useGetCursoPanelQuery } from "@/redux/control-escolar/programas-educativos/programApiSlice";
+import { useGetModulosQuery } from "@/redux/control-escolar/programas-educativos/programApiSlice";
 import RightPanel from "@/app/ui/components/right-panel";
 
 export default function ModulosPanel({ id }: { id: string }) {
-  const { data: modulos } = useGetCursoPanelQuery({
+  const { data: modulos } = useGetModulosQuery({
     id: parseInt(id),
     accion: "modulos",
   });

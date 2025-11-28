@@ -47,7 +47,7 @@ export default function CommentForm({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className={`w-full text-black font-sans ${className}`}
+      className={`w-full text-black font-serif ${className}`}
     >
       <div className="flex flex-col gap-2">
         <label

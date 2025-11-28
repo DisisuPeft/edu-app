@@ -20,7 +20,7 @@ export default function AlertUser() {
   if (!alert) return null;
 
   return (
-    <div className="fixed top-[80px] right-6 z-[600px]">
+    <div className="fixed top-[80px] right-6 z-[9999] backdrop-blur-sm bg-black/10 rounded-lg">
       <Alert
         icon={
           alert.type === "success" ? (
@@ -33,7 +33,7 @@ export default function AlertUser() {
         }
         variant="filled"
         severity={alert.type}
-        className="shadow-lg"
+        className="shadow-lg border-2 border-white/20"
       >
         {alert.message}
       </Alert>

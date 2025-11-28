@@ -19,7 +19,7 @@ export function DataTable<T>({ columns, data }: DataTableProps<T>) {
   });
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto font-serif">
       <table className="min-w-full border border-gray-200">
         <thead className="bg-gray-100">
           {table.getHeaderGroups().map((headerGroup) => (

@@ -1,16 +1,11 @@
 import { useGetMaterialesQuery } from "@/redux/features/admin/adminApiSlice";
+import DownloadButton from "./download-button";
 
 export default function RightPanel({ id }: { id: string }) {
   const { data: materiales } = useGetMaterialesQuery(id);
-  const handleDownload = (url: string, name: string) => {
-    const link = document.createElement("a");
-    link.href = url;
-    link.setAttribute("download", name);
-    document.body.appendChild(link);
-    link.click();
-  };
+
   return (
-    <aside className="w-[400px] rounded-lg shadow-xl overflow-y-auto text-black font-sans">
+    <aside className="w-[400px] rounded-lg shadow-xl overflow-y-auto text-black font-serif">
       <div className="p-6">
         <div className="mb-6">
           <h2 className="text-lg font-semibold text-black mb-4">
@@ -23,14 +18,12 @@ export default function RightPanel({ id }: { id: string }) {
             </div> */}
             {materiales?.results
               ? materiales?.results?.map((material, index) => {
-                  //   console.log(material, index);
+                  // console.log(material, index);
                   return (
                     <div
                       key={index}
                       className="flex items-center justify-between p-3 bg-muted rounded-lg hover:bg-muted/80 transition-colors cursor-pointer group"
-                      onClick={() =>
-                        handleDownload(material?.download_url, material?.name)
-                      }
+                      // onClick={() => handleDownload(material?.name)}
                     >
                       <div className="flex items-center gap-3">
                         {/* <span className="text-lg">{material.icon}</span> */}
@@ -43,9 +36,10 @@ export default function RightPanel({ id }: { id: string }) {
                           </div>
                         </div>
                       </div>
-                      <div className="opacity-0 group-hover:opacity-100 transition-opacity ml-3">
-                        <div className="w-5 h-5 border-2 border-muted-foreground rounded rotate-45"></div>
-                      </div>
+                      <DownloadButton
+                        id={material.id.toString()}
+                        name={material.name}
+                      />
                     </div>
                   );
                 })
