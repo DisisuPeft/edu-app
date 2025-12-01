@@ -8,6 +8,7 @@ import {
   ProgramaEducativoFormData,
   TipoPagoResponse,
 } from "@/redux/interface/control_escolar/types/programa-educativo";
+import { CampaniaResponse } from "../campanias/type";
 import { Response } from "@/redux/interface/response";
 
 const adminApiSlice = apiSlice.injectEndpoints({
@@ -88,6 +89,18 @@ const adminApiSlice = apiSlice.injectEndpoints({
         responseHandler: (response) => response.blob(), // <- aquí pedimos un blob
       }),
     }),
+    retrieveCampaniasDiplomados: builder.query<
+      CampaniaResponse,
+      {
+        q: string;
+        page: number | null;
+        estudiante_id?: number | null;
+        campania_programa?: number | null;
+      }
+    >({
+      query: ({ q, page, estudiante_id, campania_programa }) =>
+        `/plataforma/campanias/?q=${q}&page=${page}&estudiante_id=${estudiante_id}&campania_programa=${campania_programa}`,
+    }),
   }),
 });
 
@@ -105,4 +118,5 @@ export const {
   useRetrieveDiplomadoQuery,
   useGetTipoPagoQuery,
   useLazyDownloadMaterialQuery,
+  useRetrieveCampaniasDiplomadosQuery,
 } = adminApiSlice;

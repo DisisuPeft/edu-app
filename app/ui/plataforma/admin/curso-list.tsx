@@ -2,9 +2,9 @@
 
 // import { CursoCard } from "./curso-card";
 import { useState } from "react";
-import { useRetrieveDiplomadosQuery } from "@/redux/features/admin/adminApiSlice";
 import Link from "next/link";
 import Image from "next/image";
+import { useRetrieveCampaniasDiplomadosQuery } from "@/redux/features/admin/adminApiSlice";
 
 // export default function CursosList() {
 //   const [page, setPage] = useState<number | null>(1);
@@ -72,7 +72,7 @@ import Image from "next/image";
 export default function DiplomadosPage() {
   // Datos de ejemplo - aquí conectarías tu lógica
   const [page, setPage] = useState<number | null>(1);
-  const { data: cursos } = useRetrieveDiplomadosQuery({
+  const { data: campanias } = useRetrieveCampaniasDiplomadosQuery({
     q: "",
     page: page,
     estudiante_id: null,
@@ -85,12 +85,12 @@ export default function DiplomadosPage() {
   };
 
   const handleNext = () => {
-    if (page < cursos.count) {
+    if (page < campanias.count) {
       setPage(page + 1);
     }
   };
 
-  const totalPages = Math.ceil(cursos?.count / 10);
+  const totalPages = Math.ceil(campanias?.count / 10);
 
   // const categorias = [
   //   "Todas",
@@ -128,7 +128,7 @@ export default function DiplomadosPage() {
             <div className="hidden md:flex items-center space-x-4">
               <div className="bg-secondary/10 px-4 py-2 rounded-lg">
                 <span className="text-secondary font-semibold">
-                  {cursos?.count}
+                  {campanias?.count}
                 </span>
                 <span className="text-muted ml-1">
                   {"programas disponibles"}
@@ -220,69 +220,73 @@ export default function DiplomadosPage() {
         {/* Diplomados Grid */}
         <div className="flex flex-col">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {cursos?.results?.map((programa) => (
-              <article
-                key={programa.id}
-                className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-200 overflow-hidden h-full flex flex-col"
-              >
-                {/* Imagen de portada */}
-                <div className="relative aspect-[16/9] overflow-hidden">
-                  {programa.imagen_url ? (
-                    <Image
-                      src={programa.imagen_url} // URL absoluta o /ruta-local
-                      alt={programa.nombre}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
-                      priority={false}
-                    />
-                  ) : (
-                    // Fallback si no hay imagen
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#0D1B48] via-[#40143e] to-[#9B1C31]" />
-                  )}
-                  {/* Overlay sutil para legibilidad del título si lo quisieras arriba */}
-                  <div className="absolute inset-0 bg-black/10" />
-                </div>
-
-                {/* Contenido */}
-                <div className="p-6 flex flex-col flex-1">
-                  <h3 className="text-xl font-bold text-[#121829] mb-3 leading-tight group-hover:text-[#a20519] transition-colors duration-300">
-                    {programa.nombre}
-                  </h3>
-
-                  <p className="text-gray-600 leading-relaxed text-base line-clamp-4 mb-6">
-                    {programa.descripcion}
-                  </p>
-
-                  {/* Botón / CTA opcional */}
-                  <div className="mt-auto">
-                    {/* Reemplaza href según tu routing */}
-                    <Link
-                      href={`/plataforma/diplomados/${programa.id}`}
-                      className="inline-flex items-center gap-2 text-[#0D1B48] font-semibold hover:text-[#a20519] transition-colors"
-                    >
-                      Ver más
-                      <svg
-                        className="h-4 w-4"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
-                    </Link>
+            {campanias?.results?.map((campania) => {
+              return (
+                <article
+                  key={campania.id}
+                  className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-200 overflow-hidden h-full flex flex-col"
+                >
+                  {/* Imagen de portada */}
+                  <div className="relative aspect-[16/9] overflow-hidden">
+                    {campania.programa_r.imagen_url ? (
+                      <Image
+                        src={campania.programa_r.imagen_url} // URL absoluta o /ruta-local
+                        alt={campania.programa_r.nombre}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
+                        priority={false}
+                      />
+                    ) : (
+                      // Fallback si no hay imagen
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#0D1B48] via-[#40143e] to-[#9B1C31]" />
+                    )}
+                    {/* Overlay sutil para legibilidad del título si lo quisieras arriba */}
+                    <div className="absolute inset-0 bg-black/10" />
                   </div>
-                </div>
 
-                {/* Barra inferior animada */}
-                <div className="h-1 bg-gradient-to-r from-[#121b6a] to-[#a20519] origin-left" />
-              </article>
-            ))}
+                  {/* Contenido */}
+                  <div className="p-6 flex flex-col flex-1">
+                    <h3 className="text-xl font-bold text-[#121829] mb-3 leading-tight group-hover:text-[#a20519] transition-colors duration-300">
+                      {campania.campania_r.nombre}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed text-base line-clamp-4 mb-6">
+                      {campania.programa_r.nombre}
+                    </p>
+                    <p className="text-gray-600 leading-relaxed text-base line-clamp-4 mb-6">
+                      {campania.programa_r.descripcion}
+                    </p>
+
+                    {/* Botón / CTA opcional */}
+                    <div className="mt-auto">
+                      {/* Reemplaza href según tu routing */}
+                      <Link
+                        href={`/plataforma/diplomados/${campania.programa_r.id}`}
+                        className="inline-flex items-center gap-2 text-[#0D1B48] font-semibold hover:text-[#a20519] transition-colors"
+                      >
+                        Ver más
+                        <svg
+                          className="h-4 w-4"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </Link>
+                    </div>
+                  </div>
+
+                  {/* Barra inferior animada */}
+                  <div className="h-1 bg-gradient-to-r from-[#121b6a] to-[#a20519] origin-left" />
+                </article>
+              );
+            })}
           </div>
         </div>
 

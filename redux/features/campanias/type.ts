@@ -19,6 +19,8 @@ export interface CampaniaForm {
 export interface Programa {
   id: number;
   nombre: string;
+  descripcion: string;
+  imagen_url: string | null;
 }
 
 export type CampaniaPrograma = {
