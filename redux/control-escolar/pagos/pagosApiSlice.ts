@@ -8,8 +8,11 @@ import { apiSlice } from "@/redux/services/apiSlice";
 
 const pagosApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    retrievePagos: builder.query<PaginatedResponse<Estudiante>, number>({
-      query: (page) => `/control-escolar/pagos/?page=${page}`,
+    retrievePagos: builder.query<
+      PaginatedResponse<Estudiante>,
+      { page: number; q: string }
+    >({
+      query: ({ page, q }) => `/control-escolar/pagos/?page=${page}&q=${q}`,
     }),
     retrieveStudentPay: builder.query<Estudiante, { raw: string; q: string }>({
       query: ({ raw, q }) => `/control-escolar/pagos/${raw}/?q=${q}`,

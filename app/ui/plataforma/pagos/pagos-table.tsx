@@ -10,14 +10,21 @@ import {
   ChevronRightCircle,
   PencilIcon,
 } from "lucide-react";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import Card from "../../components/card";
 import { useRetrievePagosQuery } from "@/redux/control-escolar/pagos/pagosApiSlice";
 import Link from "next/link";
+import Input from "../../components/input";
 
 export default function PagosTable() {
   const [page, setPage] = useState<number>(1);
-  const { data: pagos } = useRetrievePagosQuery(page);
+  const [qSearch, setQSearch] = useState<string>("");
+  const { data: pagos } = useRetrievePagosQuery({ page, q: qSearch });
+  const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      setQSearch(e.currentTarget.value);
+    }
+  };
   const headers: ColumnDef<Estudiante>[] = [
     { accessorKey: "perfil", header: "Nombre Alumno" },
     {
@@ -58,6 +65,20 @@ export default function PagosTable() {
         <h2 className="text-xl font-semibold text-gray-800 font-serif">
           Registro de Pagos
         </h2>
+        <div className="flex justify-end items-center gap-2">
+          <Input
+            type="text"
+            placeholder="Buscar por nombre o apellido"
+            value={qSearch}
+            label="Buscar pago"
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setQSearch(e.target.value)
+            }
+            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+              handleSearch(e)
+            }
+          />
+        </div>
         <span className="text-sm text-gray-800 font-serif">
           {pagos?.count} {pagos?.count === 1 ? "pago" : "pagos"}
         </span>
