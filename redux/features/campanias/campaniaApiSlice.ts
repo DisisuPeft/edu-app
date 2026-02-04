@@ -1,5 +1,5 @@
 import { apiSlice } from "../../services/apiSlice";
-import { Programa, CampaniaResponse } from "./type";
+import { Programa, CampaniaResponse, CampaniaPrograma } from "./type";
 
 const campaniaApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -23,6 +23,9 @@ const campaniaApiSlice = apiSlice.injectEndpoints({
         body: { body },
       }),
     }),
+    campaniasGenericos: builder.query<CampaniaPrograma[], void>({
+      query: () => "crm/genericos/campanias/",
+    }),
   }),
 });
 
@@ -31,4 +34,5 @@ export const {
   useSaveCampaniaMutation,
   useGetCampanasQuery,
   usePatchCampaniaMutation,
+  useCampaniasGenericosQuery,
 } = campaniaApiSlice;

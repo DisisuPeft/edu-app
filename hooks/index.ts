@@ -10,4 +10,5 @@ export { default as useCreateCampania } from "@/hooks/plataforma/campania/use-cr
 export { default as useProgramaForm } from "@/hooks/programa-educativo/use-programa-form";
 export { default as useInscripcionPrograma } from "@/hooks/programa-educativo/use-inscripcion-programa";
 export { default as usePagos } from "@/hooks/programa-educativo/use-pago";
+export { default as useFichas } from "@/hooks/plataforma/fichas/use-fichas";
 // export { default as useCreatePipeline}

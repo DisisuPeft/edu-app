@@ -17,6 +17,7 @@ import {
   School,
   Megaphone,
   PiggyBankIcon,
+  FileMinus,
 } from "lucide-react";
 
 export const iconMap: Record<string, React.ElementType> = {
@@ -38,4 +39,5 @@ export const iconMap: Record<string, React.ElementType> = {
   school: School,
   megaphone: Megaphone,
   piggy: PiggyBankIcon,
+  "file-minus": FileMinus,
 };

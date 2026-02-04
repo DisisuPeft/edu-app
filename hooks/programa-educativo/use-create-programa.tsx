@@ -125,7 +125,7 @@ export default function useCreatePrograma() {
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = event.target;
-    const checked = (event.target as HTMLInputElement).checked;
+    // const checked = (event.target as HTMLInputElement).checked;
 
     setFormData((prev) => ({
       ...prev,
