@@ -161,7 +161,7 @@ export default function FichasForm({ show, setShow }: Props) {
           </div>
         </div>
         {/* Campania */}
-        <div className="space-y-6">
+        <div className="">
           <div className="border-b border-gray-200 pb-4">
             <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
               <div className="w-2 h-6 bg-green-500 rounded-full"></div>
@@ -178,7 +178,7 @@ export default function FichasForm({ show, setShow }: Props) {
                 label="Diplomado"
                 required
                 options={campanias}
-                valueKey="ID"
+                valueKey="id"
                 labelKey="nombre"
                 onChange={(e: ChangeEvent<HTMLSelectElement>) =>
                   setCampania(e.target.value)

@@ -6,7 +6,7 @@ export const metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const allowed = ["Administrador", "Vendedor"];
+  const allowed = ["Administrador"];
 
   return <RequireAuth allowedRoles={allowed}>{children}</RequireAuth>;
 }

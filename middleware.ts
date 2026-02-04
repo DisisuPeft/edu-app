@@ -59,7 +59,7 @@ export default function middleware(request: NextRequest) {
   }
 
   const estudiantesMatch = pathname.match(
-    /^\/plataforma\/estudiantes\/update\/(\d+)\/?$/
+    /^\/plataforma\/estudiantes\/update\/(\d+)\/?$/,
   );
   if (estudiantesMatch) {
     const rawId = estudiantesMatch[1];
@@ -72,7 +72,7 @@ export default function middleware(request: NextRequest) {
   }
 
   const editDiplomadoMatch = pathname.match(
-    /^\/plataforma\/diplomados\/(\d+)\/edit\/?$/
+    /^\/plataforma\/diplomados\/(\d+)\/edit\/?$/,
   );
   if (editDiplomadoMatch) {
     const rawId = editDiplomadoMatch[1];

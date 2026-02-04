@@ -28,8 +28,9 @@ export default function RequireAuth({ children, allowedRoles }: Props) {
 
   if (allowedRoles?.length && user) {
     const hasAccess = user?.roleID?.some((r: Role) =>
-      allowedRoles?.includes(r.name)
+      allowedRoles?.includes(r.name),
     );
+    // console.log(allowedRoles);
     if (!hasAccess) {
       redirect("/unauthorized");
     }
