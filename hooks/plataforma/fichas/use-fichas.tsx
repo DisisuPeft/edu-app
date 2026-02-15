@@ -9,6 +9,7 @@ import { useRetrieveMetodoPagoQuery } from "@/redux/catalogos/CatApiSlice";
 import { useCreateFichasMutation } from "@/redux/features/admin/adminApiSlice";
 import { ErrorResponse } from "@/redux/interface/response";
 import { sweetAlert } from "@/sweetalert/sweet-alert";
+import { useGetFichasQuery } from "@/redux/features/control-escolar/fichasApiSlice";
 
 interface Props {
   campaniaPrograma: string;
@@ -18,6 +19,7 @@ export default function useFichas({ campaniaPrograma, emitCloseModal }: Props) {
   const { data: tipoPago } = useGetTipoPagoQuery();
   const { data: metodoPago } = useRetrieveMetodoPagoQuery();
   const { data: campanias } = useCampaniasGenericosQuery();
+  const {refetch} = useGetFichasQuery()
   const [createFichas] = useCreateFichasMutation();
 
   const {
@@ -70,6 +72,7 @@ export default function useFichas({ campaniaPrograma, emitCloseModal }: Props) {
       reset();
       emitCloseModal(false);
       sweetAlert("success", `${res.message}`, "Exito");
+      refetch();
     } catch (error) {
       const e = error as ErrorResponse;
       emitCloseModal(false);

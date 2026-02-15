@@ -16,6 +16,7 @@ export default function FichasForm({ show, setShow }: Props) {
   const onCloseModal = (value: boolean) => {
     setShow(value);
   };
+  
   const {
     register,
     handleSubmit,
@@ -178,7 +179,7 @@ export default function FichasForm({ show, setShow }: Props) {
                 label="Diplomado"
                 required
                 options={campanias}
-                valueKey="id"
+                valueKey="ID"
                 labelKey="nombre"
                 onChange={(e: ChangeEvent<HTMLSelectElement>) =>
                   setCampania(e.target.value)

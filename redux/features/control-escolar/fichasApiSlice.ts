@@ -1,4 +1,5 @@
 import { PagoFormData } from "@/redux/interface/control_escolar/types/programa-educativo";
+import { SuccessMessage } from "@/redux/interface/response";
 import { apiSlice } from "@/redux/services/apiSlice";
 
 interface Perfil {
@@ -26,6 +27,8 @@ export interface Ficha {
   autorizado: boolean;
   comision: string;
   email: string;
+  identificador_alumno: number;
+  id: number;
 }
 
 const fichasApiSlice = apiSlice.injectEndpoints({
@@ -33,7 +36,21 @@ const fichasApiSlice = apiSlice.injectEndpoints({
     getFichas: builder.query<Ficha[], void>({
       query: () => "/control-escolar/inscripciones/fichas/",
     }),
+    authorizeFichas: builder.mutation<
+      SuccessMessage,
+      {
+        swithValue: { value: string };
+        identificador_alumno: number;
+        ficha: number;
+      }
+    >({
+      query: ({ swithValue, identificador_alumno, ficha }) => ({
+        url: `/control-escolar/inscripciones/autorizar_ficha/?identificador=${identificador_alumno}&ficha=${ficha}`,
+        method: "PATCH",
+        body: swithValue,
+      }),
+    }),
   }),
 });
 
-export const { useGetFichasQuery } = fichasApiSlice;
+export const { useGetFichasQuery, useAuthorizeFichasMutation } = fichasApiSlice;

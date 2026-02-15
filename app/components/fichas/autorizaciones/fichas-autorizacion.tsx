@@ -15,8 +15,14 @@ import { ChangeEvent } from "react";
 import { DataTable } from "@/app/utils/DataTable/DataTable";
 // import { useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import { useGetFichasQuery } from "@/redux/features/control-escolar/fichasApiSlice";
+import {
+  useGetFichasQuery,
+  useAuthorizeFichasMutation,
+} from "@/redux/features/control-escolar/fichasApiSlice";
 import { Ficha } from "@/redux/features/control-escolar/fichasApiSlice";
+import { sweetAlert } from "@/sweetalert/sweet-alert";
+import { ErrorResponse } from "@/redux/interface/response";
+// import Swal from "sweetalert2";
 // import { Modal } from "../common/Modal";
 // import PermissionsAccessForm from "@/app/ui/plataforma/admin/access-permissions";
 // import { useGetMenuQuery } from "@/redux/sistema/SistemaApiSlice";
@@ -24,7 +30,8 @@ import { Ficha } from "@/redux/features/control-escolar/fichasApiSlice";
 
 export function FichasAutorizacionDash() {
   // const dispatch = useAppDispatch();
-  const { data: fichas } = useGetFichasQuery();
+  const { data: fichas, refetch } = useGetFichasQuery();
+  const [authorizeFichas] = useAuthorizeFichasMutation();
   // const [searchByName, setSearchByName] = useState<string>("");
   // const [open, setOpen] = useState(false);
   // const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -49,9 +56,49 @@ export function FichasAutorizacionDash() {
   //   setUserId(id);
   //   setOpen(true);
   // };
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
+  const handleChange = async (
+    e: ChangeEvent<HTMLInputElement>,
+    identificador: number,
+    idFicha: number,
+  ) => {
+    // Swal.fire({
+    //   title: "Alerta",
+    //   text: "Estas por autorizar una ficha, debes validar el deposito antes con dirección",
+    //   confirmButtonText: "Validado",
+    //   cancelButtonText: "Cancelar",
+    //   showCancelButton: true,
+    //   icon: "info",
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     autoriza(e.target.value, identificador);
+    //   }
+    // });
+    try {
+      const res = await authorizeFichas({
+        swithValue: { value: e.target.value },
+        identificador_alumno: identificador,
+        ficha: idFicha,
+      }).unwrap();
+      sweetAlert("success", `${res.message}`, "Exito");
+      refetch();
+    } catch (error) {
+      const e = error as ErrorResponse;
+      sweetAlert("error", `${e.data?.detail}`, "Error");
+    }
   };
+  // const autoriza = async (value: string, id: number) => {
+  //   try {
+  //     const res = await authorizeFichas({
+  //       swithValue: { value: value },
+  //       identificador_alumno: id,
+  //     }).unwrap();
+  //     sweetAlert("success", `${res.message}`, "Exito");
+  //   } catch (error) {
+  //     const e = error as ErrorResponse;
+  //     sweetAlert("error", `${e.data?.detail}`, "Error");
+  //   }
+  // };
+
   const headers: ColumnDef<Ficha>[] = [
     {
       header: "Nombre",
@@ -68,13 +115,19 @@ export function FichasAutorizacionDash() {
     },
     // { header: "URL definida", accessorKey: "slug" },
     {
-      header: "Autorizacion",
+      header: "Autorización",
       cell: ({ row }) => {
         return (
           <div className="flex flex-row gap-4 p-2">
             <Switch
               checked={row.original.autorizado}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                handleChange(
+                  e,
+                  row.original.identificador_alumno,
+                  row.original.id,
+                )
+              }
             />
           </div>
         );
