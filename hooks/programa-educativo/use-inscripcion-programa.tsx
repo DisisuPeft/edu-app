@@ -1,10 +1,7 @@
 import { useForm } from "react-hook-form";
 import { setAlert } from "@/redux/features/alert/alertSlice";
 import { useAppDispatch } from "@/redux/hooks";
-import {
-  //   useDesinscripcionMutation,
-  useRetrieveDiplomadosQuery,
-} from "@/redux/features/admin/adminApiSlice";
+import { useInscriptionProgramaQuery } from "@/redux/control-escolar/programas-educativos/programApiSlice";
 import { useInscriptionStudentMutation } from "@/redux/features/admin/adminApiSlice";
 import { PagoFormData } from "@/redux/interface/control_escolar/types/programa-educativo";
 import { useGetTipoPagoQuery } from "@/redux/features/admin/adminApiSlice";
@@ -14,13 +11,15 @@ import { useRetrieveMetodoPagoQuery } from "@/redux/catalogos/CatApiSlice";
 export default function useInscripcionPrograma(
   estudiante_id: string,
   campaniaPrograma: number,
-  onSuccess?: (value: boolean) => void
+  onSuccess?: (value: boolean) => void,
 ) {
   const [inscriptionStudent] = useInscriptionStudentMutation();
   //   const [desinscripcion] = useDesinscripcionMutation();
   const dispatch = useAppDispatch();
   const { data: tipoPago } = useGetTipoPagoQuery();
   const { data: metodoPago } = useRetrieveMetodoPagoQuery();
+  const { data: diplomados, refetch } =
+    useInscriptionProgramaQuery(estudiante_id);
   const form = useForm<PagoFormData>({
     mode: "onChange",
     defaultValues: {
@@ -48,11 +47,7 @@ export default function useInscripcionPrograma(
     // control,
     formState: { errors },
   } = form;
-  const { data: diplomados, refetch } = useRetrieveDiplomadosQuery({
-    q: null,
-    page: 1,
-    estudiante_id: parseInt(estudiante_id),
-  });
+
   // const montoForm = watch("monto");
 
   const onSubmit = (data: PagoFormData) => {
@@ -81,14 +76,14 @@ export default function useInscripcionPrograma(
           setAlert({
             message: error?.data?.detail || "Error al inscribir al alumno.",
             type: "error",
-          })
+          }),
         );
       });
   };
-  const isMorePages = diplomados?.count <= 10;
+  // const isMorePages = diplomados?.count <= 10;
 
   return {
-    isMorePages,
+    // isMorePages,
     diplomados,
     errors,
     register,

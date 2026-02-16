@@ -21,8 +21,8 @@ import {
 } from "@/redux/features/control-escolar/fichasApiSlice";
 import { Ficha } from "@/redux/features/control-escolar/fichasApiSlice";
 import { sweetAlert } from "@/sweetalert/sweet-alert";
-import { ErrorResponse } from "@/redux/interface/response";
-// import Swal from "sweetalert2";
+// import { ErrorResponse } from "@/redux/interface/response";
+import Swal from "sweetalert2";
 // import { Modal } from "../common/Modal";
 // import PermissionsAccessForm from "@/app/ui/plataforma/admin/access-permissions";
 // import { useGetMenuQuery } from "@/redux/sistema/SistemaApiSlice";
@@ -30,7 +30,7 @@ import { ErrorResponse } from "@/redux/interface/response";
 
 export function FichasAutorizacionDash() {
   // const dispatch = useAppDispatch();
-  const { data: fichas, refetch } = useGetFichasQuery();
+  const { data, refetch } = useGetFichasQuery({});
   const [authorizeFichas] = useAuthorizeFichasMutation();
   // const [searchByName, setSearchByName] = useState<string>("");
   // const [open, setOpen] = useState(false);
@@ -61,43 +61,37 @@ export function FichasAutorizacionDash() {
     identificador: number,
     idFicha: number,
   ) => {
-    // Swal.fire({
-    //   title: "Alerta",
-    //   text: "Estas por autorizar una ficha, debes validar el deposito antes con dirección",
-    //   confirmButtonText: "Validado",
-    //   cancelButtonText: "Cancelar",
-    //   showCancelButton: true,
-    //   icon: "info",
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-    //     autoriza(e.target.value, identificador);
-    //   }
-    // });
+    // console.log(e.target.value);
+    Swal.fire({
+      title: "Alerta",
+      text: "Estas por autorizar una ficha, debes validar el deposito antes con dirección",
+      confirmButtonText: "Validado",
+      cancelButtonText: "Cancelar",
+      showCancelButton: true,
+      icon: "info",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        autoriza(e.target.value, identificador, idFicha);
+      }
+    });
+  };
+  const autoriza = async (value: string, id: number, idFicha: number) => {
     try {
+      // console.log("success");
       const res = await authorizeFichas({
-        swithValue: { value: e.target.value },
-        identificador_alumno: identificador,
+        swithValue: { value: value },
+        identificador_alumno: id,
         ficha: idFicha,
       }).unwrap();
       sweetAlert("success", `${res.message}`, "Exito");
       refetch();
     } catch (error) {
-      const e = error as ErrorResponse;
-      sweetAlert("error", `${e.data?.detail}`, "Error");
+      console.log(error);
+      // console.log("cae n el error");
+      // const e = error as ErrorResponse;
+      sweetAlert("error", `Esta ficha ya se encuentra autorizada`, "Error");
     }
   };
-  // const autoriza = async (value: string, id: number) => {
-  //   try {
-  //     const res = await authorizeFichas({
-  //       swithValue: { value: value },
-  //       identificador_alumno: id,
-  //     }).unwrap();
-  //     sweetAlert("success", `${res.message}`, "Exito");
-  //   } catch (error) {
-  //     const e = error as ErrorResponse;
-  //     sweetAlert("error", `${e.data?.detail}`, "Error");
-  //   }
-  // };
 
   const headers: ColumnDef<Ficha>[] = [
     {
@@ -109,10 +103,10 @@ export function FichasAutorizacionDash() {
       accessorKey: "email",
     },
     { header: "Inscrito a", accessorKey: "inscrito" },
-    {
-      header: "Comision",
-      accessorKey: "comision",
-    },
+    // {
+    //   header: "Comision",
+    //   accessorKey: "comision",
+    // },
     // { header: "URL definida", accessorKey: "slug" },
     {
       header: "Autorización",
@@ -176,9 +170,9 @@ export function FichasAutorizacionDash() {
 
       {/* Tabla */}
 
-      {fichas ? (
+      {data.fichas ? (
         <div>
-          <DataTable data={fichas} columns={headers} />
+          <DataTable data={data.fichas} columns={headers} />
           <div className="flex justify-end gap-4 mt-4 p-4">
             <button
               className="rounded-full"

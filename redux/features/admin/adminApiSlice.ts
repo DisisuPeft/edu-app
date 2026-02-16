@@ -15,8 +15,12 @@ import { EstudianteFicha } from "../control-escolar/fichasApiSlice";
 
 const adminApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    ObtainUsers: builder.query<UsersResponse, { q: string; page: number }>({
-      query: ({ q, page }) => `/plataforma/retrieve-users/?page=${page}&q=${q}`,
+    ObtainUsers: builder.query<
+      UsersResponse,
+      { q: string; page: number; porDiplomado?: string; estatus?: string }
+    >({
+      query: ({ q, page, porDiplomado, estatus }) =>
+        `/plataforma/retrieve-users/?page=${page}&q=${q}&diplomado=${porDiplomado}&estatus=${estatus}`,
     }),
     createUsers: builder.mutation({
       query: (payload) => ({

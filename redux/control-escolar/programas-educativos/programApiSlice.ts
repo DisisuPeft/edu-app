@@ -45,6 +45,10 @@ const programApiSlice = apiSlice.injectEndpoints({
     getOferta: builder.query<ProgramaType[], void>({
       query: () => "/control-escolar/programas/oferta/",
     }),
+    inscriptionPrograma: builder.query<[], string>({
+      query: (id) =>
+        `/control-escolar/inscripciones/programas_inscripcion/?identificador=${id}`,
+    }),
   }),
 });
 
@@ -55,4 +59,5 @@ export const {
   useGetCursoPanelEstudianteQuery,
   useGetModulosQuery,
   useGetOfertaQuery,
+  useInscriptionProgramaQuery,
 } = programApiSlice;

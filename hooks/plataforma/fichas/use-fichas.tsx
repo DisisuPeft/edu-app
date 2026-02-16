@@ -19,7 +19,7 @@ export default function useFichas({ campaniaPrograma, emitCloseModal }: Props) {
   const { data: tipoPago } = useGetTipoPagoQuery();
   const { data: metodoPago } = useRetrieveMetodoPagoQuery();
   const { data: campanias } = useCampaniasGenericosQuery();
-  const {refetch} = useGetFichasQuery()
+  const { refetch } = useGetFichasQuery({});
   const [createFichas] = useCreateFichasMutation();
 
   const {

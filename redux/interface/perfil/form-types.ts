@@ -1,3 +1,5 @@
+import { Inscripciones } from "../control_escolar/types/pagos";
+
 interface User {
   id: number;
   email: string | null;
@@ -31,6 +33,7 @@ export type EstudianteForm = {
   telefono: string | null | undefined;
   activo: IntBool | null | undefined;
   matricula: string | null | undefined;
+  inscripcion?: Inscripciones[];
 };
 
 export const defaultUserForm: User = {

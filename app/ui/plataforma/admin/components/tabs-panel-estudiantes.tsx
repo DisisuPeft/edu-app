@@ -32,7 +32,9 @@ export default function TabsPanelEstudiantes({ id }: { id: string }) {
             modules={modulos}
           />
         )}
-        {activeTab === "Inscripción" && <CourseEnrollment estudiante_id={id} />}
+        {activeTab === "Inscripción" && (
+          <CourseEnrollment estudiante_id={id} estudiante={estudiante} />
+        )}
       </main>
     </div>
   );

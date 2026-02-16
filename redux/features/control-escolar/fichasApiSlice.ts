@@ -31,10 +31,19 @@ export interface Ficha {
   id: number;
 }
 
+export interface FichasResponse {
+  fichas: Ficha[];
+  totalComision: number;
+}
+
 const fichasApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getFichas: builder.query<Ficha[], void>({
-      query: () => "/control-escolar/inscripciones/fichas/",
+    getFichas: builder.query<
+      FichasResponse,
+      { fechaInicio?: string; fechaFinal?: string }
+    >({
+      query: ({ fechaInicio, fechaFinal }) =>
+        `/control-escolar/inscripciones/fichas/?fecha_inicio=${fechaInicio}&fecha_final=${fechaFinal}`,
     }),
     authorizeFichas: builder.mutation<
       SuccessMessage,
