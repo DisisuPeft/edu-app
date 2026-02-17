@@ -170,9 +170,9 @@ export function FichasAutorizacionDash() {
 
       {/* Tabla */}
 
-      {data.fichas ? (
+      {data?.fichas ? (
         <div>
-          <DataTable data={data.fichas} columns={headers} />
+          <DataTable data={data.fichas ?? []} columns={headers} />
           <div className="flex justify-end gap-4 mt-4 p-4">
             <button
               className="rounded-full"

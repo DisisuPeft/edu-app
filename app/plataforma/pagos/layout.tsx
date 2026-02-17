@@ -6,7 +6,7 @@ export const metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const allowed = ["Administrador"];
+  const allowed = ["Administrador", "Tutor"];
 
   return (
     // <body className="bg-gray-50 text-gray-800">

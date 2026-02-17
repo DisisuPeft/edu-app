@@ -16,7 +16,7 @@ interface Props {
 export default function RequireAuth({ children, allowedRoles }: Props) {
   const { isLoading, isAuth } = useAppSelector((state) => state.auth);
   const { data: user } = useRetrieveUserQuery();
-  // console.log(user)
+  // console.log(isAuth);
   if (isLoading) {
     return (
       <div className="flex justify-center bg-white h-screen text-gray-900"></div>
